@@ -16,5 +16,5 @@
 	<!-- <bean id="requestDataValueProcessor" class="org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor"/> -->
 
 	<import resource="classpath:spring/resource-config.xml" />
-	
+	<!-- <import resource="classpath:spring/shiro-context.xml"/> -->
 </beans>
