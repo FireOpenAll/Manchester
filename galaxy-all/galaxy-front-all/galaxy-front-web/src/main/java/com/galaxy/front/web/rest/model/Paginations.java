@@ -6,7 +6,8 @@ import java.util.List;
 public class Paginations<T extends Serializable>  implements Serializable{
  int pageSize;
  int pageNum;
- List<T> data;
+ int tatal;
+ List<T> datas;
 public int getPageSize() {
 	return pageSize;
 }
@@ -19,11 +20,17 @@ public int getPageNum() {
 public void setPageNum(int pageNum) {
 	this.pageNum = pageNum;
 }
-public List<T> getData() {
-	return data;
+public int getTatal() {
+	return tatal;
 }
-public void setData(List<T> data) {
-	this.data = data;
+public void setTatal(int tatal) {
+	this.tatal = tatal;
 }
-
+public List<T> getDatas() {
+	return datas;
+}
+public void setDatas(List<T> datas) {
+	this.datas = datas;
+} 
+ 
 }
