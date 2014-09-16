@@ -1,8 +1,7 @@
-package com.galaxy.front.web.rest.controller;
+package com.galaxy.front.web.rest.letter.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,15 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.letter.LetterFeedModel;
-import com.galaxy.front.web.rest.model.letter.LetterModel;
 import com.galaxy.front.web.rest.model.letter.LetterFeedModel.UserModel;
+import com.galaxy.front.web.rest.model.letter.LetterModel;
 import com.galaxy.service.letter.LetterService;
-
-/*author:huangshanqi
- *time  :2014年9月16日 上午12:12:59
- *email :hsqmobile@gmail.com
- */
 @RestController
 @RequestMapping(value = "api/v1/letter")
 public class LetterController {
@@ -29,8 +24,14 @@ public class LetterController {
 	@Autowired
 	 LetterService letterService;
 	
-	
-	
+	@RequestMapping(method = {RequestMethod.POST,RequestMethod.GET})
+	public Object post(){
+		ResultModel result=new ResultModel();
+		LetterModel model=new LetterModel();
+		result.setData(model);
+		return result;
+		
+	}
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public Object list(HttpServletRequest request) {
 		/*
@@ -58,7 +59,5 @@ public class LetterController {
 		resultModel.setData(list);
 		return resultModel;
 	}
-	
-	
 
 }

@@ -1,12 +1,13 @@
 package com.galaxy.front.web.rest.model.letter;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /*author:huangshanqi
  *time  :2014年9月15日 下午11:59:30
  *email :hsqmobile@gmail.com
  */
-public class LetterModel {
+public class LetterModel implements Serializable{
 
 	/*
 	 * letter { id: XXXX, content: XXXXXX, time: XXXXX, from: XXXXXX, to:XXXX }

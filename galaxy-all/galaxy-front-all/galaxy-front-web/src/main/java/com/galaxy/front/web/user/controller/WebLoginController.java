@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping(value = "user")
-public class LoginController {
+public class WebLoginController {
 	@RequestMapping(value = "login",method=RequestMethod.GET)
 	public String login(){
 		return "user/login";

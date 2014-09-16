@@ -22,7 +22,7 @@ public class UserController {
 		return null;
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/restlogin", method = RequestMethod.POST)
 	public Object login(HttpServletResponse response) {
 		ResultModel result = new ResultModel();
 		result.setCode("555555");

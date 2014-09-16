@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.user.AuthResultModel;
+
 @RestController
 @RequestMapping(value = "api/v1/user")
-public class WebchatLoginController {
-	@RequestMapping(value = "/webchatlogin", method = RequestMethod.POST)
+public class SendCheckCodeController {
+	@RequestMapping(value = "/send_mobile_verifycode", method = RequestMethod.POST)
 	public Object login(HttpServletResponse response) {
 		ResultModel result = new ResultModel();
 		result.setCode("555555");
@@ -19,4 +20,5 @@ public class WebchatLoginController {
 		result.setData(authModel);
 		return result;
 	}
+
 }
