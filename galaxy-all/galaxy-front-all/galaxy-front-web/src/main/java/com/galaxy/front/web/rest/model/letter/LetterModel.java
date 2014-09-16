@@ -1,10 +1,6 @@
 package com.galaxy.front.web.rest.model.letter;
 
-<<<<<<< HEAD
 import java.io.Serializable;
-=======
-<<<<<<< HEAD
->>>>>>> cce4ed678f5ce660c9b69ca166e98ffb8fd74045
 import java.util.Date;
 
 /*author:huangshanqi
@@ -75,50 +71,4 @@ public class LetterModel implements Serializable{
 		this.to = to;
 	}
 
-<<<<<<< HEAD
-=======
-=======
-import java.io.Serializable;
-import java.util.Date;
-
-public class LetterModel  implements Serializable {
-	Long id;
-	String content;
-	Date postTime;
-	Long from;
-	Long to;
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public Date getPostTime() {
-		return postTime;
-	}
-	public void setPostTime(Date postTime) {
-		this.postTime = postTime;
-	}
-	public Long getFrom() {
-		return from;
-	}
-	public void setFrom(Long from) {
-		this.from = from;
-	}
-	public Long getTo() {
-		return to;
-	}
-	public void setTo(Long to) {
-		this.to = to;
-	}
-	
-	
->>>>>>> 0a382c7dc97a658ca9f8d6a4fd901fe744270177
->>>>>>> cce4ed678f5ce660c9b69ca166e98ffb8fd74045
 }
