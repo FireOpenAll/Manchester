@@ -4,7 +4,6 @@
 package com.galaxy.front.web.rest.controller;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -17,9 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.galaxy.front.web.rest.controller.UserController.AuthResultModel;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 
