@@ -5,7 +5,9 @@ encoding//src/main/java/com/galaxy/front/web/activity/controller/ActivityDetailC
 encoding//src/main/java/com/galaxy/front/web/rest/activity/controller/HotsController.java=UTF-8
 encoding//src/main/resources=UTF-8
 encoding//src/main/webapp/WEB-INF/views/activity/detail.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/activity/postactivity.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/user/register.jsp=UTF-8
+encoding//src/main/webapp/resources/js/common.js=UTF-8
 encoding//src/test/java=UTF-8
 encoding//src/test/java/com/galaxy/qrcode/test/QRCodeTest.java=UTF-8
 encoding//src/test/resources=UTF-8

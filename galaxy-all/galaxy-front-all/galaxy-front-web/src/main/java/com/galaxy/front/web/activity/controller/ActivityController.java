@@ -13,17 +13,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * 
  */
 @Controller
-@RequestMapping(value = "activity")
+@RequestMapping(value = "/activity")
 public class ActivityController {
+	@RequestMapping(value = "/create",method=RequestMethod.GET)
+	public String create() {
+		return "activity/postactivity";
+	}
 	@RequestMapping(value = "post",method=RequestMethod.POST)
-	public String post(@PathVariable Long id) {
-		return "activity/detail";
+	public String post() {
+		return "activity/postsuccess";
 	}
 	
 	
-	@RequestMapping(value = "modify",method=RequestMethod.POST)
+	@RequestMapping(value = "modify/{id}",method=RequestMethod.GET)
 	public String modify(@PathVariable Long id) {
-		return "activity/detail";
+		return "activity/postactivity";
 	}
 	@RequestMapping(value = "remove",method=RequestMethod.GET)
 	public String remove(@PathVariable Long id) {
