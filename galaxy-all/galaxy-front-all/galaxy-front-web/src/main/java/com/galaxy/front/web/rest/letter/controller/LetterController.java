@@ -3,7 +3,6 @@ package com.galaxy.front.web.rest.letter.controller;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,16 +32,11 @@ public class LetterController {
 		
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public Object list(HttpServletRequest request) {
-		/*
-		 * param:   user_id 
-               count 
-               until_id
-		 */
+	public Object list() {
 		
-		String userid = request.getParameter("user_id");
-		String count = request.getParameter("count");
-		String untilid = request.getParameter("until_id");
+//		String userid = request.getParameter("user_id");
+//		String count = request.getParameter("count");
+//		String untilid = request.getParameter("until_id");
 		ResultModel resultModel = new ResultModel();
 		
 		ArrayList<LetterFeedModel> list = new ArrayList<LetterFeedModel>();
@@ -55,9 +49,10 @@ public class LetterController {
 			list.add(letterFeedModel);
 		}
 		resultModel.setCode("20000");
-		resultModel.setMessage("get letter parameters[user_id="+userid+",count="+count+",until_id="+untilid+"]");
+		resultModel.setMessage("get message content");
+		//resultModel.setMessage("get letter parameters[user_id="+userid+",count="+count+",until_id="+untilid+"]");
 		resultModel.setData(list);
-		return resultModel;
+		return  resultModel;
 	}
 
 }

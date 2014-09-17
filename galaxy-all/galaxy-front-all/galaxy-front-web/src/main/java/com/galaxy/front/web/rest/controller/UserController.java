@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.galaxy.service.user.UserService;
 
 @RestController
-@RequestMapping(value = "api/v1/user")
+//@RequestMapping(value = "api/v1/user")
 public class UserController {
 	@Autowired
 	UserService userService;
 
+	/*
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public Object register() {
 		return null;
@@ -55,6 +56,7 @@ public class UserController {
 		return result;
 	}
 
+*/
 	public static class LoginParam {
 		String apikey;
 		String udid;
