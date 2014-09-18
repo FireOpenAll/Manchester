@@ -5,9 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<%String base = request.getContextPath(); %>
 </head>
 <body>
-<form action="/comments/post" method="post">
+<form action="<%=base %>/comments/post" method="post">
 标题<input name="title" type="text" /><br/>
 
 <textarea rows="20" cols="100"></textarea>

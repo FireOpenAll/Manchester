@@ -69,16 +69,14 @@ public class LoginController {
 		result.setCode("20000");
 		result.setMessage("app login success");
 
-		// AuthResultModel authModel = new AuthResultModel();
-		request.getSession().setAttribute("userId", "11110000");
-		request.getSession().setAttribute("accessToken", "aaaabbbbccccdddd");
-		request.getSession().setAttribute("refreshtoken", "eeeeffffgggghhhh");
-		request.getSession().setAttribute("expiresIn", "30*24*3600");
-		request.getSession().setAttribute("create", new Date());
+		AuthResultModel authModel = new AuthResultModel();
+		authModel.setUserId((long)11110000);
+		authModel.setAccessToken("aaaabbbbccccdddd");
+		authModel.setRefreshToken("eeeeffffgggghhhh");
+		authModel.setExpireshIn(30*24*3600);
+		authModel.setCreate(new Date());
 
-		MessageInfo messageInfo = new MessageInfo();
-		messageInfo.setStatus("ok");
-		result.setData(messageInfo);
+		result.setData(authModel);
 		return result;
 	}
 
