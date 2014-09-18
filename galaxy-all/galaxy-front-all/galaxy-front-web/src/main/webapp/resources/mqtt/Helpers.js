@@ -1,0 +1,14 @@
+var Helpers = {
+    "randomString" : function(length) {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        for (var i = 0; i < length; i++)
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+    },
+
+    "md5String" : function(content, hashIt) {
+        return (hashIt) ? CryptoJS.MD5(content).toString() : content;
+    }
+};
