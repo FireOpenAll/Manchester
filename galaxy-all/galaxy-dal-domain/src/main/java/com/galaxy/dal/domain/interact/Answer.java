@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.galaxy.dal.interact;
+package com.galaxy.dal.domain.interact;
 
 import com.galaxy.dal.domain.BaseDomain;
 

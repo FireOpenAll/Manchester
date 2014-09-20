@@ -1,4 +1,4 @@
-package com.galaxy.dal.letter;
+package com.galaxy.dal.domain.letter;
 
 import com.galaxy.dal.domain.BaseDomain;
 
