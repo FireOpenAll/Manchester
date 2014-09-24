@@ -24,44 +24,7 @@ public class LoginController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public Object register(HttpServletRequest request) {
-		ResultModel result = new ResultModel();
-		if (null != request.getParameter("email")) {
-			// 邮箱注册
-			String kaptchaExpected = null;
-			kaptchaExpected = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
-			String kaptchaReceived = request.getParameter("verify_code");
-
-			if (kaptchaExpected!=null&&kaptchaExpected.equalsIgnoreCase(kaptchaReceived)) {
-				
-				result.setCode("20000");
-				result.setMessage("email register success");
-				MessageInfo messageInfo = new MessageInfo();
-				messageInfo.setStatus("ok");
-				result.setData(messageInfo);
-			}else {
-				result.setCode("10000");
-				result.setMessage("verifyCode error");
-				MessageInfo messageInfo = new MessageInfo();
-				messageInfo.setStatus("error");
-				result.setData(messageInfo);
-			}
-			/*
-			if (kaptchaReceived == null || !kaptchaReceived.equalsIgnoreCase(kaptchaExpected)) {
-				
-			}*/
-		} else {
-			// 手机号注册
-			result.setCode("20000");
-			result.setMessage("phone_number register success");
-			MessageInfo messageInfo = new MessageInfo();
-			messageInfo.setStatus("ok");
-			result.setData(messageInfo);
-		}
-		
-		return result;
-	}
+	
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public Object login(HttpServletRequest request, HttpServletResponse response) {
@@ -89,7 +52,7 @@ public class LoginController {
 
 		return result;
 	}
-
+/*
 	@RequestMapping(value = "/profiles", method = RequestMethod.POST)
 	public Object updateProfiles() {
 		return null;
@@ -104,18 +67,6 @@ public class LoginController {
 		result.setData("ok");
 		return result;
 	}
-
-	public static class MessageInfo implements Serializable {
-		private String status;
-
-		public String getStatus() {
-			return status;
-		}
-
-		public void setStatus(String status) {
-			this.status = status;
-		}
-
-	}
+*/
 
 }
