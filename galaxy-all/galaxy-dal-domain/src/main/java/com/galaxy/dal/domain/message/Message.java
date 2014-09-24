@@ -1,4 +1,4 @@
-package com.galaxy.dal.message;
+package com.galaxy.dal.domain.message;
 
 import com.galaxy.dal.domain.BaseDomain;
 
