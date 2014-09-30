@@ -22,6 +22,7 @@ public class ActivityDetailController {
 	@RequestMapping(value = "detail/{id}.html")
 	public String details(@PathVariable Long id,Model model) {
 		ActivityModel activity=new ActivityModel();
+		/*
 		activity.setTitle("奥林匹克公园聚会");
 		activity.setId(100L);
 		activity.setStartTime(new Date());
@@ -30,6 +31,7 @@ public class ActivityDetailController {
 		activity.setDetail("<div>活动详情介绍：<img height=\"425\" src=\"http://p1.meituan.net/deal/__40477445__6945085.jpg\" alt=\"美团图\" class=\"standard-image\" /></div>");
 		model.addAttribute(activity);
 		model.addAttribute("activity",activity);
+		*/
 		return "activity/detail";
 	}
 

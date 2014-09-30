@@ -1,4 +1,4 @@
-package com.galaxy.front.web.rest.model.profile;
+package com.galaxy.front.web.rest.model.interest;
 
 import java.io.Serializable;
 import java.util.List;

@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.galaxy.front.web.rest.model.ResultModel;
+import com.galaxy.front.web.rest.model.interest.InterestGroup;
+import com.galaxy.front.web.rest.model.interest.InterestModel;
+import com.galaxy.front.web.rest.model.location.SimpleAddress;
 import com.galaxy.front.web.rest.model.profile.CreditInfo;
-import com.galaxy.front.web.rest.model.profile.InterestGroup;
-import com.galaxy.front.web.rest.model.profile.InterestModel;
-import com.galaxy.front.web.rest.model.profile.SimpleLocation;
 import com.galaxy.front.web.rest.model.profile.UserProfileModel;
 
 /**
@@ -42,12 +42,11 @@ public class UserProfileController {
 		profileModel.setGender("male");
 		profileModel.setBirthday(new Date());
 		profileModel.setCredit_info(new CreditInfo(35, "活动达人"));
-		profileModel.setLocation(new SimpleLocation("广东省", "广州市"));
+		profileModel.setLocation(new SimpleAddress("广东省", "广州市"));
 
 		List<InterestModel> lisInterests = new ArrayList<InterestModel>();
 		for (int i = 1; i < 6; i++) {
-			lisInterests.add(new InterestModel((long) i * 10000000, "兴趣" + i));
-
+			lisInterests.add(new InterestModel((long) i * 10000000, "兴趣" + i,"/interest/cover/"+(10+i)+".jpg",i+"热门兴趣描述"));
 		}
 		profileModel.setInterest_group(new InterestGroup(5, lisInterests));
 
@@ -82,11 +81,11 @@ public class UserProfileController {
 		profileModel.setGender("male");
 		profileModel.setBirthday(new Date());
 		profileModel.setCredit_info(new CreditInfo(35, "活动达人"));
-		profileModel.setLocation(new SimpleLocation("广东省", "广州市"));
+		profileModel.setLocation(new SimpleAddress("广东省", "广州市"));
 
 		List<InterestModel> lisInterests = new ArrayList<InterestModel>();
 		for (int i = 1; i < 6; i++) {
-			lisInterests.add(new InterestModel((long) i * 10000000, "兴趣" + i));
+			lisInterests.add(new InterestModel((long) i * 10000000, "兴趣" + i,"/interest/cover/"+(10+i)+".jpg",i+"热门兴趣描述"));
 
 		}
 		profileModel.setInterest_group(new InterestGroup(5, lisInterests));

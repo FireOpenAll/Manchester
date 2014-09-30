@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.galaxy.front.web.rest.model.profile.InterestModel;
+import com.galaxy.front.web.rest.model.interest.InterestGroup;
+import com.galaxy.front.web.rest.model.interest.InterestModel;
+import com.galaxy.front.web.rest.model.location.SimpleAddress;
 
 public class UserProfileModel implements Serializable {
 
@@ -16,7 +18,7 @@ public class UserProfileModel implements Serializable {
 
 	CreditInfo credit_info;
 
-	SimpleLocation location;
+	SimpleAddress location;
 
 	InterestGroup interest_group;
 
@@ -36,7 +38,7 @@ public class UserProfileModel implements Serializable {
 	}
 
 	public UserProfileModel(long user_id, String user_name, String avatar, String gender, Date birthday,
-			CreditInfo credit_info, SimpleLocation location, InterestGroup interest_group, int following, int followed,
+			CreditInfo credit_info, SimpleAddress location, InterestGroup interest_group, int following, int followed,
 			boolean is_following, boolean is_followed, int joined_count, int like_count, int comment_count,
 			int create_count) {
 		super();
@@ -106,11 +108,11 @@ public class UserProfileModel implements Serializable {
 		this.credit_info = credit_info;
 	}
 
-	public SimpleLocation getLocation() {
+	public SimpleAddress getLocation() {
 		return location;
 	}
 
-	public void setLocation(SimpleLocation location) {
+	public void setLocation(SimpleAddress location) {
 		this.location = location;
 	}
 

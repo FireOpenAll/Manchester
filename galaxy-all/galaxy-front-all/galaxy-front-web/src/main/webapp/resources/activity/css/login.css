@@ -1,0 +1,88 @@
+body{background:#fbfbfc; height:100%; }
+
+/* ================== 用户登录 ================== */
+.login_main{width:998px;margin: 40px auto;border: 1px solid #e1e2e6;background:#fff;}
+.login_main .mainBody{width:340px;float: right;padding:30px 69px 0;position:relative;}
+.login_main .mainBody .logTitle{font-size: 24px;font-weight: normal;height:24px;line-height: 24px;}
+.login_main .mainBody .loginForm{margin-top: 20px;width:340px; zoom:1;}
+.login_main .mainBody .fListN_50_275{width:340px;}
+.login_main .mainBody .fListN_50_275 ul{position:relative; }
+.login_main .mainBody .fListN_50_275 ul li.title{width:45px;color: #333;}
+.login_main .mainBody .fListN_50_275 ul li.form{width:280px;position: relative;}
+.login_main .mainBody .fListN_50_275 ul li.form input{width:278px;margin-right: 0;}
+.login_main .mainBody .fListN_50_275 ul li.tips{width:280px; }
+.login_main .mainBody .loginForm .btn_200x40{width:340px;margin: 10px 0;}
+.login_main .mainBody .loginForm .option{height: 16px;line-height: 16px;padding:10px 0;}
+.login_main .mainBody .loginForm .option a{float: right;}
+.login_main .mainBody .loginForm .tip{height: 16px;line-height: 16px;padding: 10px 0;text-align:right;}
+.login_main .mainBody .otherLogin{border-top:1px dashed #e1e2e6;margin-top: 10px;}
+.login_main .mainBody .otherLogin .title{height: 20px;line-height: 20px;padding:10px 0;}
+.login_main .mainBody .otherLogin .loginBox{overflow: hidden;zoom:1;}
+.login_main .mainBody .otherLogin .loginBox li{margin-right:10px;height:16px;line-height:16px;padding:10px 0 10px 24px;float: left;display: inline;position: relative;}
+.login_main .mainBody .otherLogin .loginBox li .icon{position: absolute; display:block; left:0; top:10px; width:20px; height:16px; background:url("../images/icon03.png") no-repeat;}
+.login_main .mainBody .otherLogin .loginBox li .sina{background-position: -160px -240px; }
+.login_main .mainBody .otherLogin .loginBox li .qq{background-position: -180px -240px; }
+.login_main .sider{width: 520px;float: left;}
+.login_main .sider img{display: block;}
+
+.login_main .mainBody .warnBox{min-width:300px;height:56px;line-height:56px;margin-left:-270px;position:absolute;left:-50px; z-index:99;background-color:#fffbf5; border:1px #f7d3a5 solid; border-radius:5px;}
+.login_main .mainBody .warnBox .arrowR{width:10px;height:19px;background:url("../images/icon03.png") no-repeat -110px -842px;position:absolute;right:-10px;top:20px;display:block;}
+.login_main .mainBody .warnBox .error{padding-left:55px;font-size:16px;}
+.login_main .mainBody .warnBox .error .icon{width:25px;height:25px;display:inline-block;overflow:hidden;left:20px;top:15px;background:url("../images/icon03.png") no-repeat -80px -840px;position:absolute;}
+
+/* ================== 用户注册 ================== */
+.register_main{width:998px;margin: 40px auto;border: 1px solid #e1e2e6;background:#fff url("../images/regBoxBg.png") repeat-y 0 0;}
+.register_main .mainBody{width: 586px;float: left;display: inline;padding:30px 0 30px 100px;}
+.register_main .mainBody .regTitle{font-size: 24px;font-weight: normal;height:24px;line-height: 24px;}
+.register_main .regForm{margin-top: 20px;margin-left: 50px;}
+.register_main .regForm li input{margin-right: 0;font-size: 14px;}
+.register_main .regForm ul li.required{font-size: 12px;font-weight: normal;}
+.register_main .regForm ul.vCodeUl li.form{width: 160px;}
+.register_main .regForm ul.vCodeUl li.refurbish{height: 40px;margin-left: 10px;}
+.register_main .regForm ul.vCodeUl li.vCodeImg img{display: block;}
+.register_main .regForm ul.gain{padding-left:80px;}
+.register_main .regForm .xieyi{margin-top: 50px;padding: 10px 0;}
+.register_main .regForm .xieyi input{margin-right: 5px;}
+.register_main .regForm .btn_200x50{width: 400px;}
+.register_main .regForm .tip{padding: 10px 25px 10px;text-align: right;}
+.register_main .sider{width:312px;height:550px;float: right;display: inline;background: #f8fafb url("../images/regSider.jpg") no-repeat center center;}
+
+/* ================== 找回密码 ================== */
+.find_password{background:#fff;border:1px solid #e1e2e6;}
+.find_password .psdTitle{background:#fcfcfc;height:20px; line-height:15px;_line-height:20px; padding:20px 0px 20px 35px;font-size:18px; font-weight:bold;position: relative;}
+.find_password .psdTitle .line{width: 4px;height: 20px;background-color: #2ba873;position: absolute;left:20px;top:20px;overflow: hidden;}
+.find_password .psdBody{width:700px;margin:0 auto;}
+.find_password .psdBody ul.vCodeUl li.form{width: 160px;}
+.find_password .psdBody ul.vCodeUl li.refurbish{height: 40px;margin-left: 10px;}
+.find_password .psdBody ul.vCodeUl li.refurbish .shuaXin{margin-top:12px;background:url(../images/icon8.png) no-repeat -120px -240px;display: inline-block;width:16px;height: 16px;}
+.find_password .psdBody ul.vCodeUl li.refurbish .shuaXin:hover{background-position: -120px -260px;}
+.find_password .psdBody ul.vCodeUl li.vCodeImg img{display: block;}
+.find_password .psdBody ul.gain{float:none;clear:both;margin-left:155px;width:470px;line-height:30px;padding:10px 0 0 0;}
+.find_password .psdBody ul.gain li.form{width:500px;line-height:30px;padding:10px 0 0 0;}
+.find_password .psdBody ul.gain li a{float: left;margin-right:15px;}
+.find_password .psdBody .btnBox{padding:30px 0 30px 155px;overflow: hidden;zoom:1;}
+.find_password .psdBody .success{padding:30px 0 30px 155px;background:#fafdff;}
+.find_password .psdBody .success .tip{color:#82c023;line-height:40px;font-size:18px;font-weight: normal;}
+.find_password .psdBody .success .tip .successIcon{float:left;display:inline;width:40px;height:40px;background:url(../images/icon03.png) no-repeat 0 -40px;margin-right:10px;}
+.find_password .psdBody .success p{padding:20px 0 20px 50px;line-height:16px;}
+.find_password .psdBody .success p a{margin:0 5px;color:#0097e0;}
+/* ================ 步骤样式 ================ */
+.find_password .step{width:660px; margin:0px auto 30px; }
+.find_password .step ul{float:left; width:100%; margin-top:30px; }
+.find_password .step li{display:inline; float:left; position:relative; width:220px; font-size:14px; color:#333333; text-align:center; }
+.find_password .step li .name{width:100%; height:20px; margin-top:40px; line-height:20px; }
+.find_password .step li .circle{position:absolute; top:0px; left:95px; width:30px; height:30px; border-radius:30px; color:#fff; line-height:30px; z-index:1; }
+.find_password .step li .line{position:absolute; top:13px; left:0px; width:100%; height:4px; overflow:hidden; }
+
+.find_password .step li.prev{cursor:pointer; }
+.find_password .step li.prev .circle{background:#ffcc80; }
+.find_password .step li.prev .line{background:#ffcc80; }
+
+.find_password .step li.current{}
+.find_password .step li.current .circle{background:#ff9900; }
+.find_password .step li.current .line{background:#ff9900; }
+
+.find_password .step li.next{cursor:not-allowed; }
+.find_password .step li.next .circle{background:#cccccc; }
+.find_password .step li.next .line{background:#cccccc; }
+

@@ -1,4 +1,4 @@
-package com.galaxy.front.web.rest.model.profile;
+package com.galaxy.front.web.rest.model.location;
 
 import java.io.Serializable;
 
@@ -6,16 +6,19 @@ import java.io.Serializable;
  *time  :2014年9月20日 下午4:16:03
  *email :hsqmobile@gmail.com
  */
-public class SimpleLocation implements Serializable {
+public class SimpleAddress implements Serializable {
+	/**
+	 * 简单的地址类，只有省和市
+	 */
 
 	private String province;
 	private String city;
 
-	public SimpleLocation() {
+	public SimpleAddress() {
 		super();
 	}
 
-	public SimpleLocation(String province, String city) {
+	public SimpleAddress(String province, String city) {
 		super();
 		this.province = province;
 		this.city = city;
