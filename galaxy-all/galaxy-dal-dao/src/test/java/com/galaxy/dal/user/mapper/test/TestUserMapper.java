@@ -3,23 +3,20 @@
  */
 package com.galaxy.dal.user.mapper.test;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import java.util.Date;
 
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.galaxy.dal.base.test.BaseDaoTest;
 import com.galaxy.dal.domain.user.User;
 import com.galaxy.dal.user.mapper.UserMapper;
 
 /**
  * @author luolishu
  * 
- */
-@ContextConfiguration(locations = { "/spring/dao.xml",
-		"/spring/datasource-config.xml" })
-@RunWith(SpringJUnit4ClassRunner.class)
-public class TestUserMapper {
+ */ 
+public class TestUserMapper extends BaseDaoTest  {
 	@Autowired
 	UserMapper userMapper;
 
@@ -27,6 +24,13 @@ public class TestUserMapper {
 	public void testInsert() {
 		User user = new User();
 		user.setLoginName("hello");
+		user.setBirthday(new Date());
+		user.setEmail("testests@test.com");
+		user.setFans(100);
+		user.setFollowers(200);
+		user.setHasPic(true);
+		user.setEmailAuth(true);
+		user.setWebchatOpenid("webchat");
 		userMapper.insert(user);
 
 	}

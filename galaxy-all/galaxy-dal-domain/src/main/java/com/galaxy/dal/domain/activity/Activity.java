@@ -6,6 +6,7 @@ import com.galaxy.dal.domain.BaseDomain;
 
 public class Activity extends BaseDomain {
 	private ActivityType type;
+	private String status;
 	private String title;
 	private Date startTime;
 	private Date endTime;
@@ -34,6 +35,30 @@ public class Activity extends BaseDomain {
 
 	public void setType(ActivityType type) {
 		this.type = type;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Integer getJoinedNum() {
+		return joinedNum;
+	}
+
+	public void setJoinedNum(Integer joinedNum) {
+		this.joinedNum = joinedNum;
+	}
+
+	public Integer getTicketsNum() {
+		return ticketsNum;
+	}
+
+	public void setTicketsNum(Integer ticketsNum) {
+		this.ticketsNum = ticketsNum;
 	}
 
 	public String getTitle() {

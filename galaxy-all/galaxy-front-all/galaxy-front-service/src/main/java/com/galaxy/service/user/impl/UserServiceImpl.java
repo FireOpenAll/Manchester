@@ -12,9 +12,15 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserMapper userMapper;
 
-	public User getUser(String userId) {
+	public User getUser(Long userId) {
 		// TODO Auto-generated method stub
-		return userMapper.getUser(userId);
+		return userMapper.getById(userId);
+	}
+
+	@Override
+	public boolean createUser(User user) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

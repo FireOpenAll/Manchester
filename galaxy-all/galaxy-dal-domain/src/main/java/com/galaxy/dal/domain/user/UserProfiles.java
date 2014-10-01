@@ -4,7 +4,7 @@ import com.galaxy.dal.domain.BaseDomain;
 
 public class UserProfiles extends BaseDomain {
 	Long userId;
-	String key;
+	String name;
 	String value;
 	public Long getUserId() {
 		return userId;
@@ -12,17 +12,17 @@ public class UserProfiles extends BaseDomain {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-	public String getKey() {
-		return key;
+	public String getName() {
+		return name;
 	}
-	public void setKey(String key) {
-		this.key = key;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getValue() {
 		return value;
 	}
 	public void setValue(String value) {
 		this.value = value;
-	}
+	} 
 
 }
