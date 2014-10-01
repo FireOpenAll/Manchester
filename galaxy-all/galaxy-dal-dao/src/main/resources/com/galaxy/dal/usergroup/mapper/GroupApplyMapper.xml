@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.galaxy.dal.usergroup.mapper.GroupApplyMapper">
+
+	<resultMap type="groupApply" id="GROUP_APPLY_MAP">
+		<id property="id" column="id" />
+		<result property="createdTime" column="created_time" />
+		<result property="updatedTime" column="updated_time" />
+		<result property="groupId" column="group_id" />
+		<result property="userId" column="user_id" />
+		<result property="auditUserId" column="audit_user_id" /> 
+	</resultMap>
+	<select id="getById" resultMap="GROUP_APPLY_MAP" parameterType="long">
+		SELECT *
+		FROM u_group_apply
+		WHERE id = #{id}
+	</select>
+	<!-- Long groupId; Long userId; Status status; Long auditUserId; String 
+		message; String reason; -->
+	<insert id="insert" parameterType="groupApply" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO
+		u_group_apply(created_time,group_id,user_id,status,audit_user_id,message,reason)
+		VALUES(#{createdTime},#{groupId},#{userId},#{status},#{auditUserId},#{message},#{reason})
+	</insert>
+</mapper>

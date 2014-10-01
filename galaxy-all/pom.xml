@@ -370,6 +370,11 @@
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.3.2</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<!-- 默认的主代码目录 -->
