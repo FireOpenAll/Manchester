@@ -37,9 +37,9 @@ public class User extends BaseDomain {
 	private boolean hasPic;//是否有图片 
 	
 	private String avatar;// 用户头像url
-	private String bindOpenId;// 绑定的openId
-
-	private String bindPlatform;// 绑定平台
+	private String qqOpenid;// 绑定的openId
+	private String webchatOpenid;// 绑定的openId
+	private String weiboOpenid;// 绑定的openId 
 
 	private Date lastVisitTime;// 上一次访问时间
 
@@ -51,6 +51,62 @@ public class User extends BaseDomain {
 
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public UserType getType() {
+		return type;
+	}
+
+	public void setType(UserType type) {
+		this.type = type;
+	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
+	public int getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(int followers) {
+		this.followers = followers;
+	}
+
+	public int getFans() {
+		return fans;
+	}
+
+	public void setFans(int fans) {
+		this.fans = fans;
+	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 
 	public String getEmail() {
@@ -76,5 +132,89 @@ public class User extends BaseDomain {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public boolean isRealNameAuth() {
+		return realNameAuth;
+	}
+
+	public void setRealNameAuth(boolean realNameAuth) {
+		this.realNameAuth = realNameAuth;
+	}
+
+	public boolean isEmailAuth() {
+		return emailAuth;
+	}
+
+	public void setEmailAuth(boolean emailAuth) {
+		this.emailAuth = emailAuth;
+	}
+
+	public boolean isMobileAuth() {
+		return mobileAuth;
+	}
+
+	public void setMobileAuth(boolean mobileAuth) {
+		this.mobileAuth = mobileAuth;
+	}
+
+	public boolean isHasPic() {
+		return hasPic;
+	}
+
+	public void setHasPic(boolean hasPic) {
+		this.hasPic = hasPic;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	 
+ 
+
+	public String getQqOpenid() {
+		return qqOpenid;
+	}
+
+	public void setQqOpenid(String qqOpenid) {
+		this.qqOpenid = qqOpenid;
+	}
+
+	public String getWebchatOpenid() {
+		return webchatOpenid;
+	}
+
+	public void setWebchatOpenid(String webchatOpenid) {
+		this.webchatOpenid = webchatOpenid;
+	}
+
+	public String getWeiboOpenid() {
+		return weiboOpenid;
+	}
+
+	public void setWeiboOpenid(String weiboOpenid) {
+		this.weiboOpenid = weiboOpenid;
+	}
+
+	public Date getLastVisitTime() {
+		return lastVisitTime;
+	}
+
+	public void setLastVisitTime(Date lastVisitTime) {
+		this.lastVisitTime = lastVisitTime;
+	}
+
+	public UserStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(UserStatus status) {
+		this.status = status;
+	}
+ 
 
 }

@@ -28,9 +28,12 @@
     FROM Person
     WHERE id = #{id}
   </select>
-
+  <!--
+  private String loginName,sex,birthday,type,nick,followers,fans,realName,email,mobile,password,realNameAuth,emailAuth,mobileAuth,hasPic,avatar,bindOpenId,bindPlatform,lastVisitTime,status;
+  
+    -->
   <insert id="insert" parameterType="user" useGeneratedKeys="true" keyProperty="id">
-    INSERT INTO Person(firstName, lastName)
-    VALUES(#{firstName}, #{lastName})
+    INSERT INTO u_user(login_name,sex,birthday,type,nick,followers,fans,real_name,email,mobile,password,real_name_auth,email_auth,mobile_auth,haspic,avatar,qq_openid,weibo_openid,webchat_openid,last_visit_time,status)
+    VALUES(#{loginName},#{sex},#{birthday},#{type},#{nick},#{followers},#{fans},#{realName},#{email},#{mobile},#{password},#{realNameAuth},#{emailAuth},#{mobileAuth},#{hasPic},#{avatar},#{qqOpenid},#{weiboOpenid},#{webchatOpenid},#{lastVisitTime},#{status})
   </insert>
 </mapper>
