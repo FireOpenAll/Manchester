@@ -222,6 +222,15 @@ $(function() {
 					<dl>
 						<dt></dt>
 						<dd>
+							<span class="ipt08 in_b"> <input type="text" title=""
+								placeholder="手机" name="mobile" id="mobile">
+							</span> <label class="error error_reg" for="mobile" generated="true"
+								style="display: none;"></label>
+						</dd>
+					</dl>
+					<dl>
+						<dt></dt>
+						<dd>
 							<span class="ipt06 in_b"> <input type="text" title=""
 								placeholder="邮箱" name="email" id="email">
 							</span> <label class="error error_reg" for="email" generated="true"
@@ -311,7 +320,7 @@ $(function() {
 								<img border="0" class="fl" id="codeimage" name="codeimage"
 									title="" src="http://www.o2olive.net/demo/index.php?act=seccode&op=makecode&nchash="><br>
 								<a href="javascript:void(0);"
-									onclick="javascript:document.getElementById(&#39;codeimage&#39;).src=&#39;index.php?act=seccode&amp;op=makecode&amp;nchash=&amp;t=&#39; + Math.random();">看不清？换一张</a>
+									onclick="javascript:document.getElementById('codeimage').src='http://www.o2olive.net/demo/index.php?act=seccode&op=makecode&nchash=&t=' + Math.random();">看不清？换一张</a>
 							</p>
 							<label for="captcha" generated="true" class="error error_reg"
 								style="display: none;"></label>
@@ -419,7 +428,7 @@ $(function(){
                 required : true,
                 email    : true,
                 remote   : {
-                    url : 'index.php?act=login&op=check_email',
+                    url : '/api/v1/email/check',
                     type: 'get',
                     data:{
                         email : function(){
