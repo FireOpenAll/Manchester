@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -87,7 +88,12 @@ public class ActivityController {
 		String event_latitude;//
 		*/
 		
-		/*
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String event_base_hidden_info = "++++++++++++++++++++++++++++++++++++++++++++";
 		event_base_hidden_info = request.getParameter("event_base_hidden_info");
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -109,9 +115,9 @@ public class ActivityController {
 		
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
 		
-		*/
 		
 		
+		/*
 		String body = null;
 	    StringBuilder stringBuilder = new StringBuilder();
 	    BufferedReader bufferedReader = null;
@@ -141,6 +147,8 @@ public class ActivityController {
 		}
 	    
         request.setAttribute("parameters", stringBuilder.toString());
+        */
+        
 		return "activity/postsuccess";
 	} 
 	
