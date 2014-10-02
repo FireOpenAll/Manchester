@@ -242,7 +242,7 @@ jQuery.extend({
  */ 
   function ajaxFileUploads(thumb, imgname, imgid, mode, callback){
     $.ajaxFileUpload({
-        url: '/core/file_uploader.do?source=ajaxuploader&file_field='+imgname+'&thumb_config='+thumb+'&mode='+mode,
+        url: '/activity/ajax_picture_upload.do?source=ajaxuploader&file_field='+imgname+'&thumb_config='+thumb+'&mode='+mode,
         secureuri: false,
         fileElementId: imgid,
         dataType: 'json',
