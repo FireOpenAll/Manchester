@@ -5,6 +5,8 @@ package com.galaxy.front.web.activity.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
@@ -110,17 +112,35 @@ public class ActivityController {
 		*/
 		
 		
-		StringBuilder sb = new StringBuilder();  
-        try(BufferedReader reader = request.getReader();) {  
-                 char[]buff = new char[1024];  
-                 int len;  
-                 while((len = reader.read(buff)) != -1) {  
-                          sb.append(buff,0, len);  
-                 }  
-        }catch (IOException e) {  
-                 e.printStackTrace();  
-        }  
-        request.setAttribute("parameters", sb.toString());
+		String body = null;
+	    StringBuilder stringBuilder = new StringBuilder();
+	    BufferedReader bufferedReader = null;
+	    InputStream inputStream;
+		try {
+			inputStream = request.getInputStream();
+			if (inputStream != null) {
+	            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+	            char[] charBuffer = new char[128];
+	            int bytesRead = -1;
+	            while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+	                stringBuilder.append(charBuffer, 0, bytesRead);
+	            }
+			}
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}finally{
+			if (bufferedReader != null){
+				try {
+					bufferedReader.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	    
+        request.setAttribute("parameters", stringBuilder.toString());
 		return "activity/postsuccess";
 	} 
 	
