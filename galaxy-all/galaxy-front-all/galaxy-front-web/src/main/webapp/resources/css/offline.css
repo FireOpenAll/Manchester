@@ -71,7 +71,7 @@ a:active {
 	color: #FFFFFF;
 }
 .category .list-items .menuicon, .more-list-items .more-menuicon, .nclife_phone s, .life_login_btn, .life_inlogin_btn {
-	background: url(/resources/images/life-arrow-r.gif) no-repeat 0 0;
+	background: url(../images/life-arrow-r.gif) no-repeat 0 0;
 }
 .life_login_btn, .life_inlogin_btn {
 	background-position: 0 -84px;
@@ -203,7 +203,7 @@ a:active {
 	top: 0px;
 	right: 0px;
 	z-index: 100;
-	background: url(/resources/images/top-rt.gif) -253px -146px no-repeat;
+	background: url(../images/top-rt.gif) -253px -146px no-repeat;
 	transition: background-position .2s cubic-bezier(0.25, .5, .5, .9);
 	-webkit-transition: background-position .2s cubic-bezier(0.25, .5, .5, .9);
 	-moz-transition: background-position .2s cubic-bezier(0.25, .5, .5, .9);
@@ -265,7 +265,7 @@ a:active {
 }
 .main-nav-left li.main-selected-nav a:hover {
 	color: #ffffff;
-	background: url(/resources/images/lsimg/header_bg.gif) repeat;
+	background: url(../images/lsimg/header_bg.gif) repeat;
 	text-decoration: none;
 	overflow: hidden;
 	border-top: none;
@@ -276,14 +276,14 @@ a:active {
 	text-decoration: none;
 }
 .main-selected-nav {
-	background: url(/resources/images/lsimg/header_bg.gif) repeat;
+	background: url(../images/lsimg/header_bg.gif) repeat;
 }
 .main-nav-left .main-selected-nav a, .main-nav-left .main-selected-nav a:hover, .topNav-right .main-selected-nav a, .topNav-right .main-selected-nav a:hover {
 	color: #FFFFFF;
 	display: inline-block;
 }
 .main-nav-left .main-selected-nav s, .topNav-right .main-selected-nav s {
-	background: url(/resources/images/nc_search_btn.png) repeat 0 -29px #E7E7E7;
+	background: url(../images/nc_search_btn.png) repeat 0 -29px #E7E7E7;
 	display: block;
 	height: 36px;
 	position: absolute;
@@ -631,7 +631,7 @@ color:#ef8317;
 	float: left;
 }
 .main-local .list_nav i {
-	background: url(/resources/images/lsimg/top-header-new.png) no-repeat;
+	background: url(../images/lsimg/top-header-new.png) no-repeat;
 	height: 18px;
 	width: 14px;
 	display: block;
@@ -782,7 +782,7 @@ color:#ef8317;
 	margin-right: 4px;
 }
 .search-wrap li a.active, .search-wrap li button {
-	background: url(/resources/images/search-btn.png) no-repeat;
+	background: url(../images/search-btn.png) no-repeat;
 	color: #fff;
 }
 .search-wrap li a.active {
@@ -900,7 +900,7 @@ color:#ef8317;
 	margin-right: 5px;
 }
 .group-icon, .coupons-icon, .card-icon {
-	background: url(/resources/images/lsimg/iconqkt.gif) no-repeat;
+	background: url(../images/lsimg/iconqkt.gif) no-repeat;
 	display: inline-block;
 	height: 14px;
 	overflow: hidden;
@@ -1111,7 +1111,7 @@ color:#ef8317;
 	margin-top: -1px;
 }
 .sort_box .button_box .bottom_img, .top_img {
-	background: url(/resources/images/sort_icon.gif) no-repeat 0 0;
+	background: url(../images/sort_icon.gif) no-repeat 0 0;
 	width: 7px;
 	height: 8px;
 	margin-left: 3px;
@@ -1309,7 +1309,7 @@ color:#ef8317;
 	height: 30px;
 	line-height: 32px;
 	display: block;
-	background: url(/resources/images/lsimg/notice.gif) no-repeat left center;
+	background: url(../images/lsimg/notice.gif) no-repeat left center;
 	padding-left: 10px;
 	width: 180px;
 	margin: 100px auto;
@@ -1442,7 +1442,7 @@ color:#ef8317;
 	position: relative;
 	left: 55px;
 	top: -13px;
-	background-image: url(/resources/images/huixing.png);
+	background-image: url(../images/huixing.png);
 	background-repeat: no-repeat;
 }
 .detail-good-language {
@@ -1563,7 +1563,7 @@ color:#ef8317;
 	position: relative;
 	left: 0px;
 	top: 15px;
-	background-image: url(/resources/images/xihuan.png);
+	background-image: url(../images/xihuan.png);
 	background-repeat: no-repeat;
 }
 .detail-option-title dt {
@@ -1578,7 +1578,7 @@ color:#ef8317;
 	position: relative;
 	left: 58px;
 	top: -9px;
-	background-image: url(/resources/images/detail-num.png);
+	background-image: url(../images/detail-num.png);
 	background-repeat: no-repeat;
 }
 .detail-option-num em {
@@ -2180,7 +2180,7 @@ UNKNOWN {
 	width: 35px;
 	color: #999999;
 	cursor: pointer;
-	background: url(/resources/images/open.gif) no-repeat;
+	background: url(../images/open.gif) no-repeat;
 	margin-right: 15px;
 }
 .close_area {
@@ -2244,7 +2244,7 @@ UNKNOWN {
 	position: relative;
 }
 .coupon_inner ul li .box:hover .scissors {
-	background: url(/resources/images/jd.gif) no-repeat 0 0;
+	background: url(../images/jd.gif) no-repeat 0 0;
 	display: block;
 	bottom: -6px;
 	height: 13px;
@@ -2254,7 +2254,7 @@ UNKNOWN {
 	width: 15px;
 }
 /*.coupon_inner .scissors {
-	background: url(/resources/images/jd.gif) no-repeat 0 0;
+	background: url(../images/jd.gif) no-repeat 0 0;
 	display: block;
 	bottom: -6px;
 	height: 13px;
@@ -2280,7 +2280,7 @@ UNKNOWN {
 	font-size: 12px;
 }
 .coupon_inner .q_btn {
-	background: url(/resources/images/index_btn.jpg) no-repeat 0 0;
+	background: url(../images/index_btn.jpg) no-repeat 0 0;
 	color: #FFFFFF;
 	float: right;
 	display: block;
@@ -2291,7 +2291,7 @@ UNKNOWN {
 	width: 55px;
 }
 .coupon_inner ul li .q_btn:hover {
-	background: url(/resources/images/index_btn.jpg) no-repeat 0 -20px;
+	background: url(../images/index_btn.jpg) no-repeat 0 -20px;
 }
 .coupon_inner .q_info {
 	height: 25px;
@@ -2354,7 +2354,7 @@ UNKNOWN {
 	font-size: 12px;
 }
 .user_tab dl dd.ut_remark {
-	background: url(/resources/images/remark.gif) no-repeat;
+	background: url(../images/remark.gif) no-repeat;
 	width: 64px;
 	height: 12px;
 	float: left;
@@ -2393,7 +2393,7 @@ UNKNOWN {
 	background-position: 0 -119px;
 }
 .user_tab .n1, .user_tab .n2 {
-	background: url(/resources/images/lsimg/topnum.jpg) no-repeat;
+	background: url(../images/lsimg/topnum.jpg) no-repeat;
 	color: #FFFFFF;
 	height: 16px;
 	line-height: 16px;
@@ -2711,7 +2711,7 @@ UNKNOWN {
 	float: right;
 }
 .comment_remark {
-	background: url(/resources/images/remark.gif) no-repeat;
+	background: url(../images/remark.gif) no-repeat;
 	width: 64px;
 	height: 12px;
 	float: left;
@@ -2976,7 +2976,7 @@ UNKNOWN {
 	float: left;
 }
 .cp-line10 {
-	background: url(/resources/images/lsimg/dotted-bg.png) repeat-x 0 0;
+	background: url(../images/lsimg/dotted-bg.png) repeat-x 0 0;
 	height: 1px;
 	overflow: hidden;
 	width: 100%;
@@ -3035,7 +3035,7 @@ UNKNOWN {
 	color: #e64d5e;
 }
 .c_icon1, .c_icon2, .c_icon3 {
-	background: url(/resources/images/lsimg/coupon-img.png) no-repeat;
+	background: url(../images/lsimg/coupon-img.png) no-repeat;
 }
 .c_icon1 {
 	background-position: 0 6px;
@@ -3047,7 +3047,7 @@ UNKNOWN {
 	background-position: -237px -503px;
 }
 .c_icon4 {
-	background: url(/resources/images/lsimg/coupon-img.png) no-repeat -237px -472px;
+	background: url(../images/lsimg/coupon-img.png) no-repeat -237px -472px;
 }
 .c_btn {
 	float: right;
@@ -3055,7 +3055,7 @@ UNKNOWN {
 	display: block;
 }
 .printBtn, .downloadBtn {
-	background: url(/resources/images/btn.gif) no-repeat;
+	background: url(../images/btn.gif) no-repeat;
 	width: 150px;
 	height: 39px;
 	float: left;
@@ -3136,7 +3136,7 @@ UNKNOWN {
 	width: 100%;
 	height: 1px;
 	overflow: hidden;
-	background: url(/resources/images/dashed_line.gif) repeat-x;
+	background: url(../images/dashed_line.gif) repeat-x;
 }
 .c_infolist {
 	float: left;
@@ -3194,7 +3194,7 @@ UNKNOWN {
 	float: left;
 }
 .sd_info .q_btn, .sd_info a.q_btn:hover {
-	background: url(/resources/images/index_btn.jpg) no-repeat 0 0;
+	background: url(../images/index_btn.jpg) no-repeat 0 0;
 	color: #FFFFFF;
 	float: right;
 	display: block;
@@ -3317,7 +3317,7 @@ UNKNOWN {
 }
 .sd_list dl dd.sd_title, .sd_list dl dd.sd_title a {
 	height: 37px;
-	/*	background: url(/resources/images/lf20.gif) repeat 0 0;*/
+	/*	background: url(../images/lf20.gif) repeat 0 0;*/
 	text-align: center;
 	top: 235px;
 	width: 204px;
@@ -3415,7 +3415,7 @@ UNKNOWN {
 .short_block .form_block .form_txt, .form_block .form_txt02 {
 	float: left;
 	height: 23px;
-	background: #FFFFFF url(/resources/images/text.gif) repeat 0 0;
+	background: #FFFFFF url(../images/text.gif) repeat 0 0;
 	line-height: 23px;
 	margin: 0;
 	padding: 0 4px;
@@ -3478,7 +3478,7 @@ UNKNOWN {
 	height: 189px;
 	clear: both;
 	background: #FFF;
-	background: url(/resources/images/lsimg/coupon-img.png) no-repeat 0px 0px;
+	background: url(../images/lsimg/coupon-img.png) no-repeat 0px 0px;
 	padding: 15px;
 	margin-bottom: -2px;
 }
@@ -3622,7 +3622,7 @@ UNKNOWN {
 	float: left;
 }
 .cp-btn-01, .cp-btn-02, .cp-btn-03, .cp-btn-04, .cp-btn-05, .jxico {
-	background: url(/resources/images/lsimg/coupon-img.png) no-repeat;
+	background: url(../images/lsimg/coupon-img.png) no-repeat;
 }
 .coupon_list .jxico {
 	background-position: -120px -380px;
@@ -3822,7 +3822,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	padding: 10px;
 }
 #print_view .info .print {
-	background: url(/resources/images/public.png) no-repeat -395px -2px;
+	background: url(../images/public.png) no-repeat -395px -2px;
 	display: block;
 	height: 36px;
 	line-height: 1000px;
@@ -3855,7 +3855,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	width: 294px;
 }
 #print_box .ticket .ncs-print-cat {
-	background: url(/resources/images/public.png) no-repeat -590px -200px;
+	background: url(../images/public.png) no-repeat -590px -200px;
 	bottom: -5;
 	display: block;
 	height: 19px;
@@ -3907,7 +3907,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	text-align: left;
 }
 .btn_r .btn_com, .btn_r .btn_com:hover {
-	background: url(/resources/images/lsimg/nav_sp.gif) no-repeat -66px 0;
+	background: url(../images/lsimg/nav_sp.gif) no-repeat -66px 0;
 	display: block;
 	width: 66px;
 	height: 30px;
@@ -3931,14 +3931,14 @@ a:hover .tm-bg, .tm-bg-hover {
 	float: left;
 }
 .login_bd dd span.ipt01, .ipt02, .ipt03, .ipt04, .ipt05, .ipt06, .ipt07, .ipt08 {
-	background: url(/resources/images/lsimg/loginbg.jpg) no-repeat 0 0;
+	background: url(../images/lsimg/loginbg.jpg) no-repeat 0 0;
 	height: 50px;
 	display: block;
 	float: left;
 	padding: 0 17px 0 50px;
 }
 .ipt09, .ipt10 {
-	background: url(/resources/images/lsimg/loginbg.jpg) no-repeat 0 0;
+	background: url(../images/lsimg/loginbg.jpg) no-repeat 0 0;
 	height: 50px;
 	display: block;
 	float: left;
@@ -4068,7 +4068,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	vertical-align: -2px;
 }
 .btn-regist, .btn-regist:hover {
-	background: url(/resources/images/lsimg/loginbg.jpg) no-repeat 0 -100px;
+	background: url(../images/lsimg/loginbg.jpg) no-repeat 0 -100px;
 	border: 0 none;
 	font-family: '微软雅黑';
 	color: #FFFFFF;
@@ -4139,7 +4139,7 @@ a:hover .tm-bg, .tm-bg-hover {
 }
 .quick-login dd.box_err_q .error_reg{float: left; text-align:left;}
 .error_reg {
-	background: url(/resources/images/lsimg/nav_sp.gif) no-repeat;
+	background: url(../images/lsimg/nav_sp.gif) no-repeat;
 	float: left;
 	color: #ff513c;
 	margin-top: 5px;
@@ -4331,7 +4331,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	line-height: 41px;
 }
 .group-bd li .btn, .group-bd li .btn-gift {
-	background: url(/resources/images/lsimg/group-btn.jpg) no-repeat;
+	background: url(../images/lsimg/group-btn.jpg) no-repeat;
 	cursor: pointer;
 	height: 40px;
 	text-align: center;
@@ -4339,7 +4339,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	float: right;
 }
 .group-bd li .btn:hover {
-	background: url(/resources/images/lsimg/group-btn.jpg) no-repeat 0 -41px;
+	background: url(../images/lsimg/group-btn.jpg) no-repeat 0 -41px;
 }
 .group-bd li .btn-gift {
 	background-position: 0 -82px;
@@ -4369,7 +4369,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	font-weight: bolder;
 }
 .group-bd li .time {
-	background: url(/resources/images/lsimg/group-time.jpg) no-repeat left center;
+	background: url(../images/lsimg/group-time.jpg) no-repeat left center;
 	padding-left: 25px;
 }*/
 /*团购侧边栏*/
@@ -4503,7 +4503,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	height: 30px;
 	line-height: 32px;
 	display: block;
-	background: url(/resources/images/lsimg/notice.gif) no-repeat left center;
+	background: url(../images/lsimg/notice.gif) no-repeat left center;
 	padding-left: 10px;
 	width: 150px;
 	margin: 100px auto;
@@ -4522,7 +4522,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	height: 30px;
 	line-height: 32px;
 	display: block;
-	background: url(/resources/images/lsimg/notice.gif) no-repeat left center;
+	background: url(../images/lsimg/notice.gif) no-repeat left center;
 	padding-left: 10px;
 	width: 150px;
 	margin: 100px auto;
@@ -4542,7 +4542,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	height: 30px;
 	line-height: 32px;
 	display: block;
-	background: url(/resources/images/lsimg/notice.gif) no-repeat left center;
+	background: url(../images/lsimg/notice.gif) no-repeat left center;
 	padding-left: 10px;
 	width: 150px;
 	margin: 100px auto;
@@ -4663,7 +4663,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	line-height: 26px;
 }
 .group-con li .btn {
-	background: url(/resources/images/lsimg/group-btn-index.jpg) no-repeat;
+	background: url(../images/lsimg/group-btn-index.jpg) no-repeat;
 	cursor: pointer;
 	height: 37px;
 	text-align: center;
@@ -4671,7 +4671,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	float: right;
 }
 .group-con li .btn:hover {
-	background: url(/resources/images/lsimg/group-btn-index.jpg) no-repeat 0 -41px;
+	background: url(../images/lsimg/group-btn-index.jpg) no-repeat 0 -41px;
 }
 .group-bd .pr-f {
 	margin-top: 5px;
@@ -4923,7 +4923,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	color: #38b;
 }
 .group-info a.sc-btn {
-	background: url(/resources/images/lsimg/star.gif) no-repeat left center;
+	background: url(../images/lsimg/star.gif) no-repeat left center;
 	display: inline-block;
 	height: 20px;
 	line-height: 20px;
@@ -4983,7 +4983,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	line-height: 38px;
 }
 .group-button .basic-deal, .group-button .cart-add, .group-button .g-basic-deal {
-	background: url(/resources/images/lsimg/deal-img.png) no-repeat;
+	background: url(../images/lsimg/deal-img.png) no-repeat;
 }
 .group-button .g-basic-deal {
 	background-position: 0 -139px;
@@ -5055,7 +5055,7 @@ a:hover .tm-bg, .tm-bg-hover {
 }
 .group-info .buy-now, .group-info .closeed {
 	position: absolute;
-	background: url(/resources/images/lsimg/group_bg.gif) no-repeat 0 0;
+	background: url(../images/lsimg/group_bg.gif) no-repeat 0 0;
 	display: block;
 	height: 77px;
 	right: -18px;
@@ -5084,7 +5084,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	font-size: 16px;
 }
 .group-info .buy-now a, .group-info .closeed a, .group-info .buy-now a.gift-btn-txt {
-	background: url(/resources/images/lsimg/group_bg.gif) no-repeat -10px -155px;
+	background: url(../images/lsimg/group_bg.gif) no-repeat -10px -155px;
 	cursor: pointer;
 	float: right;
 	height: 63px;
@@ -5114,7 +5114,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	width: 250px;
 }
 .group-info .time h3 {
-	background: url(/resources/images/lsimg/group_bg.gif) no-repeat -330px -1px;
+	background: url(../images/lsimg/group_bg.gif) no-repeat -330px -1px;
 	color: #333333;
 	font-family: "微软雅黑";
 	font-size: 16px;
@@ -5131,7 +5131,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	margin-top: 19px;
 	padding-left: 14px;
 	vertical-align: top;
-	background: url(/resources/images/lsimg/deal-img.png) no-repeat 0 -934px;
+	background: url(../images/lsimg/deal-img.png) no-repeat 0 -934px;
 }*/
 .store-action {
 	float: left;
@@ -5171,7 +5171,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	font-size: 12px;
 	color: #666;
 	font-weight: normal;
-	background: url(/resources/images/lsimg/t-icon.jpg) no-repeat 0 8px;
+	background: url(../images/lsimg/t-icon.jpg) no-repeat 0 8px;
 	padding-left: 20px;
 	display: block;
 	width: 73px;
@@ -5429,7 +5429,7 @@ a:hover .tm-bg, .tm-bg-hover {
 	z-index: 1;
 }
 .ncc-null-shopping i.ico {
-	background: url(/resources/images/lsimg/gift-icon.jpg) no-repeat center 5px;
+	background: url(../images/lsimg/gift-icon.jpg) no-repeat center 5px;
 	height: 180px;
 	left: 0;
 	position: absolute;
@@ -5470,7 +5470,7 @@ a.ncc-btn-mini {
 	position: relative;
 }
 .order-succeed i.ico {
-	background: url(/resources/images/lsimg/success.gif) no-repeat center 5px;
+	background: url(../images/lsimg/success.gif) no-repeat center 5px;
 	left: 0;
 	position: absolute;
 	top: 0;
@@ -5596,7 +5596,7 @@ a.ncc-btn-mini {
 	color:#000;
 }
 .summary-table .quantity .minus-disabled, .summary-table .quantity .minus-disabled:hover, .summary-table .quantity .minus, .summary-table .quantity .plus, .summary-table .quantity .plus:hover {
-	background: url(/resources/images/lsimg/sp-icon.png) no-repeat;
+	background: url(../images/lsimg/sp-icon.png) no-repeat;
 	display: inline-block;
 	font-size: 0;
 	height: 13px;
@@ -5659,7 +5659,7 @@ a.ncc-btn-mini {
 	margin-right: 10px;
 }
 .btn-bar, .btn-bar-txt {
-	background: url(/resources/images/lsimg/btn.jpg) no-repeat 0 0;
+	background: url(../images/lsimg/btn.jpg) no-repeat 0 0;
 	display: inline-block;
 	overflow: hidden;
 }
@@ -5752,7 +5752,7 @@ a.ncc-btn-mini {
 	font-size: 14px;
 }
 .group-msg i.error-msg, .group-msg i.ok-msg {
-	background: url(/resources/images/lsimg/group-msg.jpg) no-repeat 0 0;
+	background: url(../images/lsimg/group-msg.jpg) no-repeat 0 0;
 	float: left;
 	width: 45px;
 	height: 50px;
@@ -5779,7 +5779,7 @@ a.ncc-btn-mini {
 	height: 30px;
 	line-height: 30px;
 	display: block;
-	background: url(/resources/images/lsimg/notice.gif) no-repeat left center;
+	background: url(../images/lsimg/notice.gif) no-repeat left center;
 	padding-left: 10px;
 	width: 150px;
 	margin: 100px auto;
@@ -5864,7 +5864,7 @@ width:
 	margin: 0 auto;
 }
 .card-msg dl dt {
-	background: url(/resources/images/lsimg/card-icon.jpg) no-repeat 0 0;
+	background: url(../images/lsimg/card-icon.jpg) no-repeat 0 0;
 	vertical-align: top;
 	display: inline-block;
 	width: 23px;
@@ -5877,7 +5877,7 @@ width:
 	text-align: left;
 	line-height: 23px;
 }
-.icon-ka{background: url(/resources/images/lsimg/icon-ka.jpg) no-repeat 0 0; position:absolute; right:0; bottom:0; width:52px; height:54px;}
+.icon-ka{background: url(../images/lsimg/icon-ka.jpg) no-repeat 0 0; position:absolute; right:0; bottom:0; width:52px; height:54px;}
 .hy-con {
 	width: auto;
 	float: left;
@@ -5918,7 +5918,7 @@ width:
 	position: relative; height:33px;
 }
 .hy-card-rebate li .icon-reba {
-	background: url(/resources/images/lsimg/hy-icon.jpg) no-repeat 0 0;
+	background: url(../images/lsimg/hy-icon.jpg) no-repeat 0 0;
 }
 .hy-card-rebate li i {
 	height: 33px;
@@ -5942,7 +5942,7 @@ width:
 	text-align: right;
 }
 .hyq-btn, .hyx-btn, .hy-txt, .hyx-txt {
-	background: url(/resources/images/lsimg/btn.jpg) no-repeat 0 0;
+	background: url(../images/lsimg/btn.jpg) no-repeat 0 0;
 	display: inline-block;
 	overflow: hidden;
 }
@@ -6019,7 +6019,7 @@ width:
 }
 .apt-ul li {
 	float: left;
-	background: url(/resources/images/apt-bg.gif) no-repeat 247px 0;
+	background: url(../images/apt-bg.gif) no-repeat 247px 0;
 	width: 490px;
 	height: 170px;
 	margin: 0 9px 20px 0;
@@ -6096,7 +6096,7 @@ width:
 	color: #C32E3E;
 }
 .apt-info .apt-down, .apt-info .apt-up {
-	background: url(/resources/images/open.gif) no-repeat 0 0;
+	background: url(../images/open.gif) no-repeat 0 0;
 	cursor: pointer;
 	display: inline-block;
 	height: 9px;
@@ -6132,7 +6132,7 @@ width:
 	color: #999999;
 }
 .cancel-btn, .cancel-btn-txt {
-	background: url(/resources/images/lsimg/btn-c.gif) no-repeat 0 0;
+	background: url(../images/lsimg/btn-c.gif) no-repeat 0 0;
 	display: inline-block;
 	overflow: hidden;
 }
@@ -6360,7 +6360,7 @@ width:
 }
 /*按钮*/
 .apt-btn, .apt-btn-txt {
-	background: url(/resources/images/lsimg/btn.jpg) no-repeat 0 0;
+	background: url(../images/lsimg/btn.jpg) no-repeat 0 0;
 	display: inline-block;
 }
 .apt-btn .apt-btn-txt {
@@ -6371,7 +6371,7 @@ width:
 	cursor: pointer;
 }
 .apt-btn .apt-btn-txt:hover {
-	background: url(/resources/images/lsimg/btn.jpg) no-repeat 0 -31px;
+	background: url(../images/lsimg/btn.jpg) no-repeat 0 -31px;
 }
 .apt-btn {
 	background-position: right 0;
@@ -6385,7 +6385,7 @@ width:
 	float: left;
 }
 .remark-item {
-	background: url(/resources/images/remark_img.gif) no-repeat;
+	background: url(../images/remark_img.gif) no-repeat;
 	float: left;
 	height: 16px;
 	width: 84px;
@@ -6549,7 +6549,7 @@ a.col-num:hover {
 	_top: 0;
 	width: 14px;
 	height: 18px;
-	background: url(/resources/images/lsimg/top-header-new.png) no-repeat;
+	background: url(../images/lsimg/top-header-new.png) no-repeat;
 }
 .warp-leftside .content-nc-hot .label i {
 	background-position: -115px -58px
@@ -6677,7 +6677,7 @@ a.col-num:hover {
 	left: 0;
 	width: 15px;
 	height: 15px;
-	background: url(/resources/images/lsimg/top-header-new.png) no-repeat -97px -62px;
+	background: url(../images/lsimg/top-header-new.png) no-repeat -97px -62px;
 *display:inline;
 	zoom: 1
 }
@@ -6728,7 +6728,7 @@ a.col-num:hover {
 	font-family: Arial;
 	font-size: 18px;
 	text-align: center;
-	background: url(/resources/images/lsimg/sp-icons-24.png) no-repeat 0 -20px;
+	background: url(../images/lsimg/sp-icons-24.png) no-repeat 0 -20px;
 	z-index: 2
 }
 .warp-leftside .rc-b .link {
@@ -6804,7 +6804,7 @@ a.col-num:hover {
 	padding-left: 42px;
 }
 .booking-catetit {
-	background: url(/resources/images/lsimg/apt-img.png) no-repeat 0 -4px;
+	background: url(../images/lsimg/apt-img.png) no-repeat 0 -4px;
 	height: 50px;
 	padding: 8px 0 3px 45px;
 }
@@ -6845,7 +6845,7 @@ a.col-num:hover {
 	_padding: 0 10px
 }
 .ap-block .book-select .bk-slet span, .ap-block .drop-downlist .drop-close, .ap-block .book-select .bk-date {
-	background: url(/resources/images/lsimg/apt-img.png) no-repeat right -58px;
+	background: url(../images/lsimg/apt-img.png) no-repeat right -58px;
 	background-color: #fff;
 	border: 1px solid #d7d7d7
 }
@@ -7095,7 +7095,7 @@ a.col-num:hover {
 	margin-bottom: 10px;
 }
 .bul-list li {
-	background: url(/resources/images/lsimg/com-icon.png) no-repeat -134px -263px;
+	background: url(../images/lsimg/com-icon.png) no-repeat -134px -263px;
 	padding-left: 8px;
 }
 .aside a {
@@ -7179,7 +7179,7 @@ a.col-num:hover {
 	line-height: 18px;
 }
 .item-rank-rst {
-	background: url(/resources/images/remark.gif) no-repeat;
+	background: url(../images/remark.gif) no-repeat;
 }
 .hot-info .item-rank-rst {
 	margin-right: 10px;
@@ -7193,7 +7193,7 @@ a.col-num:hover {
 	overflow: hidden
 }
 .item-rank-rst02 {
-	background: url(/resources/images/remark.gif) no-repeat;
+	background: url(../images/remark.gif) no-repeat;
 	width: 64px;
 	height: 12px;
 	margin: 0 12px 0 0;
@@ -7270,7 +7270,7 @@ a.col-num:hover {
 	width: 20px;
 }
 .login-box .btn-qq i, .login-box .btn-sina i {
-	background: url(/resources/images/lsimg/wq.png) no-repeat;
+	background: url(../images/lsimg/wq.png) no-repeat;
 }
 .login-box .btn-sina i {
 	background-position: -30px 0;
@@ -7454,16 +7454,16 @@ a.col-num:hover {
 	width: 1px;
 }
 .layter-promo .promo-com .promo-tab .tab-col.on.n-deal i {
-	background: url(/resources/images/lsimg/index-icon.png) no-repeat -23px -1007px;
+	background: url(../images/lsimg/index-icon.png) no-repeat -23px -1007px;
 }
 .layter-promo .promo-com .promo-tab .tab-col.r-deal i {
-	background: url(/resources/images/lsimg/index-icon.png) no-repeat 0 -1038px;
+	background: url(../images/lsimg/index-icon.png) no-repeat 0 -1038px;
 }
 .layter-promo .promo-com .promo-tab .tab-col.on.r-deal i {
-	background: url(/resources/images/lsimg/index-icon.png) no-repeat -23px -1038px;
+	background: url(../images/lsimg/index-icon.png) no-repeat -23px -1038px;
 }
 .layter-promo .promo-com .promo-tab .tab-col.n-deal i {
-	background: url(/resources/images/lsimg/index-icon.png) no-repeat 0 -1007px;
+	background: url(../images/lsimg/index-icon.png) no-repeat 0 -1007px;
 }
 .layter-promo .promo-com .promo-tab .tab-col i {
 	display: inline-block;
@@ -7532,7 +7532,7 @@ a.col-num:hover {
 }
 .layter-promo .promo-list-item .promo-window .promo-window-item a:hover h3{ color:#e64d5e;  }
 .layter-promo .promo-list-item .promo-window .promo-window-item a img {
-	background: url(/resources/images/lsimg/loading.gif) no-repeat center;
+	background: url(../images/lsimg/loading.gif) no-repeat center;
 	border: 1px solid #e6e6e6;
 }
 .layter-promo .promo-com .promo-tab .tab-col.r-deal {
@@ -7612,7 +7612,7 @@ a.col-num:hover {
 	text-align: center;
 }
 .layter-promo .promo-com .promo-list-item .panel-foot .panel-ctrl ul li {
-	background: url(/resources/images/lsimg/gift-icon.png) no-repeat -19px 0;
+	background: url(../images/lsimg/gift-icon.png) no-repeat -19px 0;
 
 	width: 10px;
 	height: 10px;
@@ -7640,7 +7640,7 @@ a.col-num:hover {
 
 
 /*.promo-list-item .panel-ctrl li {
-	background: url(/resources/images/lsimg/gift-icon.png) 0 -19px 0;
+	background: url(../images/lsimg/gift-icon.png) 0 -19px 0;
 	width: 10px;
 	height: 10px;
 	
@@ -7705,7 +7705,7 @@ a.col-num:hover {
 	position: relative;
 }
 .category-foot .link .link-icon {
-	background: url(/resources/images/lsimg/link-icon.jpg) no-repeat 0 0px;
+	background: url(../images/lsimg/link-icon.jpg) no-repeat 0 0px;
 	height: 16px;
 	position: absolute;
 	right: -18px;
@@ -7726,7 +7726,7 @@ a.col-num:hover {
 	width: 80px;
 }
 #f-food .title, #f-yule .title, #f-movie .title, #f-hotel .title, #f-life .title, #f-shop .title {
-	background: url(/resources/images/lsimg/floor-img.png) no-repeat
+	background: url(../images/lsimg/floor-img.png) no-repeat
 }
 #f-food .title {
 	background-position: 0 -271px;
@@ -7799,7 +7799,7 @@ a.col-num:hover {
 	z-index: 3;
 }
 .se-slider .num li {
-	background: url(/resources/images/lsimg/gift-icon.png) no-repeat -19px 0;
+	background: url(../images/lsimg/gift-icon.png) no-repeat -19px 0;
 	width: 10px;
 	height: 10px;
 	line-height: 30px;
@@ -7820,7 +7820,7 @@ a.col-num:hover {
 	display: none;
 	width: 25px;
 	height: 25px;
-	background: url(/resources/images/lsimg/right-btn.png) no-repeat;
+	background: url(../images/lsimg/right-btn.png) no-repeat;
 	position: absolute;
 	top: 65px;
 }
@@ -7847,7 +7847,7 @@ text-align: center;
 	display: none;
 	width: 25px;
 	height: 25px;
-	background: url(/resources/images/lsimg/right-btn.png) no-repeat;
+	background: url(../images/lsimg/right-btn.png) no-repeat;
 	position: absolute;
 	top: 65px;
 }
@@ -7869,7 +7869,7 @@ text-align: center;
 	zoom: 1;
 	z-index: 3;
 }
-.weekcollect_show_box .wc_num li {background: url(/resources/images/lsimg/gift-icon.png) no-repeat -19px 0;
+.weekcollect_show_box .wc_num li {background: url(../images/lsimg/gift-icon.png) no-repeat -19px 0;
 	width: 10px;
 	height: 10px;
 	line-height: 30px;
@@ -7889,7 +7889,7 @@ text-align: center;
 	display: none;
 	width: 40px;
 	height:50px;
-	background: url(/resources/images/lsimg/sp-slide.png) no-repeat;
+	background: url(../images/lsimg/sp-slide.png) no-repeat;
 	position: absolute;
 	top:125px;
 }
@@ -8050,7 +8050,7 @@ text-align: center;
 	line-height: 18px;
 }
 .cp-con .arrow {
-	background: url(/resources/images/lsimg/coupon-top.png) no-repeat 0 0;
+	background: url(../images/lsimg/coupon-top.png) no-repeat 0 0;
 	display: block;
 	float: right;
 	height: 5px;
@@ -8222,7 +8222,7 @@ text-align: center;
 	width: 55px;
 	height: 25px;
 	margin-right: 10px;
-	background: url(/resources/images/lsimg/sp-img.png) no-repeat 0 -334px;
+	background: url(../images/lsimg/sp-img.png) no-repeat 0 -334px;
 	text-indent: -9999em;
 	outline: 0
 }
@@ -8244,7 +8244,7 @@ text-align: center;
 	width: 86px;
 	height: 25px;
 	margin-right: 10px;
-	background: url(/resources/images/lsimg/sp-img.png) no-repeat 0 0;
+	background: url(../images/lsimg/sp-img.png) no-repeat 0 0;
 	text-indent: -9999em;
 	outline: 0
 }
@@ -8407,7 +8407,7 @@ text-align: center;
 	display: block;
 }
 .buy-bottom .btn-wrapper a {
-	background: url(/resources/images/lsimg/sp-img.png) no-repeat 0 -64px;
+	background: url(../images/lsimg/sp-img.png) no-repeat 0 -64px;
 	display: inline-block;
 	height: 40px;
 	outline: 0 none;
@@ -8417,7 +8417,7 @@ text-align: center;
 	background-position: 0 -105px;
 }
 .buy-bottom .btn-wrapper a.d-btn-txt {
-	background: url(/resources/images/lsimg/sp-img.png) no-repeat 0 -396px;
+	background: url(../images/lsimg/sp-img.png) no-repeat 0 -396px;
 	display: inline-block;
 	height: 40px;
 	outline: 0 none;
@@ -8664,7 +8664,7 @@ text-align: center;
 	line-height: 41px;
 }
 .gift-bd li .btn, .gift-bd li .btn-gift {
-	background: url(/resources/images/lsimg/group-btn.jpg) no-repeat;
+	background: url(../images/lsimg/group-btn.jpg) no-repeat;
 	cursor: pointer;
 	height: 40px;
 	text-align: center;
@@ -8672,7 +8672,7 @@ text-align: center;
 	float: right;
 }
 .gift-bd li .btn:hover {
-	background: url(/resources/images/lsimg/group-btn.jpg) no-repeat 0 -41px;
+	background: url(../images/lsimg/group-btn.jpg) no-repeat 0 -41px;
 }
 .gift-bd li .btn-gift {
 	background-position: 0 -82px;
@@ -8757,7 +8757,7 @@ text-align: center;
 	line-height: 14px;
 }
 .elevator .link .link-icon {
-	background: url(/resources/images/lsimg/sub-icon.png) no-repeat 0 0;
+	background: url(../images/lsimg/sub-icon.png) no-repeat 0 0;
 	display: block;
 	height: 18px;
 	margin-left: 2px;
@@ -8863,7 +8863,7 @@ text-align: center;
 	text-decoration: none;
 }
 #gotop {
-	background: url(/resources/images/lsimg/o2o_member_pic.png) no-repeat 0 0;
+	background: url(../images/lsimg/o2o_member_pic.png) no-repeat 0 0;
 	display: block;
 	height: 54px;
 	width: 54px;
@@ -8882,7 +8882,7 @@ text-align: center;
 	width: 160px;
 }
 .cpl_title .o {
-	background: url(/resources/images/lsimg/cpl_line.png) no-repeat 5px 32px rgba(255,255,255,1);
+	background: url(../images/lsimg/cpl_line.png) no-repeat 5px 32px rgba(255,255,255,1);
  filter:progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='#7FFFFFFF', endColorstr='#7FFFFFFF');
 background-color:;
 	height: 45px;
@@ -8929,7 +8929,7 @@ background-color:;
 	text-decoration: none;
 	display: inline-block;
 	float: left;
-	background: url(/resources/images/lsimg/login.png) no-repeat scroll;
+	background: url(../images/lsimg/login.png) no-repeat scroll;
 	margin-right: 10px;
 	vertical-align: middle;
 	height: 28px;
@@ -9269,7 +9269,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr=
 	width: 13px;
 }
 .money-spare .bank {
-	background: url(/resources/images/lsimg/banklist.jpg) no-repeat;
+	background: url(../images/lsimg/banklist.jpg) no-repeat;
 	border: 1px solid #ddd;
 	cursor: pointer;
 	float: left;
@@ -9310,7 +9310,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr=
 	height: 30px;
 }
 .form-btn a.btn-submit {
-	background: url(/resources/images/lsimg/btn-shop.png) no-repeat 0 0;
+	background: url(../images/lsimg/btn-shop.png) no-repeat 0 0;
 	float: left;
 	font-size: 14px;
 	font-weight: 700;
@@ -9320,7 +9320,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr=
 	padding-left: 20px;
 }
 .form-btn .btn-submit span {
-	background: url(/resources/images/lsimg/btn-shop.png) no-repeat 100% -30px;
+	background: url(../images/lsimg/btn-shop.png) no-repeat 100% -30px;
 	cursor: pointer;
 	float: left;
 	height: 30px;
@@ -9527,14 +9527,14 @@ filter:progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr=
 	float: left;
 }
 .booking-catetit {
-	background: url(/resources/images/lsimg/apt-img.png) no-repeat 0 -4px;
+	background: url(../images/lsimg/apt-img.png) no-repeat 0 -4px;
 	height: 50px;
 	padding: 8px 0 3px 45px;
 	float: left;
 	width: 450px;
 }
 .booking-catetit02 {
-	background: url(/resources/images/lsimg/apt-img.png) no-repeat 0 -4px;
+	background: url(../images/lsimg/apt-img.png) no-repeat 0 -4px;
 	height: 50px;
 	padding: 8px 0 3px 45px;
 }
@@ -9585,7 +9585,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr=
 	_padding: 0 10px
 }
 .book-category .book-select-index .bk-slet span, .book-category .drop-downlist .drop-close, .book-category .book-select-index .bk-date {
-	background: url(/resources/images/lsimg/apt-img.png) no-repeat right -58px;
+	background: url(../images/lsimg/apt-img.png) no-repeat right -58px;
 	background-color: #fff;
 	border: 1px solid #d7d7d7
 }
@@ -9741,7 +9741,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr=
 	margin-right: 6px;
 	display: inline;
 	cursor: pointer;
-	background: url(/resources/images/lsimg/index-point.png) no-repeat 0px 0px;
+	background: url(../images/lsimg/index-point.png) no-repeat 0px 0px;
 	color: #fff;
 	font-family: arial;
 	font-size: 12px;
@@ -9750,7 +9750,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr=
 	height: 8px;
 }
 #mainjx .on {
-	background: url(/resources/images/lsimg/index-point.png) no-repeat -15px 0px;
+	background: url(../images/lsimg/index-point.png) no-repeat -15px 0px;
 	width: 8px;
 	height: 8px;
 	position: relative;
@@ -9906,7 +9906,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000, endCo
 	color: #C00
 }
 .comment-list-a .comment-entry blockquote {
-	background: url(/resources/images/lsimg/com.jpg) no-repeat -141px -2px;
+	background: url(../images/lsimg/com.jpg) no-repeat -141px -2px;
 	color: #666;
 	float: left;
 	line-height: 1.8;
@@ -9914,7 +9914,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000, endCo
 	width: 400px;
 }
 .comment-list-a .comment-entry .more {
-	background: url(/resources/images/lsimg/com.jpg) no-repeat 0 -2px;
+	background: url(../images/lsimg/com.jpg) no-repeat 0 -2px;
 	display: block;
 	float: right;
 	height: 42px;
@@ -10163,7 +10163,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000, endCo
 	z-index: 3;
 }
 .gift-banner .num li {
-	background: url(/resources/images/lsimg/gift-icon.png) no-repeat -19px 0;
+	background: url(../images/lsimg/gift-icon.png) no-repeat -19px 0;
 	width: 10px;
 	height: 10px;
 	line-height: 30px;
@@ -10591,14 +10591,14 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000, endCo
 
 
 .tabs-panel .shop-join-btn{
-    background: url(/resources/images/lsimg/shop-btn.jpg) no-repeat 0 0;
+    background: url(../images/lsimg/shop-btn.jpg) no-repeat 0 0;
     display: block;
     height: 55px;
     margin: 20px auto 10px;
     width: 168px;
 }
 .tabs-panel .shop-join-btn:hover{ background-position:0 -55px;  }
-.tabs-panel .shop-join-help {background: url(/resources/images/lsimg/shop-btn.jpg) no-repeat 0 -119px;
+.tabs-panel .shop-join-help {background: url(../images/lsimg/shop-btn.jpg) no-repeat 0 -119px;
     color: #999;
     display: block; width:100px; margin:10px auto 0; padding-left:18px; line-height:30px; height:30px
 }
@@ -10815,7 +10815,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000, endCo
 	z-index: 3;
 }
 .s-focus-pic ol li {
-	background: url(/resources/images/lsimg/shop-icon-f.png) no-repeat -24px 0;
+	background: url(../images/lsimg/shop-icon-f.png) no-repeat -24px 0;
 	width: 18px;
 	height: 18px;
 	line-height: 50px;
@@ -10831,7 +10831,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000, endCo
 background-position: 0 0;
 }
 .s-slider-list .prev, .s-slider-list .next {
-    background: url(/resources/images/lsimg/sp-slide.png) no-repeat 0 0;
+    background: url(../images/lsimg/sp-slide.png) no-repeat 0 0;
     display: none;
     height: 50px;
     position: absolute;
