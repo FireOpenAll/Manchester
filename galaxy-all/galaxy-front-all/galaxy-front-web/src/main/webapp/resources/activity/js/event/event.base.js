@@ -898,7 +898,7 @@ function event_category_list(code,type,posid) {
 	var info = '{"code":"'+code+'","type":"'+type+'"}';
 	//var url = js_huodongshu_domain+'/geteventcategory.do';
 	//var url = "http://182.92.169.209/activity/geteventcategory.do";
-	var url = "/activity/geteventcategory.do";
+	var url = "http://182.92.169.209/activity/geteventcategory.do";
 	$.ajax({
 		url: url,
 		async: false,

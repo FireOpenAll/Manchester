@@ -79,6 +79,7 @@ public class ActivityPicUploadController {
 			resultModel.setMessage("upload ok");
 			
 			String urlString = "/activity/upload/"+fileName;
+			resultModel.setData(urlString);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
