@@ -31,13 +31,16 @@ public class ActivityModel implements Serializable {
 
 	public ActivityModel() {
 		super();
-		this.feed_type = "activity";
 	}
 
-	public ActivityModel(Long activity_id, Long interest_id, String activity_name, float price, boolean isLike,
-			boolean isJoin, String ower, Date start_time, Date end_time, Contact contact, String summary, String url,
-			ArrayList<Photo> photo_list, LocationInfo locationInfo, ArrayList<UserModel> relative_user) {
+
+
+	public ActivityModel(String feed_type, Long activity_id, Long interest_id, String activity_name, float price,
+			boolean isLike, boolean isJoin, String ower, Date start_time, Date end_time, Contact contact,
+			String summary, String url, ArrayList<Photo> photo_list, LocationInfo locationInfo,
+			ArrayList<UserModel> relative_user) {
 		super();
+		this.feed_type = feed_type;
 		this.activity_id = activity_id;
 		this.interest_id = interest_id;
 		this.activity_name = activity_name;
@@ -53,8 +56,9 @@ public class ActivityModel implements Serializable {
 		Photo_list = photo_list;
 		this.locationInfo = locationInfo;
 		this.relative_user = relative_user;
-		this.feed_type = "activity";
 	}
+
+
 
 	public Long getActivity_id() {
 		return activity_id;

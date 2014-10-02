@@ -15,10 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.galaxy.front.web.rest.model.ResultModel;
 
 @Controller
-@RequestMapping(value = "/picture")
+@RequestMapping(value = "/activity")
 public class ActivityPicUploadController {
 
-	@RequestMapping(value = "activities")
+	@RequestMapping(value = "pictures")
 	public String activityPicUpload(MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
 
 		ResultModel resultModel = new ResultModel();
@@ -46,7 +46,7 @@ public class ActivityPicUploadController {
 		resultModel.setMessage("upload ok");
 		resultModel.setData("success");
 
-		request.setAttribute("fileUrl", "http://182.92.169.209/activity/upload/"+ fileName);
+		request.setAttribute("fileUrl", "http://www.huodongshu.com/html/h5/data/event/event_logo/7.jpg");
 		return "fileuploadresult";
 
 	}
