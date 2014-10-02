@@ -136,7 +136,7 @@ textarea {display: block; height:500px;}
 
 
 <div id='jia-l-map' style="display:none"></div>
-<form id="evnet_base_validateform" name="evnet_base_validateform" method="post" enctype="multipart/form-data" action="/saveEventBase.do" >
+<form id="evnet_base_validateform" name="evnet_base_validateform" method="post" enctype="multipart/form-data" action="/activity/saveEventBase.do" >
 <input type="hidden" name="get_address_btn_flag" id="get_address_btn_flag" value='1'>
 <input type="hidden" name="editor_text_zyc" id="editor_text_zyc" value='78963'>
 
@@ -148,12 +148,14 @@ textarea {display: block; height:500px;}
 
 </div>
 
-<!-- 弹出窗口 -->
+<!-- 弹出窗口,活动图片 -->
 <div class="global_dialogInfo global_dialogW800" id="upLogo" dialogTitle="选择活动图片" UIscroll="500">
     <div class="info_baseD">
         <div class="file">
             <div class="fileImg"><span><img src="http://pic.4j4j.cn/upload/pic/20130705/be35d8d3d6.jpg" alt=""></span></div>
-            <a class="btn_small btn_gray btn_autox40" "href="javascript:void(0)" id="log_chuan_file">浏览上传<input type="file"  onchange="event_logo_chuan(this)" name="event_logo"  id="event_logo_name" class="file event_logo_zyc" /></a>
+            <a class="btn_small btn_gray btn_autox40" "href="javascript:void(0)" id="log_chuan_file">浏览上传
+                <input type="file"  onchange="event_logo_chuan(this)" name="event_logo"  id="event_logo_name" class="file event_logo_zyc" />
+            </a>
             <p class="font_999999">图片尺寸为：640像素x380像素，图片不得超过300K</p>
             <div class="clear"></div>
         </div>
@@ -208,16 +210,7 @@ textarea {display: block; height:500px;}
         <div class="rightBody">
             <div class="info_main info_base" UIselect="click">
                 <div class="fList_narrow fListN_80_580">
-                <!--活动主题系列
-                <ul>
-                    <li class="title">活动主题系列：</li>
-                    <li class="form"><input type="text" class="input w390" id="event_theme_xilie"  name="event_theme_xilie" /></li>
-                    <li class="tips" id="error_event_theme_xilie" > </li>
-                    <div class="clear"></div>
-                </ul> -->
-               
-              
-
+             
                   <!--活动名称 -->
                 <ul>
                     <li class="title">活动名称</li>
@@ -225,18 +218,6 @@ textarea {display: block; height:500px;}
                     <li class="required">*</li>
                     <li class="tips" id="error_event_name" > </li>
                 </ul>
-                
-                  <!--活动最大人数 
-                <ul>
-                    <li class="title"><span>*</span>活动限制人数：</li>
-                    <li class="form"><input   type="text" class="input w390" id="event_limit_num"  name="event_limit_num" /></li>
-                    <li class="tips" id="error_event_limit_num" > </li>
-                    <div class="clear"></div>
-                </ul>-->
-                
-                
-               
-
                   <!--活动类型 -->
                  <ul style="display:none;">
                     <li class="title"><span>*</span>活动类型</li>
@@ -247,19 +228,6 @@ textarea {display: block; height:500px;}
                     <li class="tips" id="error_event_type" > </li>
                     <div class="clear"></div>
                 </ul>
-                
-                
-               
-                  <!--活动模式
-                 <ul id="ul_event_module" >
-                    <li class="title"><span>*</span>活动模式：</li>
-                    <li class="form">
-                        <input  id="event_module_type_1"  name="event_module_type" type="radio" class="radio" value="1" checked="checked" />售票模式　　
-                        <input  id="event_module_type_2"  name="event_module_type" type="radio" class="radio" value="2" />报名模式
-                    </li>
-                    <li class="tips" id="error_event_module_type" ></li>
-                    <div class="clear"></div>
-                </ul> -->
 
                 <!--时间 -->
                 <ul id="ul_event_times" class="eventTimeUl">
@@ -338,19 +306,6 @@ textarea {display: block; height:500px;}
                          <input type='text' name="event_org_hidden_info_y" id="event_org_hidden_info_y" style="position:absolute;left:-820px;border-style:none" value='' />
                         </li>
                         <li class="form" id="img_event_org_src_li">
-                            <!--<dl>
-                                <dt>活动树（北京）科技有限公司</dt>
-                                 <dd><a title="编辑" class="icon icon05" href="#"><span></span></a>|<a title="删除" class="icon icon04" href="#"><span></span></a></dd>
-                            </dl>
-                              <dl>
-                                <dt>活动树（北京）科技有限公司</dt>
-                                <dd><a title="编辑" class="icon icon05" href="#"><span></span></a>|<a title="删除" class="icon icon04" href="#"><span></span></a></dd>
-                            </dl>
-                            <dl>
-                                <dt>活动树（北京）科技有限公司</dt>
-                                <dd><a title="编辑" class="icon icon05" href="#"><span></span></a>|<a title="删除" class="icon icon04" href="#"><span></span></a></dd>
-                            </dl>-->
-                            
                             <div class="edit" id="addOrg" style="display:none;">
                                  <input type="hidden" class="input_big input_440x40" id="org_id" name="org_id" value="">
                                  <ul class="">
@@ -403,20 +358,6 @@ textarea {display: block; height:500px;}
                     <li class="required">*</li>
                     <li class="tips" id="error_event_refer_telephone"></li>
                 </ul>
-                
-                               
-                
-
-                <!--支持分享
-                <ul >
-                    <li class="title"><span>*</span>支持分享：</li>
-                    <li class="form">
-                        <input name="event_support_share" type="radio" class="radio"  value="1" checked="checked" />是　　　
-                        <input name="event_support_share" type="radio" class="radio" value="2" />否
-                    </li>
-                    <li class="tips" id="error_event_support_share"> </li>
-                    <div class="clear"></div>
-                </ul>-->
                 
                  <!-- 活动简介-->
                 <ul> 
@@ -535,18 +476,6 @@ textarea {display: block; height:500px;}
                                     </li>
                                     <div class="clear"></div>
                                 </ul>
-                                <!-- <ul class="text">
-                                    <li class="title">专属渠道门票</li>
-                                    <li class="form radioBox">
-                                        <span>
-                                            <input name="special_channels" type="radio" class="radio" value="1" />是
-                                        </span>
-                                        <span>
-                                            <input name="special_channels" checked="checked"  type="radio" class="radio" value="2" />否
-                                        </span>
-                                    </li>
-                                    <div class="clear"></div>
-                                </ul> -->
                                  <ul class="text">
                                     <li class="title">门票需要审批</li>
                                     <li class="form radioBox">
@@ -585,7 +514,7 @@ textarea {display: block; height:500px;}
                         </tr>
                     </tfoot>
                 </table>
-                <div class="billSet">
+                <div class="billSet" style="display: none;">
                     <dl>
                         <dt><input id="mystatus" name="mystatus" type="checkbox" value="10" />为参会者提供发票</dt>
                         <dd id="fapiao" style="display:none;">
@@ -604,28 +533,6 @@ textarea {display: block; height:500px;}
             <div class="info_title font_green01"><span class="line"></span>推广设置</div>
             <div class="info_main"> 
                  <div class="fList_wide fListW_80_440_170">
-                <!--活动隐私 
-
-                <ul >
-                    <li class="title"><span>*</span>活动隐私：</li>
-                    <li class="form">
-                        <input id="event_yinsi_1" name="event_yinsi" type="radio" class="radio"  value="1"  checked="checked"/>公开　
-                        <input id="event_yinsi_2" name="event_yinsi" type="radio" class="radio" value="2" />不公开
-                    </li>
-                    <li class="tips" id="error_event_yinsi" > </li>
-                    <div class="clear"></div>
-                </ul>
-                -->
-                
-                 <!-- 活动密码
-                <ul id="ul_event_passwd" style="display:none;" >
-                    <li class="title"><span>*</span>活动密码：</li>
-                    <li class="form"><input   type="text" class="input w390" id="event_passwd"  name="event_passwd"/></li>
-                    <li class="tips" id="error_event_passwd"> </li>
-                    <div class="clear"></div>
-                </ul> 
-                 -->
-                 
                 
                   <!--活动隐私2 -->
                 <ul>
@@ -646,26 +553,6 @@ textarea {display: block; height:500px;}
                         </div>
                     </li>
                 </ul>
-                
-                
-               
-                 <!--活动分类2 
-                <ul id="ul_select_category">
-                    <li class="title">活动分类</li>
-                    <li class="form">
-                       <select style="height:20px;width:260px;" id="select_category_grade1"  name="select_category_grade1" onchange="javascript:whenselectcategory();">
-                         <option>--请选择--</option>
-                       </select>
-                        <select  style="height:20px;width:260px;display:none;" id="select_category_grade2" name="select_category_grade2" >
-                         <option>--请选择--</option>
-                       </select>
-                    </li>
-                    <li class="tips" id="error_select_category" > </li>
-                    <div class="clear"></div>
-                </ul>
-                -->
-                
-                
                 
                     <!-- 活动分类 新版-->
                     <ul id="ul_category_type" class="error">
@@ -691,35 +578,6 @@ textarea {display: block; height:500px;}
                     <li class="title">活动标签</li>
                     <li class="form"><input type="text" class="input_big input_400x40" id="event_keyword" name="event_keyword" /></li>
                     <li class="tips" id="error_event_keyword" > </li>
-                    <div class="clear"></div>
-                </ul>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="info_main info_base"  id="event_link_content"  style="display:none;">
-                 <div class="fList_narrow fListN_80_580">
-                <ul>
-                    <li class="title">长链接</li>
-                    <li class="form font_gray"><span class="text" id="event_long_url">https://eventtree.com/event/</span></li>
-                    <li class="required"  style="display:none;">*</li>
-                    <div class="clear"></div>
-                </ul>
-                <ul>
-                    <li class="title">短链接</li>
-                    <li class="form font_gray" id="event_short_url" >会在活动保存生成后显示</li>
-                    <li class="required"  style="display:none;">*</li>
-                    <div class="clear"></div>
-                </ul>
-                <ul>
-                    <li class="title">二维码</li>
-                    <li class="form font_gray"><img  id="event_qr_code" style="width:120px;height:120px;" src="/getqrcode.do?str=http://www.huodongshu.com/" ></li>
-                    <li class="required"  style="display:none;">*</li>
-                    <div class="clear"></div>
-                </ul>
-                 <ul>
-                    <li class="title">活动码</li>
-                    <li class="form font_gray" id="li_invite_code"></li>
-                    <li class="required" style="display:none;">*</li>
                     <div class="clear"></div>
                 </ul>
                 </div>

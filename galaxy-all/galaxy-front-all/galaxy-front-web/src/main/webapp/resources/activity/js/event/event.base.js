@@ -1,6 +1,209 @@
 var map_point_info = '';
 
 
+/**高德地图*/
+var mapObj,toolBar;
+var windowsArr = [];
+var marker = [];
+$(function(){
+	mapInit();
+	$("#map_div_bigdiv").hide(); 
+})
+function mapInit() {
+	var event_id=$.trim(getQueryString('event_id'));
+	if(event_id){
+		$("#map_div_bigdiv").attr("style","width:562px;");
+	}else{
+		$("#map_div_bigdiv").attr("style","width:760px;");
+	}
+    mapObj = new AMap.Map("iCenter", {
+        view: new AMap.View2D({
+            center:new AMap.LngLat(116.397428,39.90923),//地图中心点
+            zoom:15//地图显示的缩放级别
+        }),
+        keyboardEnable:false
+    });
+    mapObj.plugin(["AMap.ToolBar"],function(){		
+		toolBar = new AMap.ToolBar();
+		mapObj.addControl(toolBar);		
+	});
+    toolBar.show()
+     
+    mapObj.setStatus({scrollWheel:false});
+   // document.getElementById("keyword").onkeyup = keydown;
+}
+//输入提示
+function autoSearch() { 
+    var keywords =$.trim($("#zxy_zxy").val());
+      if(keywords==''){
+    	  return false;
+      }
+    var auto; 
+    //加载输入提示插件
+        mapObj.plugin(["AMap.Autocomplete"], function() {
+        var autoOptions = {
+            city: "" //城市，默认全国
+        };
+        auto = new AMap.Autocomplete(autoOptions);
+        //查询成功时返回查询结果
+        if ( keywords.length > 0) { 
+        	$("#address_list").html('');
+        	$('#address_list_real').html('');
+            AMap.event.addListener(auto,"complete",autocomplete_CallBack);
+            auto.search(keywords);
+        }
+        else {
+            //document.getElementById("result1").style.display = "none";
+        }
+    });
+}
+
+//输出输入提示结果的回调函数
+function autocomplete_CallBack(data) { 
+    var resultStr = "";
+    var tipArr = data.tips;
+    if (tipArr&&tipArr.length>0) {                
+        for (var i = 0; i < tipArr.length; i++) {
+            resultStr += "<dl id='divid" + (i + 1) + "'  onclick='selectResult(" + i + ")'  style=\"font-size: 13px;cursor:pointer;padding:5px 5px 5px 5px;\"" + "data=" + tipArr[i].adcode + ">" + tipArr[i].name + "<span style='color:#C1C1C1;'>"+ tipArr[i].district + "</span></dl>";
+        }
+    }
+    else  {
+        resultStr = " π__π 亲,人家找不到结果!<br />要不试试：<br />1.请确保所有字词拼写正确<br />2.尝试不同的关键字<br />3.尝试更宽泛的关键字";
+    }
+     $("#address_list").html(resultStr);
+     $("#address_list").show();
+}
+
+function gaode_keydown(event){
+    var key = (event||window.event).keyCode;
+    if(key===40){//down
+       
+    }else if(key===38){//up
+     
+    }else if(key === 13){
+       
+    }else{
+        autoSearch();
+    }
+}
+
+//从输入提示框中选择关键字并查询
+function selectResult(index) {
+    if(index<0){
+        return;
+    }
+    if (navigator.userAgent.indexOf("MSIE") > 0) {
+        document.getElementById("zxy_zxy").onpropertychange = null;
+    }
+    //截取输入提示的关键字部分
+    var text = document.getElementById("divid" + (index + 1)).innerHTML.replace(/<[^>].*?>.*<\/[^>].*?>/g,""); 
+    var cityCode = document.getElementById("divid" + (index + 1)).getAttribute('data');
+    document.getElementById("zxy_zxy").value = text;
+    
+    //根据选择的输入提示关键字查询
+    mapObj.plugin(["AMap.PlaceSearch"], function() {      
+        var msearch = new AMap.PlaceSearch();  //构造地点查询类
+        AMap.event.addListener(msearch, "complete", placeSearch_CallBack); //查询成功时的回调函数
+        msearch.setCity(cityCode);
+        msearch.search(text);  //关键字查询查询
+    });
+}
+
+//输出关键字查询结果的回调函数
+function placeSearch_CallBack(data) {
+    //清空地图上的InfoWindow和Marker
+    windowsArr = [];
+    marker     = [];
+    mapObj.clearMap();
+    var resultStr1 = "";
+    var poiArr = data.poiList.pois;
+   // console.dir(poiArr);return;
+    var resultCount = poiArr.length;
+    for (var i = 0; i < resultCount; i++) {
+        resultStr1 += "<dl id='divid" + (i + 1) + "' onclick='addmarker(\""+poiArr[i].location.lng+"\",\""+poiArr[i].location.lat+"\",\""+poiArr[i].name+"\",\"1\");' onmouseout='onmouseout_MarkerStyle(" + (i + 1) + ",this)' style=\"font-size: 12px;cursor:pointer;padding:0px 0 4px 2px; border-bottom:1px solid #C1FFC1;\"><table width=560><tr>" + "<td><h3><font color=\"#00a6ac\">名称: " + poiArr[i].name + "</font></h3>";
+            resultStr1 += poiArr[i].address + "</td></tr></table></dl>";
+            //addmarker(i, poiArr[i]);
+    }   
+    mapObj.setFitView();
+    $('#address_list').hide();
+    $('#address_list_real').html(resultStr1);
+    $('#address_list_real').show(); 
+}
+
+
+//输入提示框鼠标移出时的样式
+function onmouseout_MarkerStyle(pointid, thiss) {  //鼠标移开后点样式恢复
+  thiss.style.background = "";
+}
+
+
+
+//添加查询结果的marker&infowindow  
+function addmarker( lng,lat,address,flag) {	
+	var event_id=$.trim(getQueryString('event_id'));
+	if(event_id){
+		$("#map_div_bigdiv").attr("style","width:562px;");
+	}else{
+		$("#map_div_bigdiv").attr("style","width:760px;");
+	}
+	if(flag==1){
+		$("#get_address_btn_flag").val('2');
+	}
+	 $("#zxy_zxy").val(address);
+	 $("#address_list_real").hide();
+    var lngX = lng;
+    var latY = lat;
+    $("#longitude").val(lng);
+	$("#latitude").val(lat);   
+    
+	var lnglatXY = new AMap.LngLat(lngX,latY);
+	 var MGeocoder;
+	    //加载地理编码插件
+	    mapObj.plugin(["AMap.Geocoder"], function() {        
+	        MGeocoder = new AMap.Geocoder({ 
+	            radius: 1000,
+	            extensions: "all"
+	        });
+	        //返回地理编码结果 
+	        AMap.event.addListener(MGeocoder, "complete", geocoder_CallBack); 
+	        //逆地理编码
+	        MGeocoder.getAddress(lnglatXY); 
+	    });
+	    //加点
+	    var marker = new AMap.Marker({
+	        map:mapObj,
+	        icon: new AMap.Icon({
+	            image: "http://api.amap.com/Public/images/js/mark.png",
+	            size:new AMap.Size(58,30),
+	            imageOffset: new AMap.Pixel(-32, -0)
+	        }),
+	        position: lnglatXY,
+	        offset: new AMap.Pixel(-5,-30)
+	    });
+	    mapObj.setFitView();
+	    mapObj.setZoom(15);
+	 $("#map_div_bigdiv").show();  
+}
+
+//回调函数
+function geocoder_CallBack(data) {
+	var city=data.regeocode.addressComponent.city;
+	if(city==''){
+		$("#city_name").val(data.regeocode.addressComponent.province);
+	}else{
+		$("#city_name").val(data.regeocode.addressComponent.city);
+	}
+	
+	//console.dir(data);
+	//alert(11);
+ //var	address = data.regeocode.formattedAddress;
+ //alert(address);
+//	console.dir(data);
+ 
+}  
+/**高德地图*/
+
+
 
 
 
@@ -35,10 +238,9 @@ function  panduan_zyc(){
 }
 
 
-
 /**活动logo图片上传*/
 function  event_logo_chuan(b){
-	hds_preview_pic(b,'img_event_logo_src','img_event_logo_src_li');
+	hds_preview_pic(b,'img_event_logo_src','img_event_logo_src_li');//图片预览
 	$("#event_logo_xitong_flag").val(3);
 	$("#img_event_logo_src_li").removeClass('file');
 	//$("#img_event_logo_src_li").addClass('file_oks');
@@ -128,83 +330,15 @@ function  haibao_btn_show_hide(){
 	}
 }
 
-/**得到要搜索的地方修改2014年9月14日
-http://developer.baidu.com/map/jsdemo.htm#i1_4
-*/
-function  getAddress(){
-	var address=$("#zxy_zxy").val();
-	if(address==''){
-		alert('搜索地址不能为空！');return  false;
-	}
-	var map = new BMap.Map("jia-l-map");
-	map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
-	var options = {
-		onSearchComplete: function(results){
-			//console.dir(results);
-			$("#address_list").show();
-			var html="";
-			// 判断状态是否正确
-			if (local.getStatus() == BMAP_STATUS_SUCCESS){
-				var s = [];
-				for (var i = 0; i < results.getCurrentNumPois(); i ++){
-					if(!results.getPoi(i).province){
-						results.getPoi(i).province='';
-					}
-					if(!results.getPoi(i).city){
-						results.getPoi(i).city='';
-					}
-					html+='<dl onclick="adddizhi(\''+results.getPoi(i).point.lng+'\',\''+results.getPoi(i).point.lat+'\',\''+results.getPoi(i).city+'\',\''+results.getPoi(i).title+'\');">\
-        	                             <dt>'+results.getPoi(i).title+'</dt>\
-        	                             <dd>'+results.getPoi(i).province+results.getPoi(i).city+'</dd>\
-        	                             <div class="clear"></div>\
-        	                         </dl>\
-        	                             ';
-				}
-			}else{
-				html="<center>未搜到相关地址</center>";
-			}
-			$("#address_list").html(html);
-			$("#ul_address_map").click(function(event){
-				event.stopPropagation();
-			})
-			$("body").click(function(){
-				$("#address_list").hide();
-			})
-		}
-	};
-	var local = new BMap.LocalSearch(map, options);
-	local.search(address);
-}
 
 
-/**点击内容框改变修改2014年9月1日*/
-function  adddizhi(jingdu,weidu,city,title){
-	$("#zxy_zxy").val(title);
-	$("#city_name").val(city);
-	$("#longitude").val(jingdu);
-	$("#latitude").val(weidu);
-	$("#address_list").hide();
-	$("#get_address_btn_flag").val(2);
-         if(jingdu && weidu){
-			$("#longitude").val(jingdu);
-			$("#latitude").val(weidu);
-			map_point_info = jingdu+'-'+weidu;
-			loadmap(jingdu,weidu);
-		}else{
-			$("#longitude").val(116.25788391122);
-			$("#latitude").val(39.976275091642);
-			loadmap(116.25788391122,39.976275091642);
-		}
-	
-}
+
 
 
 
 /**zyc*/
 
 $(document).ready(function(){
-	
-
 
 
 	//时间
@@ -264,37 +398,12 @@ $(document).ready(function(){
 
 //编辑框
 var editor;
-//			KindEditor.ready(function(K) {
-//				editor = K.create('textarea[name="reportContent"]', {
-//					height:"300px",
-//					allowFileManager : false,
-//					uploadJson : js_huodongshu_domain+'/keupload.do',
-//					items : [
-//		/*'source', '|', 'undo', 'redo', '|',*/ 'preview', /*'print', 'template', 'code',*/ 'cut', 'copy', 'paste',
-//		'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
-//		'justifyfull', 'insertorderedlist', 'insertunorderedlist', /*'indent', 'outdent', 'subscript',
-//		'superscript', 'clearhtml', 'quickformat', 'selectall',*/ '|', 'fullscreen', /*'/',*/
-//		'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
-//		'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',/* 'multiimage',*/
-//		/*'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
-//		'anchor',*/ 'link', 'unlink'
-//	],
-//					allowFlashUpload: false
-//				});
-//				var result = getQueryString("event_id");
-//				result = $.trim(result);
-//				if(result == ''){
-//					$("div[class='ke-container ke-container-default']").attr("style","width:762px;");
-//				}else{
-//					$("div[class='ke-container ke-container-default']").attr("style","width:562px;");
-//				}
-//
-//			});
+
 
 
 KindEditor.ready(function(K) {
 	editor = K.create('#textarea[name="reportContent"]', {
-		cssPath : '/resources/activity/js/kindeditor/plugins/code/prettify.css',
+		cssPath : 'js/kindeditor/plugins/code/prettify.css',
 		//    uploadJson : js_huodongshu_domain+'/keupload.do',
 		//    fileManagerJson : 'js/kindeditor/php/file_manager_json.php',
 		allowFileManager : false,
@@ -376,78 +485,26 @@ function load_event_yinshi(){
 	});
 }
 
-//加载地图
-function loadmap(lng,lat){
-	var event_id=$.trim(getQueryString('event_id'));
-	if(event_id){
-		$("#map_div_bigdiv").attr("style","width:562px;");
-	}else{
-		$("#map_div_bigdiv").attr("style","width:760px;");
-	}
-	$("#map_div_bigdiv").show();
-	var map = new BMap.Map("allmap");
-	var point = new BMap.Point(lng,lat);
-	map.centerAndZoom(point, 17);
-	map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
-	var marker = new BMap.Marker(point);  // 创建标注
-	map.addOverlay(marker);              // 将标注添加到地图中
-}
 
 
-
-//根据地址记载地图暂时无用
-//function loadMapbyAddress1(){
-//
-//
-//	var cityid = $("#city_id").val();
-//	var province = $("#city_name").val();
-//	var city = $("#city_name").val();
-//	var district = $("#district_name").val();
-//	var address = $("#zxy_zxy").val();
-//	address = $.trim(address);
-//	if(city==''){
-//		return;
-//	}
-//	if(address == ''){
-//		return;
-//	}
-//	address = city+district+address;
-//	var addressinfo = '{"province":"'+province+'","cityid":"'+cityid+'","city":"'+city+'","district":"'+district+'","address":"'+address+'"}';
-//	var url = js_huodongshu_domain+"/event/getMapPointZyc.do";
-//	$.ajax({ url: url,
-//	type:"POST",
-//	dataType:"json",
-//	data:'addressinfo='+addressinfo,
-//	success:function(msg){
-//		if(msg){
-//			var lng = msg.results.location.lng;
-//			var lat = msg.results.location.lat;
-//			$("#longitude").val(lng);
-//			$("#latitude").val(lat);
-//			map_point_info = lng+'-'+lat;
-//			loadmap(lng,lat);
-//			//loadmap(116.25788391122,39.976275091642);
-//		}else{
-//			$("#longitude").val(116.25788391122);
-//			$("#latitude").val(39.976275091642);
-//			loadmap(116.25788391122,39.976275091642);
-//		}
-//
-//	}
-//	});
-//}
 
 
 //保存活动基本信息
 function event_base_save(obj){
 	/*zyc用于logo图片验证*/
 	var img_event_logo_src_te = $.trim($("#img_event_logo_src").attr('src'));
-	//alert(img_event_logo_src_te);
+	
+	
+	alert('img_event_logo_src_te'+img_event_logo_src_te);
+	
+	// alert(img_event_logo_src_te);
 	$("#img_event_log_form_zyc").val(img_event_logo_src_te);
 
 	var event_ticket_hidden_info = getTicketInfo() ;
-
 	
+	alert('event_ticket_hidden_info'+event_ticket_hidden_info);
+
+
 	$("input[name='event_ticket_hidden_info']").val(event_ticket_hidden_info);
 
 	//add by surn 20140827
@@ -475,13 +532,16 @@ function event_base_save(obj){
 	$(obj).attr("disabled","disabled");
 	//		var event_theme_xilie = $("#event_theme_xilie").val();
 	var event_name = $("#event_name").val();
+	
+	//alert('活动名称：'+event_name);
 
 	var event_type = $("input[name='event_type']:checked").val();
 	//	    var event_module_type  = $("input[name='event_module_type']:checked").val();
 
 	var event_start_time = $("#event_start_time").val();
 	var event_end_time = $("#event_end_time").val();
-
+	
+	//alert('开始时间：'+event_start_time+',结束时间：'+event_end_time);
 
 	var event_address_name = $("#event_address_name").val();
 	//	    var event_address_grade1 = $("#event_address_grade1").html();
@@ -490,7 +550,7 @@ function event_base_save(obj){
 	var select_address_grade1 =  $("#select_address_grade1").val();
 	var select_address_grade2 =  $("#select_address_grade2").val();
 	var select_address_grade3 =  $("#select_address_grade3").val();
-	var event_address_info = $("#zxy_zxy").val();  //zyc 修改
+	var event_address_info = $("#zxy_zxy").val();  //详细地址,zyc 修改
 	var event_longitude = $("#longitude").val();
 	var event_latitude = $("#latitude").val();
 
@@ -536,8 +596,6 @@ function event_base_save(obj){
 	//alert(event_longitude);alert(event_latitude);return;
 	/**zyc*/
 
-	
-	
 	var eventbaseinfo =  '{'+
 	//	       '"event_theme_xilie":"'+event_theme_xilie +'",'+
 	'"event_name":"'+event_name+'",'+
@@ -567,43 +625,17 @@ function event_base_save(obj){
 	'"description":"'+description+'"'+
 	// '"editor_text":"'+editor_text+'"'+
 	'}';
+   // alert(eventbaseinfo);return;
+	alert('eventbaseinfo:'+eventbaseinfo);
 	
 	$("input[name='event_base_hidden_info']").val(eventbaseinfo);
-	
-	//var editor_text = editor.html();
+	var editor_text = editor.html();
 	$("#editor_text_zyc").val(editor_text);
-	$(obj).attr("disabled",false);
+	alert('editor_text:'+editor_text);
 	
+	$(obj).attr("disabled",false);
 	$("#evnet_base_validateform").submit();
-	//	    $("#evnet_base_validateform").ajaxSubmit(function(str){
-	//	    	  alert(1);
-	//	    	  str = $.trim(str);
-	//			  alert(str);
-	//		});
-
-	//		var url = js_huodongshu_domain+"/saveEventBase.do";
-	//		$("#evnet_base_validateform").ajaxSubmit({
-	//		dataType:"json",
-	//		success : function(msg){
-	//			alert(1);
-	//			alert(msg.data.event_keyword);
-	//		}
-	//		});
-	//	    $.ajax({ url: url,
-	//			type:"POST",
-	//			dataType:"json",
-	//		    data:'eventbaseinfo='+eventbaseinfo,
-	//			success:function(msg){
-	//               if(msg.status == 1){
-	//            	   alert('保存成功！');
-	//               }else{
-	//            	   alert(msg.msg);
-	//               }
-	//
-	//		    }
-	//		});
-
-	//	}//end else
+	
 }
 
 //加载活动信息页面
@@ -781,9 +813,9 @@ function load_event_base_page(event_id){
 			$("#li_invite_code").html(msg.data.invite_code);
 			//地图zyc 2014年9月14日修改
 			if(msg.data.longitude!='' && msg.data.latitude!='' && msg.data.longitude!='-1' && msg.data.latitude!='-1'){
-				loadmap(msg.data.longitude,msg.data.latitude);
 				$("#longitude").val(msg.data.longitude);
 				$("#latitude").val(msg.data.latitude);
+				addmarker(msg.data.longitude,msg.data.latitude,msg.data.address,0);
 			}
 			
 			//左侧导航条
@@ -855,89 +887,18 @@ function change_org(orgData){
 
 	//subOrgOff();
 }
-//function displayleftMenu(eid){
-//	    eid = $.trim(eid);
-//	    $("#dt_jibenxinxi").attr("href","event_base.html?eid="+eid);
-//	    $("#dd_huodongricheng").attr("href","event_agenda.html?eventid="+eid);
-//	    $("#dd_baomingbiao").attr("href","event_register_form.html?eventid="+eid);
-//	    $("#dd_yanjiangjiabin").attr("href","event_jiabin.html?eventid="+eid);
-//	    $("#dd_zuzhijigou").attr("href","event_jigou.html?eventid="+eid);
-//	    $("#dd_gongzuorenyuan").attr("href","event_gongzuorenyuan.html?eventid="+eid);
-//	    $("#dd_huodongwenjian").attr("href","event_wenjian.html?eventid="+eid);
-//	    $("#dd_huodongxiangce").attr("href","event_xiangce.html?eventid="+eid);
-//	    $("#dd_huodongshipin").attr("href","event_video.html?eventid="+eid);
-//}
-
-/**
-* 加载三级区域菜单
-*
-**/
-//function changeLevel(code,type,posid) {
-//      var info = '{"code":"'+code+'","type":"'+type+'"}';
-//     var url = js_huodongshu_domain+'/getaddressinfo.do';
-//	  $.ajax({
-//			url: url,
-//			dataType: "json",
-//			data:"info="+info,
-//			success: function(msg){
-//		        	   var data = {addres:msg.data};
-//					   var dataDir = {
-//				    	'li':{
-//			   				'addre<-addres':{
-//						        '.':'addre.name',
-//			   					'@onclick':function(a){
-//						           if(posid == 'event_uladdress_grade1'){
-//						        	   var selectval = 'event_address_grade1';
-//						           }else if(posid == 'event_uladdress_grade2'){
-//						        	   var selectval = 'event_address_grade2';
-//						           }if(posid == 'event_uladdress_grade3'){
-//						        	   var selectval = 'event_address_grade3';
-//						           }
-//			   				       return 'javascript:whenproviceselect("'+selectval+'","'+(a.item.name)+'","'+(a.item.code)+'");';
-//
-//			   		            }
-//			   				}
-//
-//		   			    }
-//		   		       };//end dataDir
-//					   $("#"+posid).render(data, dataDir);
-//
-//
-//			}
-//	   });
-//}
-/**
-*
-*/
-//function whenproviceselect(id,content,code){
-//	$("#"+id).html(content);
-//	if(id == 'event_address_grade1'){
-//		 $("#event_address_grade2").html("选择市");
-//		 $("#event_uladdress_grade2").html('<li> </li');
-//		 $("#event_address_grade3").html("选择县");
-//		 $("#event_uladdress_grade3").html('<li> </li');
-//		changeLevel(code,'list','event_uladdress_grade2');
-//	}else if(id == 'event_address_grade2'){
-//		 $("#event_address_grade3").html("选择县");
-//		$("#event_uladdress_grade3").html('<li> </li');
-//		changeLevel(code,'list','event_uladdress_grade3');
-//	}else if(id == 'event_address_grade3'){
-//		return;
-//	}
-//
-//
-//}
 
 
 /**
 * 加载活动分类信息
 *
 **/
-function event_category_list(code,type,posid) {
+function event_category_list(code,type,posid) { 
 	posid = $.trim(posid);
 	var info = '{"code":"'+code+'","type":"'+type+'"}';
 	//var url = js_huodongshu_domain+'/geteventcategory.do';
-	var url = 'http://localhost:8080/'+'activity/geteventcategory.do';
+	//var url = "http://182.92.169.209/activity/geteventcategory.do";
+	var url = "http://localhost:8080/activity/geteventcategory.do";
 	$.ajax({
 		url: url,
 		async: false,
@@ -972,11 +933,12 @@ function event_category_list(code,type,posid) {
 	});
 }
 
-function whenselectcategory(){
-	$("#select_category_grade2").html('<option  value="-1" >--请选择--</option>');
-	var code = $("#select_category_grade1").val();
-	event_category_list(code,'list',"select_category_grade2");
-}
+/* 暂时无用**/
+//function whenselectcategory(){
+//	$("#select_category_grade2").html('<option  value="-1" >--请选择--</option>');
+//	var code = $("#select_category_grade1").val();
+//	event_category_list(code,'list',"select_category_grade2");
+//}
 
 
 function myformvalidate(){
@@ -1145,6 +1107,7 @@ function myformvalidate(){
 				end_time_validate:true
 			},
 			'event_address_name':{
+				required:true,
 				maxlength:30,
 				address_namecheck:true
 
@@ -1158,7 +1121,7 @@ function myformvalidate(){
 			'select_address_grade3':{
 				required:true
 			},
-			'event_address_info':{
+			'zxy_zxy':{
 				required:true,
 				maxlength:30,
 				address_info_check:true
@@ -1231,6 +1194,7 @@ function myformvalidate(){
 				required: "<span class='icon'></span><font color='red'>请选择活动结束时间！<font>"
 			},
 			'event_address_name': {
+				required: "<span class='icon'></span><font color='red'>请填写地点名称！<font>",
 				maxlength: "<span class='icon'></span><font color='red'>活动地点不能超过20个汉字！<font>"
 			},
 			'select_address_grade1': {
@@ -1242,7 +1206,7 @@ function myformvalidate(){
 			'select_address_grade3': {
 				required: "<span class='icon'></span><font color='red'>必填项<font>"
 			},
-			'event_address_info': {
+			'zxy_zxy': {
 				required: "<span class='icon'></span><font color='red'>请填写具体地址！<font>",
 				maxlength: "<span class='icon'></span><font color='red'>详细地址不能超过30个汉字！<font>"
 			},
@@ -1322,7 +1286,7 @@ function myformvalidate(){
 				$("#error_select_address").html(error);
 			}else if(element.is("input[name='select_address_grade3']")){
 				$("#error_select_address").html(error);
-			}else if(element.is("input[name='event_address_info']")){
+			}else if(element.is("input[name='zxy_zxy']")){
 				$("#error_event_address_info").html(error);
 			}else if(element.is("input[name='event_refer_telephone']")){
 				$("#error_event_refer_telephone").html(error);

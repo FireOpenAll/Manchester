@@ -1,8 +1,14 @@
+/**
+ * 主办方相关的js
+ */
 var awardNum = 0;
 $(document).ready(function(){
     //加载当前的主办方活动
     //loadSponsorUser();
     //二维码图片上传
+	
+	//huangshanqi
+	/*
     $("#upload_code").on('change','#code_pic',function (){
         ajaxFileUploads('erweima','code_pic','code_pic','max',function (info){
             if(info.status==1){
@@ -16,7 +22,8 @@ $(document).ready(function(){
             
         });
     });
-    
+    */
+    //huangshanqi
     
   //主办方logo上传
     $("#upload").on('change','#event_pic',function (){
@@ -33,9 +40,9 @@ $(document).ready(function(){
             }
             */
         	//huangshanqi
-        	 $('#img_test').attr('src',"/resources/activity/images/h5/data/event/event_logo/11.jpg");
+        	 $('#img_test').attr('src',"http://www.huodongshu.com/html/h5/data/event/event_logo/7.jpg");
              $("#img_test").show();
-             $("input[name='filePic']").val(info.data.thumb_url);
+             $("input[name='filePic']").val("http://www.huodongshu.com/html/h5/data/event/event_logo/9.jpg");
              $("#org_form_file").removeClass("form file").addClass("form file_ok");
            //huangshanqi
             
@@ -76,6 +83,7 @@ function loadSponsorUser(){
             }
        });
 }
+
 var info="",orgJsonName="", delOrgIds = "",orgSponNum=0,orgJson1="",orgJson2="",orgJson3="";
 //账户基本信息保存
 function account_sponsor_save(){

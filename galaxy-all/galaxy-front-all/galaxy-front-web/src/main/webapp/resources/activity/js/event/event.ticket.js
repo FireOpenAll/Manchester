@@ -223,7 +223,7 @@ function getTicketInfo(){
 	var json = '{';
 	json += '"is_invoice":"'+is_invoice+'","invoice":"'+invoice+'","event_id":"'+event_id+'","list":[' ;
 	
-	for(var i=0; i <　info.length ; ++i){
+	for(var i=0; i <info.length ; ++i){
 		json = json+'{'+info[i]+'}';
 		if((info.length-1) == i){
 			break;

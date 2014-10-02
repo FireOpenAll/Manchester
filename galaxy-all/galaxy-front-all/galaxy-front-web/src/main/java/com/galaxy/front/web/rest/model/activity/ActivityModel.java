@@ -10,6 +10,9 @@ import com.galaxy.front.web.rest.model.location.LocationInfo;
 import com.galaxy.front.web.rest.model.user.UserModel;
 
 public class ActivityModel implements Serializable {
+	
+	private String feed_type;//feedItem类型
+	
 	private Long activity_id;
 	private Long interest_id;
 	private String activity_name;
@@ -30,10 +33,14 @@ public class ActivityModel implements Serializable {
 		super();
 	}
 
-	public ActivityModel(Long activity_id, Long interest_id, String activity_name, float price, boolean isLike,
-			boolean isJoin, String ower, Date start_time, Date end_time, Contact contact, String summary, String url,
-			ArrayList<Photo> photo_list, LocationInfo locationInfo, ArrayList<UserModel> relative_user) {
+
+
+	public ActivityModel(String feed_type, Long activity_id, Long interest_id, String activity_name, float price,
+			boolean isLike, boolean isJoin, String ower, Date start_time, Date end_time, Contact contact,
+			String summary, String url, ArrayList<Photo> photo_list, LocationInfo locationInfo,
+			ArrayList<UserModel> relative_user) {
 		super();
+		this.feed_type = feed_type;
 		this.activity_id = activity_id;
 		this.interest_id = interest_id;
 		this.activity_name = activity_name;
@@ -50,6 +57,8 @@ public class ActivityModel implements Serializable {
 		this.locationInfo = locationInfo;
 		this.relative_user = relative_user;
 	}
+
+
 
 	public Long getActivity_id() {
 		return activity_id;
@@ -169,6 +178,14 @@ public class ActivityModel implements Serializable {
 
 	public void setRelative_user(ArrayList<UserModel> relative_user) {
 		this.relative_user = relative_user;
+	}
+
+	public String getFeed_type() {
+		return feed_type;
+	}
+
+	public void setFeed_type(String feed_type) {
+		this.feed_type = feed_type;
 	}
 
 	

@@ -14,9 +14,11 @@ public class InterestModel implements Serializable {
 	String interest_name;// 兴趣名
 	String cover;// 兴趣封面
 	String summary;// 摘要描述
+	String feed_type;//feedItem类型
 
 	public InterestModel() {
 		super();
+		this.feed_type = "interest";
 	}
 
 	public InterestModel(long interest_id, String interest_name, String cover, String summary) {
@@ -25,6 +27,7 @@ public class InterestModel implements Serializable {
 		this.interest_name = interest_name;
 		this.cover = cover;
 		this.summary = summary;
+		this.feed_type = "interest";
 	}
 
 	public long getInterest_id() {
@@ -57,6 +60,14 @@ public class InterestModel implements Serializable {
 
 	public void setSummary(String summary) {
 		this.summary = summary;
+	}
+
+	public String getFeed_type() {
+		return feed_type;
+	}
+
+	public void setFeed_type(String feed_type) {
+		this.feed_type = feed_type;
 	}
 
 }

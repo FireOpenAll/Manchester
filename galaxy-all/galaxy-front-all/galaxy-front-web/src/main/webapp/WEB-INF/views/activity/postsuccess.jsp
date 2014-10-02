@@ -8,5 +8,6 @@
 </head>
 <body>
 提交成功
+<p><%=request.getAttribute("parameters") %></p>
 </body>
 </html>
