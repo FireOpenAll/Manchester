@@ -75,16 +75,18 @@ public class ActivityPicUploadController {
 		// 保存
 		try {
 			file.transferTo(targetFile);
+			resultModel.setCode("20000");
+			resultModel.setMessage("upload ok");
+			
+			String urlString = "/activity/upload/"+fileName;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+			
+			resultModel.setCode("50000");
+			resultModel.setMessage("uploal_error");
+			
 		}
-
-		resultModel.setCode("20000");
-		resultModel.setMessage("upload ok");
-		
-		String urlString = "/activity/upload/"+fileName;
-		
-		resultModel.setData(urlString);
 
 		return resultModel;
 
