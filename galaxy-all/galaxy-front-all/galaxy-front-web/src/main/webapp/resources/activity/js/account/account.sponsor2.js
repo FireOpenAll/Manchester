@@ -39,7 +39,12 @@ $(document).ready(function(){
                 alert(info.msg);
             }
             */
-        	alert('info-------'+info);
+        	
+        	var ret;
+        	for(var i in info){
+        		ret +=i+':'+info[i];
+        	}
+        	alert('ret+++++=='+ret);
         	if(info.code=='20000'){
         		$('#img_test').attr('src',info.data);
                 $("#img_test").show();

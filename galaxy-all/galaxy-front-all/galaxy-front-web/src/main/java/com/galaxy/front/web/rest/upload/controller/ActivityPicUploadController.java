@@ -8,11 +8,15 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.junit.runners.Parameterized.Parameter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.mysql.fabric.xmlrpc.base.Param;
@@ -23,7 +27,8 @@ public class ActivityPicUploadController {
 
 	@ResponseBody
 	@RequestMapping(value = "ajax_picture_upload")
-	public Object activityPicUpload(MultipartFile file) {
+	//public Object activityPicUpload( @RequestParam("event_pic") MultipartFile file,HttpServletRequest request) {
+	public Object activityPicUpload(@RequestParam("file_field") String fileParamter,HttpServletRequest request) {
 
 		
 		/**
@@ -33,12 +38,28 @@ public class ActivityPicUploadController {
 		 * source=ajaxuploader，说明这是ajaxuploader上传
 		 * @return :json
 		 */
+		
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		 /**页面控件的文件流**/      
+		//String field_nameString = request.getParameter("file_field")
+        MultipartFile file = multipartRequest.getFile(fileParamter);
+		
+		
+		String tagNameString = request.getParameter("file_field");
+		System.err.println("file_field-------------------------"+tagNameString);
+		
+		
+		 /**页面控件的文件流**/      
+        
+        System.out.println("file == null:::::::::"+(file==null));
+		
+		
 		ResultModel resultModel = new ResultModel();
 
 		//String path1 = request.getSession().getServletContext().getRealPath("/");
 		String path = "/upload/images/activity/upload/";
 
-		System.out.println("===========" + path);
+		//System.out.println("===========" + path);
 		
 		String originalname = file.getOriginalFilename();
 		String extents = originalname.substring(originalname.indexOf("."));
@@ -63,7 +84,7 @@ public class ActivityPicUploadController {
 		
 		String urlString = "/activity/upload/"+fileName;
 		
-		resultModel.setData(fileName);
+		resultModel.setData(urlString);
 
 		return resultModel;
 
