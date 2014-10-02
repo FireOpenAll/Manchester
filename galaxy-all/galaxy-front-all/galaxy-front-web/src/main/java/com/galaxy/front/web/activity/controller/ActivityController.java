@@ -3,6 +3,8 @@
  */
 package com.galaxy.front.web.activity.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
@@ -28,15 +30,67 @@ public class ActivityController {
 	
 
 
+	/**
+	 * ajax创建活动表单提交
+	 */
 	@RequestMapping(value = "saveEventBase",method = RequestMethod.POST)
 	public String saveEventBase(HttpServletRequest request,HttpServletResponse response){
+		
+		/**
+		 * Model:event_ticket_hidden_info
+		 * 
+		 */
+		
+		/*
+		String event_name ="";//活动名称
+		String event_start_time = "";//
+		String event_end_time= "";//
+		String event_address_name= "";//
+		String event_address_info= "";//详细地址
+		String img_event_logo_src_te="";//活动图片
+		
+		String org_name= "";//主办方名字
+		String logo_url= "";//主办方logo
+		String org_description= "";//主办方介绍
+		
+		String refer_telephone= "";//咨询电话
+		String description= "";//活动简介
+		String editor_text= "";//活动详情
+		
+		//上传海报
+		String eventhaibao_logo1= "";//
+		String eventhaibao_logo2= "";//
+		String eventhaibao_logo3= "";//
+		
+		//门票list[]
+		String id;//门票id
+		String name;//门票名称
+		String qty;//总数量
+		String saleqty;//已售
+		String price;//价格
+		String status;//售票状态
+		String type;//门票类型(1=免费，2=收费)
+		
+		
+		//隐私
+		String event_yinsi;//(1=公开,2=不公开)
+		
+		
+		//活动类型
+		String event_category1;//(=列表id)
+		
+		//地点
+		String city_name;//
+		String event_logitude;//
+		String event_latitude;//
+		*/
+		
+		/*
 		String event_base_hidden_info = "++++++++++++++++++++++++++++++++++++++++++++";
 		event_base_hidden_info = request.getParameter("event_base_hidden_info");
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
 		
 		StringBuilder sBuilder = new StringBuilder("");
-		
-		
 		Map<String, String[]> map = request.getParameterMap();
 		for(String name:map.keySet()){
 			System.out.print("key="+name);
@@ -53,6 +107,20 @@ public class ActivityController {
 		
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
 		
+		*/
+		
+		
+		StringBuilder sb = new StringBuilder();  
+        try(BufferedReader reader = request.getReader();) {  
+                 char[]buff = new char[1024];  
+                 int len;  
+                 while((len = reader.read(buff)) != -1) {  
+                          sb.append(buff,0, len);  
+                 }  
+        }catch (IOException e) {  
+                 e.printStackTrace();  
+        }  
+        request.setAttribute("parameters", sb.toString());
 		return "activity/postsuccess";
 	} 
 	

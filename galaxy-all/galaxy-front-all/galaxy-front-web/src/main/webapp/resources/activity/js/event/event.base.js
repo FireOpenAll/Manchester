@@ -241,6 +241,7 @@ function  panduan_zyc(){
 /**活动logo图片上传*/
 function  event_logo_chuan(b){
 	hds_preview_pic(b,'img_event_logo_src','img_event_logo_src_li');//图片预览
+	
 	$("#event_logo_xitong_flag").val(3);
 	$("#img_event_logo_src_li").removeClass('file');
 	//$("#img_event_logo_src_li").addClass('file_oks');
@@ -492,6 +493,8 @@ function load_event_yinshi(){
 //保存活动基本信息
 function event_base_save(obj){
 	/*zyc用于logo图片验证*/
+	
+	//
 	var img_event_logo_src_te = $.trim($("#img_event_logo_src").attr('src'));
 	
 	
@@ -500,6 +503,7 @@ function event_base_save(obj){
 	// alert(img_event_logo_src_te);
 	$("#img_event_log_form_zyc").val(img_event_logo_src_te);
 
+	//门票信息
 	var event_ticket_hidden_info = getTicketInfo() ;
 	
 	alert('event_ticket_hidden_info'+event_ticket_hidden_info);
@@ -508,6 +512,7 @@ function event_base_save(obj){
 	$("input[name='event_ticket_hidden_info']").val(event_ticket_hidden_info);
 
 	//add by surn 20140827
+	//主办方信息，最多三个
 	var event_org_hidden_info = "";
 	if (orgJson1 != "" ) {
 		event_org_hidden_info +=orgJson1;
@@ -573,6 +578,7 @@ function event_base_save(obj){
 	var event_id = $("#event_base_hidden_eid").val();
 	event_id = $.trim(event_id);
 
+	
 	var event_refer_telephone = $("input[name='event_refer_telephone']").val();
 	event_refer_telephone = $.trim(event_refer_telephone);
 
@@ -596,6 +602,7 @@ function event_base_save(obj){
 	//alert(event_longitude);alert(event_latitude);return;
 	/**zyc*/
 
+	//活动基本信息
 	var eventbaseinfo =  '{'+
 	//	       '"event_theme_xilie":"'+event_theme_xilie +'",'+
 	'"event_name":"'+event_name+'",'+

@@ -316,14 +316,16 @@ textarea {display: block; height:500px;}
                                 <ul class="">
                                     
                                     <li class="form file" id="org_form_file">
-                                    <div class="fileImg" id="orgFileImg">
-                                    <span><img src="" alt="" id="img_test"/></span></div>
-                            <a class="btn_small btn_gray btn_110x30" href="javascript:void(0)" id="upload" >主办方logo
-                                     <input type="file" class="file" id="event_pic" name="event_pic"></a>
-                                     <input type="hidden" name="filePic" id="filepic" value="">
-                                     <p class="font_999999">图片尺寸为：300像素x180像素，图片不得超过150K</p>
-                                     <div class="clear"></div>
-                                 </li>
+                                        <div class="fileImg" id="orgFileImg">
+                                           <span><img src="" alt="" id="img_test"/></span>
+                                        </div>
+                                         <a class="btn_small btn_gray btn_110x30" href="javascript:void(0)" id="upload" >主办方logo
+                                              <input type="file" class="file" id="event_pic" name="event_pic">
+                                         </a>
+                                        <input type="hidden" name="filePic" id="filepic" value="">
+                                        <p class="font_999999">图片尺寸为：300像素x180像素，图片不得超过150K</p>
+                                        <div class="clear"></div>
+                                    </li>
                                     
                                     <li class="required">*</li>
                                     <li class="tips"><span class="icon"></span></li>
