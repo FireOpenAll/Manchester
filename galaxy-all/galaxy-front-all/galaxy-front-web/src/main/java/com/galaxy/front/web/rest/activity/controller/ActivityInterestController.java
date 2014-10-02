@@ -26,6 +26,7 @@ public class ActivityInterestController {
  */
 	
 	/**
+	 * 圈子页面的活动api
 	 * @param : interestId,count,until_id,
 	 * @return 
 	 */

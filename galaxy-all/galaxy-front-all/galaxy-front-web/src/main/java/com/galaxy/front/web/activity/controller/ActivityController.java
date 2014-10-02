@@ -5,6 +5,10 @@ package com.galaxy.front.web.activity.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +25,37 @@ import com.galaxy.front.web.rest.model.ResultModel;
 @Controller
 @RequestMapping(value = "/activity")
 public class ActivityController {
+	
+
+
+	@RequestMapping(value = "saveEventBase",method = RequestMethod.POST)
+	public String saveEventBase(HttpServletRequest request,HttpServletResponse response){
+		String event_base_hidden_info = "++++++++++++++++++++++++++++++++++++++++++++";
+		event_base_hidden_info = request.getParameter("event_base_hidden_info");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
+		
+		StringBuilder sBuilder = new StringBuilder("");
+		
+		
+		Map<String, String[]> map = request.getParameterMap();
+		for(String name:map.keySet()){
+			System.out.print("key="+name);
+			sBuilder.append("key="+name);
+			for(String value:map.get(name)){
+				sBuilder.append(",value="+value);
+				System.out.print(",value="+value);
+			}
+			sBuilder.append("\n");
+			System.out.print("\n");
+		}
+			
+		request.setAttribute("parameters", sBuilder.toString());
+		
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
+		
+		return "activity/postsuccess";
+	} 
+	
 	@RequestMapping(value = "/create",method=RequestMethod.GET)
 	public String create() {
 		return "activity/postactivity";

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.galaxy.front.web.rest.model.Photo;
+import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.activity.ChannelModel;
 import com.galaxy.service.activity.ActivityService;
 
@@ -17,16 +19,22 @@ public class ChannelController {
 	@Autowired
 	private ActivityService activityService;
 
-	@RequestMapping(value = "channels", method = RequestMethod.GET)
+	@RequestMapping(value = "hots_channels", method = RequestMethod.GET)
 	public Object get() {
-		List<ChannelModel> channelList = new ArrayList<ChannelModel>();
+		ResultModel resultModel = new ResultModel();
+		resultModel.setCode("20000");
+		resultModel.setMessage("get hosts channels success");
+		
+		ArrayList<ChannelModel> channelList = new ArrayList<ChannelModel>();
 		for (int i = 0; i < 4; i++) {
-			ChannelModel model = new ChannelModel();
-			model.setTitle("title" + i);
-			model.setPicUrl("http://url.com/" + i);
-			model.setChannelId((long) i);
-			channelList.add(model);
+			ChannelModel channelModel = new ChannelModel();
+			channelModel.setChannelId((long) (10001110+i));
+			channelModel.setTitle("周末专场"+i);
+			channelModel.setCover(new Photo("/interest/cover/"+(20+i)+".jpg","/interest/cover/"+(20+i)+".jpg","/interest/cover/"+(20+i)+".jpg"));
+			channelModel.setType("interest");
+			channelList.add(channelModel);
 		}
-		return channelList;
+		resultModel.setData(channelList);
+		return resultModel;
 	}
 }
