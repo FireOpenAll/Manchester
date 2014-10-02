@@ -39,6 +39,7 @@ $(document).ready(function(){
                 alert(info.msg);
             }
             */
+        	alert('info-------'+info);
         	if(info.code=='20000'){
         		$('#img_test').attr('src',info.data);
                 $("#img_test").show();

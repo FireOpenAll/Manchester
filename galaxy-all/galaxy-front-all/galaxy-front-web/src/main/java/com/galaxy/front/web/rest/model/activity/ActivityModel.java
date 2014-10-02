@@ -19,7 +19,7 @@ public class ActivityModel implements Serializable {
 	private float price;
 	private boolean like;// 是否已经点击喜欢
 	private boolean join;// 是否已经点击参加
-	private String ower;// 组织者
+	private String owner;// 组织者
 	private Date start_time;
 	private Date end_time;
 	private Contact contact;// 联系方式
@@ -33,8 +33,9 @@ public class ActivityModel implements Serializable {
 		super();
 	}
 
+
 	public ActivityModel(String feed_type, Long activity_id, Long interest_id, String activity_name, float price,
-			boolean like, boolean join, String ower, Date start_time, Date end_time, Contact contact, String summary,
+			boolean like, boolean join, String owner, Date start_time, Date end_time, Contact contact, String summary,
 			String url, ArrayList<Photo> photo_list, LocationInfo locationInfo, ArrayList<UserModel> relative_user) {
 		super();
 		this.feed_type = feed_type;
@@ -44,7 +45,7 @@ public class ActivityModel implements Serializable {
 		this.price = price;
 		this.like = like;
 		this.join = join;
-		this.ower = ower;
+		this.owner = owner;
 		this.start_time = start_time;
 		this.end_time = end_time;
 		this.contact = contact;
@@ -54,6 +55,8 @@ public class ActivityModel implements Serializable {
 		this.locationInfo = locationInfo;
 		this.relative_user = relative_user;
 	}
+
+
 
 	public Long getActivity_id() {
 		return activity_id;
@@ -103,13 +106,19 @@ public class ActivityModel implements Serializable {
 		this.join = join;
 	}
 
-	public String getOwer() {
-		return ower;
+
+
+	public String getOwner() {
+		return owner;
 	}
 
-	public void setOwer(String ower) {
-		this.ower = ower;
+
+
+	public void setOwner(String owner) {
+		this.owner = owner;
 	}
+
+
 
 	public Date getStart_time() {
 		return start_time;
