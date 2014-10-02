@@ -39,11 +39,28 @@ $(document).ready(function(){
                 alert(info.msg);
             }
             */
+        	
+        	var ret;
+        	for(var i in info){
+        		ret +=i+':'+info[i];
+        	}
+        	alert('ret+++++=='+ret);
+        	if(info.code=='20000'){
+        		$('#img_test').attr('src',info.data);
+                $("#img_test").show();
+                $("input[name='filePic']").val(info.data);
+                $("#org_form_file").removeClass("form file").addClass("form file_ok");
+                
+        	}else{
+        		alert(info.message);
+        	}
         	//huangshanqi
+        	/*
         	 $('#img_test').attr('src',"http://www.huodongshu.com/html/h5/data/event/event_logo/7.jpg");
              $("#img_test").show();
              $("input[name='filePic']").val("http://www.huodongshu.com/html/h5/data/event/event_logo/9.jpg");
              $("#org_form_file").removeClass("form file").addClass("form file_ok");
+             */
            //huangshanqi
             
         });

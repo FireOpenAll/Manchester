@@ -10,22 +10,22 @@ import com.galaxy.front.web.rest.model.location.LocationInfo;
 import com.galaxy.front.web.rest.model.user.UserModel;
 
 public class ActivityModel implements Serializable {
-	
-	private String feed_type;//feedItem类型
-	
+
+	private String feed_type;// feedItem类型
+
 	private Long activity_id;
 	private Long interest_id;
 	private String activity_name;
 	private float price;
-	private boolean isLike;// 是否已经点击喜欢
-	private boolean isJoin;// 是否已经点击参加
-	private String ower;// 组织者
+	private boolean like;// 是否已经点击喜欢
+	private boolean join;// 是否已经点击参加
+	private String owner;// 组织者
 	private Date start_time;
 	private Date end_time;
 	private Contact contact;// 联系方式
 	private String summary;// 活动摘要信息
 	private String url;// 活动详情url
-	private ArrayList<Photo> Photo_list;// 活动照片
+	private ArrayList<Photo> photo_list;// 活动照片
 	private LocationInfo locationInfo;// 活动地点
 	private ArrayList<UserModel> relative_user;// 活动相关参与人员
 
@@ -34,26 +34,24 @@ public class ActivityModel implements Serializable {
 	}
 
 
-
 	public ActivityModel(String feed_type, Long activity_id, Long interest_id, String activity_name, float price,
-			boolean isLike, boolean isJoin, String ower, Date start_time, Date end_time, Contact contact,
-			String summary, String url, ArrayList<Photo> photo_list, LocationInfo locationInfo,
-			ArrayList<UserModel> relative_user) {
+			boolean like, boolean join, String owner, Date start_time, Date end_time, Contact contact, String summary,
+			String url, ArrayList<Photo> photo_list, LocationInfo locationInfo, ArrayList<UserModel> relative_user) {
 		super();
 		this.feed_type = feed_type;
 		this.activity_id = activity_id;
 		this.interest_id = interest_id;
 		this.activity_name = activity_name;
 		this.price = price;
-		this.isLike = isLike;
-		this.isJoin = isJoin;
-		this.ower = ower;
+		this.like = like;
+		this.join = join;
+		this.owner = owner;
 		this.start_time = start_time;
 		this.end_time = end_time;
 		this.contact = contact;
 		this.summary = summary;
 		this.url = url;
-		Photo_list = photo_list;
+		this.photo_list = photo_list;
 		this.locationInfo = locationInfo;
 		this.relative_user = relative_user;
 	}
@@ -93,28 +91,34 @@ public class ActivityModel implements Serializable {
 	}
 
 	public boolean isLike() {
-		return isLike;
+		return like;
 	}
 
-	public void setLike(boolean isLike) {
-		this.isLike = isLike;
+	public void setLike(boolean like) {
+		this.like = like;
 	}
 
 	public boolean isJoin() {
-		return isJoin;
+		return join;
 	}
 
-	public void setJoin(boolean isJoin) {
-		this.isJoin = isJoin;
+	public void setJoin(boolean join) {
+		this.join = join;
 	}
 
-	public String getOwer() {
-		return ower;
+
+
+	public String getOwner() {
+		return owner;
 	}
 
-	public void setOwer(String ower) {
-		this.ower = ower;
+
+
+	public void setOwner(String owner) {
+		this.owner = owner;
 	}
+
+
 
 	public Date getStart_time() {
 		return start_time;
@@ -157,11 +161,11 @@ public class ActivityModel implements Serializable {
 	}
 
 	public ArrayList<Photo> getPhoto_list() {
-		return Photo_list;
+		return photo_list;
 	}
 
 	public void setPhoto_list(ArrayList<Photo> photo_list) {
-		Photo_list = photo_list;
+		this.photo_list = photo_list;
 	}
 
 	public LocationInfo getLocationInfo() {
@@ -188,5 +192,4 @@ public class ActivityModel implements Serializable {
 		this.feed_type = feed_type;
 	}
 
-	
 }
