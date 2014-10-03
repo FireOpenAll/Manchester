@@ -151,10 +151,10 @@ textarea {display: block; height:500px;}
 <!-- 弹出窗口,活动图片 -->
 <div class="global_dialogInfo global_dialogW800" id="upLogo" dialogTitle="选择活动图片" UIscroll="500">
     <div class="info_baseD">
-        <div class="file">
+        <div class="file"  style="display:none">
             <div class="fileImg"><span><img src="http://pic.4j4j.cn/upload/pic/20130705/be35d8d3d6.jpg" alt=""></span></div>
             <a class="btn_small btn_gray btn_autox40" "href="javascript:void(0)" id="log_chuan_file">浏览上传
-                <input type="file"  onchange="event_logo_chuan(this)" name="event_logo"  id="event_logo_name" class="file event_logo_zyc" />
+                <input type="file"  onchange="event_logo_chuan(this)" name="event_logo"  id="event_logo_name" class="file event_logo_zyc"/>
             </a>
             <p class="font_999999">图片尺寸为：640像素x380像素，图片不得超过300K</p>
             <div class="clear"></div>

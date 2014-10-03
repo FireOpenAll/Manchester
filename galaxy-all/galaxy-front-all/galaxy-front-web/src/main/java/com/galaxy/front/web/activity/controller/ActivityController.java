@@ -3,14 +3,9 @@
  */
 package com.galaxy.front.web.activity.controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.galaxy.front.web.activity.controller.PostModel.EvenBaseInfoModel;
+import com.galaxy.front.web.activity.controller.PostModel.OrgModel;
+import com.galaxy.front.web.activity.controller.PostModel.TicketModel;
 import com.galaxy.front.web.rest.model.ResultModel;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * @author luolishu
@@ -40,7 +40,10 @@ public class ActivityController {
 	public String saveEventBase(HttpServletRequest request,HttpServletResponse response){
 		
 		/**
-		 * Model:event_ticket_hidden_info
+		 * Model:event_ticket_hidden_info,
+		 * event_base_hidden_info,
+		 * event_org_hidden_info,
+		 * 
 		 * 
 		 */
 		
@@ -88,14 +91,43 @@ public class ActivityController {
 		String event_latitude;//
 		*/
 		
-		try {
-			request.setCharacterEncoding("utf-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String event_base_hidden_info = "++++++++++++++++++++++++++++++++++++++++++++";
+		
+		StringBuilder sBuilder = new StringBuilder("");
+		String event_base_hidden_info = null;
 		event_base_hidden_info = request.getParameter("event_base_hidden_info");
+		if(event_base_hidden_info !=null){
+			Gson gson = new Gson();
+			EvenBaseInfoModel evenBaseInfoModel = gson.fromJson(event_base_hidden_info, EvenBaseInfoModel.class);
+			
+			System.out.println("evenBaseInfoModel=="+evenBaseInfoModel.toString());
+			sBuilder.append("evenBaseInfoModel==").append(evenBaseInfoModel.toString()).append("\n");
+			
+		}
+		
+		String event_ticket_hidden_info = null;
+		event_ticket_hidden_info = request.getParameter("event_ticket_hidden_info");
+		if(event_ticket_hidden_info !=null){
+			Gson gson = new Gson();
+			List<TicketModel> ticketModels = gson.fromJson(event_ticket_hidden_info, new TypeToken<List<TicketModel>>(){}.getType());
+			
+			System.out.println("ticketModels"+ticketModels.toString());
+			sBuilder.append("ticketModels==").append(ticketModels.toString()).append("\n");
+			//Gson gson = new Gson();
+			//Event_ticket_hidden_info_JsonModel event_ticket_hidden_info_JsonModel = gson.fromJson(event_ticket_hidden_info, Event_ticket_hidden_info_JsonModel.class);
+			//System.out.println("event_ticket_hidden_info_JsonModel.getList().get(0).getName()=="+event_ticket_hidden_info_JsonModel.getList().get(0).getName());
+		}
+		
+		String event_org_hidden_info = null;
+		event_org_hidden_info = request.getParameter("event_org_hidden_info");
+		if(event_org_hidden_info !=null){
+			Gson gson = new Gson();
+			List<OrgModel> orgModels =gson.fromJson(event_org_hidden_info, new TypeToken<List<OrgModel>>(){}.getType());
+			System.out.println("orgModels=="+orgModels.toString());
+			sBuilder.append("orgModels==").append(orgModels.toString()).append("\n");
+		}
+		
+		/*
+		System.out.println(event_base_hidden_info);
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
 		
 		StringBuilder sBuilder = new StringBuilder("");
@@ -115,7 +147,7 @@ public class ActivityController {
 		
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
 		
-		
+		*/
 		
 		/*
 		String body = null;
@@ -149,6 +181,8 @@ public class ActivityController {
         request.setAttribute("parameters", stringBuilder.toString());
         */
         
+		
+		request.setAttribute("parameters", sBuilder.toString());
 		return "activity/postsuccess";
 	} 
 	
@@ -215,7 +249,6 @@ public class ActivityController {
 		public void setName(String name) {
 			this.name = name;
 		}
-		
-		
 	}
+	
 }

@@ -44,7 +44,7 @@ $(document).ready(function(){
         	for(var i in info){
         		ret +=i+':'+info[i];
         	}
-        	alert('ret+++++=='+ret);
+        	//alert('ret+++++=='+ret);
         	if(info.code=='20000'){
         		$('#img_test').attr('src',info.data);
                 $("#img_test").show();
@@ -122,7 +122,7 @@ function account_sponsor_save(){
     //}
     var info='',orgJsonNum = '',orgname = '',tmp = '';
     if (id != "") { type = 'edit'; } else { id = 0;}
-    tmp = '{"id":"'+id+'","name":"'+name+'","description":"'+description+'","logo_url":"'+logo_url+'","type":"'+type+'"},';
+    tmp = '{"name":"'+name+'","description":"'+description+'","logo_url":"'+logo_url+'","type":"'+type+'"},';
     
     
     //info += '{"id":"'+id+'","name":"'+name+'","description":"'+description+'","logo_url":"'+logo_url+'"},';

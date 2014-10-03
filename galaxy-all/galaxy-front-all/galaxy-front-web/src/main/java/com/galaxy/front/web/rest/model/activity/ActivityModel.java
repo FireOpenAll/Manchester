@@ -6,6 +6,7 @@ import java.util.Date;
 
 import com.galaxy.front.web.rest.model.Contact;
 import com.galaxy.front.web.rest.model.Photo;
+import com.galaxy.front.web.rest.model.interest.InterestModel;
 import com.galaxy.front.web.rest.model.location.LocationInfo;
 import com.galaxy.front.web.rest.model.user.UserModel;
 
@@ -14,11 +15,13 @@ public class ActivityModel implements Serializable {
 	private String feed_type;// feedItem类型
 
 	private Long activity_id;
-	private Long interest_id;
 	private String activity_name;
 	private float price;
 	private boolean like;// 是否已经点击喜欢
+	private int like_count;// 点赞人数
 	private boolean join;// 是否已经点击参加
+	private int join_count;// 参加人数
+	private int comment_count;// 评论数
 	private String owner;// 组织者
 	private Date start_time;
 	private Date end_time;
@@ -28,23 +31,26 @@ public class ActivityModel implements Serializable {
 	private ArrayList<Photo> photo_list;// 活动照片
 	private LocationInfo locationInfo;// 活动地点
 	private ArrayList<UserModel> relative_user;// 活动相关参与人员
+	private ArrayList<InterestModel> interest_list;// 活动相关兴趣
 
 	public ActivityModel() {
 		super();
 	}
 
-
-	public ActivityModel(String feed_type, Long activity_id, Long interest_id, String activity_name, float price,
-			boolean like, boolean join, String owner, Date start_time, Date end_time, Contact contact, String summary,
-			String url, ArrayList<Photo> photo_list, LocationInfo locationInfo, ArrayList<UserModel> relative_user) {
+	public ActivityModel(String feed_type, Long activity_id, String activity_name, float price, boolean like,
+			int like_count, boolean join, int join_count, int comment_count, String owner, Date start_time,
+			Date end_time, Contact contact, String summary, String url, ArrayList<Photo> photo_list,
+			LocationInfo locationInfo, ArrayList<UserModel> relative_user, ArrayList<InterestModel> interest_list) {
 		super();
 		this.feed_type = feed_type;
 		this.activity_id = activity_id;
-		this.interest_id = interest_id;
 		this.activity_name = activity_name;
 		this.price = price;
 		this.like = like;
+		this.like_count = like_count;
 		this.join = join;
+		this.join_count = join_count;
+		this.comment_count = comment_count;
 		this.owner = owner;
 		this.start_time = start_time;
 		this.end_time = end_time;
@@ -54,9 +60,24 @@ public class ActivityModel implements Serializable {
 		this.photo_list = photo_list;
 		this.locationInfo = locationInfo;
 		this.relative_user = relative_user;
+		this.interest_list = interest_list;
 	}
 
+	public int getComment_count() {
+		return comment_count;
+	}
 
+	public void setComment_count(int comment_count) {
+		this.comment_count = comment_count;
+	}
+
+	public String getFeed_type() {
+		return feed_type;
+	}
+
+	public void setFeed_type(String feed_type) {
+		this.feed_type = feed_type;
+	}
 
 	public Long getActivity_id() {
 		return activity_id;
@@ -64,14 +85,6 @@ public class ActivityModel implements Serializable {
 
 	public void setActivity_id(Long activity_id) {
 		this.activity_id = activity_id;
-	}
-
-	public Long getInterest_id() {
-		return interest_id;
-	}
-
-	public void setInterest_id(Long interest_id) {
-		this.interest_id = interest_id;
 	}
 
 	public String getActivity_name() {
@@ -98,6 +111,14 @@ public class ActivityModel implements Serializable {
 		this.like = like;
 	}
 
+	public int getLike_count() {
+		return like_count;
+	}
+
+	public void setLike_count(int like_count) {
+		this.like_count = like_count;
+	}
+
 	public boolean isJoin() {
 		return join;
 	}
@@ -106,19 +127,21 @@ public class ActivityModel implements Serializable {
 		this.join = join;
 	}
 
+	public int getJoin_count() {
+		return join_count;
+	}
 
+	public void setJoin_count(int join_count) {
+		this.join_count = join_count;
+	}
 
 	public String getOwner() {
 		return owner;
 	}
 
-
-
 	public void setOwner(String owner) {
 		this.owner = owner;
 	}
-
-
 
 	public Date getStart_time() {
 		return start_time;
@@ -184,12 +207,12 @@ public class ActivityModel implements Serializable {
 		this.relative_user = relative_user;
 	}
 
-	public String getFeed_type() {
-		return feed_type;
+	public ArrayList<InterestModel> getInterest_list() {
+		return interest_list;
 	}
 
-	public void setFeed_type(String feed_type) {
-		this.feed_type = feed_type;
+	public void setInterest_list(ArrayList<InterestModel> interest_list) {
+		this.interest_list = interest_list;
 	}
 
 }

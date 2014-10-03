@@ -498,7 +498,7 @@ function event_base_save(obj){
 	var img_event_logo_src_te = $.trim($("#img_event_logo_src").attr('src'));
 	
 	
-	alert('img_event_logo_src_te'+img_event_logo_src_te);
+	//alert('img_event_logo_src_te'+img_event_logo_src_te);
 	
 	// alert(img_event_logo_src_te);
 	$("#img_event_log_form_zyc").val(img_event_logo_src_te);
@@ -506,7 +506,7 @@ function event_base_save(obj){
 	//门票信息
 	var event_ticket_hidden_info = getTicketInfo() ;
 	
-	alert('event_ticket_hidden_info'+event_ticket_hidden_info);
+	//alert('event_ticket_hidden_info'+event_ticket_hidden_info);
 
 
 	$("input[name='event_ticket_hidden_info']").val(event_ticket_hidden_info);
@@ -612,33 +612,27 @@ function event_base_save(obj){
 	'"event_start_time":"'+event_start_time+'",'+
 	'"event_end_time":"'+event_end_time+'",'+
 	'"event_address_name":"'+event_address_name+'",'+
-	'"select_address_grade1":"'+select_address_grade1+'",'+
-	'"select_address_grade2":"'+select_address_grade2+'",'+
-	'"select_address_grade3":"'+select_address_grade3+'",'+
 	'"event_longitude":"'+event_longitude+'",'+
 	'"event_latitude":"'+event_latitude+'",'+
-	'"event_id":"'+event_id+'",'+
 	'"event_address_info":"'+event_address_info+'",'+
 	'"refer_telephone":"'+event_refer_telephone+'",'+
 	'"event_yinsi":"'+event_yinsi+'",'+
-	'"event_passwd":"'+event_passwd+'",'+
 	'"event_category1":"'+category_type+'",'+
-	'"event_category2":"'+event_category2+'",'+
-	'"map":"'+map_point_info+'",'+
+	//'"map":"'+map_point_info+'",'+
 	//	       '"event_support_share":"'+event_support_share+'",'+
-	'"event_keyword":"'+event_keyword+'",'+
+	//'"event_keyword":"'+event_keyword+'",'+
 	//	       '"limit_num":"'+event_limit_num+'",'+
-	'"template_id":"'+template_id+'",'+
+	//'"template_id":"'+template_id+'",'+
 	'"description":"'+description+'"'+
 	// '"editor_text":"'+editor_text+'"'+
 	'}';
    // alert(eventbaseinfo);return;
-	alert('eventbaseinfo:'+eventbaseinfo);
+	//alert('eventbaseinfo:'+eventbaseinfo);
 	
 	$("input[name='event_base_hidden_info']").val(eventbaseinfo);
 	var editor_text = editor.html();
 	$("#editor_text_zyc").val(editor_text);
-	alert('editor_text:'+editor_text);
+	//alert('editor_text:'+editor_text);
 	
 	$(obj).attr("disabled",false);
 	$("#evnet_base_validateform").submit();
@@ -904,8 +898,8 @@ function event_category_list(code,type,posid) {
 	posid = $.trim(posid);
 	var info = '{"code":"'+code+'","type":"'+type+'"}';
 	//var url = js_huodongshu_domain+'/geteventcategory.do';
+	var url = "http://localhost:8080/activity/geteventcategory.do";
 	//var url = "http://182.92.169.209/activity/geteventcategory.do";
-	var url = "http://182.92.169.209/activity/geteventcategory.do";
 	$.ajax({
 		url: url,
 		async: false,
