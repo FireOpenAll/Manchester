@@ -897,8 +897,8 @@ function change_org(orgData){
 function event_category_list(code,type,posid) { 
 	posid = $.trim(posid);
 	var info = '{"code":"'+code+'","type":"'+type+'"}';
-	var url = domain+'/activity/geteventcategory.do';
-	//var url = "http://localhost:8080/activity/geteventcategory.do";
+	//var url = js_huodongshu_domain+'/geteventcategory.do';
+	var url = "http://localhost:8080/activity/geteventcategory.do";
 	//var url = "http://182.92.169.209/activity/geteventcategory.do";
 	$.ajax({
 		url: url,

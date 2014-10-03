@@ -48,7 +48,7 @@ public class ActivityInterestController {
 		
 		ArrayList<InterestModel> interest_list = new ArrayList<InterestModel>();
 		for (int i = 0; i < 4; i++) {
-			interest_list.add(new InterestModel(10000000+i, "interest_name"+i, "/interest/cover/" + (20 + i) + ".jpg", "兴趣介绍"));
+			interest_list.add(new InterestModel(10000000+i, "兴趣"+i, "/interest/cover/" + (20 + i) + ".jpg", "兴趣介绍"));
 		}
 		
 		for (int i = 0; i < 10; i++) {
