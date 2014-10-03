@@ -2,7 +2,7 @@ package com.galaxy.dal.domain.interact;
 
 import com.galaxy.dal.domain.BaseDomain;
 
-public class Question extends BaseDomain {
+public class Ask extends BaseDomain {
 	Long activityId;
 	Long userId;
 	String userName;

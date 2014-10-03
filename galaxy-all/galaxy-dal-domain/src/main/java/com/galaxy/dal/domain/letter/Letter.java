@@ -8,9 +8,9 @@ public class Letter extends BaseDomain {
 	private String ip;
 	private String type;
 	private String content;
-	private boolean read;
-	private boolean reply;
-	private int status;
+	private Boolean readFlag;
+	private Boolean reply;
+	private Integer status;
 	public Long getFromUserId() {
 		return fromUserId;
 	}
@@ -29,7 +29,6 @@ public class Letter extends BaseDomain {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	
 	public String getType() {
 		return type;
 	}
@@ -42,24 +41,25 @@ public class Letter extends BaseDomain {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public boolean isRead() {
-		return read;
+	public Boolean getReadFlag() {
+		return readFlag;
 	}
-	public void setRead(boolean read) {
-		this.read = read;
+	public void setReadFlag(Boolean readFlag) {
+		this.readFlag = readFlag;
 	}
-	public boolean isReply() {
+	public Boolean getReply() {
 		return reply;
 	}
-	public void setReply(boolean reply) {
+	public void setReply(Boolean reply) {
 		this.reply = reply;
 	}
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
+	 
 	
 	
 

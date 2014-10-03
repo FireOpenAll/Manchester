@@ -14,7 +14,7 @@ public class WebLoginController {
 	
 	@RequestMapping(value = "login",method=RequestMethod.POST)
 	public String doLogin(){
-		return "user/login";
+		return "user/loginSuccess";
 	}
 
 }

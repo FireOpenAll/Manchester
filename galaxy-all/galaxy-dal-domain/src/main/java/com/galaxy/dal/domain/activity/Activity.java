@@ -20,7 +20,7 @@ public class Activity extends BaseDomain {
 	private Double price;
 
 	private String tags;
-	
+	Boolean needAudit;
 	private Long userId;//发布人ID
 	
 	private Long operatorId;//操作人ID
@@ -155,6 +155,14 @@ public class Activity extends BaseDomain {
 
 	public void setOperatorId(Long operatorId) {
 		this.operatorId = operatorId;
+	}
+
+	public Boolean getNeedAudit() {
+		return needAudit;
+	}
+
+	public void setNeedAudit(Boolean needAudit) {
+		this.needAudit = needAudit;
 	}
 	
 	

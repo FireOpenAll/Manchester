@@ -8,6 +8,8 @@ public class GroupMembers extends BaseDomain {
 	String memberName;
 	Long groupId;
 	GroupRole role;
+	String company;
+	String companyDomain;
 
 	public Long getUserId() {
 		return userId;
@@ -39,6 +41,22 @@ public class GroupMembers extends BaseDomain {
 
 	public void setRole(GroupRole role) {
 		this.role = role;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getCompanyDomain() {
+		return companyDomain;
+	}
+
+	public void setCompanyDomain(String companyDomain) {
+		this.companyDomain = companyDomain;
 	}
 
 }
