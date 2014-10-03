@@ -5,7 +5,7 @@ package com.galaxy.front.web.activity.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.galaxy.front.web.activity.controller.PostModel.EvenBaseInfoModel;
+import com.galaxy.front.web.activity.controller.PostModel.OrgModel;
+import com.galaxy.front.web.activity.controller.PostModel.TicketModel;
 import com.galaxy.front.web.rest.model.ResultModel;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * @author luolishu
@@ -28,15 +33,104 @@ public class ActivityController {
 	
 
 
+	/**
+	 * ajax创建活动表单提交
+	 */
 	@RequestMapping(value = "saveEventBase",method = RequestMethod.POST)
 	public String saveEventBase(HttpServletRequest request,HttpServletResponse response){
-		String event_base_hidden_info = "++++++++++++++++++++++++++++++++++++++++++++";
+		
+		/**
+		 * Model:event_ticket_hidden_info,
+		 * event_base_hidden_info,
+		 * event_org_hidden_info,
+		 * 
+		 * 
+		 */
+		
+		/*
+		String event_name ="";//活动名称
+		String event_start_time = "";//
+		String event_end_time= "";//
+		String event_address_name= "";//
+		String event_address_info= "";//详细地址
+		String img_event_logo_src_te="";//活动图片
+		
+		String org_name= "";//主办方名字
+		String logo_url= "";//主办方logo
+		String org_description= "";//主办方介绍
+		
+		String refer_telephone= "";//咨询电话
+		String description= "";//活动简介
+		String editor_text= "";//活动详情
+		
+		//上传海报
+		String eventhaibao_logo1= "";//
+		String eventhaibao_logo2= "";//
+		String eventhaibao_logo3= "";//
+		
+		//门票list[]
+		String id;//门票id
+		String name;//门票名称
+		String qty;//总数量
+		String saleqty;//已售
+		String price;//价格
+		String status;//售票状态
+		String type;//门票类型(1=免费，2=收费)
+		
+		
+		//隐私
+		String event_yinsi;//(1=公开,2=不公开)
+		
+		
+		//活动类型
+		String event_category1;//(=列表id)
+		
+		//地点
+		String city_name;//
+		String event_logitude;//
+		String event_latitude;//
+		*/
+		
+		
+		StringBuilder sBuilder = new StringBuilder("");
+		String event_base_hidden_info = null;
 		event_base_hidden_info = request.getParameter("event_base_hidden_info");
+		if(event_base_hidden_info !=null){
+			Gson gson = new Gson();
+			EvenBaseInfoModel evenBaseInfoModel = gson.fromJson(event_base_hidden_info, EvenBaseInfoModel.class);
+			
+			System.out.println("evenBaseInfoModel=="+evenBaseInfoModel.toString());
+			sBuilder.append("evenBaseInfoModel==").append(evenBaseInfoModel.toString()).append("\n");
+			
+		}
+		
+		String event_ticket_hidden_info = null;
+		event_ticket_hidden_info = request.getParameter("event_ticket_hidden_info");
+		if(event_ticket_hidden_info !=null){
+			Gson gson = new Gson();
+			List<TicketModel> ticketModels = gson.fromJson(event_ticket_hidden_info, new TypeToken<List<TicketModel>>(){}.getType());
+			
+			System.out.println("ticketModels"+ticketModels.toString());
+			sBuilder.append("ticketModels==").append(ticketModels.toString()).append("\n");
+			//Gson gson = new Gson();
+			//Event_ticket_hidden_info_JsonModel event_ticket_hidden_info_JsonModel = gson.fromJson(event_ticket_hidden_info, Event_ticket_hidden_info_JsonModel.class);
+			//System.out.println("event_ticket_hidden_info_JsonModel.getList().get(0).getName()=="+event_ticket_hidden_info_JsonModel.getList().get(0).getName());
+		}
+		
+		String event_org_hidden_info = null;
+		event_org_hidden_info = request.getParameter("event_org_hidden_info");
+		if(event_org_hidden_info !=null){
+			Gson gson = new Gson();
+			List<OrgModel> orgModels =gson.fromJson(event_org_hidden_info, new TypeToken<List<OrgModel>>(){}.getType());
+			System.out.println("orgModels=="+orgModels.toString());
+			sBuilder.append("orgModels==").append(orgModels.toString()).append("\n");
+		}
+		
+		/*
+		System.out.println(event_base_hidden_info);
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
 		
 		StringBuilder sBuilder = new StringBuilder("");
-		
-		
 		Map<String, String[]> map = request.getParameterMap();
 		for(String name:map.keySet()){
 			System.out.print("key="+name);
@@ -53,6 +147,42 @@ public class ActivityController {
 		
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
 		
+		*/
+		
+		/*
+		String body = null;
+	    StringBuilder stringBuilder = new StringBuilder();
+	    BufferedReader bufferedReader = null;
+	    InputStream inputStream;
+		try {
+			inputStream = request.getInputStream();
+			if (inputStream != null) {
+	            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+	            char[] charBuffer = new char[128];
+	            int bytesRead = -1;
+	            while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+	                stringBuilder.append(charBuffer, 0, bytesRead);
+	            }
+			}
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}finally{
+			if (bufferedReader != null){
+				try {
+					bufferedReader.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	    
+        request.setAttribute("parameters", stringBuilder.toString());
+        */
+        
+		
+		request.setAttribute("parameters", sBuilder.toString());
 		return "activity/postsuccess";
 	} 
 	
@@ -119,7 +249,6 @@ public class ActivityController {
 		public void setName(String name) {
 			this.name = name;
 		}
-		
-		
 	}
+	
 }

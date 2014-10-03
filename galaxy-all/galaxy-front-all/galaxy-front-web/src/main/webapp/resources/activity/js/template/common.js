@@ -1,4 +1,4 @@
-var js_huodongshu_domain = '';//domain
+var js_huodongshu_domain  = "http://182.92.169.209";//domain
 
 var hds_is_login = 0;
 var need_login_page =['page_edit.html','account_mailVerifiction.html','account_phoneVerifiction.html','account_reviseEmail.html','manage_participants.html','account_revisePhone.html','account_sponsor.html','account_revisePsd.html','account_xiaofei.html','account_safe.html','account_certification.html','shoppingCart02.html','account_base.html','event_base.html','event_agenda.html','event_ticket_list.html','event_xiangce.html','event_xiangce_browse.html','event_video.html','event_wenjian.html','event_jiabin.html','event_jigou.html','event_gongzuorenyuan.html','event_register_form.html','myEvent_create.html','myEvent_join.html','myEvent_interest.html','manage_order_details.html','event_agenda.html','topic_setting.html','lottery_setting.html','vote_setting.html','myEvent_trial.html'];

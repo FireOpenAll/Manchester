@@ -188,16 +188,15 @@ function getTicketInfo(){
 	var type = 1;
 	var channel_type = '';
 	var event_id = getQueryString("event_id");
+	/*
 	var is_invoice = $("#mystatus:checked").val() ? 1 : 2;
 	var invoice = 0;
 	if(is_invoice == 1){
-//		is_invoice = 1;
 		$("input[name='status']:checked").each(function(){invoice = parseInt(invoice) + parseInt($(this).val());});
-//		invoice
 	}else{
 		is_invoice = 2;
 	}
-	
+	*/
 	$("#ticket_info").find("tr[ticketinfo='tk']").each(function(){
 		name = $(this).find("input[name='name']").val();
 		tid = $(this).find("input[name='name']").attr("tid");
@@ -220,9 +219,9 @@ function getTicketInfo(){
 		}
 
 	});
-	var json = '{';
-	json += '"is_invoice":"'+is_invoice+'","invoice":"'+invoice+'","event_id":"'+event_id+'","list":[' ;
-	
+	var json = '[';
+	//json += '"is_invoice":"'+is_invoice+'","invoice":"'+invoice+'","event_id":"'+event_id+'","list":[' ;
+	//json += '","list":[' ;
 	for(var i=0; i <info.length ; ++i){
 		json = json+'{'+info[i]+'}';
 		if((info.length-1) == i){
@@ -231,7 +230,7 @@ function getTicketInfo(){
 			json += ',';
 		}
 	}
-	json += ']}';
+	json += ']';
 	
 	
 	return json;
@@ -267,6 +266,7 @@ function loadTicket(){
 				var tr = '';
 				var edit = '';
 				
+				/*
 				//发票设置
 				if(temp[0].is_invoice == 1){//需要发票时
 					$("input[name='mystatus']").prop("checked",true);
@@ -282,7 +282,7 @@ function loadTicket(){
 					$("input[name='mystatus']").removeAttr("checked");
 				}
 				
-				
+				*/
 				for(var i=0;i<len;++i){
 					tr = $("#ticket_info tr").first().clone(true);
 					tr.removeAttr("style");

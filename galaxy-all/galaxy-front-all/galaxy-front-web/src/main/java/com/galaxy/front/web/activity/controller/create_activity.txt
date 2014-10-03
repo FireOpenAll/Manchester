@@ -1,0 +1,254 @@
+Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Encoding:gzip,deflate
+Accept-Language:zh-CN,zh;q=0.8,en;q=0.6
+Cache-Control:max-age=0
+Connection:keep-alive
+Content-Length:81892
+Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Cookie:JSESSIONID=C155BED5F872D43D23F53E087DC2B183
+Host:localhost:8080
+Origin:http://localhost:8080
+Referer:http://localhost:8080/activity/create
+User-Agent:Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.124 Safari/537.36
+Request Payload
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="get_address_btn_flag"
+
+2
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="editor_text_zyc"
+
+<span style="color:#999999;font-family:微软雅黑;font-size:14px;line-height:40px;background-color:#FFFFFF;">活动详情</span>
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="haibaoimg1_update"
+
+1
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="haibaoimg2_update"
+
+1
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="haibaoimg3_update"
+
+1
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_logo_xitong"
+
+/resources/activity/h5/data/event/event_logo/17.jpg
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_logo_xitong_flag"
+
+2
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_name"
+
+活动名称
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_type"
+
+2
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_start_time"
+
+2014-10-03 10:02
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_end_time"
+
+2014-10-06 10:02
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_address_name"
+
+广东省广州市
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="city_name"
+
+广州市
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="city_id"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="district_name"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="zyx_address_comprare_name"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="zxy_zxy"
+
+广东省汽车客运站
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="img_event_log_form_zyc"
+
+/resources/activity/h5/data/event/event_logo/17.jpg
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_ticket_hidden_info"
+
+{"is_invoice":"2","invoice":"0","event_id":"null","list":[{"id":"0","name":"免费门票","qty":"50","saleqty":"0","price":"0","status":"1","type":"2"},{"id":"0","name":"收费门票","qty":"600","saleqty":"0","price":"11.0","status":"1","type":"1"}]}
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_base_hidden_info"
+
+{"event_name":"活动名称","event_type":"2","city_name":"广州市","event_start_time":"2014-10-03 10:02","event_end_time":"2014-10-06 10:02","event_address_name":"广东省广州市","select_address_grade1":"undefined","select_address_grade2":"undefined","select_address_grade3":"undefined","event_longitude":"113.25258","event_latitude":"23.148113","event_id":"","event_address_info":"广东省汽车客运站","refer_telephone":"13121432254;11111100000","event_yinsi":"2","event_passwd":"","event_category1":"1","event_category2":"undefined","map":"","event_keyword":"","template_id":"1","description":"活动简介"}
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_org_hidden_info"
+
+[{"id":"0","name":"主办方1名称","description":"主办方1介绍","logo_url":"/activity/upload/1412301782711.jpg","type":"create"},{"id":"0","name":"主办方2名称","description":"主办方2名称","logo_url":"/activity/upload/1412301805505.jpg","type":"create"}]
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_org_hidden_info_delorgids"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_org_hidden_info_y"
+
+[{"id":"0","name":"主办方1名称","description":"主办方1介绍","logo_url":"/activity/upload/1412301782711.jpg","type":"create"},{"id":"0","name":"主办方2名称","description":"主办方2名称","logo_url":"/activity/upload/1412301805505.jpg","type":"create"}]
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="org_id"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="org_name"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_pic"; filename=""
+Content-Type: application/octet-stream
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="filePic"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="org_description"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_refer_telephone"
+
+13121432254;11111100000
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="huodongjianjie"
+
+ 活动简介
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="editor_content_hidden"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="reportContent"
+
+<span style="color:#999999;font-family:微软雅黑;font-size:14px;line-height:40px;background-color:#FFFFFF;">活动详情</span>
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="eventhaibao_logo1"; filename="8.jpg"
+Content-Type: image/jpeg
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="eventhaibao_logo2"; filename=""
+Content-Type: application/octet-stream
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="eventhaibao_logo3"; filename=""
+Content-Type: application/octet-stream
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="name"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="qty"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="price"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="edit"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_start_time"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_end_time"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="limit_min"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="limit_max"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="description"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="need_approve"
+
+2
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="name"
+
+免费门票
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="qty"
+
+50
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="price"
+
+0
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="edit"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="name"
+
+收费门票
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="qty"
+
+600
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="price"
+
+11.0
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="edit"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="status"
+
+1
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_yinsi"
+
+2
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_passwd"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="category_type"
+
+1
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="category_select_required"
+
+1
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX
+Content-Disposition: form-data; name="event_keyword"
+
+
+------WebKitFormBoundaryaIQcpWSI3v7fDtkX-
