@@ -621,12 +621,12 @@ var jiathis_config = {
       <div class="group-detail-box">
         <div class="group-content-nav">
           <ul class="gr">
-            <li class="group-content-current"><a href="http://www.o2olive.net/demo/index.php?act=groupbuy&op=detail&group_id=22#store_intro" class="tab-item">商家介绍</a></li>
-            <li class=""><a href="http://www.o2olive.net/demo/index.php?act=groupbuy&op=detail&group_id=22#store_position" class="tab-item">商家位置</a></li>
-            <li class=""><a href="http://www.o2olive.net/demo/index.php?act=groupbuy&op=detail&group_id=22#buy_must_know" class="tab-item">购买须知</a></li>
-            <li class=""><a href="http://www.o2olive.net/demo/index.php?act=groupbuy&op=detail&group_id=22#group_detail" class="tab-item">商品详情</a></li>
+            <li class=""><a href="#store_intro" class="tab-item">商家介绍</a></li>
+            <li class=""><a href="#store_position" class="tab-item">商家位置</a></li>
+            <li class=""><a href="#buy_must_know" class="tab-item">购买须知</a></li>
+            <li class=""><a href="#group_detail" class="tab-item">商品详情</a></li>
           </ul>
-          <div class="buy-group" style="display: none;"> <a href="javascript:void(0);" class="buy gpbuy" rel="nofollow">抢购</a> <a group_id="22" href="http://www.o2olive.net/demo/index.php?act=groupbuy&op=detail&group_id=22#" hidefocus="true" data-quantity="1" data-cityid="40" data-dealid="25564115" class="cart addtocart" rel="nofollow">加入购物车</a></div>
+          <div class="buy-group" style="display: none;"> <a href="javascript:void(0);" class="buy gpbuy" rel="nofollow">抢购</a> <a group_id="22" href="#" hidefocus="true" data-quantity="1" data-cityid="40" data-dealid="25564115" class="cart addtocart" rel="nofollow">加入购物车</a></div>
         </div>
         <div class="group-detail-main gr">
           <h2 class="standard-bar" id="store_intro">商家介绍</h2>
@@ -641,7 +641,7 @@ var jiathis_config = {
                 <h1 class="store_title" onclick="javascript:window.open(&#39;index.php?act=store&amp;op=detail&amp;id=1&#39;);" style="cursor:pointer">俏江南</h1>
               </div>
               <div class="remark_box"> <span class="remark-item star"></span>
-                <div class="remark_taste"> <a href="http://www.o2olive.net/demo/index.php?act=groupbuy&op=detail&group_id=22#" class="col-num"></a> <em class="sep">|</em><span>人均<strong class="stress"> ¥59.00 </strong></span></div>
+                <div class="remark_taste"> <a href="#" class="col-num"></a> <em class="sep">|</em><span>人均<strong class="stress"> ¥59.00 </strong></span></div>
               </div>
               <ul>
                 <li><em>地址：</em><span>南门外大街2-6号中粮大悦城内北区4楼27号(南马路口)</span></li>
@@ -879,7 +879,7 @@ var jiathis_config = {
 		  <a href="http://www.o2olive.net/demo/shop/api.php?act=toqq" class="btn-qq J-trigger"><i class="icon-qq"></i>QQ登录</a>
 		  <a href="http://www.o2olive.net/demo/shop/api.php?act=tosina" class="btn-sina J-trigger"><i class="icon-sina"></i>新浪微博登录</a>
         </div>
-		  <div class="login-other"> （本地生活帐号）<a href="http://www.o2olive.net/demo/index.php?act=login" class="ml5">登录</a><i class="split">|</i><a href="http://www.o2olive.net/demo/index.php?act=login&op=register">注册</a> </div>
+		  <div class="login-other"> （本地生活帐号）<a href="/user/login" class="ml5">登录</a><i class="split">|</i><a href="/user/register">注册</a> </div>
 		</div>
 	</div>
 	  <!-- 预约预订 -->
