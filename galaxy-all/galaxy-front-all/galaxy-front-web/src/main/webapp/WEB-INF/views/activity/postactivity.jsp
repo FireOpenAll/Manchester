@@ -137,12 +137,17 @@ textarea {display: block; height:500px;}
 
 <div id='jia-l-map' style="display:none"></div>
 <form id="evnet_base_validateform" name="evnet_base_validateform" method="post" enctype="multipart/form-data" action="/activity/saveEventBase.do" >
-<input type="hidden" name="get_address_btn_flag" id="get_address_btn_flag" value='1'>
-<input type="hidden" name="editor_text_zyc" id="editor_text_zyc" value='78963'>
+<input type="hidden" name="get_address_btn_flag" id="get_address_btn_flag" value='1'></input>
+<input type="hidden" name="editor_text_zyc" id="editor_text_zyc" value='78963'></input>
 
-<input type="hidden" name="haibaoimg1_update" id='haibaoimg1_update' value='1'>
-<input type="hidden" name="haibaoimg2_update" id='haibaoimg2_update' value='1'>
-<input type="hidden" name="haibaoimg3_update" id='haibaoimg3_update' value='1'>
+<input type="hidden" name="haibaoimg1_update" id='haibaoimg1_update' value='1'></input>
+<input type="hidden" name="haibaoimg2_update" id='haibaoimg2_update' value='1'></input>
+<input type="hidden" name="haibaoimg3_update" id='haibaoimg3_update' value='1'></input>
+
+<input type="hidden" name="haibao_src_1" id='haibao_src_1' value=''></input>
+<input type="hidden" name="haibao_src_2" id='haibao_src_2' value=''></input>
+<input type="hidden" name="haibao_src_3" id='haibao_src_3' value=''></input>
+                          
 
 <div id="file_log_te" style="display:none">
 
@@ -197,9 +202,13 @@ textarea {display: block; height:500px;}
 
 
 
-
-<input type="hidden" name="event_logo_xitong" id="event_logo_xitong">
-<input type="hidden" name="event_logo_xitong_flag" id="event_logo_xitong_flag" value='1'>
+<!-- 海报ur
+<input type="hidden" id="haibao_src_l" name="haibao_src_l" value="aa" />
+<input type="hidden" id="haibao_src_2" name="haibao_src_2" value="bb" />
+<input type="hidden" id="haibao_src_3" name="haibao_src_3" value="cc" />
+ 海报url -->
+<input type="hidden" name="event_logo_xitong" id="event_logo_xitong"></input>
+<input type="hidden" name="event_logo_xitong_flag" id="event_logo_xitong_flag" value='1'></input>
 <div class="global_width">
     <div class="global_leftMenu">
         
@@ -252,15 +261,15 @@ textarea {display: block; height:500px;}
                 </ul>
                 <!-- 详细地址 2 -->
                 <ul id="ul_select_address">
-                    <input type="hidden" id="city_name" name="city_name">
+                    <input type="hidden" id="city_name" name="city_name"></input>
                     <input type="hidden" id="city_id" name="city_id">
                     <input type="hidden" id="district_name" name="district_name">
                     <input type="hidden" id="longitude" value=""  />
                     <input type="hidden" id="latitude" value="" />
                     <li class="title">详细地址</li>
                     <li class="form" id="ul_address_map">
-                       <input type="hidden" name="zyx_address_comprare_name" id="zyx_address_comprare_name" value="">
-                        <input type="text" id="zxy_zxy" autocomplete="off" onkeydown="gaode_keydown(event)" name="zxy_zxy" class="input_big input_560x40" >
+                       <input type="hidden" name="zyx_address_comprare_name" id="zyx_address_comprare_name" value=""></input>
+                        <input type="text" id="zxy_zxy" autocomplete="off" onkeydown="gaode_keydown(event)" name="zxy_zxy" class="input_big input_560x40" ></input>
                         <div class="areaDL" style="display:none;z-index:300" id="address_list">
 
                         </div>
@@ -301,7 +310,8 @@ textarea {display: block; height:500px;}
                 
                 <!-- 主办方 -->
                     <ul class="organizers" id="organizers_id">
-                        <li class="title">主办方<input type="hidden" id="event_org_hidden_info" name="event_org_hidden_info" value=""/>
+                        <li class="title">主办方
+                         <input type="hidden" id="event_org_hidden_info" name="event_org_hidden_info" value=""/>
                          <input type="hidden" name="event_org_hidden_info_delorgids" value=""/>
                          <input type='text' name="event_org_hidden_info_y" id="event_org_hidden_info_y" style="position:absolute;left:-820px;border-style:none" value='' />
                         </li>
@@ -384,8 +394,10 @@ textarea {display: block; height:500px;}
                 
                    <!-- 邀请海报  --> 
                      <ul class="error">
+                      
                         <li class="title">邀请海报</li>
                         <li class="form file" id="haibao_img_li">
+                        
                               <div id="haibao_list">
                                
                               </div>
@@ -394,6 +406,8 @@ textarea {display: block; height:500px;}
                              <input type="file" onchange="haibao_chuan(this)" name="eventhaibao_logo1" id="haibao1_file" class="file zyc_file">
                              <input type="file" onchange="haibao_chuan(this)" name="eventhaibao_logo2" style="display:none" id="haibao2_file" class="file zyc_file ">
                              <input type="file" onchange="haibao_chuan(this)" name="eventhaibao_logo3" style="display:none" id="haibao3_file" class="file zyc_file">
+                             
+                             
                              </a>
                             <p class="font_999999" id="haibao_file_list_p">最多3张海报,尺寸为：900x1200像素  ,图片不得超过500K</p>
                             <div class="clear"></div>

@@ -3,23 +3,33 @@
  */
 package com.galaxy.front.web.activity.controller;
 
+import java.io.File;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.galaxy.dal.domain.activity.ActivityType;
 import com.galaxy.front.web.activity.controller.PostModel.EvenBaseInfoModel;
 import com.galaxy.front.web.activity.controller.PostModel.OrgModel;
 import com.galaxy.front.web.activity.controller.PostModel.TicketModel;
 import com.galaxy.front.web.rest.model.ResultModel;
+import com.galaxy.service.activity.ActivityService;
+import com.galaxy.service.activity.form.ActivityForm;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -30,225 +40,216 @@ import com.google.gson.reflect.TypeToken;
 @Controller
 @RequestMapping(value = "/activity")
 public class ActivityController {
-	
 
+	@Autowired
+	private ActivityService activityService;
 
 	/**
 	 * ajax创建活动表单提交
 	 */
-	@RequestMapping(value = "saveEventBase",method = RequestMethod.POST)
-	public String saveEventBase(HttpServletRequest request,HttpServletResponse response){
-		
+	@RequestMapping(value = "saveEventBase", method = RequestMethod.POST)
+	public String saveEventBase(HttpServletRequest request, HttpServletResponse response) {
+
 		/**
-		 * Model:event_ticket_hidden_info,
-		 * event_base_hidden_info,
+		 * Model:event_ticket_hidden_info, event_base_hidden_info,
 		 * event_org_hidden_info,
 		 * 
 		 * 
 		 */
-		
+
 		/*
-		String event_name ="";//活动名称
-		String event_start_time = "";//
-		String event_end_time= "";//
-		String event_address_name= "";//
-		String event_address_info= "";//详细地址
-		String img_event_logo_src_te="";//活动图片
+		 * String event_name ="";//活动名称 String event_start_time = "";// String
+		 * event_end_time= "";// String event_address_name= "";// String
+		 * event_address_info= "";//详细地址 String img_event_logo_src_te="";//活动图片
+		 * 
+		 * String org_name= "";//主办方名字 String logo_url= "";//主办方logo String
+		 * org_description= "";//主办方介绍
+		 * 
+		 * String refer_telephone= "";//咨询电话 String description= "";//活动简介
+		 * String editor_text= "";//活动详情
+		 * 
+		 * //上传海报 String eventhaibao_logo1= "";// String eventhaibao_logo2=
+		 * "";// String eventhaibao_logo3= "";//
+		 * 
+		 * //门票list[] String id;//门票id String name;//门票名称 String qty;//总数量
+		 * String saleqty;//已售 String price;//价格 String status;//售票状态 String
+		 * type;//门票类型(1=免费，2=收费)
+		 * 
+		 * 
+		 * //隐私 String event_yinsi;//(1=公开,2=不公开)
+		 * 
+		 * 
+		 * //活动类型 String event_category1;//(=列表id)
+		 * 
+		 * //地点 String city_name;// String event_logitude;// String
+		 * event_latitude;//
+		 */
 		
-		String org_name= "";//主办方名字
-		String logo_url= "";//主办方logo
-		String org_description= "";//主办方介绍
-		
-		String refer_telephone= "";//咨询电话
-		String description= "";//活动简介
-		String editor_text= "";//活动详情
-		
-		//上传海报
-		String eventhaibao_logo1= "";//
-		String eventhaibao_logo2= "";//
-		String eventhaibao_logo3= "";//
-		
-		//门票list[]
-		String id;//门票id
-		String name;//门票名称
-		String qty;//总数量
-		String saleqty;//已售
-		String price;//价格
-		String status;//售票状态
-		String type;//门票类型(1=免费，2=收费)
-		
-		
-		//隐私
-		String event_yinsi;//(1=公开,2=不公开)
-		
-		
-		//活动类型
-		String event_category1;//(=列表id)
-		
-		//地点
-		String city_name;//
-		String event_logitude;//
-		String event_latitude;//
-		*/
-		
-		
+		EvenBaseInfoModel evenBaseInfoModel = null;
+		List<TicketModel> ticketModels = null;
+		List<OrgModel> orgModels = null;
+		ActivityForm activityForm = null;
+
 		StringBuilder sBuilder = new StringBuilder("");
+
+		// 活动详情
+		String editor_text_zyc = null;
+		editor_text_zyc = request.getParameter("editor_text_zyc");
+
+		//
 		String event_base_hidden_info = null;
 		event_base_hidden_info = request.getParameter("event_base_hidden_info");
-		if(event_base_hidden_info !=null){
-			Gson gson = new Gson();
-			EvenBaseInfoModel evenBaseInfoModel = gson.fromJson(event_base_hidden_info, EvenBaseInfoModel.class);
-			
-			System.out.println("evenBaseInfoModel=="+evenBaseInfoModel.toString());
-			sBuilder.append("evenBaseInfoModel==").append(evenBaseInfoModel.toString()).append("\n");
-			
-		}
 		
+		//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!event_base_hidden_info \n"+event_base_hidden_info+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!event_base_hidden_info \n");
+
+		if (event_base_hidden_info != null) {
+			Gson gson = new Gson();
+			evenBaseInfoModel = gson.fromJson(event_base_hidden_info, EvenBaseInfoModel.class);
+
+			System.out.println("evenBaseInfoModel==" + evenBaseInfoModel.toString());
+			sBuilder.append("evenBaseInfoModel==").append(evenBaseInfoModel.toString()).append("\n");
+
+		}
+
+		//
 		String event_ticket_hidden_info = null;
 		event_ticket_hidden_info = request.getParameter("event_ticket_hidden_info");
-		if(event_ticket_hidden_info !=null){
+		if (event_ticket_hidden_info != null) {
 			Gson gson = new Gson();
-			List<TicketModel> ticketModels = gson.fromJson(event_ticket_hidden_info, new TypeToken<List<TicketModel>>(){}.getType());
-			
-			System.out.println("ticketModels"+ticketModels.toString());
+			ticketModels = gson.fromJson(event_ticket_hidden_info, new TypeToken<List<TicketModel>>() {
+			}.getType());
+
+			System.out.println("ticketModels" + ticketModels.toString());
 			sBuilder.append("ticketModels==").append(ticketModels.toString()).append("\n");
-			//Gson gson = new Gson();
-			//Event_ticket_hidden_info_JsonModel event_ticket_hidden_info_JsonModel = gson.fromJson(event_ticket_hidden_info, Event_ticket_hidden_info_JsonModel.class);
-			//System.out.println("event_ticket_hidden_info_JsonModel.getList().get(0).getName()=="+event_ticket_hidden_info_JsonModel.getList().get(0).getName());
+			// Gson gson = new Gson();
+			// Event_ticket_hidden_info_JsonModel
+			// event_ticket_hidden_info_JsonModel =
+			// gson.fromJson(event_ticket_hidden_info,
+			// Event_ticket_hidden_info_JsonModel.class);
+			// System.out.println("event_ticket_hidden_info_JsonModel.getList().get(0).getName()=="+event_ticket_hidden_info_JsonModel.getList().get(0).getName());
 		}
-		
+
+		//
 		String event_org_hidden_info = null;
 		event_org_hidden_info = request.getParameter("event_org_hidden_info");
-		if(event_org_hidden_info !=null){
+		if (event_org_hidden_info != null) {
 			Gson gson = new Gson();
-			List<OrgModel> orgModels =gson.fromJson(event_org_hidden_info, new TypeToken<List<OrgModel>>(){}.getType());
-			System.out.println("orgModels=="+orgModels.toString());
+			orgModels = gson.fromJson(event_org_hidden_info, new TypeToken<List<OrgModel>>() {
+			}.getType());
+			System.out.println("orgModels==" + orgModels.toString());
 			sBuilder.append("orgModels==").append(orgModels.toString()).append("\n");
 		}
-		
-		/*
-		System.out.println(event_base_hidden_info);
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
-		
-		StringBuilder sBuilder = new StringBuilder("");
-		Map<String, String[]> map = request.getParameterMap();
-		for(String name:map.keySet()){
-			System.out.print("key="+name);
-			sBuilder.append("key="+name);
-			for(String value:map.get(name)){
-				sBuilder.append(",value="+value);
-				System.out.print(",value="+value);
-			}
-			sBuilder.append("\n");
-			System.out.print("\n");
+
+		if (evenBaseInfoModel != null && ticketModels != null && orgModels != null && editor_text_zyc != null) {
+			activityForm = new ActivityForm();
+			activityForm.setTitle(evenBaseInfoModel.getEvent_name());
+			activityForm.setStartTime(String2Date(evenBaseInfoModel.getEvent_start_time()));
+			activityForm.setEndTime(String2Date(evenBaseInfoModel.getEvent_end_time()));
+
+			activityForm.setAddress(evenBaseInfoModel.getEvent_address_info());
+			activityForm.setLongtitude(evenBaseInfoModel.getEvent_longitude());
+			activityForm.setLatitude(evenBaseInfoModel.getEvent_latitude());
+			activityForm.setPhone(evenBaseInfoModel.getRefer_telephone());
+			activityForm.setDescription(evenBaseInfoModel.getDescription());
+			activityForm.setContent(editor_text_zyc);// 详情
+
+			activityForm.setHaibao_urls(evenBaseInfoModel.getHaibao_urls());
+
+			activityForm.setCatId1(Long.valueOf(evenBaseInfoModel.getEvent_category1()));
+
+			activityForm.setType((evenBaseInfoModel.getEvent_yinsi() % 2 == 0) ? ActivityType.ONLINE
+					: ActivityType.OFFLINE);
+
+			activityService.create(activityForm);
+
 		}
-			
+
 		request.setAttribute("parameters", sBuilder.toString());
-		
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
-		
-		*/
-		
-		/*
-		String body = null;
-	    StringBuilder stringBuilder = new StringBuilder();
-	    BufferedReader bufferedReader = null;
-	    InputStream inputStream;
-		try {
-			inputStream = request.getInputStream();
-			if (inputStream != null) {
-	            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-	            char[] charBuffer = new char[128];
-	            int bytesRead = -1;
-	            while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
-	                stringBuilder.append(charBuffer, 0, bytesRead);
-	            }
-			}
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}finally{
-			if (bufferedReader != null){
-				try {
-					bufferedReader.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-	    
-        request.setAttribute("parameters", stringBuilder.toString());
-        */
-        
-		
-		request.setAttribute("parameters", sBuilder.toString());
+
 		return "activity/postsuccess";
-	} 
-	
-	@RequestMapping(value = "/create",method=RequestMethod.GET)
+	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create() {
 		return "activity/postactivity";
 	}
-	@RequestMapping(value = "post",method=RequestMethod.POST)
+
+	@RequestMapping(value = "post", method = RequestMethod.POST)
 	public String post() {
 		return "activity/postsuccess";
 	}
-	
-	
-	@RequestMapping(value = "modify/{id}",method=RequestMethod.GET)
+
+	@RequestMapping(value = "modify/{id}", method = RequestMethod.GET)
 	public String modify(@PathVariable Long id) {
 		return "activity/postactivity";
 	}
-	@RequestMapping(value = "remove",method=RequestMethod.GET)
+
+	@RequestMapping(value = "remove", method = RequestMethod.GET)
 	public String remove(@PathVariable Long id) {
-		//check 活动信息属于自己的
+		// check 活动信息属于自己的
 		return "activity/detail";
 	}
-	
-	@RequestMapping(value = "modify",method=RequestMethod.GET)
+
+	@RequestMapping(value = "modify", method = RequestMethod.GET)
 	public String view(@PathVariable Long id) {
 		return "activity/detail";
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/geteventcategory",method = RequestMethod.GET)
-	public Object getEventCategory(){
+	@RequestMapping(value = "/geteventcategory", method = RequestMethod.GET)
+	public Object getEventCategory() {
 		ResultModel resultModel = new ResultModel();
 		ArrayList<testModel> list = new ArrayList<ActivityController.testModel>();
 		for (int i = 0; i < 10; i++) {
-		list.add(new testModel(i,"分类"+i));
+			list.add(new testModel(i, "分类" + i));
 		}
-		
+
 		resultModel.setData(list);
-		
+
 		return resultModel;
 	}
 
-	
-	class testModel implements Serializable{
-		int id ;
+	class testModel implements Serializable {
+		int id;
 		String name;
+
 		public testModel() {
 			super();
 		}
+
 		public testModel(int id, String name) {
 			super();
 			this.id = id;
 			this.name = name;
 		}
+
 		public int getId() {
 			return id;
 		}
+
 		public void setId(int id) {
 			this.id = id;
 		}
+
 		public String getName() {
 			return name;
 		}
+
 		public void setName(String name) {
 			this.name = name;
 		}
 	}
-	
+
+	public Date String2Date(String date) {
+		Date date2 = null;
+		try {
+			date2 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return date2;
+	}
+
 }

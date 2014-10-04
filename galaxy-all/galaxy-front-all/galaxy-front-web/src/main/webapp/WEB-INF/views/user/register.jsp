@@ -318,9 +318,9 @@ $(function() {
 							</span>
 							<p class="yzm">
 								<img border="0" class="fl" id="codeimage" name="codeimage"
-									title="" src="/api/v1/image_code"><br>
+									title="" src="http://www.o2olive.net/demo/index.php?act=seccode&op=makecode&nchash="><br>
 								<a href="javascript:void(0);"
-									onclick="javascript:document.getElementById('codeimage').src='/api/v1/image_code?t='+Math.random();">看不清？换一张</a>
+									onclick="javascript:document.getElementById('codeimage').src='http://www.o2olive.net/demo/index.php?act=seccode&op=makecode&nchash=&t=' + Math.random();">看不清？换一张</a>
 							</p>
 							<label for="captcha" generated="true" class="error error_reg"
 								style="display: none;"></label>
@@ -395,7 +395,7 @@ $(function(){
         if($("#register_form").valid()){
         	$("#register_form").submit();
         } else{
-        	document.getElementById('codeimage').src='api/v1/image_code?nchash=&t=' + Math.random();
+        	document.getElementById('codeimage').src='http://www.o2olive.net/demo/shop/index.php?act=seccode&op=makecode&nchash=&t=' + Math.random();
         }
     });
     $("#register_form").validate({
@@ -406,7 +406,7 @@ $(function(){
                 lettersmax : true,
                 lettersonly : true,
                 remote   : {
-                    url :'/api/v1/check/username',
+                    url :'index.php?act=login&op=check_member',
                     type:'get',
                     data:{
                         member_name : function(){
@@ -428,7 +428,7 @@ $(function(){
                 required : true,
                 email    : true,
                 remote   : {
-                    url : '/api/v1/check/email',
+                    url : '/api/v1/email/check',
                     type: 'get',
                     data:{
                         email : function(){
@@ -440,8 +440,8 @@ $(function(){
             captcha : {
                 required : true,
                 remote   : {
-                    url : '/api/v1/checkcode/verify',
-                    type: 'post',
+                    url : 'index.php?act=seccode&op=check&nchash=',
+                    type: 'get',
                     data:{
                         captcha : function(){
                             return $('#captcha').val();

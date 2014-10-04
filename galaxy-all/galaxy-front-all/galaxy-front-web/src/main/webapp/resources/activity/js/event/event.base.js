@@ -264,6 +264,23 @@ function haibao_del(num,b){
 	var   file_id="haibao"+num+'_file';
 	var  file_name='eventhaibao_logo'+num;
 	$("#"+file_id).remove();
+	
+	//hsq
+	var haibao_src_id;
+	if (file_name == 'eventhaibao_logo1' && file_id == 'haibao1_file') {
+		haibao_src_id = 'haibao_src_1';
+	}
+	if (file_name == 'eventhaibao_logo2' && file_id == 'haibao2_file') {
+		haibao_src_id = 'haibao_src_2';
+	}
+	if (file_name == 'eventhaibao_logo3' && file_id == 'haibao3_file') {
+		haibao_src_id = 'haibao_src_3';
+	}
+	$('#'+haibao_src_id).val('');
+	
+	//hsq
+	
+	
 	var html='<input type="file" onchange="haibao_chuan(this)" style="display:block" name="'+file_name+'" id="'+file_id+'" class="file zyc_file">';
 	$('#haibao_file_list').append(html);
 	$('#haibao_file_list_p').show();
@@ -277,23 +294,76 @@ function haibao_del(num,b){
 }
 /**海报上传*/
 function haibao_chuan(b){
-	var  haibao_id=''; var num='';
-	if($("#haibao1_img").length==0 && $("#haibao2_img").length==0 && $("#haibao3_img").length==0){
-		num=1;	haibao_id='haibao1_img';	    $('.zyc_file').hide();	$("#haibao1_file").show();
-	}else if($("#haibao1_img").length>0 && $("#haibao2_img").length==0 && $("#haibao3_img").length==0){
-		num=2;	haibao_id='haibao2_img';    $('.zyc_file').hide();	$("#haibao2_file").show();
-	}else if($("#haibao1_img").length==0 && $("#haibao2_img").length>0 && $("#haibao3_img").length==0){
-		num=1; haibao_id='haibao1_img';    $('.zyc_file').hide();	$("#haibao1_file").show();
-	}else if($("#haibao1_img").length==0 && $("#haibao2_img").length==0 && $("#haibao3_img").length>0){
-		num=1; haibao_id='haibao1_img';     $('.zyc_file').hide();	$("#haibao1_file").show();
-	}else if($("#haibao1_img").length>0 && $("#haibao2_img").length>0 && $("#haibao3_img").length==0){
-		num=3; haibao_id='haibao3_img';     $('.zyc_file').hide();	$("#haibao3_file").show();
-	}else if($("#haibao1_img").length==0 && $("#haibao2_img").length>0 && $("#haibao3_img").length>0){
-		num=1; haibao_id='haibao1_img';     $('.zyc_file').hide();	$("#haibao1_file").show();
-	}else if($("#haibao1_img").length>0 && $("#haibao2_img").length==0 && $("#haibao3_img").length>0){
-		num=2; haibao_id='haibao2_img';     $('.zyc_file').hide();	$("#haibao2_file").show();
-	}else if($("#haibao1_img").length>0 && $("#haibao2_img").length>0 && $("#haibao3_img").length>0){
-		alert('最多只能上传3张海报！');  return false;
+	var haibao_id = '';
+		
+	var num = '';
+	if ($("#haibao1_img").length == 0 && $("#haibao2_img").length == 0
+			&& $("#haibao3_img").length == 0) {
+		num = 1;
+		haibao_id = 'haibao1_img';
+		
+		hsq_haibao_upload('eventhaibao_logo1', 'haibao1_file');
+		
+		$('.zyc_file').hide();
+		$("#haibao1_file").show();
+	} else if ($("#haibao1_img").length > 0 && $("#haibao2_img").length == 0
+			&& $("#haibao3_img").length == 0) {
+		num = 2;
+		haibao_id = 'haibao2_img';
+
+		hsq_haibao_upload('eventhaibao_logo2', 'haibao2_file');
+		
+		$('.zyc_file').hide();
+		$("#haibao2_file").show();
+	} else if ($("#haibao1_img").length == 0 && $("#haibao2_img").length > 0
+			&& $("#haibao3_img").length == 0) {
+		num = 1;
+		haibao_id = 'haibao1_img';
+
+		hsq_haibao_upload('eventhaibao_logo1', 'haibao1_file');
+		
+		$('.zyc_file').hide();
+		$("#haibao1_file").show();
+	} else if ($("#haibao1_img").length == 0 && $("#haibao2_img").length == 0
+			&& $("#haibao3_img").length > 0) {
+		num = 1;
+		haibao_id = 'haibao1_img';
+
+		hsq_haibao_upload('eventhaibao_logo1', 'haibao1_file');
+		
+		$('.zyc_file').hide();
+		$("#haibao1_file").show();
+	} else if ($("#haibao1_img").length > 0 && $("#haibao2_img").length > 0
+			&& $("#haibao3_img").length == 0) {
+		num = 3;
+		haibao_id = 'haibao3_img';
+
+		hsq_haibao_upload('eventhaibao_logo3', 'haibao3_file');
+		
+		$('.zyc_file').hide();
+		$("#haibao3_file").show();
+	} else if ($("#haibao1_img").length == 0 && $("#haibao2_img").length > 0
+			&& $("#haibao3_img").length > 0) {
+		num = 1;
+		haibao_id = 'haibao1_img';
+
+		hsq_haibao_upload('eventhaibao_logo1', 'haibao1_file');
+		
+		$('.zyc_file').hide();
+		$("#haibao1_file").show();
+	} else if ($("#haibao1_img").length > 0 && $("#haibao2_img").length == 0
+			&& $("#haibao3_img").length > 0) {
+		num = 2;
+		haibao_id = 'haibao2_img';
+
+		hsq_haibao_upload('eventhaibao_logo2', 'haibao2_file');
+		
+		$('.zyc_file').hide();
+		$("#haibao2_file").show();
+	} else if ($("#haibao1_img").length > 0 && $("#haibao2_img").length > 0
+			&& $("#haibao3_img").length > 0) {
+		alert('最多只能上传3张海报！');
+		return false;
 	}
 	var html='<div class="fileImgOuter">\
                     <div class="icon_box">\
@@ -304,6 +374,9 @@ function haibao_chuan(b){
 	$("#haibao_list").append(html);
 	haibao_btn_show_hide();
 	hds_preview_pic(b,haibao_id,'123');
+	
+	//图片上传
+		
 
 	$("#haibao_img_li").removeClass('file');
 	$("#haibao_img_li").addClass('file_ok');
@@ -340,7 +413,8 @@ function  haibao_btn_show_hide(){
 /**zyc*/
 
 $(document).ready(function(){
-
+	
+	var  pic1 = "";
 
 	//时间
 	$('#event_start_time,#event_end_time').datetimepicker();
@@ -602,6 +676,25 @@ function event_base_save(obj){
 	//alert(event_longitude);alert(event_latitude);return;
 	/**zyc*/
 
+	//活动海报
+	var haibao_url1="";
+	var haibao_url2="";
+	var haibao_url3="";
+	haibao_url1 = $("#haibao_src_1").val();
+	haibao_url2 = $("#haibao_src_2").val();
+	haibao_url3 = $("#haibao_src_3").val();
+	
+	var haibao_urls = haibao_url1;
+	if(haibao_url2 != ""){
+		haibao_urls = haibao_urls+";"+haibao_url2;
+	}
+	if(haibao_url3 != ""){
+		haibao_urls = haibao_urls+";"+haibao_url3;
+	}
+	alert("海报urls："+haibao_urls);
+	
+	//活动海报
+	
 	//活动基本信息
 	var eventbaseinfo =  '{'+
 	//	       '"event_theme_xilie":"'+event_theme_xilie +'",'+
@@ -618,13 +711,13 @@ function event_base_save(obj){
 	'"refer_telephone":"'+event_refer_telephone+'",'+
 	'"event_yinsi":"'+event_yinsi+'",'+
 	'"event_category1":"'+category_type+'",'+
+	'"haibao_urls":"'+haibao_urls+'",'+
 	//'"map":"'+map_point_info+'",'+
 	//	       '"event_support_share":"'+event_support_share+'",'+
 	//'"event_keyword":"'+event_keyword+'",'+
 	//	       '"limit_num":"'+event_limit_num+'",'+
 	//'"template_id":"'+template_id+'",'+
 	'"description":"'+description+'"'+
-	// '"editor_text":"'+editor_text+'"'+
 	'}';
    // alert(eventbaseinfo);return;
 	//alert('eventbaseinfo:'+eventbaseinfo);
@@ -635,6 +728,10 @@ function event_base_save(obj){
 	//alert('editor_text:'+editor_text);
 	
 	$(obj).attr("disabled",false);
+	
+	
+	
+	
 	$("#evnet_base_validateform").submit();
 	
 }
@@ -894,12 +991,26 @@ function change_org(orgData){
 * 加载活动分类信息
 *
 **/
-function event_category_list(code,type,posid) { 
+function event_category_list(code,type,posid) {
+	
+	//hsq
+	//新分类数据
+	var html = '';
+	for(var i = 1; i < 11; i++){
+		html += '<li category_select_type="' + i + '">' + '类别' + i + '</li>';
+	}
+	$("#event_category_grade1").html(html);
+	UIselect();
+	
+	//hsq
+	
+	
+	/*
 	posid = $.trim(posid);
 	var info = '{"code":"'+code+'","type":"'+type+'"}';
-	//var url = js_huodongshu_domain+'/geteventcategory.do';
-	var url = "http://localhost:8080/activity/geteventcategory.do";
-	//var url = "http://182.92.169.209/activity/geteventcategory.do";
+	//var url = js_huodongshu_domain+'/activity/geteventcategory.do';
+	//var url = "http://localhost:8080/activity/geteventcategory.do";
+	var url = "http://182.92.169.209/activity/geteventcategory.do";
 	$.ajax({
 		url: url,
 		async: false,
@@ -930,8 +1041,14 @@ function event_category_list(code,type,posid) {
 			$("#event_category_grade1").html(html);
 			UIselect();
 
+			
+			
+			
+			
+			
 		}
 	});
+	*/
 }
 
 /* 暂时无用**/
@@ -1366,5 +1483,50 @@ function eventStatusTip(){
 }
 
 
+/**
+ * 海报上传
+ */
+//
+function hsq_haibao_upload(input_btn_name,input_btn_id){
+	
+	 ajaxFileUploads('haibao',input_btn_name,input_btn_id,'max',function (info){
+		 
+    	var ret;
+    	for(var i in info){
+    		ret +=i+':'+info[i];
+    	}
+    	//alert('ret+++++=='+ret);
+    	
+    	alert('input_btn_name ='+input_btn_name +',input_btn_id='+input_btn_id);
+    	
+    	var haibao_src_id;
+    	if (input_btn_name == 'eventhaibao_logo1' && input_btn_id == 'haibao1_file') {
+			haibao_src_id = 'haibao_src_1';
+    	}
+    	if (input_btn_name == 'eventhaibao_logo2' && input_btn_id == 'haibao2_file') {
+    		haibao_src_id = 'haibao_src_2';
+    	}
+    	if (input_btn_name == 'eventhaibao_logo3' && input_btn_id == 'haibao3_file') {
+    		haibao_src_id = 'haibao_src_3';
+    	}
+    	
+    	alert('haibao_src_id====' + haibao_src_id);
+    	
+		
+		if (info.code == '20000') {
+			var value = info.data;
+			//alert('info.data==' + value);
+			$("#"+haibao_src_id).val(value);
+			var aa = $("#"+haibao_src_id).val();
+			alert("aa=="+aa);
+
+		} else {
+			alert(info.message);
+		}
+
+    	
+    	
+    });
+}
 
 

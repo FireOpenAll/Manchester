@@ -3,7 +3,8 @@
  */
 package com.galaxy.front.web.activity.controller;
 
-import org.springframework.mobile.device.Device;
+import java.util.Date;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,7 @@ import com.galaxy.front.web.rest.model.activity.ActivityModel;
 @RequestMapping(value = "activity")
 public class ActivityDetailController {
 	@RequestMapping(value = "detail/{id}.html")
-	public String details(@PathVariable Long id,Model model,Device device) {
+	public String details(@PathVariable Long id,Model model) {
 		ActivityModel activity=new ActivityModel();
 		/*
 		activity.setTitle("奥林匹克公园聚会");

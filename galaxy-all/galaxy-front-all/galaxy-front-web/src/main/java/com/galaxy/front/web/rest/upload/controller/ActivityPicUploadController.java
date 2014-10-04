@@ -39,25 +39,20 @@ public class ActivityPicUploadController {
 		 * @return :json
 		 */
 		
+		//thumb_config
+		
+		
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		 /**页面控件的文件流**/      
-		//String field_nameString = request.getParameter("file_field")
-        MultipartFile file = multipartRequest.getFile(fileParamter);
-		
-		
-		String tagNameString = request.getParameter("file_field");
-		System.err.println("file_field-------------------------"+tagNameString);
-		
-		
-		 /**页面控件的文件流**/      
-        
+		 /**页面控件的文件流**/
+        MultipartFile file = multipartRequest.getFile(fileParamter);	    
         System.out.println("file == null:::::::::"+(file==null));
 		
 		
 		ResultModel resultModel = new ResultModel();
 
 		//String path1 = request.getSession().getServletContext().getRealPath("/");
-		String path = "/upload/images/activity/upload/";
+		String foldName = request.getParameter("thumb_config");
+		String path = "/upload/images/activity/"+foldName+"/";
 
 		//System.out.println("===========" + path);
 		
@@ -78,7 +73,7 @@ public class ActivityPicUploadController {
 			resultModel.setCode("20000");
 			resultModel.setMessage("upload ok");
 			
-			String urlString = "/activity/upload/"+fileName;
+			String urlString = "/activity/"+foldName+"/"+fileName;
 			resultModel.setData(urlString);
 			
 		} catch (Exception e) {

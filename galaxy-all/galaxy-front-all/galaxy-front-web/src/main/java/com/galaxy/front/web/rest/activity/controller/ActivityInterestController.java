@@ -34,6 +34,7 @@ public class ActivityInterestController {
 	@RequestMapping (value = "/interest_activity",method = RequestMethod.GET)
 	public Object getActivitysByInterestId(){
 		ResultModel resultModel = new ResultModel();
+		
 		ArrayList<ActivityModel> recomment_activity = new ArrayList<ActivityModel>();
 		
 		ArrayList<UserModel> relative_user = new ArrayList<UserModel>();

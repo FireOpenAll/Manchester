@@ -17,28 +17,32 @@ public class EvenBaseInfoModel implements Serializable {
 	private String event_end_time;// 结束时间
 	private String event_address_name;// 地点名称
 
-	private String event_longitude;// 经度
-	private String event_latitude;// 纬度
+	private Double event_longitude;// 经度
+	private Double event_latitude;// 纬度
 
 	private String event_address_info;// 详细地址
 	private String refer_telephone;// 电话
 
-	private String event_yinsi;// (1=公开,2=不公开)
+	private int event_yinsi;// (1=公开,2=不公开)
 
-	private String event_category1;// 活动类型id，下拉列表id
+	private Long event_category1;// 活动类型id，下拉列表id
 
 	private String description;// 活动简介
+	
+	private String haibao_urls;//活动海报,"；"分割，最多三个图片 
 
 	public EvenBaseInfoModel() {
 		super();
 	}
 
-	public EvenBaseInfoModel(String event_name, String city_name, String event_start_time,
-			String event_end_time, String event_address_name, String event_longitude, String event_latitude,
-			String event_address_info, String refer_telephone, String event_yinsi, String event_category1,
-			String description) {
+
+	public EvenBaseInfoModel(String event_name, String event_type, String city_name, String event_start_time,
+			String event_end_time, String event_address_name, Double event_longitude, Double event_latitude,
+			String event_address_info, String refer_telephone, int event_yinsi, Long event_category1,
+			String description, String haibao_urls) {
 		super();
 		this.event_name = event_name;
+		this.event_type = event_type;
 		this.city_name = city_name;
 		this.event_start_time = event_start_time;
 		this.event_end_time = event_end_time;
@@ -50,111 +54,150 @@ public class EvenBaseInfoModel implements Serializable {
 		this.event_yinsi = event_yinsi;
 		this.event_category1 = event_category1;
 		this.description = description;
+		this.haibao_urls = haibao_urls;
 	}
+
+
 
 	public String getEvent_name() {
 		return event_name;
 	}
 
+
 	public void setEvent_name(String event_name) {
 		this.event_name = event_name;
 	}
 
-	public String getCity_name() {
-		return city_name;
-	}
-
-	public void setCity_name(String city_name) {
-		this.city_name = city_name;
-	}
-
-	public String getEvent_start_time() {
-		return event_start_time;
-	}
-
-	public void setEvent_start_time(String event_start_time) {
-		this.event_start_time = event_start_time;
-	}
-
-	public String getEvent_end_time() {
-		return event_end_time;
-	}
-
-	public void setEvent_end_time(String event_end_time) {
-		this.event_end_time = event_end_time;
-	}
-
-	public String getEvent_address_name() {
-		return event_address_name;
-	}
-
-	public void setEvent_address_name(String event_address_name) {
-		this.event_address_name = event_address_name;
-	}
-
-	public String getEvent_longitude() {
-		return event_longitude;
-	}
-
-	public void setEvent_longitude(String event_longitude) {
-		this.event_longitude = event_longitude;
-	}
-
-	public String getEvent_latitude() {
-		return event_latitude;
-	}
-
-	public void setEvent_latitude(String event_latitude) {
-		this.event_latitude = event_latitude;
-	}
-
-	public String getEvent_address_info() {
-		return event_address_info;
-	}
-
-	public void setEvent_address_info(String event_address_info) {
-		this.event_address_info = event_address_info;
-	}
-
-	public String getRefer_telephone() {
-		return refer_telephone;
-	}
-
-	public void setRefer_telephone(String refer_telephone) {
-		this.refer_telephone = refer_telephone;
-	}
-
-	public String getEvent_yinsi() {
-		return event_yinsi;
-	}
-
-	public void setEvent_yinsi(String event_yinsi) {
-		this.event_yinsi = event_yinsi;
-	}
-
-	public String getEvent_category1() {
-		return event_category1;
-	}
-
-	public void setEvent_category1(String event_category1) {
-		this.event_category1 = event_category1;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
 	public String getEvent_type() {
 		return event_type;
 	}
 
+
 	public void setEvent_type(String event_type) {
 		this.event_type = event_type;
 	}
+
+
+	public String getCity_name() {
+		return city_name;
+	}
+
+
+	public void setCity_name(String city_name) {
+		this.city_name = city_name;
+	}
+
+
+	public String getEvent_start_time() {
+		return event_start_time;
+	}
+
+
+	public void setEvent_start_time(String event_start_time) {
+		this.event_start_time = event_start_time;
+	}
+
+
+	public String getEvent_end_time() {
+		return event_end_time;
+	}
+
+
+	public void setEvent_end_time(String event_end_time) {
+		this.event_end_time = event_end_time;
+	}
+
+
+	public String getEvent_address_name() {
+		return event_address_name;
+	}
+
+
+	public void setEvent_address_name(String event_address_name) {
+		this.event_address_name = event_address_name;
+	}
+
+
+	public Double getEvent_longitude() {
+		return event_longitude;
+	}
+
+
+	public void setEvent_longitude(Double event_longitude) {
+		this.event_longitude = event_longitude;
+	}
+
+
+	public Double getEvent_latitude() {
+		return event_latitude;
+	}
+
+
+	public void setEvent_latitude(Double event_latitude) {
+		this.event_latitude = event_latitude;
+	}
+
+
+	public String getEvent_address_info() {
+		return event_address_info;
+	}
+
+
+	public void setEvent_address_info(String event_address_info) {
+		this.event_address_info = event_address_info;
+	}
+
+
+	public String getRefer_telephone() {
+		return refer_telephone;
+	}
+
+
+	public void setRefer_telephone(String refer_telephone) {
+		this.refer_telephone = refer_telephone;
+	}
+
+
+	public int getEvent_yinsi() {
+		return event_yinsi;
+	}
+
+
+	public void setEvent_yinsi(int event_yinsi) {
+		this.event_yinsi = event_yinsi;
+	}
+
+
+	public Long getEvent_category1() {
+		return event_category1;
+	}
+
+
+	public void setEvent_category1(Long event_category1) {
+		this.event_category1 = event_category1;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public String getHaibao_urls() {
+		return haibao_urls;
+	}
+
+
+	public void setHaibao_urls(String haibao_urls) {
+		this.haibao_urls = haibao_urls;
+	}
+
 
 	@Override
 	public String toString() {
@@ -172,6 +215,7 @@ public class EvenBaseInfoModel implements Serializable {
 		sBuilder.append("refer_telephone=").append(this.getRefer_telephone()).append(", ");
 		sBuilder.append("event_yinsi=").append(this.getEvent_yinsi()).append(", ");
 		sBuilder.append("event_category1=").append(this.getEvent_category1()).append(", ");
+		sBuilder.append("haibao_urls=").append(this.getHaibao_urls()).append(", ");
 		sBuilder.append("description=").append(this.getDescription());
 		return sBuilder.toString();
 	}
