@@ -22,7 +22,7 @@ import com.galaxy.dal.letter.mapper.LetterMapper;
 public class LetterMapperTest extends BaseDaoTest {
 	@Resource
 	LetterMapper letterMapper;
-
+/*
 	@Test
 	public void testInsert() {
 		Letter letter=new Letter();
@@ -52,5 +52,5 @@ public class LetterMapperTest extends BaseDaoTest {
 		Assert.assertNotNull(letter);
 
 	}
-
+*/
 }

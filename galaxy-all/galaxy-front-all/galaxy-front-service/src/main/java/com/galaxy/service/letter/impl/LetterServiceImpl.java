@@ -17,7 +17,7 @@ import com.galaxy.service.letter.LetterService;
 public class LetterServiceImpl implements LetterService {
 	@Autowired
 	LetterMapper letterMapper;
-
+/*
 	@Override
 	public boolean post(Letter letter) {
 		return letterMapper.insert(letter);
@@ -43,5 +43,5 @@ public class LetterServiceImpl implements LetterService {
 	public List<Letter> getFromUserLetters(Long userId) {
 		return letterMapper.getFromUserLetters(userId);
 	}
-
+*/
 }
