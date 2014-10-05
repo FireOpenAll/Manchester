@@ -11,7 +11,7 @@ import com.galaxy.front.web.rest.model.CommentModel;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.user.UserModel;
 
-@RestController
+@RestController(value = "restActivityCommentsController")
 @RequestMapping(value = "api/v1/activity")
 public class ActivityCommentsController {
 
@@ -39,21 +39,21 @@ public class ActivityCommentsController {
 		return resultModel;
 	}
 
+	/**
+	 * @param :activity_id,user_id,content
+	 * @return
+	 */
 	@RequestMapping(value = "comment", method = RequestMethod.POST)
 	public Object postCommentByActId() {
 		ResultModel resultModel = new ResultModel();
 
 		resultModel.setCode("20000");
-		resultModel.setMessage("get comment success");
+		resultModel.setMessage("post comment success");
 
-		ArrayList<CommentModel> commentModels = new ArrayList<CommentModel>();
-		for (int i = 0; i < 10; i++) {
-			commentModels.add(new CommentModel((long) 1010101011, new UserModel((long) 111110000 + i,
-					"/interest/cover/" + (30 + i) + ".jpg", "用户名" + i, (i % 2 == 0) ? "male" : "female"), "回复内容" + i,
-					new Date()));
-		}
+		CommentModel commentModel=  new CommentModel(111100001, new UserModel(101010101, "/interest/cover/30.jpg", "name", "male"), "评论内容", new Date());
+		
 
-		resultModel.setData(commentModels);
+		resultModel.setData(commentModel);
 		return resultModel;
 	}
 

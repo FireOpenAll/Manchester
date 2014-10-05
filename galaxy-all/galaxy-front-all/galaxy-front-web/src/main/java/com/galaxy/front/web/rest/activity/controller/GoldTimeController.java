@@ -67,22 +67,13 @@ public class GoldTimeController {
 		return resultModel;
 	}
 	
-	
-	
-	
-	
-	//日期加减函数
-	
-	/**
-	 * 
+	/**日期加减函数
 	 * @param day=天数
 	 * @return
 	 */
 	public Date addDate(int day) {
-		
 		Calendar c=Calendar.getInstance();
 		c.set(Calendar.DAY_OF_MONTH, day);
-		
 		return new Date(c.getTimeInMillis());
 	}
 

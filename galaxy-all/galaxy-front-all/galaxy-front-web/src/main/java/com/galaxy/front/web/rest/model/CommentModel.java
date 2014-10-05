@@ -10,7 +10,7 @@ import com.galaxy.front.web.rest.model.user.UserModel;
  *email :hsqmobile@gmail.com
  */
 public class CommentModel implements Serializable {
-	private long commend_id;
+	private long comment_id;
 	private UserModel author;
 	private String content;
 	private Date create_time;
@@ -19,20 +19,20 @@ public class CommentModel implements Serializable {
 		super();
 	}
 
-	public CommentModel(long commend_id, UserModel author, String content, Date create_time) {
+	public CommentModel(long comment_id, UserModel author, String content, Date create_time) {
 		super();
-		this.commend_id = commend_id;
+		this.comment_id = comment_id;
 		this.author = author;
 		this.content = content;
 		this.create_time = create_time;
 	}
 
-	public long getCommend_id() {
-		return commend_id;
+	public long getcomment_id() {
+		return comment_id;
 	}
 
-	public void setCommend_id(long commend_id) {
-		this.commend_id = commend_id;
+	public void setcomment_id(long comment_id) {
+		this.comment_id = comment_id;
 	}
 
 	public UserModel getAuthor() {
