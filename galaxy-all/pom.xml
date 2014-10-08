@@ -62,7 +62,9 @@
 		<jodatime.version>2.4</jodatime.version>
 		<jadira-usertype-core.version>3.2.0.GA</jadira-usertype-core.version>
 
-
+        <!--mail-->
+        <javamail.version>1.4.7</javamail.version>
+        
 		<!-- Web dependencies -->
 		<webjars-bootstrap.version>2.3.0</webjars-bootstrap.version>
 		<webjars-jquery-ui.version>1.10.3</webjars-jquery-ui.version>
