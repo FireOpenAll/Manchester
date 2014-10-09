@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.galaxy.dal.domain.location.Province;
-import com.galaxy.front.web.Utils.Code;
-import com.galaxy.front.web.Utils.ResultModelUtils;
+import com.galaxy.front.web.utils.Code;
+import com.galaxy.front.web.utils.ResultModelUtils;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.service.location.ProvinceService;
 

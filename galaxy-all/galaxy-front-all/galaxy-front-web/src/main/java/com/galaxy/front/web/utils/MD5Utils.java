@@ -1,4 +1,4 @@
-package com.galaxy.front.web.Utils;
+package com.galaxy.front.web.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

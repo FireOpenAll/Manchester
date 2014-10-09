@@ -1,4 +1,4 @@
-package com.galaxy.front.web.Utils;
+package com.galaxy.front.web.utils;
 /*author:huangshanqi
  *time  :2014年10月7日 上午10:56:34
  *email :hsqmobile@gmail.com

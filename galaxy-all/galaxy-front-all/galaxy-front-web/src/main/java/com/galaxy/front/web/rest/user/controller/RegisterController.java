@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.galaxy.dal.domain.user.User;
 import com.galaxy.dal.user.mapper.UserMapper;
-import com.galaxy.front.web.Utils.Code;
-import com.galaxy.front.web.Utils.RegexUtils;
-import com.galaxy.front.web.Utils.ResultModelUtils;
+import com.galaxy.front.web.utils.Code;
+import com.galaxy.front.web.utils.RegexUtils;
+import com.galaxy.front.web.utils.ResultModelUtils;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.StatusModel;
 import com.galaxy.service.user.UserService;

@@ -1,6 +1,4 @@
-package com.galaxy.front.web.Utils;
-
-import org.junit.Test;
+package com.galaxy.front.web.utils;
 
 import com.galaxy.front.web.rest.model.ResultModel;
 /*author:huangshanqi

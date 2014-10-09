@@ -1,4 +1,4 @@
-package com.galaxy.front.web.Utils;
+package com.galaxy.front.web.utils;
 
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;

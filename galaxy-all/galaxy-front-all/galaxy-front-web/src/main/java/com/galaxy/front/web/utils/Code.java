@@ -1,4 +1,4 @@
-package com.galaxy.front.web.Utils;
+package com.galaxy.front.web.utils;
 
 /*author:huangshanqi
  *time  :2014年10月7日 下午2:23:25
@@ -19,7 +19,7 @@ public enum Code {
 	USER_NAME_FORMAT_ERROR("50006","用户名格式错误,不得包含特许字符，最长30个字符"),
 	USER_NAME_USED("50007","用户名已被使用"),
 	
-	PARAMS_ERROR("50008","参数错误"),
+	PARAMS_ERROR("50008","参数错误")
 	
 	
 	
