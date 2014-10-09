@@ -100,7 +100,11 @@
 			<version>3.11-beta2</version>
 		</dependency>
 
-
+		<dependency>
+			<groupId>com.lepeng.im</groupId>
+			<artifactId>IMProtocalLib</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<!-- add by hsq -->
 	</dependencies>
 </project>
