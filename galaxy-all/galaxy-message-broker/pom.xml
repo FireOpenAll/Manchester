@@ -3,20 +3,20 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.galaxy</groupId>
-		<artifactId>galaxy-front-all</artifactId>
+		<artifactId>galaxy-all</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>galaxy-front-service</artifactId>
+	<artifactId>galaxy-message-broker</artifactId>
 	<dependencies>
-		<dependency>
-			<groupId>com.galaxy</groupId>
-			<artifactId>galaxy-dal-dao</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 		<dependency>
 			<groupId>com.lepeng.im</groupId>
 			<artifactId>IMProtocalLib</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.lmax</groupId>
+			<artifactId>disruptor</artifactId>
+			<version>3.3.0</version>
 		</dependency>
 	</dependencies>
 </project>
