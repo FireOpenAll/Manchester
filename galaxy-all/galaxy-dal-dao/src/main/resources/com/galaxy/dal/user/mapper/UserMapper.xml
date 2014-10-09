@@ -41,4 +41,27 @@
 		u_user(login_name,sex,birthday,type,nick,followers,fans,real_name,email,mobile,password,real_name_auth,email_auth,mobile_auth,haspic,avatar,qq_openid,weibo_openid,webchat_openid,last_visit_time,status)
 		VALUES(#{loginName},#{sex},#{birthday},#{type},#{nick},#{followers},#{fans},#{realName},#{email},#{mobile},#{password},#{realNameAuth},#{emailAuth},#{mobileAuth},#{hasPic},#{avatar},#{qqOpenid},#{weiboOpenid},#{webchatOpenid},#{lastVisitTime},#{status})
 	</insert>
+	
+	<select id="countUsersByEmail" parameterType="String" resultType="int">
+	select count(*) 
+	from u_user
+	where email = #{email}
+	</select>
+	<select id="countUsersByMobile" parameterType="String" resultType="int">
+	select count(*) 
+	from u_user
+	where mobile = #{mobile}
+	</select>
+	<select id="countUsersByLoginName" parameterType="String" resultType="int">
+	select count(*) 
+	from u_user
+	where login_name = #{login_name}
+	</select>
+	
+	<update id="setUserEmailAuthByEmail" parameterType="Map">
+	update u_user
+	set email_auth = #{email_auth}
+	where email = #{email}
+	
+	</update>
 </mapper>

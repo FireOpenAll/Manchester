@@ -98,13 +98,12 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.11-beta2</version>
-		</dependency>
-
+		</dependency> 
 		<dependency>
 			<groupId>com.lepeng.im</groupId>
 			<artifactId>IMProtocalLib</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+		</dependency> 
         <!-- mail -->
 	    <dependency>
 		    <groupId>javax.mail</groupId>
@@ -114,7 +113,7 @@
         <dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>4.1.1.RELEASE</version>
+			<version>4.1.1.RELEASE</version> 
 		</dependency> 
         <!--  -->
 		<!-- add by hsq -->
