@@ -44,11 +44,12 @@ public class CallbackApiTest {
 	public void testInterface() throws Exception {
 		final Promise<Buffer> result = new Promise<Buffer>();
 		MQTT mqtt = new MQTT();
-		mqtt.setHost("iot.eclipse.org", 1883);
+		mqtt.setHost("182.92.169.209", 1883);
+		mqtt.setClientId("ttt");
 		mqtt.setTracer(new Tracer() {
 			@Override
 			public void onReceive(MQTTFrame frame) { 
-				System.out.println("recv: " + frame.messageType()+" content"+new String(frame.buffers[0].getData()));
+				System.out.println("recv: " + frame);
 			}
 
 			@Override
@@ -63,59 +64,11 @@ public class CallbackApiTest {
 		});
 
 		final CallbackConnection connection = mqtt.callbackConnection();
-
-		// Start add a listener to process subscription messages, and start the
-		// resume the connection so it starts receiving messages from the
-		// socket.
-		connection.listener(new Listener() {
-			public void onConnected() {
-				System.out.println("connected");
-			}
-
-			public void onDisconnected() {
-				System.out.println("disconnected");
-			}
-
-			public void onPublish(UTF8Buffer topic, Buffer payload,
-					Runnable onComplete) {
-				result.onSuccess(payload);
-				onComplete.run();
-			}
-
-			public void onFailure(Throwable value) {
-				System.out.println("failure: " + value);
-				result.onFailure(value);
-				connection.disconnect(null);
-			}
-		}); 
-		connection.connect(new Callback<Void>() {
-			// Once we connect..
-			public void onSuccess(Void v) {
-
-				// Subscribe to a topic foo
-				Topic[] topics = { new Topic(utf8("foo"), QoS.AT_LEAST_ONCE) };
-				connection.subscribe(topics, new Callback<byte[]>() {
-					public void onSuccess(byte[] value) {
-						// Once subscribed, publish a message on the same topic.
-						connection.publish("foo", "Hello".getBytes(),
-								QoS.AT_LEAST_ONCE, false, null);
-					}
-
-					public void onFailure(Throwable value) {
-						result.onFailure(value);
-						connection.disconnect(null);
-					}
-				});
-
-			}
-
-			public void onFailure(Throwable value) {
-				result.onFailure(value);
-			}
-		});
+ 
+		connection.connect(null);
 		while (true) {
 			for (int i = 0; i < 10; i++) {
-				connection.publish("foo", "Hello".getBytes(),
+				connection.publish("foo/1",(i+"Hello").getBytes(),
 						QoS.AT_LEAST_ONCE, false, null);
 			} 
 			Thread.sleep(1000L);

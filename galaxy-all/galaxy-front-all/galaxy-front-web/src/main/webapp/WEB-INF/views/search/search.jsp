@@ -452,14 +452,18 @@ $(function() {
       </div>
     </div>
     <ul class="navbar">
-      <li><span class="split-line"><a href="http://www.o2olive.net/demo" class="">首页</a></span></li>
-                        <li><span class="split-line"> <a class="current" href="http://www.o2olive.net/demo/index.php?act=groupbuy">团购</a></span></li>
-                        <li><span class="split-line"> <a class="" href="http://www.o2olive.net/demo/index.php?act=coupon&op=list">找优惠</a></span></li>
-                        <li><span class="split-line"> <a class="" href="http://www.o2olive.net/demo/index.php?act=card">会员卡</a></span></li>
-                        <li><span class="split-line"> <a class="" href="http://www.o2olive.net/demo/index.php?act=appointment">订座</a></span></li>
-                        <li><span class="split-line"> <a class="" href="http://www.o2olive.net/demo/index.php?act=gift">积分商城</a></span></li>
-                        <li><span class="split-line"> <a class="" href="http://www.o2olive.net/demo/index.php?act=goodsreal&op=grindex">购物</a></span></li>
-                        <li><span class="split-line"> <a class="" target="_blank" href="http://www.o2olive.net/demo/circle">社区</a></span></li>
+      <li><span class="split-line"><a href="/" class="">首页</a></span></li>
+                        <li><span class="split-line"> <a class="current" href="＃">活动</a></span></li> 
+                        <li><span class="split-line"> <a class="" href="＃">约会</a></span></li>
+                        <li><span class="split-line"> <a class="" href="#">圈子</a></span></li>
+                        <li><span class="split-line"> <a class="" href="＃">讲师</a></span></li>
+                        <li><span class="split-line"> <a class="" href="＃">找场地</a></span></li>
+                        <li><span class="split-line"> <a class="" href="＃">问答</a></span></li>
+                        <li><span class="split-line"> <a class="" href="＃">纸上谈兵</a></span></li>
+                        <li><span class="split-line"> <a class="" href="＃">最佳实践</a></span></li>
+                        <li><span class="split-line"> <a class="" href="＃">文章</a></span></li>
+                        
+                        <li><span class="split-line"> <a class="" target="_blank" href="＃">社区</a></span></li>
                                                                       </ul>
   </div>
 </div>

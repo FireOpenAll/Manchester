@@ -13,7 +13,7 @@
         <dependent-module archiveName="galaxy-dal-domain-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/galaxy-dal-domain/galaxy-dal-domain">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="kaptcha-0.0.9.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/kaptcha/kaptcha">
+        <dependent-module archiveName="IMProtocalLib-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/IMProtocalLib/IMProtocalLib">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="galaxy-front-web"/>

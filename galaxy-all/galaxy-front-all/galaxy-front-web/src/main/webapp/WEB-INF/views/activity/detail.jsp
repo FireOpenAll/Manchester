@@ -236,9 +236,13 @@ $(function() {
           <input type="hidden" value="list" name="op">
           <div class="tab"> <span class="tri"></span>
             <ul class="search_tabs">
-                            <li class="search_tab" op="search_groupbuy">团购</li>
-              <li class="search_tab" op="search_store">商家</li>
-              <li class="search_tab" op="search_goodsreal">购物</li>
+                            <li class="search_tab" op="search_groupbuy">活动</li>
+              <li class="search_tab" op="search_store">约会</li>
+               <li class="search_tab" op="search_goodsreal">名师</li>
+               <li class="search_tab" op="search_goodsreal">问答</li>
+               <li class="search_tab" op="search_goodsreal">项目</li>
+              <li class="search_tab" op="search_goodsreal">文章</li>
+              
                           </ul>
           </div>
           <input type="text" placeholder="输入关键字查找在本地的团购" x-webkit-speech="" value="" class="search-box-from" style="width:310px;" data-smartbox="/search/smartboxv2/" autocomplete="off" name="keyword" tabindex="1" id="">
@@ -456,15 +460,19 @@ $(function() {
                   </ul>
       </div>
     </div>
-    <ul class="navbar">
-      <li><span class="split-line"><a href="http://www.o2olive.net/demo" class="">首页</a></span></li>
-                        <li><span class="split-line"> <a class="current" href="http://www.o2olive.net/demo/index.php?act=groupbuy">团购</a></span></li>
-                        <li><span class="split-line"> <a class="" href="http://www.o2olive.net/demo/index.php?act=coupon&op=list">找优惠</a></span></li>
-                        <li><span class="split-line"> <a class="" href="http://www.o2olive.net/demo/index.php?act=card">会员卡</a></span></li>
-                        <li><span class="split-line"> <a class="" href="http://www.o2olive.net/demo/index.php?act=appointment">订座</a></span></li>
-                        <li><span class="split-line"> <a class="" href="http://www.o2olive.net/demo/index.php?act=gift">积分商城</a></span></li>
-                        <li><span class="split-line"> <a class="" href="http://www.o2olive.net/demo/index.php?act=goodsreal&op=grindex">购物</a></span></li>
-                        <li><span class="split-line"> <a class="" target="_blank" href="http://www.o2olive.net/demo/circle">社区</a></span></li>
+     <ul class="navbar">
+      <li><span class="split-line"><a href="/" class="">首页</a></span></li>
+                        <li><span class="split-line"> <a class="current" href="＃">活动</a></span></li> 
+                        <li><span class="split-line"> <a class="" href="＃">约会</a></span></li>
+                        <li><span class="split-line"> <a class="" href="#">圈子</a></span></li>
+                        <li><span class="split-line"> <a class="" href="＃">讲师</a></span></li>
+                        <li><span class="split-line"> <a class="" href="＃">找场地</a></span></li>
+                        <li><span class="split-line"> <a class="" href="＃">问答</a></span></li>
+                        <li><span class="split-line"> <a class="" href="＃">纸上谈兵</a></span></li>
+                        <li><span class="split-line"> <a class="" href="＃">最佳实践</a></span></li>
+                        <li><span class="split-line"> <a class="" href="＃">文章</a></span></li>
+                        
+                        <li><span class="split-line"> <a class="" target="_blank" href="＃">社区</a></span></li>
                                                                       </ul>
   </div>
 </div>
@@ -484,7 +492,7 @@ $(function(){
 			var num = parseInt($('.group-cart').val());
 			window.location.href = 'index.php?act=groupbuy&op=groupbuyorder&group_id=22&buy_num='+num;
 		}else{
-			ajax_form('login', '登录', 'http://www.o2olive.net/demo/index.php?act=login&op=login_popup','500px');
+			ajax_form('login', '登录', '/user/login','500px');
 		}
 	});
 	$('#apt_date').datepicker({dateFormat: 'yy-mm-dd',minDate:'0'});
