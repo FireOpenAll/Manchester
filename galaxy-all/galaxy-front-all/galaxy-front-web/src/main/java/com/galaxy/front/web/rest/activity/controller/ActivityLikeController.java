@@ -57,7 +57,7 @@ public class ActivityLikeController {
 	 * @param pageSize
 	 * @return
 	 */
-	@RequestMapping(value = "getLike",method = RequestMethod.GET,params = {"user_id","until_id","pageSize"})
+	@RequestMapping(value = "getMyLikedActivity",method = RequestMethod.GET,params = {"user_id","until_id","pageSize"})
 	public Object getLikedActivity(@RequestParam("user_id") long user_id,@RequestParam("until_id") long until_id,@RequestParam("pageSize") int pageSize){
 		ResultModel resultModel = new ResultModel();
 
@@ -74,8 +74,8 @@ public class ActivityLikeController {
 
 		ArrayList<Photo> photos = new ArrayList<Photo>();
 		for (int i = 1; i < 4; i++) {
-			photos.add(new Photo("/interest/cover/" + (10 + i) + ".jpg", "/interest/cover/" + (10 + i) + ".jpg",
-					"/interest/cover/" + (10 + i) + ".jpg"));
+			photos.add(new Photo("/interest/cover/" + (20 + i) + ".jpg", "/interest/cover/" + (20 + i) + ".jpg",
+					"/interest/cover/" + (20 + i) + ".jpg"));
 		}
 
 		ArrayList<InterestModel> interest_list = new ArrayList<InterestModel>();
