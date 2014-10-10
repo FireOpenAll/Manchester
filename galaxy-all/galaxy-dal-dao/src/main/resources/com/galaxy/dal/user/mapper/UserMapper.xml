@@ -47,15 +47,54 @@
 	from u_user
 	where email = #{email}
 	</select>
+	
 	<select id="countUsersByMobile" parameterType="String" resultType="int">
 	select count(*) 
 	from u_user
 	where mobile = #{mobile}
 	</select>
+	
 	<select id="countUsersByLoginName" parameterType="String" resultType="int">
 	select count(*) 
 	from u_user
 	where login_name = #{login_name}
+	</select>
+	
+	<select id="getUserbyEmailPassword" parameterType="Map" resultMap="USER_MAP">
+	SELECT * 
+	FROM u_user
+	WHERE
+	email = #{email}
+	AND
+	password = #{password}
+	</select>
+	
+	<select id="getUserbyMobilePassword" parameterType="Map" resultMap="USER_MAP">
+	SELECT * 
+	FROM u_user
+	WHERE
+	mobile = #{mobile}
+	AND
+	password = #{password}
+	</select>
+	
+	<select id="getUserbyLoginNamePassword" parameterType="Map" resultMap="USER_MAP">
+	SELECT * 
+	FROM u_user
+	WHERE
+	login_name = #{login_name}
+	AND
+	password = #{password}
+	</select>
+	
+	
+	<select id="countEmailAuthed" parameterType="String" resultType="int">
+	select count(*)
+	from u_user
+	where
+	email = #{email}
+	and
+	email_auth = 1
 	</select>
 	
 	<update id="setUserEmailAuthByEmail" parameterType="Map">

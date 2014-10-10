@@ -43,7 +43,7 @@
         -->
     </bean>
     
-    <bean id="mailUtils" class="com.galaxy.front.web.Utils.MailUtils">
+    <bean id="emailUtils" class="com.galaxy.front.web.utils.EmailUtils">
         <property name="mailSender" ref="mailSender" />
         <property name="simpleMailMessage" ref="simpleMailMessage" />
     </bean>

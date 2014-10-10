@@ -148,7 +148,7 @@ $(function() {
 <div id="topNav" style="z-index:999;position:relative;">
   <div id="topNav-inner-new" style="width:1025px;">
     <ul class="topNav-left">
-            <li class="user_info"> <span>您好，欢迎来到 O2OLive系统演示站</span> <a class="user-info-login" href="http://www.o2olive.net/demo/index.php?act=login">[登录]</a><a class="user-info-signup" href="http://www.o2olive.net/demo/index.php?act=login&op=register">[注册]</a> </li>
+            <li class="user_info"> <span>您好，欢迎来到 O2OLive系统演示站</span> <a class="user-info-login" href="/user/login">[登录]</a><a class="user-info-signup" href="/user/register">[注册]</a> </li>
                   <li class="line">|</li>
       <li class="mobile-info-item dropdown"> <a href="javascript:void(0);" class="dropdown-tog"><i class="icon-mobile"></i>手机本地生活<i class="tri tri-dropdown"></i></a>
         <div class="dropdown-menu dropdown-menu-app"> <a target="_blank" href="http://www.o2olive.net/demo/#" class="app-block"> <span class="app-block-title">免费下载O2OLive手机版</span> <span class="app-block-content"> <img src="/resources/images/6f4416f017cad0a0a46fee4c7624425d.png" width="89px"> </span> <i class="app-block-arrow"></i> </a> </div>

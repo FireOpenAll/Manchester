@@ -5,7 +5,7 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
 
-<title>注册活动平台</title>
+<title>登陆活动平台</title>
 <meta name="keywords" content="O2OLive系统演示站">
 <meta name="description" content="O2OLive系统演示站">
 <meta name="author" content="ShopNC">
@@ -170,31 +170,38 @@ $(function() {
   <div class="left_pic"><img src="/resources/images/1.jpg"></div>
   <div class="login_page">
     <div class="page_hd">
-      <h2>登录<span>&nbsp;User Login</span></h2>
+      <h2>登录<span>&nbsp;Galaxy</span></h2>
     </div>
     <form id="login_form" method="post" novalidate="novalidate" action="/user/login">
+    	<input type="hidden" name ="type" value=""/>
       <dl class="login_bd">
 
         <dt>用户名</dt>
 
-        <dd><span class="ipt01 in_b">
-          <input type="text" placeholder="输入用户名" name="member_name" id="member_name">
-          </span> </dd>
-        <dd><span class="ipt02 in_b">
-          <input type="password" id="password" autocomplete="off" name="password" placeholder="密码">
-          </span></dd>
+        <dd>
+        	<span class="ipt01 in_b">
+            	<input type="text" placeholder="输入用户名/验证邮箱/验证手机号" name="logintext" id="logintext">
+          </span> 
+        </dd>
+        <dd>
+        	<span class="ipt02 in_b">
+          		<input type="password" id="password" autocomplete="off" name="password" placeholder="密码">
+            </span>
+        </dd>
 
         <dd class="clearfix" style=" margin:10px 0;">
         	<span class="ipt07 in_b" style="padding-left:10px;">
-            <input type="text" title="" size="10" maxlength="4" placeholder="请输入验证码" style="width:170px;" name="captcha" id="captcha">
+            	<input type="text" title="" size="10" maxlength="4" placeholder="请输入验证码" style="width:170px;" name="captcha" id="captcha">
             </span>
-            <p class="yzm"> <img border="0" class="fl" id="codeimage" name="codeimage" title="" src="http://www.o2olive.net/demo/shop/index.php?act=seccode&op=makecode&nchash=&t="><br>
-              <a href="javascript:void(0);" onclick="javascript:document.getElementById('codeimage').src=http://www.o2olive.net/demo/shop/index.php?act=seccode&op=makecode&nchash=&t=' + Math.random();">看不清？换一张</a></p>
+            <p class="yzm"> 
+            	<img border="0" class="fl" id="codeimage" name="codeimage" title="" src="/api/v1/code/image_code"><br>
+            	<a href="javascript:void(0);" onclick="javascript:document.getElementById('codeimage').src='/api/v1/code/image_code?t=' + Math.random();">看不清？换一张</a>
+             </p>
 
         </dd>
           <dd class="box_err  clearfix">
          <!-- <label for="" generated="true" class="error_login"></label>-->
-         <label for="member_name" generated="true" class="error error_reg" style="display:none;"></label>
+         <label for="logintext" generated="true" class="error error_reg" style="display:none;"></label>
          <label for="password" generated="true" class="error error_reg" style="display:none;"></label>
          <label for="captcha" generated="true" class="error error_reg" style="display:none;"></label>
         </dd>
@@ -206,7 +213,7 @@ $(function() {
     </form>
     <div class="btn_r">
 		<span>还没有注册账号？</span>
-		<a class="btn_com" href="http://www.o2olive.net/demo/index.php?act=login&op=register"></a>
+		<a class="btn_com" href="/user/egister"></a>
 
 		<a class="fw" style="font-size:12px" target="_blank" href="http://www.o2olive.net/demo/index.php?act=login&op=forget_password">忘记密码？</a>
 	</div>
@@ -224,9 +231,21 @@ $(function() {
 $(document).ready(function(){
 	$('input[name="Submit"]').click(function(){
         if($("#login_form").valid()){
+        	/*
+        	var logintext = $("#logintext").val();
+        	alert('logintext:' + logintext)
+        	if(/^([a-z0-9A-Z_]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$/i.test(logintext)){
+        		$("#type").val("email");
+        	}else if(/^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$/i.test(logintext)){
+        		$("#type").val("mobile");
+        	}else{
+        		$("#type").val("username");
+        	}
+        	alert($("#type").val())
+        	*/
         	$("#login_form").submit();
         } else{
-        	document.getElementById('codeimage').src='http://www.o2olive.net/demo/shop/index.php?act=seccode&op=makecode&nchash=&t=' + Math.random();
+        	document.getElementById('codeimage').src='/api/v1/code/image_code?t=' + Math.random();
         }
     });
 	$("#login_form").validate({
@@ -234,12 +253,12 @@ $(document).ready(function(){
 			error.appendTo('.error_login');
         },
 		rules: {
-			member_name: "required",
+			logintext: "required",
 			password: "required",
             captcha : {
                 required : true,
                 remote   : {
-                    url : 'http://www.o2olive.net/demo/shop/index.php?act=seccode&op=makecode&nchash=&t=',
+                    url : '/api/v1/code/check_image',
                     type: 'get',
                     data:{
                         captcha : function(){
@@ -250,7 +269,7 @@ $(document).ready(function(){
             }
 		},
 		messages: {
-			member_name: "登录用户名不能为空!",
+			logintext: "登录用户名不能为空!",
 			password: "登录密码不能为空!",
 		    captcha : {
                 required : '请输入验证码',

@@ -1,5 +1,7 @@
 package com.galaxy.front.web.utils;
 
+import org.junit.Test;
+
 import com.galaxy.front.web.rest.model.ResultModel;
 /*author:huangshanqi
  *time  :2014年10月7日 下午5:02:06

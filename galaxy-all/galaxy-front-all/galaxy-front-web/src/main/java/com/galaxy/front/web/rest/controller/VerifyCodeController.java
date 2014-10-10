@@ -13,8 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.galaxy.front.web.rest.model.ResultModel;
@@ -25,15 +28,16 @@ import com.google.code.kaptcha.Producer;
  * @author luolishu
  *
  */
-@RestController
-@RequestMapping(value = "api/v1")
+@Controller
+@RequestMapping(value = "api/v1/code")
 public class VerifyCodeController {
 
 	@Autowired
 	private Producer captchaProducer;
 
-	@RequestMapping(value = "/verify_code", method = RequestMethod.GET)
-	public Object verifycode() {
+	@ResponseBody
+	@RequestMapping(value = "/mobile_code", method = RequestMethod.GET)
+	public Object getCode() {
 		ResultModel result = new ResultModel();
 		result.setCode("20000");
 		result.setMessage("get verifyCode success");
@@ -44,9 +48,9 @@ public class VerifyCodeController {
 		result.setData(verifyInfo);
 		return result;
 	}
-
+	
 	@RequestMapping(value = "/image_code", method = RequestMethod.GET)
-	public byte[] imageverifycode(HttpServletRequest request, HttpServletResponse response) {
+	public void getImage(HttpServletRequest request, HttpServletResponse response) {
 		
 		// Set to expire far in the past.  
         response.setDateHeader("Expires", 0);  
@@ -99,8 +103,18 @@ public class VerifyCodeController {
 		verifyInfo.setVerify_image("/user/verifyImage/1.jpg");
 		result.setData(verifyInfo);
 */
-		return null;
 	}
+	
+	
+	@RequestMapping(value = "/check_image", method = RequestMethod.GET,params={"captcha"})
+	public void checkImageCode(HttpServletRequest request,HttpServletResponse response,@RequestParam("captcha") String captcha) throws IOException {
+		if (captcha.equalsIgnoreCase(request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY).toString())){
+			response.getOutputStream().print(true);
+		}else {
+			response.getOutputStream().print(false);
+		}
+	}
+	
 
 	public static class VerifyInfo implements Serializable {
 		private String verify_code;

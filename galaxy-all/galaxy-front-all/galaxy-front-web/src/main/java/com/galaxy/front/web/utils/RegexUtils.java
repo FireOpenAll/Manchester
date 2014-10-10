@@ -10,7 +10,7 @@ public class RegexUtils {
 	/*
 	 * 公共正则表达式验证
 	 */
-	
+	public static final String USERNAME_REGEX = "^[a-zA-Z][a-zA-Z0-9_]{5,19}$";
 	public static final String PHONE_REGEX = "^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
 	public static final String EMAIL_REGEX = "^([a-z0-9A-Z_]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
 	public static final String PASSWORD_REGEX = "^[a-zA-Z0-9_]{6,20}$";
@@ -59,10 +59,20 @@ public class RegexUtils {
 	 * 不含特许字符，长度1-30
 	 */
 	public static boolean checkName(String name){
-		return (!hasSpecialChar(name))&&(name.length()>1)&&(name.length()<30);
+		return (!hasSpecialChar(name))&&(name.length()>6)&&(name.length()<20);
 	}
 	
-	
+	/**
+	 * 正则检验所有参数，都正确返回true，否则返回
+	 * @param username
+	 * @param password
+	 * @param email
+	 * @param mobile
+	 * @return
+	 */
+	public static boolean checkAll(String username,String password,String email,String mobile){
+		return checkPassword(password)&&checkName(username)&&((email != null)?checkEmail(email):checkPhone(mobile));
+	}
 	
 
 }

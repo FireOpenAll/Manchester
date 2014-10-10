@@ -102,12 +102,6 @@ public class ActivityController {
 		}
 
 		for (int i = 0; i < 4; i++) {
-			// recomment_activity.add(new ActivityModel("activity",1110001100L,
-			// 123456789L, "活动"+i, (float)(90.69+i), (i%2==0)?true:false,
-			// (++i%2==0)?true:false, i+"组织者", new Date(), new Date(), new
-			// Contact("12345678901"), "活动摘要"+i, "/activity/"+i, photos, new
-			// LocationInfo(100.12+i*2,120.89+i*3,"北京市海淀区西土城路"),
-			// relative_user));
 			recomment_activity.add(new ActivityModel("activity", (long) 11110000 + i, "活动名" + i * 2,
 					(float) (10.111 + i), (i % 2 == 0) ? true : false, 100 * i, (i % 2 != 0) ? true : false, 200 * i,
 					300 * i, "组织者 " + i + " 号", new Date(), new Date(), new Contact("1234567890" + i), "活动" + i + "摘要",

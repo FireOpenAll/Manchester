@@ -47,6 +47,33 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userMapper.setUserEmailAuthByEmail(map);
 	}
+
+	@Override
+	public User getUserbyEmailPassword(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserbyEmailPassword(map);
+	}
+
+	@Override
+	public boolean checkEmailAuth(String email) {
+		// TODO Auto-generated method stub
+		return (userMapper.countEmailAuthed(email)==1)?true:false;
+	}
+
+	@Override
+	public User getUserbyMobilePassword(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserbyMobilePassword(map);
+	}
+
+	@Override
+	public User getUserbyLoginNamePassword(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserbyLoginNamePassword(map);
+	}
+	
+	
+	
 	
 	
 	

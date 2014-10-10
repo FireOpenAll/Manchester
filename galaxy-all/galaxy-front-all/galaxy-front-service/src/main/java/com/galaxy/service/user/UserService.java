@@ -20,6 +20,14 @@ public interface UserService {
 	int countUsersByMobile(String mobile);
 	int countUsersByLoginName(String login_name);
 	
+	//设置邮箱为认证
 	int setUserEmailAuthByEmail(Map<String, Object> map);
+	
+	User getUserbyEmailPassword(Map<String, String> map);
+	User getUserbyMobilePassword(Map<String, String> map);
+	User getUserbyLoginNamePassword(Map<String, String> map);
+	
+	//邮箱是否认证
+	boolean checkEmailAuth(String email);
 
 }

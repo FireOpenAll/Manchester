@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
 
-<title>O2OLive系统演示站</title>
+<title>galaxy注册</title>
 <meta name="keywords" content="O2OLive系统演示站">
 <meta name="description" content="O2OLive系统演示站">
 <meta name="author" content="ShopNC">
@@ -25,6 +25,7 @@
 	src="/resources/js/jquery.js" charset="utf-8"></script>
 <script type="text/javascript"
 	src="/resources/js/common_register.js" charset="utf-8"></script>
+<script type="text/javascript" src="/resource/js/hsqregister.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('#gotop').click(function(){
@@ -189,36 +190,47 @@ $(function() {
 				<h2>
 					注册<span>&nbsp;Register</span>
 				</h2>
+				<p style="color:ff0000"><%="${message}" %></p>
 			</div>
 			<div class="register_bd">
-				<form id="register_form" method="post" novalidate="novalidate">
+				<form id="register_form" method="post" action="http://localhost:8080/user/register">
 					<dl>
 						<dt></dt>
 						<dd>
-							<span class="ipt03 in_b"> <input type="text"
-								placeholder="用户名" name="member_name" id="member_name">
-							</span> <label for="member_name" generated="true"
-								class="error error_reg" style="display: none;"></label>
+							<span class="ipt03 in_b"> 
+								<input type="text" placeholder="用户名" name="username" id="username">
+							</span>
+						    <label for="username" generated="true" class="error error_reg" style="display: none;"></label>
 						</dd>
 					</dl>
 					<dl>
 						<dt></dt>
 						<dd>
-							<span class="ipt04 in_b"> <input type="password" title=""
-								placeholder="密码" name="password" id="password">
-							</span> <label class="error error_reg" for="password" generated="true"
-								style="display: none;"></label>
+							<span class="ipt06 in_b"> 
+								<input type="text" title="" placeholder="邮箱" name="email" id="email">
+							</span> 
+							<label id="email_error" class="error error_reg" for="email" generated="true" style="display: none;"></label>
 						</dd>
 					</dl>
 					<dl>
 						<dt></dt>
 						<dd>
-							<span class="ipt05 in_b"> <input type="password" title=""
-								placeholder="确认密码" name="password_confirm" id="password_confirm">
-							</span> <label class="error error_reg" for="password_confirm"
-								generated="true" style="display: none;"></label>
+							<span class="ipt04 in_b"> 
+								<input type="password" title="" placeholder="密码" name="password" id="password">
+							</span> 
+							<label class="error error_reg" for="password" generated="true" style="display: none;"></label>
 						</dd>
 					</dl>
+					<dl>
+						<dt></dt>
+						<dd>
+							<span class="ipt05 in_b"> 
+								<input type="password" title="" placeholder="确认密码" name="password_confirm" id="password_confirm">
+							</span> 
+							<label class="error error_reg" for="password_confirm" generated="true" style="display: none;"></label>
+						</dd>
+					</dl>
+					<!-- 
 					<dl>
 						<dt></dt>
 						<dd>
@@ -228,15 +240,7 @@ $(function() {
 								style="display: none;"></label>
 						</dd>
 					</dl>
-					<dl>
-						<dt></dt>
-						<dd>
-							<span class="ipt06 in_b"> <input type="text" title=""
-								placeholder="邮箱" name="email" id="email">
-							</span> <label class="error error_reg" for="email" generated="true"
-								style="display: none;"></label>
-						</dd>
-					</dl>
+					 -->
 					<!--
         <dl>
           <dt></dt>
@@ -311,34 +315,32 @@ $(function() {
 					<dl>
 						<dt></dt>
 						<dd>
-							<span class="ipt07 in_b" style="padding-left: 10px;"> <input
+							<span class="ipt07 in_b" style="padding-left: 10px;">
+							 <input
 								type="text" title="" size="10" maxlength="4"
 								placeholder="请输入验证码" style="width: 170px;" name="captcha"
 								id="captcha">
 							</span>
 							<p class="yzm">
-								<img border="0" class="fl" id="codeimage" name="codeimage"
-									title="" src="http://www.o2olive.net/demo/index.php?act=seccode&op=makecode&nchash="><br>
+								<img border="0" class="fl" id="codeimage" name="codeimage" title="" src="http://localhost:8080/api/v1/code/image_code">
+								<br>
 								<a href="javascript:void(0);"
-									onclick="javascript:document.getElementById('codeimage').src='http://www.o2olive.net/demo/index.php?act=seccode&op=makecode&nchash=&t=' + Math.random();">看不清？换一张</a>
+									onclick="javascript:document.getElementById('codeimage').src='http://localhost:8080/api/v1/code/image_code?t=' + Math.random();">看不清？换一张</a>
 							</p>
-							<label for="captcha" generated="true" class="error error_reg"
-								style="display: none;"></label>
+							<label for="captcha" generated="true" class="error error_reg" style="display: none;"></label>
 						</dd>
 					</dl>
 					<dl>
 						<dt></dt>
 						<dd class="ment">
-							<label for=""> <input type="checkbox" checked="checked"
-								value="1" id="clause" name="agree"> 阅读并同意 <a
-								title="阅读并同意"
-								href="http://www.o2olive.net/demo/index.php?act=document&code=agreement">服务协议</a>
-							</label> <label for="agree" generated="true" class="error"
-								style="display: none;">请阅读并同意该协议</label>
+							<label for=""> 
+								<input type="checkbox" checked="checked"value="1" id="clause" name="agree"> 阅读并同意 
+								<a title="阅读并同意" href="http://www.o2olive.net/demo/index.php?act=document&code=agreement">服务协议</a>
+							</label> 
+							<label for="agree" generated="true" class="error" style="display: none;">请阅读并同意该协议</label>
 						</dd>
 						<dd>
-							<input type="button" title="立即注册" class="btn-regist" value="立即注册"
-								name="Submit">
+							<input type="button" title="立即注册" class="btn-regist" value="立即注册" name="Submit">
 						</dd>
 					</dl>
 				</form>
@@ -378,14 +380,17 @@ $(function(){
 		$('#c_city_letter').hide();
 	});
 	
+	jQuery.validator.addMethod("passwordLimit", function(value, element) {
+		return this.optional(element) || /^[a-zA-Z0-9_]{6,20}$/i.test(value);
+	},"密码须由字母、数字和下划线组成，6-20字符");
 	jQuery.validator.addMethod("lettersonly", function(value, element) {
-		return this.optional(element) || /^[^:%,'\*\"\s\<\>\&]+$/i.test(value);
-	}, "Letters only please"); 
+		return this.optional(element) || /^[a-zA-Z][a-zA-Z0-9_]{5,19}$/i.test(value);
+	},"用户名须由字母、数字和下划线组成，以字母开头，6-20字符");
 	jQuery.validator.addMethod("lettersmin", function(value, element) {
-		return this.optional(element) || ($.trim(value.replace(/[^\u0000-\u00ff]/g,"aa")).length>=3);
+		return this.optional(element) || ($.trim(value).length>=6);
 	}, "Letters min please"); 
 	jQuery.validator.addMethod("lettersmax", function(value, element) {
-		return this.optional(element) || ($.trim(value.replace(/[^\u0000-\u00ff]/g,"aa")).length<=15);
+		return this.optional(element) || ($.trim(value).length<=20);
 	}, "Letters max please");
 
 	jQuery.validator.addMethod("phones", function(value, element) {
@@ -395,22 +400,22 @@ $(function(){
         if($("#register_form").valid()){
         	$("#register_form").submit();
         } else{
-        	document.getElementById('codeimage').src='http://www.o2olive.net/demo/shop/index.php?act=seccode&op=makecode&nchash=&t=' + Math.random();
+        	document.getElementById('codeimage').src='http://localhost:8080/api/v1/code/image_code?t=' + Math.random();
         }
     });
     $("#register_form").validate({
         rules : {
-            member_name : {
+            username : {
                 required : true,
                 lettersmin : true,
                 lettersmax : true,
                 lettersonly : true,
                 remote   : {
-                    url :'index.php?act=login&op=check_member',
+                    url :'http://localhost:8080/user/check/username',
                     type:'get',
                     data:{
-                        member_name : function(){
-                            return $('#member_name').val();
+                        username : function(){
+                            return $('#username').val();
                         }
                     }
                 }
@@ -418,7 +423,8 @@ $(function(){
             password : {
                 required : true,
                 minlength: 6,
-				maxlength: 20
+				maxlength: 20,
+				passwordLimit:"密码须由字母、数字和下划线组成，6-20字符!"
             },
             password_confirm : {
                 required : true,
@@ -428,11 +434,10 @@ $(function(){
                 required : true,
                 email    : true,
                 remote   : {
-                    url : '/api/v1/email/check',
+                    url : 'http://localhost:8080/user/check/email',
                     type: 'get',
                     data:{
-                        email : function(){
-                            return $('#email').val();
+                        email : function(){ return $('#email').val();
                         }
                     }
                 }
@@ -440,7 +445,7 @@ $(function(){
             captcha : {
                 required : true,
                 remote   : {
-                    url : 'index.php?act=seccode&op=check&nchash=',
+                    url : 'http://localhost:8080/api/v1/code/check_image',
                     type: 'get',
                     data:{
                         captcha : function(){
@@ -454,11 +459,11 @@ $(function(){
             }
         },
         messages : {
-            member_name : {
+            username : {
                 required : '用户名不能为空!',
-                lettersmin : '用户名必须在3-15个字符之间!',
-                lettersmax : '用户名必须在3-15个字符之间!',
-				lettersonly: '用户名不能包含敏感字符',
+                lettersmin : '用户名必须在6-20个字符之间!',
+                lettersmax : '用户名必须在6-20个字符之间!',
+				lettersonly: '用户名必须是字母、数字和下划线组成，以字母开头，6-20字符',
 				remote	 : '该用户名已经存在'
             },
             password  : {

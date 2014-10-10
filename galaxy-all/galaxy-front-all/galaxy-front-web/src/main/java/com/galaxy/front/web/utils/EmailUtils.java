@@ -7,7 +7,7 @@ import org.springframework.mail.SimpleMailMessage;
  *time  :2014年10月5日 下午9:43:20
  *email :hsqmobile@gmail.com
  */
-public class MailUtils {
+public class EmailUtils {
 
 	private MailSender mailSender;
 	private SimpleMailMessage simpleMailMessage;

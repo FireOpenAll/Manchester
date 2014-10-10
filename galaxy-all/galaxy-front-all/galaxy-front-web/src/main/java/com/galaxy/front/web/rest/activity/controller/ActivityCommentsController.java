@@ -56,5 +56,7 @@ public class ActivityCommentsController {
 		resultModel.setData(commentModel);
 		return resultModel;
 	}
+	
+	
 
 }
