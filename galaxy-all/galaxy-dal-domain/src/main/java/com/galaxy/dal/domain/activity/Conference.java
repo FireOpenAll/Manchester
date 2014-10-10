@@ -9,5 +9,7 @@ public class Conference extends BaseDomain {
 	Long activityId;
 	Date startTime;//会议开始时间
 	Date endTime;//会议结束时间
+	String title;
+	String description;
 
 }
