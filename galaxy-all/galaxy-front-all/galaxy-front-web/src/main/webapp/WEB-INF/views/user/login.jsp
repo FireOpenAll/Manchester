@@ -213,7 +213,7 @@ $(function() {
     </form>
     <div class="btn_r">
 		<span>还没有注册账号？</span>
-		<a class="btn_com" href="/user/egister"></a>
+		<a class="btn_com" href="./user/egister"></a>
 
 		<a class="fw" style="font-size:12px" target="_blank" href="http://www.o2olive.net/demo/index.php?act=login&op=forget_password">忘记密码？</a>
 	</div>
@@ -243,6 +243,8 @@ $(document).ready(function(){
         	}
         	alert($("#type").val())
         	*/
+        	
+        	
         	$("#login_form").submit();
         } else{
         	document.getElementById('codeimage').src='/api/v1/code/image_code?t=' + Math.random();

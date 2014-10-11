@@ -15,6 +15,6 @@
 </head>
 <p>邮箱验证失败，从新发送验证邮件！</p>
 <a
-	href="http://localhost:8080/v1/api/email/send?email=<%=request.getParameter("email")%>">重新发送</a>
+	href="http://182.92.169.209/v1/api/email/send?email=<%=request.getParameter("email")%>">重新发送</a>
 </body>
 </html>

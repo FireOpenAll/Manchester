@@ -39,7 +39,7 @@ public class ActivityJoinController {
 	 * @param pageSize
 	 * @return
 	 */
-	@RequestMapping(value = "joined",method = RequestMethod.GET,params = {"user_id","until_id","pageSize"})
+	@RequestMapping(value = "getMyJoinedActivity",method = RequestMethod.GET,params = {"user_id","until_id","pageSize"})
 	public Object getJoinedActivity(@RequestParam("user_id") long user_id,@RequestParam("until_id") long until_id,@RequestParam("pageSize") int pageSize){
 		ResultModel resultModel = new ResultModel();
 

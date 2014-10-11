@@ -15,7 +15,7 @@
 </head>
 <p>邮箱验证成功</p>
 <h3>
-	<a href="http://localhost:8080/user/login">马上登陆</a>
+	<a href="http://182.92.169.209/user/login">马上登陆</a>
 </h3>
 </body>
 </html>
