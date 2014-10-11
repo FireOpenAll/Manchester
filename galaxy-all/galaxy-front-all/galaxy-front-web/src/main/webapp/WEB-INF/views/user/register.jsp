@@ -433,7 +433,8 @@ $(function(){
             email : {
                 required : true,
                 email    : true,
-                remote   : /user/check/email',
+                remote   : {
+                    url : '/user/check/email',
                     type: 'get',
                     data:{
                         email : function(){ return $('#email').val();
