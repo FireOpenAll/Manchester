@@ -64,7 +64,7 @@ public class RegisterController {
 
 					StringBuilder stringBuilder = new StringBuilder("");
 					stringBuilder.append("欢迎注册galaxy，点击以下完成邮箱验证!").append("\n");
-					stringBuilder.append(Constans.localhost);
+					stringBuilder.append(Constans.remotehost);
 					stringBuilder.append("api/v1/email/verify?email=").append(email);
 					stringBuilder.append("&code=").append(code);
 					stringBuilder.append("\n");
