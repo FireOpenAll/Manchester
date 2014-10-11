@@ -243,6 +243,8 @@ $(document).ready(function(){
         	}
         	alert($("#type").val())
         	*/
+        	
+        	
         	$("#login_form").submit();
         } else{
         	document.getElementById('codeimage').src='/api/v1/code/image_code?t=' + Math.random();
