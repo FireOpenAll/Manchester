@@ -193,7 +193,7 @@ $(function() {
 				<p style="color:ff0000"><%="${message}" %></p>
 			</div>
 			<div class="register_bd">
-				<form id="register_form" method="post" action="http://localhost:8080/user/register">
+				<form id="register_form" method="post" action="/user/register">
 					<dl>
 						<dt></dt>
 						<dd>
@@ -322,10 +322,10 @@ $(function() {
 								id="captcha">
 							</span>
 							<p class="yzm">
-								<img border="0" class="fl" id="codeimage" name="codeimage" title="" src="http://localhost:8080/api/v1/code/image_code">
+								<img border="0" class="fl" id="codeimage" name="codeimage" title="" src="/api/v1/code/image_code">
 								<br>
 								<a href="javascript:void(0);"
-									onclick="javascript:document.getElementById('codeimage').src='http://localhost:8080/api/v1/code/image_code?t=' + Math.random();">看不清？换一张</a>
+									onclick="javascript:document.getElementById('codeimage').src='/api/v1/code/image_code?t=' + Math.random();">看不清？换一张</a>
 							</p>
 							<label for="captcha" generated="true" class="error error_reg" style="display: none;"></label>
 						</dd>
@@ -400,7 +400,7 @@ $(function(){
         if($("#register_form").valid()){
         	$("#register_form").submit();
         } else{
-        	document.getElementById('codeimage').src='http://localhost:8080/api/v1/code/image_code?t=' + Math.random();
+        	document.getElementById('codeimage').src='/api/v1/code/image_code?t=' + Math.random();
         }
     });
     $("#register_form").validate({
@@ -411,7 +411,7 @@ $(function(){
                 lettersmax : true,
                 lettersonly : true,
                 remote   : {
-                    url :'http://localhost:8080/user/check/username',
+                    url :'/user/check/username',
                     type:'get',
                     data:{
                         username : function(){
@@ -433,8 +433,7 @@ $(function(){
             email : {
                 required : true,
                 email    : true,
-                remote   : {
-                    url : 'http://localhost:8080/user/check/email',
+                remote   : /user/check/email',
                     type: 'get',
                     data:{
                         email : function(){ return $('#email').val();
@@ -445,7 +444,7 @@ $(function(){
             captcha : {
                 required : true,
                 remote   : {
-                    url : 'http://localhost:8080/api/v1/code/check_image',
+                    url : '/api/v1/code/check_image',
                     type: 'get',
                     data:{
                         captcha : function(){
