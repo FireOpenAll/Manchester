@@ -98,24 +98,29 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.11-beta2</version>
-		</dependency> 
+		</dependency>
 		<dependency>
 			<groupId>com.lepeng.im</groupId>
 			<artifactId>IMProtocalLib</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency> 
-        <!-- mail -->
-	    <dependency>
-		    <groupId>javax.mail</groupId>
-		    <artifactId>mail</artifactId>
-		    <version>1.4.7</version>
-	    </dependency>
-        <dependency>
+		</dependency>
+		<!-- mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>4.1.1.RELEASE</version> 
-		</dependency> 
-        <!--  -->
+			<artifactId>spring-context-support</artifactId> 
+		</dependency>
+		<!-- -->
 		<!-- add by hsq -->
+        <!-- add message broker -->
+		<dependency>
+			<groupId>com.galaxy</groupId>
+			<artifactId>galaxy-message-broker</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
