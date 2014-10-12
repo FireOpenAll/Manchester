@@ -19,13 +19,13 @@ public class JsonDecoder {
 		Message<?> message = null;
 		switch (messageType) {
 		case P2P:
-			message = new P2PMessage();
+			message = new JsonP2PMessage();
 			break;
 		case GROUP:
-			message = new GroupMessage();
+			message = new JsonGroupMessage();
 			break;
 		case NOTIFICATION:
-			message = new Notification();
+			message = new JsonNotification();
 			break;
 		}
 		message.decode(values);

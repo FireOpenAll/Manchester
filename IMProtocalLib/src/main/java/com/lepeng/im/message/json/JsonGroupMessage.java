@@ -6,48 +6,41 @@ package com.lepeng.im.message.json;
 import java.util.Map;
 
 import com.google.gson.Gson;
+import com.lepeng.im.message.GroupMessage;
 
 /**
  * @author luolishu
  * 
  */
-public class P2PMessage extends BaseMessage {
-	Long id;
-	Long toId;
+public class JsonGroupMessage extends BaseMessage implements GroupMessage<String>{ 
+	Long groupId;
 	Long fromId;
 	Integer messageType;
 	String content;
 
-	public Long getToId() {
-		return toId;
+	public Long getGroupId() {
+		return groupId;
 	}
 
 	public Long getFromId() {
 		return fromId;
 	}
 
-	public P2PMessage decode(String payload) {
+	public JsonGroupMessage decode(String payload) {
 		Gson gson = new Gson();
 		Map<?, ?> values = gson.fromJson(payload, Map.class);
 		return decode(values);
 	}
 
-	public P2PMessage decode(Map<?, ?> values) {
-		toId = getLong((Number) values.get("toId"));
+	public JsonGroupMessage decode(Map<?, ?> values) {
+		groupId = getLong((Number) values.get("groupId"));
 		fromId = getLong((Number) values.get("fromId"));
-		id = getLong((Number)values.get("id"));
+		id = getLong((Number) values.get("id"));
 		messageType = getInteger((Number) values.get("messageType"));
 		content = (String) values.get("content");
 		return this;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+ 
 
 	public Integer getMessageType() {
 		return messageType;
@@ -65,18 +58,13 @@ public class P2PMessage extends BaseMessage {
 		this.content = content;
 	}
 
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
+	}
+
 	public void setFromId(Long fromId) {
 		this.fromId = fromId;
 	}
-
-	public void setToId(Long toId) {
-		this.toId = toId;
-	}
-
-	@Override
-	public String toString() {
-		return "P2PMessage [id=" + id + ", toId=" + toId + ", fromId=" + fromId
-				+ ", messageType=" + messageType + ", content=" + content + "]";
-	}
+ 
 
 }
