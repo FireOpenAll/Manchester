@@ -10,10 +10,17 @@ public class RegexUtils {
 	/*
 	 * 公共正则表达式验证
 	 */
+	
+	/*用户名为以字母开头，由数字、字母和下划线组成的6-20个字符的字符串*/
 	public static final String USERNAME_REGEX = "^[a-zA-Z][a-zA-Z0-9_]{5,19}$";
+	
+	
 	public static final String PHONE_REGEX = "^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
+	
 	public static final String EMAIL_REGEX = "^([a-z0-9A-Z_]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+	/*密码由数字、字母和下划线组成的6-20个字符的字符串*/
 	public static final String PASSWORD_REGEX = "^[a-zA-Z0-9_]{6,20}$";
+	
 	public static final String SPECIAL_CHAR_REGEX = "[`~!@#$%^&*()+=|{}':;',//[//].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
 	/**
 	 * 邮箱正则验证,符合返回true

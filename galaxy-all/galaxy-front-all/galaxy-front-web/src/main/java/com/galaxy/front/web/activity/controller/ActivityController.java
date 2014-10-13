@@ -171,7 +171,7 @@ public class ActivityController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create() {
-		return "activity/postactivity";
+		return "activity/create";
 	}
 
 	@RequestMapping(value = "post", method = RequestMethod.POST)

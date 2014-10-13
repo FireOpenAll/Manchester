@@ -62,7 +62,7 @@ public class ActivityLikeController {
 		ResultModel resultModel = new ResultModel();
 
 		resultModel.setCode("20000");
-		resultModel.setMessage("get host activity category");
+		resultModel.setMessage("getMyLikedActivity success");
 
 		ArrayList<ActivityModel> recomment_activity = new ArrayList<ActivityModel>();
 

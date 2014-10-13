@@ -44,7 +44,7 @@ public class ActivityJoinController {
 		ResultModel resultModel = new ResultModel();
 
 		resultModel.setCode("20000");
-		resultModel.setMessage("get host activity category");
+		resultModel.setMessage("getMyJoinedActivity success");
 
 		ArrayList<ActivityModel> recomment_activity = new ArrayList<ActivityModel>();
 

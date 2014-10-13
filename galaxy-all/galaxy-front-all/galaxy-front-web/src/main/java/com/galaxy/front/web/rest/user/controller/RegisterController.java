@@ -45,39 +45,44 @@ public class RegisterController {
 	 * @param password
 	 * @return
 	 */
-	@RequestMapping(value = "register",method = RequestMethod.POST,params = {"email","password"})
-	public Object registerByEmail(HttpServletRequest request,@RequestParam("email") String email,@RequestParam("password") String password){
+	@RequestMapping(value = "register",method = RequestMethod.POST,params = {"username","email","password"})
+	public Object registerByEmail(HttpServletRequest request,@RequestParam("username") String username,@RequestParam("email") String email,@RequestParam("password") String password){
 		ResultModel resultModel = new ResultModel();
 		
-		if (RegexUtils.checkEmail(email)&&RegexUtils.checkPassword(password)) {
+		if (RegexUtils.checkName(username)&&RegexUtils.checkEmail(email)&&RegexUtils.checkPassword(password)) {
 			if (userService.countUsersByEmail(email)>0) {
+				//email 已被注册
 				resultModel = ResultModelUtils.getResultModelByCode(Code.EMAIL_USED);
-			}else {
+				resultModel.setData("该邮箱已被注册,请用其他邮箱重新注册!");
+			}else if(userService.countUsersByLoginName(username)>0){
+				//用户名已被注册
+				resultModel = ResultModelUtils.getResultModelByCode(Code.USER_NAME_USED);
+				resultModel.setData("该用户名已被注册,请用其他用户名重新注册!");
+			}else{
+				//email、username可用
 				User user = new User();
+				user.setLoginName(username);
 				user.setEmail(email);
 				user.setPassword(password);
-				user.setEmailAuth(false);
 				user.setCreatedTime(new Timestamp(new Date().getTime()));
+				user.setEmailAuth(false);
+				userService.createUser(user);
 				
-				if (userService.createUser(user)) {
-					String code = MD5Utils.encode2String(email);
+				String code = MD5Utils.encode2String(email);
 
-					StringBuilder stringBuilder = new StringBuilder("");
-					stringBuilder.append("欢迎注册galaxy，点击以下完成邮箱验证!").append("\n");
-					stringBuilder.append(Constans.remotehost);
-					stringBuilder.append("api/v1/email/verify?email=").append(email);
-					stringBuilder.append("&code=").append(code);
-					stringBuilder.append("\n");
-					
-					emailUtils.sendMail("galaxy 邮箱验证", stringBuilder.toString(), email);
-					
-					resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
-					resultModel.setData("email register success");
-				}else {
-					resultModel = ResultModelUtils.getResultModelByCode(Code.REGISTER_ERROR);
-					resultModel.setData("email register fail");
-				}
+				StringBuilder stringBuilder = new StringBuilder("");
+				stringBuilder.append("欢迎注册galaxy，点击以下完成邮箱验证!").append("\n");
+				stringBuilder.append(Constans.remotehost);
+				stringBuilder.append("api/v1/email/verify?email=").append(email);
+				stringBuilder.append("&code=").append(code);
+				stringBuilder.append("\n");
+
+				emailUtils.sendMail("galaxy邮箱验证", stringBuilder.toString(), email);
+				
+				resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+				resultModel.setData("注册成功，请前往邮箱点击链接已完成验证");
 			}
+			
 		}else {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 		}

@@ -75,7 +75,7 @@ public class ActivityCommentsController {
 		ResultModel resultModel = new ResultModel();
 
 		resultModel.setCode("20000");
-		resultModel.setMessage("get host activity category");
+		resultModel.setMessage("getCommentedActivity success");
 
 		ArrayList<ActivityModel> recomment_activity = new ArrayList<ActivityModel>();
 
