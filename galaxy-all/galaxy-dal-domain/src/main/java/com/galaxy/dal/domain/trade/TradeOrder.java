@@ -7,5 +7,10 @@ import com.galaxy.dal.domain.BaseDomain;
  *
  */
 public class TradeOrder extends BaseDomain {
+	Long userId;
+	OrderType type;
+	Long productId;
+	OrderStatus status;
+	
 
 }
