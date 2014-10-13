@@ -1,4 +1,4 @@
-package com.galaxy.front.web.rest.message;
+package com.galaxy.front.web.rest.chat;
 
 import java.io.Serializable;
 
@@ -13,7 +13,7 @@ import com.lepeng.im.message.Message;
 import com.lepeng.im.message.json.JsonDecoder;
 
 @RestController(value = "MqttMessageController")
-@RequestMapping(value = "api/v1/message")
+@RequestMapping(value = "api/v1/chat")
 public class MessageController {
 	@Autowired
 	MessageBroker messageBroker;
