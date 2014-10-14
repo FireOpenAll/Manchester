@@ -5,8 +5,5 @@
     <artifactId>galaxy-all</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>galaxy-commons</artifactId>
-  <packaging>pom</packaging>
-  <modules> 
-  </modules>
+  <artifactId>galaxy-commons</artifactId> 
 </project>

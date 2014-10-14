@@ -86,6 +86,14 @@
 	AND
 	password = #{password}
 	</select>
+	<select id="findUserByLoginName" parameterType="string" resultMap="USER_MAP">
+	SELECT * 
+	FROM u_user
+	WHERE
+	login_name = #{loginName} or email = #{loginName} or mobile = #{loginName} limit 1
+	</select>
+	
+	
 	
 	
 	<select id="countEmailAuthed" parameterType="String" resultType="int">

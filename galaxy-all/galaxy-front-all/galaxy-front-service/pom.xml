@@ -18,5 +18,10 @@
 			<artifactId>IMProtocalLib</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.galaxy</groupId> 
+			<artifactId>galaxy-commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
