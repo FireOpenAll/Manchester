@@ -15,7 +15,6 @@
 
 	<resultMap type="user" id="USER_MAP">
 		<id property="id" column="id" />
-		<result property="loginName" column="login_name"/>
 		<result property="createdTime" column="created_time" />
 		<result property="updatedTime" column="updated_time" />
 		<result property="realNameAuth" column="real_name_auth" />
@@ -87,6 +86,14 @@
 	AND
 	password = #{password}
 	</select>
+	<select id="findUserByLoginName" parameterType="string" resultMap="USER_MAP">
+	SELECT * 
+	FROM u_user
+	WHERE
+	login_name = #{loginName} or email = #{loginName} or mobile = #{loginName} limit 1
+	</select>
+	
+	
 	
 	
 	<select id="countEmailAuthed" parameterType="String" resultType="int">

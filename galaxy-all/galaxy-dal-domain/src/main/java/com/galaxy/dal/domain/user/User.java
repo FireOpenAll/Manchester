@@ -27,6 +27,8 @@ public class User extends BaseDomain {
 	private String mobile;
 
 	private String password;
+	
+	private String salt;//用于生成密码和校验密码
 
 	private boolean realNameAuth;// 实名认证
 
@@ -131,6 +133,14 @@ public class User extends BaseDomain {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 	public boolean isRealNameAuth() {
