@@ -1,6 +1,6 @@
 //显示省
 function getProvince(){
-	var url = '/api/v1/location/province.';
+	var url = '/api/v1/location/province';
 	
 	var defaultProvince = '<option value="0">--省--</option>';
 	var defaultCity = '<option value="0">--市--</option>';
@@ -21,7 +21,7 @@ function getProvince(){
 	        	//alert(msg.code);
 	        	if (msg.code == "20000") {
 	        		var provincelist = msg.data;
-	        		alert(provincelist.length);
+	        		//alert(provincelist.length);
 	        		var len = provincelist.length;
 			      	for(var i = 0; i < len; i++){
 			      		var item = provincelist[i];
@@ -41,9 +41,13 @@ function getProvince(){
 
 //显示市
 function getCity(){
-	
+
 	var province_code = $("#province_select").val();
-	var url = '/api/v1/location/city.';
+	
+	//设置provice的input值
+	$("#province").val(province_code);
+	//设置provice的input值
+	var url = '/api/v1/location/city';
 	
 	var defaultCity = '<option value="0">--市--</option>';
 	var defaultDistrict = '<option value="0">--区--</option>';
@@ -60,7 +64,7 @@ function getCity(){
 	        	//alert(msg.code);
 	        	if (msg.code == "20000") {
 	        		var citylist = msg.data;
-	        		alert(citylist.length);
+	        		//alert(citylist.length);
 	        		var len = citylist.length;
 			      	for(var i = 0; i < len; i++){
 			      		var item = citylist[i];
@@ -82,6 +86,10 @@ function getCity(){
 function getDistrict(){
 	
 	var city_code = $("#city_select").val();
+	//设置city的input值
+	$("#city").val(city_code);
+	//设置city的input值
+	
 	var url = '/api/v1/location/district';
 	
 	var defaultDistrict = '<option value="0">--区--</option>';
@@ -96,7 +104,7 @@ function getDistrict(){
 	        	//alert(msg.code);
 	        	if (msg.code == "20000") {
 	        		var districtlist = msg.data;
-	        		alert(districtlist.length);
+	        		//alert(districtlist.length);
 	        		var len = districtlist.length;
 			      	for(var i = 0; i < len; i++){
 			      		var item = districtlist[i];
@@ -113,3 +121,14 @@ function getDistrict(){
 	});
 }
 //显示区
+
+//设置区
+function setDistrict(){
+	//设置district的input值
+	var dis = $("#district_select").val();
+	//alert('dis='+dis);
+	$("#district").val(dis);
+	//var district = $("#district").val();
+	//alert('district='+district);
+}
+//设置区

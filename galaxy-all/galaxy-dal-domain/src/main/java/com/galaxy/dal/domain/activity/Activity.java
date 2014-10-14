@@ -46,6 +46,14 @@ public class Activity extends BaseDomain {
 
 	private Double latitude;
 	private String description;// 活动简介
+	private String sponsor;//活动主办方
+	
+	public String getSponsor() {
+		return sponsor;
+	}
+	public void setSponsor(String sponsor) {
+		this.sponsor = sponsor;
+	}
 	public ActivityType getType() {
 		return type;
 	}

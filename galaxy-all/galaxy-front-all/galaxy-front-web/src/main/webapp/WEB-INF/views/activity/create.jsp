@@ -67,7 +67,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Brand</a>
+        <a class="navbar-brand" href="#">Galaxy</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -86,7 +86,7 @@
             <a href="#">我的账户</a>
           </li>
           <li c>
-            <a href="#" >欢迎&nbsp;&nbsp;huangshanqi&nbsp;</a>
+            <a href="#" >欢迎&nbsp;&nbsp;<%=request.getSession().getAttribute("userName").toString() %>&nbsp;</a>
           </li>
 
           <li >
@@ -98,7 +98,7 @@
     <!-- /.container-fluid --> </nav>
 
   <div class = "mypanel">
-    <form class="form-horizontal" role="form" id="form" action="#">
+    <form class="form-horizontal" role="form" id="form" action="/activity/create" enctype="multipart/form-data" method="POST">
       <div class="panel panel-default">
         <!--div class="panel-heading ">
         <h4>基本信息:</h4>
@@ -113,15 +113,15 @@
             <div class="form-group">
               <label for="name" class="col-lg-2 control-label">活动名称:</label>
               <div class="col-lg-10">
-                <input type="text" class="form-control" id="name" placeholder="活动名称">
+                <input type="text" class="form-control" id="name" name="name" placeholder="活动名称">
               </div>
             </div>
             <div class="form-group">
               <label for="event_time" class="col-lg-2 control-label">活动时间:</label>
               <div class="col-lg-10 form-inline" id="event_time">
 
-                <input type="text" class="form-control col-lg-3" id="start_time" placeholder="开始时间">              
-                <input type="text"   class="form-control col-lg-3" id="end_time" placeholder="结束时间"></div>
+                <input type="text" class="form-control col-lg-3" id="start_time" name="start_time" placeholder="开始时间">              
+                <input type="text"   class="form-control col-lg-3" id="end_time" name="end_time" placeholder="结束时间"></div>
             </div>
             <div class="form-group">
               <label for="area" class="col-lg-2 control-label">活动地点:</label>
@@ -137,7 +137,7 @@
                   <option value="0">--市--</option>
                 </select>
                 <span>&nbsp;&nbsp;</span>
-                <select class="col-lg-2" id="district_select" >
+                <select class="col-lg-2" id="district_select" onchange="setDistrict()">
                   <option value="0">--区--</option>
                 </select>
 
@@ -149,27 +149,27 @@
             <div class="form-group">
               <label for="address_detail" class="col-lg-2 control-label">活动详细地址:</label>
               <div class="col-lg-10">
-                <input type="text" class="form-control" id="address_detail" placeholder="活动详细地址">
+                <input type="text" class="form-control" id="address_detail" name="address_detail" placeholder="活动详细地址">
               </div>
             </div>
             <div class="form-group">
               <label for="haibaos" class="col-lg-2 control-label">活动海报:</label>
               <div class="col-lg-10" id="haibaos">
-                <input type="file" class="form-control" id="haibao1" name="file1">
-                <input type="file" class="form-control" id="haibao2" name="file2">
-                <input type="file" class="form-control" id="haibao3" name="file3">
+                <input type="file" class="form-control" id="haibao1" name="haibao1">
+                <input type="file" class="form-control" id="haibao2" name="haibao2">
+                <input type="file" class="form-control" id="haibao3" name="haibao3">
               </div>
             </div>
             <div class="form-group">
               <label for="sponsor" class="col-lg-2 control-label">活动主办方:</label>
               <div class="col-lg-10">
-                <input type="text" class="form-control" id="sponsor" placeholder="活动主办方">
+                <input type="text" class="form-control" id="sponsor" name="sponsor" placeholder="活动主办方">
               </div>
             </div>
             <div class="form-group">
               <label for="phone" class="col-lg-2 control-label">咨询电话:</label>
               <div class="col-lg-10">
-                <input type="text" class="form-control" id="phone" placeholder="咨询电话">
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="咨询电话">
               </div>
             </div>
             <div class="form-group">
@@ -210,17 +210,17 @@
               </thead>
               <tbody>
                 <tr>
-                  <td >免费门票</td>
-                  <td><input type="text" id ="ticket1_name"/></td>
-                  <td><input type="text" id ="ticket1_num"/></td>
-                  <td><input type="text" id ="ticket1_price"/></td>
+                  <td >活动门票</td>
+                  <td><input type="text" id ="ticket_name" name="ticket_name" /></td>
+                  <td><input type="text" id ="ticket_num" name="ticket_num" /></td>
+                  <td><input type="text" id ="ticket_price" name="ticket_price" /></td>
                 </tr>
-                <tr>
+                <!--tr>
                   <td >收费门票</td>
-                  <td><input type="text" id ="ticket2_name"/></td>
-                  <td><input type="text" id ="ticket2_num"/></td>
-                  <td><input type="text" id ="ticket2_price"/></td>
-                </tr>
+                  <td><input type="text" id ="ticket2_name" name="ticket2_name" /></td>
+                  <td><input type="text" id ="ticket2_num" name="ticket2_num" /></td>
+                  <td><input type="text" id ="ticket2_price" name="ticket2_price" /></td>
+                </tr-->
               </tbody>
             </table>
           </div>
@@ -235,23 +235,20 @@
           <div id="tuiguangtinfoorm">
             <div class="radio">
               <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios1" value="1" checked>公开（发布到活动平台）</label>
+                <input type="radio" name="optionsRadios" id="optionsRadios" value="1" checked>公开（发布到活动平台）</label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios2" value="2">不公开（只有知道网址才能访问）</label>
+                <input type="radio" name="optionsRadios" id="optionsRadios" value="2">不公开（只有知道网址才能访问）</label>
             </div>
 
             <br/>        
             <p>活动分类：</p>
             <div class="col-lg-2">
-              <select class="form-control">
-                <option>分类1</option>
-                <option>分类2</option>
-                <option>分类3</option>
-                <option>分类4</option>
-                <option>分类5</option>
+              <select class="form-control" id="category_select" onchange="setCategory()">
+                <option value="0">--选择分类--</option>
               </select>
+              <input type="hidden" id="category" name="category">
             </div>
 
 

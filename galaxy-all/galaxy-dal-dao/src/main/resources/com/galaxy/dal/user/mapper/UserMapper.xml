@@ -15,6 +15,7 @@
 
 	<resultMap type="user" id="USER_MAP">
 		<id property="id" column="id" />
+		<result property="loginName" column="login_name"/>
 		<result property="createdTime" column="created_time" />
 		<result property="updatedTime" column="updated_time" />
 		<result property="realNameAuth" column="real_name_auth" />

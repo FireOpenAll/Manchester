@@ -394,7 +394,7 @@ $(function(){
 	}, "Letters max please");
 
 	jQuery.validator.addMethod("phones", function(value, element) {
-		return this.optional(element) || /^[1][3-8]+\d{9}/i.test(value);
+		return this.optional(element) || /^(13[0-9]|15[0|3|6|7|8|9]|18[8|9])\d{8}$/i.test(value);
 	}, "phone number please"); 
 	$('input[name="Submit"]').click(function(){
         if($("#register_form").valid()){

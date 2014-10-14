@@ -4,26 +4,33 @@
 package com.galaxy.front.web.activity.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.aspectj.weaver.NewConstructorTypeMunger;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.galaxy.dal.domain.activity.ActivityType;
+import com.galaxy.front.web.activity.controller.PostModel.CreateModel;
 import com.galaxy.front.web.activity.controller.PostModel.EvenBaseInfoModel;
 import com.galaxy.front.web.activity.controller.PostModel.OrgModel;
 import com.galaxy.front.web.activity.controller.PostModel.TicketModel;
@@ -45,7 +52,7 @@ public class ActivityController {
 	private ActivityService activityService;
 
 	/**
-	 * ajax创建活动表单提交
+	 * ajax创建活动表单提交第一版
 	 */
 	@RequestMapping(value = "saveEventBase", method = RequestMethod.POST)
 	public String saveEventBase(HttpServletRequest request, HttpServletResponse response) {
@@ -173,6 +180,94 @@ public class ActivityController {
 	public String create() {
 		return "activity/create";
 	}
+	
+	//活动提交第二版
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public String createPost(HttpServletRequest request,@ModelAttribute("form") CreateModel model,
+			@RequestParam("haibao1")MultipartFile haibao1File,@RequestParam("haibao2")MultipartFile haibao2File,
+			@RequestParam("haibao3")MultipartFile haibao3File) {
+		/*
+		StringBuilder sb= new StringBuilder();
+		Set<String> paramsSet = request.getParameterMap().keySet();
+		for (String key:paramsSet) {
+			sb.append(key).append("=").append(request.getParameter(key)).append(",");
+		}
+		System.err.println("all string = "+sb.toString());
+		*/
+		if (haibao1File == null) {
+			System.err.println("haobao1 is null``````````````````````````````````````````");
+		}
+		
+		System.out.println("name====================================!!!!!!!!!!!!!!!!!"+model.getName());
+		System.out.println("haobaos=================================!!!!!!!!!!!!!!!!!"+haibao1File.getName());
+		
+		ActivityForm activityForm = new ActivityForm();
+		
+		long userId = (long) request.getSession().getAttribute("userId");
+		//保存海报
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+		String fold = simpleDateFormat.format(new Date());
+		String haibao_urls_path = "/upload/images/activity/"+userId+"/"+fold+"/";
+		System.out.println("haobao1="+haibao1File.getOriginalFilename()+":"+haibao1File.getName());
+		System.out.println("haobao2="+haibao2File.getOriginalFilename()+":"+haibao2File.getName());
+		System.out.println("haobao3="+haibao3File.getOriginalFilename()+":"+haibao3File.getName());
+		String  filename1=(new Date().getTime()+1)+haibao1File.getOriginalFilename().substring(haibao1File.getOriginalFilename().indexOf("."));
+		String  filename2=(new Date().getTime()+2)+haibao2File.getOriginalFilename().substring(haibao2File.getOriginalFilename().indexOf("."));
+		String  filename3=(new Date().getTime()+3)+haibao3File.getOriginalFilename().substring(haibao3File.getOriginalFilename().indexOf("."));
+		
+		File targetFile1 = new File(haibao_urls_path, filename1);
+		if (!targetFile1.exists()) {
+			targetFile1.mkdirs();
+		}
+		File targetFile2 = new File(haibao_urls_path, filename2);
+		if (!targetFile2.exists()) {
+			targetFile2.mkdirs();
+		}
+		File targetFile3 = new File(haibao_urls_path, filename3);
+		if (!targetFile3.exists()) {
+			targetFile3.mkdirs();
+		}
+		
+		try {
+			haibao1File.transferTo(targetFile1);
+			haibao2File.transferTo(targetFile2);
+			haibao3File.transferTo(targetFile3);
+			
+			String haibao_urls ="/activity/"+userId+"/"+fold+"/"+filename1+";"+
+					"/activity/"+userId+"/"+fold+"/"+filename2+";"+
+					"/activity/"+userId+"/"+fold+"/"+filename3;
+			System.out.println("haibao_urls======="+haibao_urls);
+			activityForm.setHaibao_urls(haibao_urls);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//保存海报
+		
+		
+		activityForm.setUserId(userId);
+		activityForm.setType((model.getOptionsRadios()==1)?ActivityType.ONLINE:ActivityType.OFFLINE);
+		activityForm.setCatId1(model.getCategory());
+		activityForm.setTitle(model.getName());
+		activityForm.setStartTime(String2Date(model.getStart_time()));
+		activityForm.setEndTime(String2Date(model.getEnd_time()));
+		activityForm.setProvinceId(model.getProvince());
+		activityForm.setCityId(model.getCity());
+		activityForm.setDistrictId(model.getDistrict());
+		activityForm.setAddress(model.getAddress_detail());
+		activityForm.setPrice(model.getTicket_price());
+		activityForm.setTicketsNum(model.getTicket_num());
+		activityForm.setPhone(model.getPhone());
+		activityForm.setDescription(model.getDescription().trim());
+		activityForm.setContent(model.getDetail().trim());
+		
+		activityService.create(activityForm);
+		request.setAttribute("message", "创建活动成功");
+		return "activity/postsuccess";
+	}
 
 	@RequestMapping(value = "post", method = RequestMethod.POST)
 	public String post() {
@@ -203,7 +298,8 @@ public class ActivityController {
 		for (int i = 0; i < 10; i++) {
 			list.add(new testModel(i, "分类" + i));
 		}
-
+        resultModel.setCode("20000");
+        resultModel.setMessage("geteventcategory success");
 		resultModel.setData(list);
 
 		return resultModel;
@@ -252,4 +348,13 @@ public class ActivityController {
 		return date2;
 	}
 
+	/*
+	@Test
+	public void test(){
+		SimpleDateFormat CeshiFmt2=new SimpleDateFormat("yyyyMMddHHmm");
+		System.out.println(CeshiFmt2.format(new Date()));
+		System.out.println(new Date().getTime());
+		System.out.println(new Date().getTime());
+	}
+	*/
 }
