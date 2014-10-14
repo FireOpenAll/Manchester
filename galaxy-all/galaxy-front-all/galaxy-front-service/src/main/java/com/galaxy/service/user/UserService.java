@@ -6,7 +6,9 @@ import java.util.Map;
 import com.galaxy.dal.domain.user.User;
 
 public interface UserService {
-
+	public static final String HASH_ALGORITHM = "SHA-1";
+	public static final int HASH_INTERATIONS = 1024;
+	public static final int SALT_SIZE = 8;
 	User getUser(Long userId);
 
 	boolean createUser(User user);
@@ -23,6 +25,7 @@ public interface UserService {
 	//设置邮箱为认证
 	int setUserEmailAuthByEmail(Map<String, Object> map);
 	
+	User findUserByLoginName(String loginName);
 	User getUserbyEmailPassword(Map<String, String> map);
 	User getUserbyMobilePassword(Map<String, String> map);
 	User getUserbyLoginNamePassword(Map<String, String> map);

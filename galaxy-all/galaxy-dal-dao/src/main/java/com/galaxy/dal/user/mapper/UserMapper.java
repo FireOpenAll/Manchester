@@ -41,4 +41,6 @@ public interface UserMapper extends BaseMapper<User> {
 	User getUserbyMobilePassword(Map<String, String> map);
 
 	User getUserbyLoginNamePassword(Map<String, String> map);
+	
+	public User findUserByLoginName(@Param("loginName")String loginName);
 }
