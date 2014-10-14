@@ -24,8 +24,7 @@
 <script type="text/javascript"
 	src="/resources/js/jquery.js" charset="utf-8"></script>
 <script type="text/javascript"
-	src="/resources/js/common_register.js" charset="utf-8"></script>
-<script type="text/javascript" src="/resource/js/hsqregister.js"></script>
+	src="/resources/js/common_register.js" charset="utf-8"></script> 
 <script type="text/javascript">
 $(function(){
 	$('#gotop').click(function(){
@@ -335,7 +334,7 @@ $(function() {
 						<dd class="ment">
 							<label for=""> 
 								<input type="checkbox" checked="checked"value="1" id="clause" name="agree"> 阅读并同意 
-								<a title="阅读并同意" href="http://www.o2olive.net/demo/index.php?act=document&code=agreement">服务协议</a>
+								<a title="阅读并同意" href="/document/service.html">服务协议</a>
 							</label> 
 							<label for="agree" generated="true" class="error" style="display: none;">请阅读并同意该协议</label>
 						</dd>
