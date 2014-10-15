@@ -40,7 +40,7 @@ public class CardController {
 	private String qq;
 	private String weixin;
 	private String photo;// 头像URL
-	private String qrCodeUrl;// 名片二维码地址
+	private String qrcode;// 名片二维码地址
 	 */
 	@RequestMapping(value = "get",method = RequestMethod.GET,params={"user_id"})
 	public Object getCardByUserId(@RequestParam("user_id") Long user_id){
@@ -60,7 +60,7 @@ public class CardController {
 		cardModel.setQq("88888888");
 		cardModel.setWeixin("jiedichen");
 		cardModel.setPhoto("/user/avatar/10.jpg");
-		cardModel.setQrCodeUrl("/user/avatar/11.jpg");
+		cardModel.setQrcode("/user/avatar/11.jpg");
 		
 		resultModel.setData(cardModel);
 		
@@ -73,7 +73,7 @@ public class CardController {
 	 * @return
 	 */
 	@RequestMapping(value = "card",method = RequestMethod.POST, 
-			params = {"card_id","user_id","name","company","title","phone","email","address","website","qq","weixin","photo","qrCodeUrl"})
+			params = {"card_id","user_id","name","company","title","phone","email","address","website","qq","weixin","photo","qrcode"})
 	public Object ModifyCardbyUserId(@ModelAttribute CardModel cardModel){
 		
 		System.out.println(cardModel.toString());
@@ -142,7 +142,7 @@ public class CardController {
 			cardModel.setQq("88888888"+i);
 			cardModel.setWeixin("jiedichen"+i);
 			cardModel.setPhoto("/user/avatar/"+(10+i)+".jpg");
-			cardModel.setQrCodeUrl("/user/avatar/"+(10+i)+".jpg");
+			cardModel.setQrcode("/user/avatar/"+(10+i)+".jpg");
 			
 			cardModels.add(cardModel);
 		}

@@ -31,7 +31,7 @@ public class CardModel implements Serializable {
 
 	private String photo;// 头像URL
 
-	private String qrCodeUrl;// 名片二维码地址
+	private String qrcode;// 名片二维码地址
 
 	public Long getCard_id() {
 		return card_id;
@@ -129,12 +129,12 @@ public class CardModel implements Serializable {
 		this.photo = photo;
 	}
 
-	public String getQrCodeUrl() {
-		return qrCodeUrl;
+	public String getQrcode() {
+		return qrcode;
 	}
 
-	public void setQrCodeUrl(String qrCodeUrl) {
-		this.qrCodeUrl = qrCodeUrl;
+	public void setQrcode(String qrcode) {
+		this.qrcode = qrcode;
 	}
 
 	@Override
@@ -153,7 +153,7 @@ public class CardModel implements Serializable {
 		stringBuilder.append("qq=").append(this.getQq()).append(",");
 		stringBuilder.append("weixin=").append(this.getWeixin()).append(",");
 		stringBuilder.append("photo=").append(this.getPhoto()).append(",");
-		stringBuilder.append("qrCodeUrl=").append(this.getQrCodeUrl());
+		stringBuilder.append("qrcode=").append(this.getQrcode());
 		return super.toString();
 	}
 
