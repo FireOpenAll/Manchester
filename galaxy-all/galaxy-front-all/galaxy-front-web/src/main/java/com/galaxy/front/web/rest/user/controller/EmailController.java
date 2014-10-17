@@ -4,11 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.galaxy.dal.domain.user.User;
 import com.galaxy.front.web.utils.Constans;
 import com.galaxy.front.web.utils.EmailUtils;
 import com.galaxy.front.web.utils.MD5Utils;
@@ -46,6 +49,9 @@ public class EmailController {
 			map.put("email_auth", true);
 			
 			userService.setUserEmailAuthByEmail(map);
+			
+			//验证成功创建名片
+			
 			/*
 			stringBuffer.append("邮箱验证成功,");
 			stringBuffer.append(email).append(" 马上登陆：");

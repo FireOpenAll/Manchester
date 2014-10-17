@@ -1,5 +1,7 @@
 package com.galaxy.front.web.utils;
 
+import org.apache.ibatis.jdbc.SQL;
+
 /*author:huangshanqi
  *time  :2014年10月7日 下午2:23:25
  *email :hsqmobile@gmail.com
@@ -28,6 +30,12 @@ public enum Code {
 	REGISTER_ERROR("50050","注册失败，请从新注册"),
 	
 	PARAMS_ERROR("50008","参数错误"),
+	
+	//sql相关错误
+	SQL_ADD_ERROR("51000","创建失败"),
+	SQL_UPDATE_ERROR("51001","更新失败"),
+	SQL_DELETE_ERROR("51002","删除失败"),
+	SQL_ADD_EXISTS("51003","记录已存在或某字段不能重复"),
 	
 	
 	

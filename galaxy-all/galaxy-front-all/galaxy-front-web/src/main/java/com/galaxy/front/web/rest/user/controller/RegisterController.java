@@ -21,6 +21,7 @@ import com.galaxy.front.web.utils.Code;
 import com.galaxy.front.web.utils.Constans;
 import com.galaxy.front.web.utils.EmailUtils;
 import com.galaxy.front.web.utils.MD5Utils;
+import com.galaxy.front.web.utils.ParamUtils;
 import com.galaxy.front.web.utils.RegexUtils;
 import com.galaxy.front.web.utils.ResultModelUtils;
 import com.galaxy.service.user.UserService;
@@ -49,7 +50,7 @@ public class RegisterController {
 	public Object registerByEmail(HttpServletRequest request,@RequestParam("username") String username,@RequestParam("email") String email,@RequestParam("password") String password){
 		ResultModel resultModel = new ResultModel();
 		
-		if (RegexUtils.checkName(username)&&RegexUtils.checkEmail(email)&&RegexUtils.checkPassword(password)) {
+		if (ParamUtils.isNotEmpty(username,email,password)&&RegexUtils.checkName(username)&&RegexUtils.checkEmail(email)&&RegexUtils.checkPassword(password)) {
 			if (userService.countUsersByEmail(email)>0) {
 				//email 已被注册
 				resultModel = ResultModelUtils.getResultModelByCode(Code.EMAIL_USED);
