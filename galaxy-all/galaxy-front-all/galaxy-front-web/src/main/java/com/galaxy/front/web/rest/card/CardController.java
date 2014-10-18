@@ -72,7 +72,6 @@ public class CardController {
 	public Object createMyCard(HttpServletRequest request,@ModelAttribute Card card){
 		
 		System.out.println("coming into createMyCard");
-
 		
 		ResultModel resultModel = new ResultModel();
 		
@@ -141,6 +140,7 @@ public class CardController {
 		if (ParamUtils.isNotEmpty(user_id,target_id)) {
 			if (user_id.equals(target_id)) {
 				//查询用户自己的名片
+				/*
 				Card card = cardService.getCardByUserId(user_id);
 				if (card != null) {
 					
@@ -151,12 +151,19 @@ public class CardController {
 					resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 					resultModel.setData("参数错误或者用户未创建名片");
 				}
+				*/
+				//
+				resultModel=ResultModelUtils.getResultModelByCode(Code.OK);
+				resultModel.setData(getCard(user_id));
+				//
 			}else {
 				//用户查询他人的
+				/*
 				Card card = cardService.getCardByUserId(target_id);
 				if (card != null) {
 					CardModel cardModel = new CardModel();
 					cardModel.setCard(card);
+					
 					if (cardService.checkisAdded(user_id, target_id)) {
 						cardModel.setAdded(true);
 					}else {
@@ -169,6 +176,15 @@ public class CardController {
 					resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 					resultModel.setData("参数错误或者用户未创建名片");
 				}
+				*/
+				
+				//假的
+				resultModel=ResultModelUtils.getResultModelByCode(Code.OK);
+				CardModel cardModel = new CardModel();
+				cardModel.setCard(getCard(target_id));
+				cardModel.setAdded(false);
+				resultModel.setData(cardModel);
+				//
 			}
 		}else {
 			//参数不全
@@ -212,9 +228,11 @@ public class CardController {
 			params = {"user_id","name","company","title","phone","email","address","website","qq","weixin","photo"})
 	public Object ModifyCardbyUserId(@ModelAttribute Card card){
 		ResultModel resultModel = new ResultModel();
+		/*sql
 		if (ParamUtils.isNotEmpty(card.getUser_id())) {
 			if (cardService.modefyCard(card)) {
 				card = cardService.getCardByUserId(card.getUser_id());
+				resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 				resultModel.setData(card);
 			}else {
 				resultModel = ResultModelUtils.getResultModelByCode(Code.SQL_UPDATE_ERROR);
@@ -224,7 +242,12 @@ public class CardController {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 			resultModel.setData("name字段必须有");
 		}	
+		*/
 		
+		//假的
+		resultModel=ResultModelUtils.getResultModelByCode(Code.OK);
+		resultModel.setData(new StatusModel("ok"));
+		//
 		return resultModel;
 	}
 	
@@ -237,6 +260,7 @@ public class CardController {
 	@RequestMapping(value = "add",method = RequestMethod.POST, params = {"user_id","card_id"})
 	public Object addCardToMyBook(@RequestParam("user_id") Long user_id,@RequestParam("card_id") Long card_id){
 		ResultModel resultModel = new ResultModel();
+		/*sql
 		if (ParamUtils.isNotEmpty(user_id,card_id)) {
 			if (cardService.checkisAddedByUserIdCardId(user_id, card_id)) {
 				//已添加
@@ -259,11 +283,12 @@ public class CardController {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 			resultModel.setData(new StatusModel("failed"));
 		}
+		*/
 		
-		/*
+		//假的
 		resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 		resultModel.setData(new StatusModel("ok"));
-		*/
+		//
 		return resultModel;
 	}
     
@@ -276,6 +301,7 @@ public class CardController {
 	@RequestMapping(value = "delete",method = RequestMethod.DELETE, params = {"user_id","card_id"})
 	public Object deleteCardFormMyBook(@RequestParam("user_id") Long user_id,@RequestParam("card_id") Long card_id){
 		ResultModel resultModel = new ResultModel();
+		/*sql
 		if (ParamUtils.isNotEmpty(user_id,card_id)) {
 			if (cardService.deleteCardFormMyBook(user_id, card_id)) {
 				resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
@@ -288,10 +314,11 @@ public class CardController {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 			resultModel.setData(new StatusModel("failed"));
 		}
-		/*
+		*/
+		
 		resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 		resultModel.setData(new StatusModel("ok"));
-		*/
+		
 		return resultModel;
 	}
 	
@@ -304,6 +331,7 @@ public class CardController {
 	public Object getAllCradFromMyBook(@RequestParam("user_id") Long user_id){
 		ResultModel resultModel = new ResultModel();
 		
+		/*sql
 		if (ParamUtils.isNotEmpty(user_id)) {
 			ListModel<Card> listModel = new ListModel<Card>();
 			List<Card> cardModels = cardService.getAllCradsFromMyBook(user_id);
@@ -315,15 +343,16 @@ public class CardController {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 			resultModel.setData(new StatusModel("failed"));
 		}
+		*/
 		
-		/*
+		//假的
 		resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 		
 		ListModel<CardModel> listModel = new ListModel<CardModel>();
 		ArrayList<CardModel> cardModels = new ArrayList<CardModel>();
 		listModel.setCount(20);
 		for (int i = 0; i < 20; i++) {
-			CardModel cardModel = new CardModel();
+			Card cardModel = new Card();
 
 			cardModel.setCard_id(100000000L+i);
 			cardModel.setUser_id(200000000L+i*2);
@@ -339,14 +368,32 @@ public class CardController {
 			cardModel.setPhoto("/user/avatar/"+(10+i)+".jpg");
 			cardModel.setQrcode("/user/avatar/"+(10+i)+".jpg");
 			
-			cardModels.add(cardModel);
 		}
 		listModel.setList(cardModels);
 		resultModel.setData(listModel);
 		
-		*/
+		//
 		return resultModel;
 	}
 	
+	
+	public Card getCard(long id){
+		Card cardModel = new Card();
+		cardModel.setCard_id(789789789L);
+		cardModel.setUser_id(id);
+		cardModel.setName("chengjiedi");
+		cardModel.setCompany("北京邮电大学");
+		cardModel.setTitle("Android研发工程师");
+		cardModel.setPhone("12345678901");
+		cardModel.setEmail("chenjiedi@bupt.edu.cn");
+		cardModel.setAddress("北京市海淀区西土城路10号");
+		cardModel.setWebsite("www.bbs.byr.cn");
+		cardModel.setQq("88888888");
+		cardModel.setWeixin("jiedichen");
+		cardModel.setPhoto("/user/avatar/10.jpg");
+		cardModel.setQrcode("/user/avatar/11.jpg");
+		
+		return cardModel;
+	}
 	
 }

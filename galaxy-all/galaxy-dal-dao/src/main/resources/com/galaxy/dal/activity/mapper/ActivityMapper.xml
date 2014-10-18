@@ -17,6 +17,17 @@
 		<id property="id" column="id" />
 		<result property="createdTime" column="created_time" />
 		<result property="updatedTime" column="updated_time" />
+		<result property="startTime" column="start_time"/>
+		<result property="endTime" column="end_time"/>
+		<result property="provinceId" column="province_id"/>
+		<result property="cityId" column="city_id"/>
+		<result property="districtId" column="district_id"/>
+		<result property="refUrl" column="ref_url"/>
+		<result property="operatorId" column="operator_id"/>
+		<result property="joinedNum" column="joined_num"/>
+		<result property="ticketsNum" column="tickets_num"/>
+		<result property="userId" column="user_id"/>
+		
 	</resultMap>
 	
 

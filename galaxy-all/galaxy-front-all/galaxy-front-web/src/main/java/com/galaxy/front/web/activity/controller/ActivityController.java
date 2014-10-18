@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.galaxy.dal.domain.activity.Activity;
 import com.galaxy.dal.domain.activity.ActivityType;
 import com.galaxy.front.web.activity.controller.PostModel.CreateModel;
 import com.galaxy.front.web.activity.controller.PostModel.EvenBaseInfoModel;
@@ -263,6 +264,7 @@ public class ActivityController {
 		activityForm.setPhone(model.getPhone());
 		activityForm.setDescription(model.getDescription().trim());
 		activityForm.setContent(model.getDetail().trim());
+		activityForm.setSponsor(model.getSponsor());
 		
 		activityService.create(activityForm);
 		request.setAttribute("message", "创建活动成功");
@@ -279,6 +281,18 @@ public class ActivityController {
 		return "activity/postactivity";
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "get",method = RequestMethod.GET,params="id")
+	public Object getActById(@RequestParam("id") Long id){
+		ResultModel resultModel = new ResultModel();
+		resultModel.setCode("20000");
+		resultModel.setMessage("get activity success");
+		
+		Activity acviActivity = activityService.getActivity(id);
+		resultModel.setData(acviActivity);
+		return resultModel;
+	}
+	
 	@RequestMapping(value = "remove", method = RequestMethod.GET)
 	public String remove(@PathVariable Long id) {
 		// check 活动信息属于自己的

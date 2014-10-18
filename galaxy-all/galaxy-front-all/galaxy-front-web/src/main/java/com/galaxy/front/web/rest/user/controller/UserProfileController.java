@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +20,8 @@ import com.galaxy.front.web.rest.model.interest.InterestModel;
 import com.galaxy.front.web.rest.model.location.SimpleAddress;
 import com.galaxy.front.web.rest.model.profile.CreditInfo;
 import com.galaxy.front.web.rest.model.profile.UserProfileModel;
+import com.galaxy.front.web.utils.ParamUtils;
+import com.galaxy.service.user.UserService;
 
 /**
  * @author luolishu
@@ -26,9 +30,16 @@ import com.galaxy.front.web.rest.model.profile.UserProfileModel;
 @RestController
 @RequestMapping(value = "api/v1/user")
 public class UserProfileController {
+	
+	@Autowired
+	private UserService userService;
+	
 
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
 	public Object modifyProfile() {
+		/**
+		 * 假数据
+		 */
 		ResultModel resultModel = new ResultModel();
 
 		resultModel.setCode("20000");
@@ -66,8 +77,11 @@ public class UserProfileController {
 		return resultModel;
 	}
 
-	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public Object getProfile() {
+	@RequestMapping(value = "/profile", method = RequestMethod.GET,params="user_id")
+	public Object getProfile(@RequestParam("user_id") Long user_id) {
+		/**
+		 * 假数据
+		 */
 		ResultModel resultModel = new ResultModel();
 
 		resultModel.setCode("20000");
@@ -75,8 +89,8 @@ public class UserProfileController {
 
 		UserProfileModel profileModel = new UserProfileModel();
 
-		profileModel.setUser_id(11110000);
-		profileModel.setUser_name("paris");
+		profileModel.setUser_id(user_id);
+		profileModel.setUser_name("user_id="+user_id);
 		profileModel.setAvatar("/user/avatar/10.jpg");
 		profileModel.setGender("male");
 		profileModel.setBirthday(new Date());
@@ -102,6 +116,56 @@ public class UserProfileController {
 		profileModel.setCreate_count(400);
 
 		resultModel.setData(profileModel);
+
+		return resultModel;
+	}
+	
+	
+	@RequestMapping(value = "/profile1", method = RequestMethod.GET,params="user_id")
+	public Object getProfile1(@RequestParam("user_id") Long user_id) {
+		/**
+		 * sql数据
+		 */
+		ResultModel resultModel = new ResultModel();
+
+		if (ParamUtils.isNotEmpty(user_id)) {
+			resultModel.setCode("20000");
+			resultModel.setMessage("update user profile success");
+
+			UserProfileModel profileModel = new UserProfileModel();
+
+			profileModel.setUser_id(user_id);
+			profileModel.setUser_name("user_id="+user_id);
+			profileModel.setAvatar("/user/avatar/10.jpg");
+			profileModel.setGender("male");
+			profileModel.setBirthday(new Date());
+			profileModel.setCredit_info(new CreditInfo(35, "活动达人"));
+			profileModel.setLocation(new SimpleAddress("广东省", "广州市"));
+
+			List<InterestModel> lisInterests = new ArrayList<InterestModel>();
+			for (int i = 1; i < 6; i++) {
+				lisInterests.add(new InterestModel((long) i * 10000000, "兴趣" + i,"/interest/cover/"+(10+i)+".jpg",i+"热门兴趣描述"));
+
+			}
+			profileModel.setInterest_group(new InterestGroup(5, lisInterests));
+
+			profileModel.setFollowing(500);
+			profileModel.setFollowed(100);
+
+			profileModel.setIs_followed(true);
+			profileModel.setIs_following(false);
+
+			profileModel.setJoined_count(100);
+			profileModel.setLike_count(200);
+			profileModel.setComment_count(300);
+			profileModel.setCreate_count(400);
+
+			resultModel.setData(profileModel);
+		}else {
+			
+		}
+		
+		
 
 		return resultModel;
 	}
