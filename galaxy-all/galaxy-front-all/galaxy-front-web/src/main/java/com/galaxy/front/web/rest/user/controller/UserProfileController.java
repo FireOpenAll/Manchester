@@ -14,13 +14,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.galaxy.dal.domain.user.User;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.interest.InterestGroup;
 import com.galaxy.front.web.rest.model.interest.InterestModel;
 import com.galaxy.front.web.rest.model.location.SimpleAddress;
 import com.galaxy.front.web.rest.model.profile.CreditInfo;
 import com.galaxy.front.web.rest.model.profile.UserProfileModel;
+import com.galaxy.front.web.utils.Code;
 import com.galaxy.front.web.utils.ParamUtils;
+import com.galaxy.front.web.utils.ResultModelUtils;
 import com.galaxy.service.user.UserService;
 
 /**
@@ -129,13 +132,22 @@ public class UserProfileController {
 		ResultModel resultModel = new ResultModel();
 
 		if (ParamUtils.isNotEmpty(user_id)) {
+			
+			User user = userService.getUser(user_id);
+			if (user != null) {
+				
+			}else {
+				
+			}
+			
+			
 			resultModel.setCode("20000");
 			resultModel.setMessage("update user profile success");
 
 			UserProfileModel profileModel = new UserProfileModel();
 
 			profileModel.setUser_id(user_id);
-			profileModel.setUser_name("user_id="+user_id);
+			profileModel.setUser_name("paris");
 			profileModel.setAvatar("/user/avatar/10.jpg");
 			profileModel.setGender("male");
 			profileModel.setBirthday(new Date());
@@ -162,7 +174,8 @@ public class UserProfileController {
 
 			resultModel.setData(profileModel);
 		}else {
-			
+			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
+			resultModel.setData("请输入正确的参数");
 		}
 		
 		

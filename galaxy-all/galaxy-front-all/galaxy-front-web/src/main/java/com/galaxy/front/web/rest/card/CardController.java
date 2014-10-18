@@ -246,7 +246,7 @@ public class CardController {
 		
 		//假的
 		resultModel=ResultModelUtils.getResultModelByCode(Code.OK);
-		resultModel.setData(new StatusModel("ok"));
+		resultModel.setData(card);
 		//
 		return resultModel;
 	}
@@ -348,29 +348,27 @@ public class CardController {
 		//假的
 		resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 		
-		ListModel<CardModel> listModel = new ListModel<CardModel>();
-		ArrayList<CardModel> cardModels = new ArrayList<CardModel>();
-		listModel.setCount(20);
+		
+		ArrayList<Card> cards = new ArrayList<Card>();
 		for (int i = 0; i < 20; i++) {
-			Card cardModel = new Card();
+			Card card = new Card();
 
-			cardModel.setCard_id(100000000L+i);
-			cardModel.setUser_id(200000000L+i*2);
-			cardModel.setName("name"+i);
-			cardModel.setCompany("第"+i+"分公司");
-			cardModel.setTitle("Android研发工程师"+i+"级");
-			cardModel.setPhone("1234567890"+(i%10));
-			cardModel.setEmail("chenjiedi@bupt.edu.cn"+i);
-			cardModel.setAddress("北京市海淀区西土城路 "+i+" 号");
-			cardModel.setWebsite("www.bbs.byr.cn"+i);
-			cardModel.setQq("88888888"+i);
-			cardModel.setWeixin("jiedichen"+i);
-			cardModel.setPhoto("/user/avatar/"+(10+i)+".jpg");
-			cardModel.setQrcode("/user/avatar/"+(10+i)+".jpg");
-			
+			card.setCard_id(100000000L+i);
+			card.setUser_id(200000000L+i*2);
+			card.setName("name"+i);
+			card.setCompany("第"+i+"分公司");
+			card.setTitle("Android研发工程师"+i+"级");
+			card.setPhone("1234567890"+(i%10));
+			card.setEmail("chenjiedi@bupt.edu.cn"+i);
+			card.setAddress("北京市海淀区西土城路 "+i+" 号");
+			card.setWebsite("www.bbs.byr.cn"+i);
+			card.setQq("88888888"+i);
+			card.setWeixin("jiedichen"+i);
+			card.setPhoto("/user/avatar/"+(10+i)+".jpg");
+			card.setQrcode("/user/avatar/"+(10+i)+".jpg");
+			cards.add(card);
 		}
-		listModel.setList(cardModels);
-		resultModel.setData(listModel);
+		resultModel.setData(cards);
 		
 		//
 		return resultModel;
