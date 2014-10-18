@@ -36,7 +36,7 @@ public enum Code {
 	SQL_UPDATE_ERROR("51001","更新失败"),
 	SQL_DELETE_ERROR("51002","删除失败"),
 	SQL_ADD_EXISTS("51003","记录已存在或某字段不能重复"),
-	
+	SQL_SELECT_NOT_EXISTS("51004","没有此记录"),
 	
 	
 	

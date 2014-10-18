@@ -228,6 +228,8 @@ public class CardController {
 			params = {"user_id","name","company","title","phone","email","address","website","qq","weixin","photo"})
 	public Object ModifyCardbyUserId(@ModelAttribute Card card){
 		ResultModel resultModel = new ResultModel();
+		
+		System.out.println("card==="+card.toString());
 		/*sql
 		if (ParamUtils.isNotEmpty(card.getUser_id())) {
 			if (cardService.modefyCard(card)) {

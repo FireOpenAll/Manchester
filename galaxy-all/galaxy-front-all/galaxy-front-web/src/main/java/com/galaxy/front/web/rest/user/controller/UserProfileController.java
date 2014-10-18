@@ -137,7 +137,8 @@ public class UserProfileController {
 			if (user != null) {
 				
 			}else {
-				
+				resultModel = ResultModelUtils.getResultModelByCode(Code.SQL_SELECT_NOT_EXISTS);
+				resultModel.setData("用户不存在");
 			}
 			
 			
