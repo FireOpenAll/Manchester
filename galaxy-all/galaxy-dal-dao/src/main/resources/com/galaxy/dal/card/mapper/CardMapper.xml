@@ -94,7 +94,7 @@
 	select * from u_card 
 	where id in
 	(select card_id from u_user_cards where user_id = #{param1.user_id})
-	limit #{param2},(#{param2}+#{param3})
+	limit #{param2},#{param3}
 	</select>
 	
 	<!-- 得到我名片夹里的所有名片 -->

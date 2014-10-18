@@ -195,7 +195,7 @@ public class ActivityController {
 		System.err.println("all string = "+sb.toString());
 		*/
 		if (haibao1File == null) {
-			System.err.println("haobao1 is null``````````````````````````````````````````");
+			System.out.println("haobao1 is null``````````````````````````````````````````");
 		}
 		
 		System.out.println("name====================================!!!!!!!!!!!!!!!!!"+model.getName());

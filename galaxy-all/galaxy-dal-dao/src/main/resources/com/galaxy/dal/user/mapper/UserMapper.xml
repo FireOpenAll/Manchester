@@ -22,7 +22,7 @@
 		<result property="mobileAuth" column="mobile_auth" />
 		<result property="mobileAuth" column="mobile_auth" />
 		<result property="hasPic" column="haspic" />
-
+        <result property="loginName" column="login_name"/>
 		<result property="qqOpenid" column="qq_openid" />
 		<result property="weiboOpenid" column="weibo_openid" />
 		<result property="webchatOpenid" column="webchat_openid" />

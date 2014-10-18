@@ -66,12 +66,12 @@ public class WebLoginController {
 				map.put("password", password);
 				map.put("login_name", logintext);
 				user = userService.getUserbyLoginNamePassword(map);
-				System.err.println("username == "+user.getLoginName());
+				System.out.println("username == "+user.getLoginName());
 				if (user != null && (user.isMobileAuth() || user.isEmailAuth())) {
 					request.getSession().setAttribute("userId", user.getId());
 					request.getSession().setAttribute("userName", user.getLoginName());
-					System.err.println("userId"+request.getSession().getAttribute("userId").toString());
-					System.err.println("userName"+request.getSession().getAttribute("userName").toString());
+					System.out.println("userId"+request.getSession().getAttribute("userId").toString());
+					System.out.println("userName"+request.getSession().getAttribute("userName").toString());
 					return "activity/create";
 				}else {
 					request.setAttribute("message", "你的账户尚未进行验证，请进行手机号或邮箱认证");
