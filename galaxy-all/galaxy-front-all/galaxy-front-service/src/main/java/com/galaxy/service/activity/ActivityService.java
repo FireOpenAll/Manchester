@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.galaxy.dal.domain.activity.Activity;
+import com.galaxy.dal.domain.activity.ActivityJoinedUsers;
 import com.galaxy.service.activity.form.ActivityForm;
 
 public interface ActivityService {
@@ -20,6 +21,8 @@ public interface ActivityService {
 
 	public List<Activity> list(Map parameters, int size);
 	
+	public List<ActivityJoinedUsers> listAllJoinedUsers(Long activityId);
 	
+	public List<ActivityJoinedUsers> listAllJoinedUsersFromId(Long activityId,Long fromId,Long size);
 
 }

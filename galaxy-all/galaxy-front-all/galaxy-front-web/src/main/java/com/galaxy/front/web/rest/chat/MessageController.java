@@ -1,6 +1,7 @@
 package com.galaxy.front.web.rest.chat;
 
 import java.io.Serializable;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ public class MessageController {
 	public Object sendMessage(@RequestParam("message") String message) {
 		ResultModel result = new ResultModel();
 		result.setCode("20000");
+		result.setData((Serializable) Collections.EMPTY_MAP);
 		if (message == null) {
 			result.setCode("40000");
 			return result;

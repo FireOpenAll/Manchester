@@ -21,6 +21,16 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/**" /> 
+			<mvc:exclude-mapping path="/user/login" />
+			<mvc:exclude-mapping path="/user/register" />
+			<mvc:exclude-mapping path="/user/logout" />
+			<mvc:exclude-mapping path="*.html" />
+			<bean class="com.galaxy.front.web.rest.interceptor.AuthApiHandlerInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<context:component-scan base-package="com.galaxy.front" />
 

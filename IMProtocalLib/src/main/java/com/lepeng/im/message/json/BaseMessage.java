@@ -5,6 +5,7 @@ import com.lepeng.im.message.Message;
 
 public abstract class BaseMessage implements Message<String> {
 	protected Long id;
+	protected Long createdTime;
 	public String encode() {
 		Gson gson = new Gson();
 		return gson.toJson(this);
@@ -31,6 +32,15 @@ public abstract class BaseMessage implements Message<String> {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public Long getCreatedTime() {
+		return createdTime;
+	}
+
+	public void setCreatedTime(Long createdTime) {
+		this.createdTime = createdTime;
+	}
+
 	@Override
 	public String toString() {
 		Gson gson=new Gson();

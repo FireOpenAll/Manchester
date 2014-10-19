@@ -12,10 +12,10 @@ public class City implements Serializable{
 	/*
 	 * 城市类model
 	 */
-	private int id;
-	private int city_code;
+	private Integer id;
+	private Integer city_code;
 	private String city_name;
-	private int province_code;
+	private Integer province_code;
 
 	public City() {
 		super();
@@ -29,19 +29,19 @@ public class City implements Serializable{
 		this.province_code = province_code;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getCity_code() {
+	public Integer getCity_code() {
 		return city_code;
 	}
 
-	public void setCity_code(int city_code) {
+	public void setCity_code(Integer city_code) {
 		this.city_code = city_code;
 	}
 
@@ -53,12 +53,13 @@ public class City implements Serializable{
 		this.city_name = city_name;
 	}
 
-	public int getProvince_code() {
+	public Integer getProvince_code() {
 		return province_code;
 	}
 
-	public void setProvince_code(int province_code) {
+	public void setProvince_code(Integer province_code) {
 		this.province_code = province_code;
 	}
+
 
 }

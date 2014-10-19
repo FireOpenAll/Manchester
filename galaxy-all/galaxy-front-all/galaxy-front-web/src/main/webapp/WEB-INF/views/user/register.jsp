@@ -126,7 +126,7 @@ function AddFavorite(sURL, sTitle)
     }
 }
 
-var SITEURL = 'http://www.o2olive.net/demo';
+var SITEURL = 'http://www.lookpeng.com';
 $(function() {
 		$(".tab").hover(function() {
 		$(this).addClass("tab_over");
@@ -160,12 +160,8 @@ $(function() {
 		<div id="header-bottom">
 			<div id="header-bottom-new" style="width: 990px;">
 				<div id="logo">
-					<a href="http://www.o2olive.net/demo"><img
-						src="/resources/images/9bb0b297fef066c19a53b322d171e629.jpg"></a>
-					<!--<div class="nc—city-info">
-					<h2>@天津</h2>
-					<a class="ncchange-city" href="http://www.o2olive.net/demo/index.php?act=city&op=city">[城市切换]</a>
-					</div>-->
+					<a href="http://www.lookpeng.com"><img
+						src="/resources/images/lookpeng3.png"></a> 
 				</div>
 			</div>
 		</div>
@@ -495,16 +491,11 @@ $(function(){
 	<div class="footer-info">
 		<div class="footer-info-nav gr">
 			<ul>
-				<li class="first"><a href="http://www.o2olive.net/demo">首页</a></li>
-				<li><a target="_blank"
-					href="http://www.o2olive.net/demo/index.php?act=article&article_id=17">招聘英才</a></li>
-				<li><a
-					href="http://www.o2olive.net/demo/index.php?act=article&article_id=18">广告合作</a></li>
-				<li><a
-					href="http://www.o2olive.net/demo/index.php?act=article&article_id=16">联系我们</a></li>
-				<li><a
-					href="http://www.o2olive.net/demo/index.php?act=article&article_id=15">关于O2OLive</a></li>
-				<li><a href="http://www.o2olive.net/demo/index.php?act=slogin">商户登录</a></li>
+			<li class="first"><a href="/">首页</a></li>
+	    	<li><a href="/advert.html">广告合作</a></li>
+    		<li><a href="/contactus.html">联系我们</a></li>
+    		<li><a href="/about.html">关于乐朋</a></li>
+    		<li><a href="/merchant/login"">商户登录</a></li>
 			</ul>
 			<a href="javascript:;" class="footer-info-con"> <img width="276"
 				height="24" alt="本地生活"
@@ -513,8 +504,8 @@ $(function(){
 		</div>
 		<div class="copyright">
 			<p>
-				Copyright 2007-2014 O2OLive Inc.,All rights reserved.Powered by <span
-					class="vol"><font class="b">O2OLive</font></span>
+			Copyright 2007-2014 乐朋 Inc.,All rights reserved. 
+				Powered by <span class="vol"><font class="b">乐朋</font></span> 
 			</p>
 		</div>
 	</div>
