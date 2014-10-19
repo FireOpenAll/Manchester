@@ -13,7 +13,9 @@
 
 <mapper namespace="com.galaxy.dal.location.mapper.ProvinceMapper">
 
-	<resultMap type="province" id="PROVINCE_MAP"></resultMap>
+	<resultMap type="province" id="PROVINCE_MAP">
+	<id property="id" column="id" />
+	</resultMap>
 
 	<select id="getAllProvince" resultMap="PROVINCE_MAP">
 		SELECT *

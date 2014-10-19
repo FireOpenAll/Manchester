@@ -13,7 +13,9 @@
 
 <mapper namespace="com.galaxy.dal.location.mapper.CityMapper">
 
-	<resultMap type="city" id="CITY_MAP"></resultMap>
+	<resultMap type="city" id="CITY_MAP">
+	<id property="id" column="id" />
+	</resultMap>
 	<select id="getCitysByProvinceCode" parameterType="String"
 		resultMap="CITY_MAP">
 		SELECT *
