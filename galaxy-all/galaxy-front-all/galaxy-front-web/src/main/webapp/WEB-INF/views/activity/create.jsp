@@ -86,7 +86,7 @@
             <a href="#">我的账户</a>
           </li>
           <li c>
-            <a href="#" >欢迎&nbsp;&nbsp;<%=request.getSession().getAttribute("userName").toString() %>&nbsp;</a>
+            <a href="#" >欢迎&nbsp;&nbsp;<%=request.getSession().getAttribute("userName")%>&nbsp;</a>
           </li>
 
           <li >

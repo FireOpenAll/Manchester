@@ -123,7 +123,7 @@ function AddFavorite(sURL, sTitle)
     }
 }
 
-var SITEURL = 'http://www.o2olive.net/demo';
+var SITEURL = 'http://www.lookpeng.com';
 $(function() {
 		$(".tab").hover(function() {
 		$(this).addClass("tab_over");
@@ -156,12 +156,7 @@ $(function() {
 <div id="header">
   <div id="header-bottom">
     <div id="header-bottom-new" style="width:990px;">
-      <div id="logo"> <a href="http://www.o2olive.net/demo"><img src="/resources/images/9bb0b297fef066c19a53b322d171e629.jpg"></a>
-                <!--<div class="nc—city-info">
-					<h2>@天津</h2>
-					<a class="ncchange-city" href="http://www.o2olive.net/demo/index.php?act=city&op=city">[城市切换]</a>
-					</div>-->
-              </div>
+      <div id="logo"> <a href="/"><img src="/resources/images/lookpeng3.png"></a></div>
           </div>
   </div>
 </div>
@@ -180,7 +175,7 @@ $(function() {
 
         <dd>
         	<span class="ipt01 in_b">
-            	<input type="text" placeholder="输入用户名/验证邮箱/验证手机号" name="logintext" id="logintext">
+            	<input type="text" placeholder="输入用户名/验证邮箱/验证手机号" name="username" id="username">
           </span> 
         </dd>
         <dd>
@@ -201,7 +196,7 @@ $(function() {
         </dd>
           <dd class="box_err  clearfix">
          <!-- <label for="" generated="true" class="error_login"></label>-->
-         <label for="logintext" generated="true" class="error error_reg" style="display:none;"></label>
+         <label for="username" generated="true" class="error error_reg" style="display:none;"></label>
          <label for="password" generated="true" class="error error_reg" style="display:none;"></label>
          <label for="captcha" generated="true" class="error error_reg" style="display:none;"></label>
         </dd>
@@ -213,16 +208,16 @@ $(function() {
     </form>
     <div class="btn_r">
 		<span>还没有注册账号？</span>
-		<a class="btn_com" href="./user/egister"></a>
+		<a class="btn_com" href="/user/register"></a>
 
-		<a class="fw" style="font-size:12px" target="_blank" href="http://www.o2olive.net/demo/index.php?act=login&op=forget_password">忘记密码？</a>
+		<a class="fw" style="font-size:12px" target="_blank" href="/user/forgot_pwd">忘记密码？</a>
 	</div>
 
 
     <div class="nc-login-other">
     	<p>您可以用合作伙伴账号登录：</p>
-    	        <a class="qq" title="QQ" href="http://www.o2olive.net/demo/shop/api.php?act=toqq">&nbsp;</a>
-                        <a class="sina" title="新浪微博" href="http://www.o2olive.net/demo/shop/api.php?act=tosina">&nbsp;</a>
+    	        <a class="qq" title="QQ" href="/user/qqlogin">&nbsp;</a>
+                        <a class="sina" title="新浪微博" href="/user/weibologin">&nbsp;</a>
             </div>
   </div>
 </div>
@@ -232,11 +227,11 @@ $(document).ready(function(){
 	$('input[name="Submit"]').click(function(){
         if($("#login_form").valid()){
         	/*
-        	var logintext = $("#logintext").val();
-        	alert('logintext:' + logintext)
-        	if(/^([a-z0-9A-Z_]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$/i.test(logintext)){
+        	var username = $("#username").val();
+        	alert('username:' + username)
+        	if(/^([a-z0-9A-Z_]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$/i.test(username)){
         		$("#type").val("email");
-        	}else if(/^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$/i.test(logintext)){
+        	}else if(/^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$/i.test(username)){
         		$("#type").val("mobile");
         	}else{
         		$("#type").val("username");
@@ -255,7 +250,7 @@ $(document).ready(function(){
 			error.appendTo('.error_login');
         },
 		rules: {
-			logintext: "required",
+			username: "required",
 			password: "required",
             captcha : {
                 required : true,
@@ -271,7 +266,7 @@ $(document).ready(function(){
             }
 		},
 		messages: {
-			logintext: "登录用户名不能为空!",
+			username: "登录用户名不能为空!",
 			password: "登录密码不能为空!",
 		    captcha : {
                 required : '请输入验证码',
@@ -286,19 +281,20 @@ $(document).ready(function(){
 <div class="footer-info">
 	<div class="footer-info-nav gr">
 		<ul>
-	    	<li class="first"><a href="http://www.o2olive.net/demo">首页</a></li>
-	    	    		    		    		    		    		    		    		    		    		    		    		    		    		    		    		    		    		<li><a target="_blank" href="http://www.o2olive.net/demo/index.php?act=article&article_id=17">招聘英才</a></li>
-    		    		    		    		<li><a href="http://www.o2olive.net/demo/index.php?act=article&article_id=18">广告合作</a></li>
-    		    		    		    		<li><a href="http://www.o2olive.net/demo/index.php?act=article&article_id=16">联系我们</a></li>
-    		    		    		    		<li><a href="http://www.o2olive.net/demo/index.php?act=article&article_id=15">关于O2OLive</a></li>
-    		    		    			        <li><a href="http://www.o2olive.net/demo/index.php?act=slogin">商户登录</a></li>
+	    	<li class="first"><a href="/">首页</a></li>
+	    	<li><a href="/advert.html">广告合作</a></li>
+    		<li><a href="/contactus.html">联系我们</a></li>
+    		<li><a href="/about.html">关于乐朋</a></li>
+    		<li><a href="/merchant/login"">商户登录</a></li>
 	    </ul>
 	    <a href="javascript:;" class="footer-info-con">
 	    	<img width="276" height="24" alt="本地生活" src="/resources/images/footer-img.jpg">
 	    </a>
 	</div>
 	<div class="copyright">
-    	<p>Copyright 2007-2014 O2OLive Inc.,All rights reserved.Powered by <span class="vol"><font class="b">O2OLive</font></span>
+    	<p>
+    	Copyright 2007-2014 乐朋 Inc.,All rights reserved.
+				Powered by <span class="vol"><font class="b">乐朋</font></span> 
     	  </p>
     </div>
 </div>
