@@ -11,10 +11,10 @@ public class District implements Serializable{
 	/*
 	 * 区model
 	 */
-	private int id;
-	private int district_code;
+	private Integer id;
+	private Integer district_code;
 	private String district_name;
-	private int city_code;
+	private Integer city_code;
 
 	public District() {
 		super();
@@ -28,19 +28,19 @@ public class District implements Serializable{
 		this.city_code = city_code;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getDistrict_code() {
+	public Integer getDistrict_code() {
 		return district_code;
 	}
 
-	public void setDistrict_code(int district_code) {
+	public void setDistrict_code(Integer district_code) {
 		this.district_code = district_code;
 	}
 
@@ -52,12 +52,12 @@ public class District implements Serializable{
 		this.district_name = district_name;
 	}
 
-	public int getCity_code() {
+	public Integer getCity_code() {
 		return city_code;
 	}
 
-	public void setCity_code(int city_code) {
+	public void setCity_code(Integer city_code) {
 		this.city_code = city_code;
 	}
-
+ 
 }

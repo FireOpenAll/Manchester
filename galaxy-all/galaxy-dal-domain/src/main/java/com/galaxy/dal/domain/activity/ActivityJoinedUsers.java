@@ -5,6 +5,7 @@ import com.galaxy.dal.domain.BaseDomain;
 public class ActivityJoinedUsers extends BaseDomain {
 	private Long userId;
 	private String userName;
+	private String realName;
 	private Long activityId;
 	
 	private int ticketNum;//购买门票
@@ -20,6 +21,12 @@ public class ActivityJoinedUsers extends BaseDomain {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	public String getRealName() {
+		return realName;
+	}
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 	public Long getActivityId() {
 		return activityId;
@@ -41,7 +48,7 @@ public class ActivityJoinedUsers extends BaseDomain {
 		this.status = status;
 	}
 
-	enum Status{
+	public enum Status{
 		INIT,
 		AUDIT;
 		

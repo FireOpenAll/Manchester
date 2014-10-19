@@ -5,11 +5,8 @@
  *******************************************************************************/
 package com.galaxy.service.user;
 
-import java.io.Serializable;
-
 import javax.annotation.PostConstruct;
 
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -41,9 +38,13 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		User user = userService.findUserByLoginName(token.getUsername());
 		if (user != null) {
 			byte[] salt = Encodes.decodeHex(user.getSalt());
-			SessionUser sessionUser=new SessionUser();
-			sessionUser.setEmail(user.getEmail());
-			return new SimpleAuthenticationInfo(sessionUser, user.getPassword(),ByteSource.Util.bytes(salt), getName());
+			LoginUserModel loginUser=new LoginUserModel();
+			loginUser.setEmail(user.getEmail());
+			loginUser.setLoginName(token.getUsername());
+			loginUser.setMobile(user.getMobile());
+			loginUser.setNickName(user.getNick());
+			loginUser.setUserId(user.getId());
+			return new SimpleAuthenticationInfo(loginUser, user.getPassword(),ByteSource.Util.bytes(salt), getName());
 		} else {
 			return null;
 		}
@@ -55,7 +56,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			PrincipalCollection principals) {
-		SessionUser shiroUser = (SessionUser) principals.getPrimaryPrincipal();
+		LoginUserModel shiroUser = (LoginUserModel) principals.getPrimaryPrincipal();
 		User user = userService.findUserByLoginName(shiroUser.loginName);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		// info.addRoles(user.getRoleList());
@@ -74,90 +75,4 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		setCredentialsMatcher(matcher);
 	}
 
-	/**
-	 * 自定义Authentication对象，使得Subject除了携带用户的登录名外还可以携带更多信息.
-	 */
-	public static class SessionUser implements Serializable {
-		private static final long serialVersionUID = -1373760761780840081L;
-		public Long id;
-		public String loginName;
-		public String mobile;
-		public String email;
-		public String nickName;
-		
-
-		 
-		public Long getId() {
-			return id;
-		}
-
-		public void setId(Long id) {
-			this.id = id;
-		}
-
-		public String getLoginName() {
-			return loginName;
-		}
-
-		public void setLoginName(String loginName) {
-			this.loginName = loginName;
-		}
-
-		public String getMobile() {
-			return mobile;
-		}
-
-		public void setMobile(String mobile) {
-			this.mobile = mobile;
-		}
-
-		public String getEmail() {
-			return email;
-		}
-
-		public void setEmail(String email) {
-			this.email = email;
-		}
-
-		public String getNickName() {
-			return nickName;
-		}
-
-		public void setNickName(String nickName) {
-			this.nickName = nickName;
-		}
-
-		/**
-		 * 重载hashCode,只计算loginName;
-		 */
-		@Override
-		public int hashCode() {
-			return new HashCodeBuilder().append(loginName).toHashCode();
-		}
-
-		/**
-		 * 重载equals,只计算loginName;
-		 */
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj) {
-				return true;
-			}
-			if (obj == null) {
-				return false;
-			}
-			if (getClass() != obj.getClass()) {
-				return false;
-			}
-			SessionUser other = (SessionUser) obj;
-			if (loginName == null) {
-				if (other.loginName != null) {
-					return false;
-				}
-			} else if (!loginName.equals(other.loginName)) {
-				return false;
-			}
-			return true;
-		}
-	}
 }

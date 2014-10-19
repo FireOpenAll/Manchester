@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findUserByLoginName(String loginName) { 
-		return null;
+		return userMapper.findUserByLoginName(loginName);
 	}
 	
 	

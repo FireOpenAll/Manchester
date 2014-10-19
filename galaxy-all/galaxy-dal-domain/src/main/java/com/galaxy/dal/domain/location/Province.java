@@ -11,8 +11,8 @@ public class Province implements Serializable{
 	/*
 	 * 省份Model
 	 */
-	private int id;
-	private int province_code;
+	private Integer id;
+	private Integer province_code;
 	private String province_name;
 
 	public Province() {
@@ -26,19 +26,19 @@ public class Province implements Serializable{
 		this.province_name = province_name;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getProvince_code() {
+	public Integer getProvince_code() {
 		return province_code;
 	}
 
-	public void setProvince_code(int province_code) {
+	public void setProvince_code(Integer province_code) {
 		this.province_code = province_code;
 	}
 
@@ -49,5 +49,6 @@ public class Province implements Serializable{
 	public void setProvince_name(String province_name) {
 		this.province_name = province_name;
 	}
+ 
 
 }
