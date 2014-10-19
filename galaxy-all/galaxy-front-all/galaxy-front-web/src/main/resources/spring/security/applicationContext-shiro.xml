@@ -51,8 +51,9 @@
 		<property name="filterChainDefinitions">
 			<value>
 				/user/login= authc
+				/user/register/**= anon
 				/user/logout = logout
-				/account/** = user
+				/user/**=user 
 				/api/secure/** = authcBasic
 			</value>
 		</property>
