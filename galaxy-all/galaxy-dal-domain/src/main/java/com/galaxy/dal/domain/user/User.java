@@ -15,9 +15,11 @@ public class User extends BaseDomain {
 	private UserType type;// 用户类型。普通用户，商家
 
 	private String nick;// 昵称
-	
-	private int followers;
-	
+
+	private int followers;// 被关注,粉丝
+
+	private int followings;// 关注人
+
 	private int fans;
 
 	private String realName;// 真实姓名
@@ -27,21 +29,21 @@ public class User extends BaseDomain {
 	private String mobile;
 
 	private String password;
-	
-	private String salt;//用于生成密码和校验密码
+
+	private String salt;// 用于生成密码和校验密码
 
 	private boolean realNameAuth;// 实名认证
 
 	private boolean emailAuth;// 邮箱验证
 
 	private boolean mobileAuth;// 手机验证
-	
-	private boolean hasPic;//是否有图片 
-	
+
+	private boolean hasPic;// 是否有图片
+
 	private String avatar;// 用户头像url
 	private String qqOpenid;// 绑定的openId
 	private String webchatOpenid;// 绑定的openId
-	private String weiboOpenid;// 绑定的openId 
+	private String weiboOpenid;// 绑定的openId
 
 	private Date lastVisitTime;// 上一次访问时间
 
@@ -93,6 +95,14 @@ public class User extends BaseDomain {
 
 	public void setFollowers(int followers) {
 		this.followers = followers;
+	}
+
+	public int getFollowings() {
+		return followings;
+	}
+
+	public void setFollowings(int followings) {
+		this.followings = followings;
 	}
 
 	public int getFans() {
@@ -183,9 +193,6 @@ public class User extends BaseDomain {
 		this.avatar = avatar;
 	}
 
-	 
- 
-
 	public String getQqOpenid() {
 		return qqOpenid;
 	}
@@ -225,6 +232,5 @@ public class User extends BaseDomain {
 	public void setStatus(UserStatus status) {
 		this.status = status;
 	}
- 
 
 }

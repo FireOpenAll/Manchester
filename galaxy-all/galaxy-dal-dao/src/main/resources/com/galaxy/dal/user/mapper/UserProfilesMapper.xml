@@ -19,11 +19,27 @@
 		<result property="createdTime" column="created_time" />
 		<result property="updatedTime" column="updated_time" />
 	</resultMap>
-	<select id="getById" resultMap="USER_PROFILES_MAP" parameterType="long">
-		SELECT *
-		FROM u_user
-		WHERE id = #{id}
+
+    <!--  得到用户的name 属性数据-->
+    <select id="getByUserIdName" resultMap="USER_PROFILES_MAP">
+    select * from u_user_profiles
+    where user_id = #{user_id}
+    and name = #{name}
+    </select>
+    <!-- 获取用户所有的profile属性 -->
+	<select id="getAllByUserId" resultMap="USER_PROFILES_MAP" parameterType="long">
+	select * from u_user_profiles
+	where user_id = #{user_id}
 	</select>
+	
+	<!-- 删除用户的name 属性数据-->
+	<delete id="deleteByUserIdName">
+	delete from u_user_profiles
+	where user_id = #{user_id}
+    and name = #{name}
+	</delete>
+
+	
 	<!-- private String loginName,sex,birthday,type,nick,followers,fans,realName,email,mobile,password,realNameAuth,emailAuth,mobileAuth,hasPic,avatar,bindOpenId,bindPlatform,lastVisitTime,status; -->
 	<insert id="insert" parameterType="userProfiles"
 		useGeneratedKeys="true" keyProperty="id">
@@ -31,4 +47,5 @@
 		u_user_profiles(created_time,user_id,name,value)
 		VALUES(#{createdTime},#{userId},#{name},#{value})
 	</insert>
+	
 </mapper>

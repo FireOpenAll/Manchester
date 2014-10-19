@@ -38,8 +38,8 @@
 	<insert id="insert" parameterType="user" useGeneratedKeys="true"
 		keyProperty="id">
 		INSERT INTO
-		u_user(login_name,created_time,sex,birthday,type,nick,followers,fans,real_name,email,mobile,password,salt,real_name_auth,email_auth,mobile_auth,haspic,avatar,qq_openid,weibo_openid,webchat_openid,last_visit_time,status)
-		VALUES(#{loginName},#{createdTime},#{sex},#{birthday},#{type},#{nick},#{followers},#{fans},#{realName},#{email},#{mobile},#{password},#{salt},#{realNameAuth},#{emailAuth},#{mobileAuth},#{hasPic},#{avatar},#{qqOpenid},#{weiboOpenid},#{webchatOpenid},#{lastVisitTime},#{status})
+		u_user(login_name,created_time,sex,birthday,type,nick,followers,followings,fans,real_name,email,mobile,password,salt,real_name_auth,email_auth,mobile_auth,haspic,avatar,qq_openid,weibo_openid,webchat_openid,last_visit_time,status)
+		VALUES(#{loginName},#{createdTime},#{sex},#{birthday},#{type},#{nick},#{followers},#{followings},#{fans},#{realName},#{email},#{mobile},#{password},#{salt},#{realNameAuth},#{emailAuth},#{mobileAuth},#{hasPic},#{avatar},#{qqOpenid},#{weiboOpenid},#{webchatOpenid},#{lastVisitTime},#{status})
 	</insert>
 	
 	<select id="countUsersByEmail" parameterType="String" resultType="int">
