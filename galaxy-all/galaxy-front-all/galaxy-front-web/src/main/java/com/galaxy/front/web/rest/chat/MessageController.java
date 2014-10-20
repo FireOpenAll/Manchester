@@ -2,9 +2,14 @@ package com.galaxy.front.web.rest.chat;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +21,7 @@ import com.lepeng.im.message.json.JsonDecoder;
 @RestController(value = "MqttMessageController")
 @RequestMapping(value = "api/v1/chat")
 public class MessageController {
+	static Logger logger=LoggerFactory.getLogger(MessageController.class);
 	@Autowired
 	MessageBroker messageBroker;
 
@@ -25,7 +31,7 @@ public class MessageController {
 	 * @param message
 	 * @return
 	 */
-	@RequestMapping(value = "send")
+	@RequestMapping(value = "send",method=RequestMethod.GET)
 	public Object sendMessage(@RequestParam("message") String message) {
 		ResultModel result = new ResultModel();
 		result.setCode("20000");
@@ -39,6 +45,31 @@ public class MessageController {
 			messageBroker.receive(msg);
 		} catch (Exception e) {
 			result.setCode("40000");
+			logger.error("decode error!",e);
+		}
+		return result;
+	}
+	/**
+	 * 发送消息接口
+	 * 
+	 * @param message
+	 * @return
+	 */
+	@RequestMapping(value = "send",method=RequestMethod.POST)
+	public Object sendMessagePost(@RequestBody Map<?,?> message) {
+		ResultModel result = new ResultModel();
+		result.setCode("20000");
+		result.setData((Serializable) Collections.EMPTY_MAP);
+		if (message == null) {
+			result.setCode("40000");
+			return result;
+		}
+		try {
+			Message<?> msg = JsonDecoder.decode(message);
+			messageBroker.receive(msg);
+		} catch (Exception e) {
+			result.setCode("40000");
+			logger.error("decode error!",e);
 		}
 		return result;
 	}
