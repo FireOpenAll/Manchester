@@ -22,7 +22,7 @@
 		<result property="replyTime" column="reply_time" />
 		
 	</resultMap>
-	<select id="getById" resultMap="ACTIVITY_LIKED_USERS_MAP"
+	<select id="getById" resultMap="ActivityComment"
 		parameterType="long">
 		SELECT *
 		FROM ac_activity_commented_users
@@ -30,7 +30,7 @@
 	</select>
 
     <!-- 评论活动 -->
-	<insert id="insert" parameterType="activityLikedUsers"
+	<insert id="insert" parameterType="ActivityComment"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
 		ac_activity_commented_users(created_time,activity_id,user_id,target_id,reply_time,content)
@@ -38,7 +38,7 @@
 	</insert>
 	
 	<!-- 取消评论  By 评论id-->
-	<delete id="cancelComment" parameterType="long">
+	<delete id="cancelCommentById" parameterType="long">
 	delete from ac_activity_commented_users
 	where id = #{id}
 	</delete>
