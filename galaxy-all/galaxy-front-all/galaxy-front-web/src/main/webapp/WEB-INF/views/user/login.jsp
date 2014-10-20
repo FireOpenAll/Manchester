@@ -162,7 +162,7 @@ $(function() {
 </div>
 <script type="text/javascript" src="/resources/js/jquery.validation.min.js" charset="utf-8"></script>
 <div id="main-wrap">
-  <div class="left_pic"><img src="/resources/images/1.jpg"></div>
+  <div class="left_pic"><img src="/resources/images/login_baner.jpg"></div>
   <div class="login_page">
     <div class="page_hd">
       <h2>登录<span>&nbsp;Galaxy</span></h2>

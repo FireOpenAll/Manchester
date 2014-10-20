@@ -178,7 +178,7 @@ $(function() {
 </style>
 	<div id="main-wrap">
 		<div class="left_pic">
-			<img src="/resources/images/1.jpg">
+			<img src="/resources/images/login_baner.jpg">
 		</div>
 		<div class="register_page">
 			<div class="page_hd">
