@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.galaxy.dal.chat.mapper.ChatGroupMapper">
+
+	<resultMap type="chatGroup" id="chatGroup_MAP">
+		<id property="id" column="id" />
+		<result property="createdTime" column="created_time" />
+		<result property="updatedTime" column="updated_time" /> 
+		<result property="cateId1" column="cate_id1" />
+		<result property="cateId2" column="cate_id3" />
+		<result property="cateId3" column="cate_id3" />
+		<result property="ownerUserId" column="owner_user_id" />
+		<result property="publicDesc" column="public_desc" />
+        <result property="memberDesc" column="member_desc"/>
+	</resultMap>
+	<select id="getById" resultMap="chatGroup_MAP" parameterType="long">
+		SELECT *
+		FROM im_chat_group
+		WHERE id = #{id}
+	</select>
+	<!-- private String loginName,sex,birthday,type,nick,followers,fans,realName,email,mobile,password,realNameAuth,emailAuth,mobileAuth,hasPic,avatar,bindOpenId,bindPlatform,lastVisitTime,status; -->
+	<insert id="insert" parameterType="chatGroup" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO
+		im_chat_group(created_time,cateId1,cateId2,cateId3,ownerUserId,publicDesc,memberDesc)
+		VALUES(#{createdTime},#{cateId1},#{cateId2},#{cateId3},#{ownerUserId},#{publicDesc},#{memberDesc})
+	</insert>
+	 
+</mapper>
