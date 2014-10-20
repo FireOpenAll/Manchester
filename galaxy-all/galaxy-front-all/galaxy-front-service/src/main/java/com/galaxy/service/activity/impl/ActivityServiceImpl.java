@@ -117,6 +117,13 @@ public class ActivityServiceImpl implements ActivityService {
 			Long fromId, Long size) { 
 		return activityJoinedUsersMapper.listAllJoinedUsersFromId(activityId, fromId, size);
 	}
+	
+	//计算user_id参加的活动数
+	@Override
+	public int getUserJoinedActNumber(Long user_id) {
+		// TODO Auto-generated method stub
+		return ;
+	}
 
 	
 

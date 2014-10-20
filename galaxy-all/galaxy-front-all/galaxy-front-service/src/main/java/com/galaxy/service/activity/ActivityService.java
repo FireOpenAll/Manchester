@@ -24,5 +24,8 @@ public interface ActivityService {
 	public List<ActivityJoinedUsers> listAllJoinedUsers(Long activityId);
 	
 	public List<ActivityJoinedUsers> listAllJoinedUsersFromId(Long activityId,Long fromId,Long size);
+	
+	//计算user_id参加的活动数
+	public int getUserJoinedActNumber(Long user_id);
 
 }

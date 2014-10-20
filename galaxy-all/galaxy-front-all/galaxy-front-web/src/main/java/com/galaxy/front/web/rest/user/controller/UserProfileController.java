@@ -24,6 +24,7 @@ import com.galaxy.front.web.rest.model.profile.UserProfileModel;
 import com.galaxy.front.web.utils.Code;
 import com.galaxy.front.web.utils.ParamUtils;
 import com.galaxy.front.web.utils.ResultModelUtils;
+import com.galaxy.service.activity.ActivityService;
 import com.galaxy.service.user.UserService;
 
 /**
@@ -36,6 +37,8 @@ public class UserProfileController {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ActivityService activityService;
 	
 
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
@@ -93,7 +96,7 @@ public class UserProfileController {
 		UserProfileModel profileModel = new UserProfileModel();
 
 		profileModel.setUser_id(user_id);
-		profileModel.setUser_name("user_id="+user_id);
+		profileModel.setUser_name("paris");
 		profileModel.setAvatar("/user/avatar/10.jpg");
 		profileModel.setGender("male");
 		profileModel.setBirthday(new Date());
@@ -124,17 +127,56 @@ public class UserProfileController {
 	}
 	
 	
-	@RequestMapping(value = "/profile1", method = RequestMethod.GET,params="user_id")
-	public Object getProfile1(@RequestParam("user_id") Long user_id) {
+	@RequestMapping(value = "/profile1", method = RequestMethod.GET,params={"user_id","target_id"})
+	public Object getProfile1(@RequestParam("user_id") Long user_id,@RequestParam("target_id") Long target_id) {
 		/**
 		 * sql数据
 		 */
 		ResultModel resultModel = new ResultModel();
 
-		if (ParamUtils.isNotEmpty(user_id)) {
+		if (ParamUtils.isNotEmpty(user_id,target_id)) {
 			
-			User user = userService.getUser(user_id);
+			User user = userService.getUser(target_id);
 			if (user != null) {
+				UserProfileModel profileModel = new UserProfileModel();
+
+				profileModel.setUser_id(user.getId());
+				profileModel.setUser_name(user.getNick());//nickname
+				profileModel.setAvatar(user.getAvatar());
+				profileModel.setGender(user.getSex());
+				profileModel.setBirthday(user.getBirthday());
+				//待完善
+				profileModel.setCredit_info(new CreditInfo(35, "活动达人"));
+				profileModel.setLocation(new SimpleAddress("广东省", "广州市"));
+
+				List<InterestModel> lisInterests = new ArrayList<InterestModel>();
+				for (int i = 1; i < 6; i++) {
+					lisInterests.add(new InterestModel((long) i * 10000000, "兴趣" + i,"/interest/cover/"+(10+i)+".jpg",i+"热门兴趣描述"));
+
+				}
+				profileModel.setInterest_group(new InterestGroup(5, lisInterests));
+				//待完善
+				
+				profileModel.setFollowed(user.getFollowers());
+				profileModel.setFollowing(user.getFans());
+				
+				profileModel.setJoined_count(100);
+				profileModel.setLike_count(200);
+				profileModel.setComment_count(300);
+				profileModel.setCreate_count(400);
+
+				if (user_id.equals(target_id)) {
+					//查看自己的profile
+					profileModel.setIs_followed(false);
+					profileModel.setIs_following(false);
+				}else {
+					//查看他人的profile
+					
+				}
+				
+				resultModel.setData(profileModel);
+				
+				
 				
 			}else {
 				resultModel = ResultModelUtils.getResultModelByCode(Code.SQL_SELECT_NOT_EXISTS);

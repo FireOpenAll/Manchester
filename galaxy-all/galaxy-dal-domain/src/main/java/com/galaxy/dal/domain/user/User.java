@@ -10,7 +10,7 @@ public class User extends BaseDomain {
 
 	private String sex;
 
-	private Date birthday;// 2000-01-01 00:00:00 生日
+	private Date birthday;// 2000-01-01 00:00:00 生日,年月日就够了
 
 	private UserType type;// 用户类型。普通用户，商家
 
@@ -18,9 +18,7 @@ public class User extends BaseDomain {
 
 	private int followers;// 被关注,粉丝
 
-	private int followings;// 关注人
-
-	private int fans;
+	private int fans;//关注
 
 	private String realName;// 真实姓名
 
@@ -95,14 +93,6 @@ public class User extends BaseDomain {
 
 	public void setFollowers(int followers) {
 		this.followers = followers;
-	}
-
-	public int getFollowings() {
-		return followings;
-	}
-
-	public void setFollowings(int followings) {
-		this.followings = followings;
 	}
 
 	public int getFans() {
