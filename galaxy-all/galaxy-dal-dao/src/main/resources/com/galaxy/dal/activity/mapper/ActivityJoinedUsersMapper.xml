@@ -51,4 +51,11 @@
 		ac_activity_joined_users(created_time,user_id,user_name,activity_id,ticket_num)
 		VALUES(#{createdTime},#{userId},#{userName},#{activityId},#{ticketNum})
 	</insert>
+	
+	<!-- 计算user_id参加的活动数 -->
+	<select id="getUserJoinedActNumber" parameterType="long">
+	select count(id) 
+	from ac_activity_joined_users
+	where user_id = #{user_id}
+	</select>
 </mapper>

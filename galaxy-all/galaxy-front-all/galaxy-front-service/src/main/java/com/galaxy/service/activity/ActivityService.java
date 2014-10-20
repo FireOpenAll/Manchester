@@ -3,8 +3,12 @@ package com.galaxy.service.activity;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.galaxy.dal.base.mapper.PaginationParam;
 import com.galaxy.dal.domain.activity.Activity;
 import com.galaxy.dal.domain.activity.ActivityJoinedUsers;
+import com.galaxy.dal.domain.activity.ActivityLikedUsers;
 import com.galaxy.service.activity.form.ActivityForm;
 
 public interface ActivityService {
@@ -15,14 +19,36 @@ public interface ActivityService {
 
 	public boolean removeById(Long id);
 
-	public boolean joinActivity(Long activityId, Long userId);
+	
 
 	public Activity getActivity(Long id);
 
 	public List<Activity> list(Map parameters, int size);
 	
+	////join
+	public boolean joinActivity(Long activityId, Long userId);
 	public List<ActivityJoinedUsers> listAllJoinedUsers(Long activityId);
 	
 	public List<ActivityJoinedUsers> listAllJoinedUsersFromId(Long activityId,Long fromId,Long size);
+	
+	//计算user_id参加的活动数
+	public int getUserJoinedActNumber(Long user_id);
 
+	////join
+	
+	
+	////like
+	public boolean likeActivity(ActivityLikedUsers activityLikedUsers);
+	
+	//分页列出某个活动点赞的用户
+	public List<ActivityLikedUsers> listAllLikedUsers(Long activity_id);
+	//分页列出某个活动点赞的用户
+	public List<ActivityLikedUsers> listAllLikedUsersByActId(PaginationParam paginationParam);
+	//计算user_id Liked过的活动数
+	public int getLikedActNumByUserId(Long user_id);
+	//取消点赞 
+	public boolean cancelLiked(Long user_id,Long activity_id);
+
+	
+	////like
 }
