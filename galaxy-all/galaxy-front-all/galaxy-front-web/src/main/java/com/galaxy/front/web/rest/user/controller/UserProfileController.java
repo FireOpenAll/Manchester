@@ -83,8 +83,8 @@ public class UserProfileController {
 		return resultModel;
 	}
 
-	@RequestMapping(value = "/profile", method = RequestMethod.GET,params="user_id")
-	public Object getProfile(@RequestParam("user_id") Long user_id) {
+	@RequestMapping(value = "/profile", method = RequestMethod.GET,params={"user_id","target_id"})
+	public Object getProfile(@RequestParam("user_id") Long user_id,@RequestParam("target_id") Long target_id) {
 		/**
 		 * 假数据
 		 */
@@ -94,8 +94,9 @@ public class UserProfileController {
 		resultModel.setMessage("update user profile success");
 
 		UserProfileModel profileModel = new UserProfileModel();
+		
 
-		profileModel.setUser_id(user_id);
+		profileModel.setUser_id(target_id);
 		profileModel.setUser_name("paris");
 		profileModel.setAvatar("/user/avatar/10.jpg");
 		profileModel.setGender("male");
@@ -159,6 +160,14 @@ public class UserProfileController {
 				
 				profileModel.setFollowed(user.getFollowers());
 				profileModel.setFollowing(user.getFans());
+				
+				//得到用户参加过的活动数目
+				int joined_count = activityService.getUserJoinedActNumber(target_id);
+				profileModel.setJoined_count(joined_count);
+				
+				//得到用户点赞过的活动数目
+				int liked_count = activityService.getLikedActNumByUserId(target_id);
+				profileModel.setLike_count(liked_count);
 				
 				profileModel.setJoined_count(100);
 				profileModel.setLike_count(200);
