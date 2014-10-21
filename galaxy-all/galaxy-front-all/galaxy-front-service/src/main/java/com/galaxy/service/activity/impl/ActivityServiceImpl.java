@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,11 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.galaxy.dal.activity.mapper.ActivityDetailMapper;
 import com.galaxy.dal.activity.mapper.ActivityJoinedUsersMapper;
+import com.galaxy.dal.activity.mapper.ActivityLikedUsersMapper;
 import com.galaxy.dal.activity.mapper.ActivityMapper;
 import com.galaxy.dal.base.mapper.PaginationParam;
 import com.galaxy.dal.domain.activity.Activity;
 import com.galaxy.dal.domain.activity.ActivityDetail;
 import com.galaxy.dal.domain.activity.ActivityJoinedUsers;
+import com.galaxy.dal.domain.activity.ActivityLikedUsers;
 import com.galaxy.service.activity.ActivityService;
 import com.galaxy.service.activity.form.ActivityForm;
 import com.galaxy.service.user.LoginUserModel;
@@ -29,6 +32,8 @@ public class ActivityServiceImpl implements ActivityService {
 	ActivityDetailMapper activityDetailMappper;
 	@Autowired
 	ActivityJoinedUsersMapper activityJoinedUsersMapper;
+	@Autowired
+	ActivityLikedUsersMapper activityLikedUsersMapper;
 
 	@Override
 	@Transactional
@@ -107,6 +112,7 @@ public class ActivityServiceImpl implements ActivityService {
 		return results;
 	}
 
+	////join
 	@Override
 	public List<ActivityJoinedUsers> listAllJoinedUsers(Long activityId) { 
 		return activityJoinedUsersMapper.listAllJoinedUsers(activityId);
@@ -117,7 +123,52 @@ public class ActivityServiceImpl implements ActivityService {
 			Long fromId, Long size) { 
 		return activityJoinedUsersMapper.listAllJoinedUsersFromId(activityId, fromId, size);
 	}
-
 	
+	//计算user_id参加的活动数
+	@Override
+	public int getUserJoinedActNumber(Long user_id) {
+		// TODO Auto-generated method stub
+		return activityJoinedUsersMapper.getUserJoinedActNumber(user_id);
+	}
+
+
+	////join
+	
+	////like
+	@Override
+	public boolean likeActivity(ActivityLikedUsers activityLikedUsers) {
+		//点赞某活动
+		return activityLikedUsersMapper.insert(activityLikedUsers);
+	}
+	
+	@Override
+	public List<ActivityLikedUsers> listAllLikedUsers(Long activity_id) {
+		//分页列出某个活动点赞的用户
+		List<ActivityLikedUsers> likedUsers = activityLikedUsersMapper.listAllLikedUsers(activity_id);
+		return likedUsers;
+	}
+
+	@Override
+	public List<ActivityLikedUsers> listAllLikedUsersByActId(PaginationParam paginationParam) {
+		//分页列出某个活动点赞的用户
+		List<ActivityLikedUsers> likedUsers = activityLikedUsersMapper.listAllLikedUsersByActId(paginationParam);
+		return likedUsers;
+	}
+
+	@Override
+	public int getLikedActNumByUserId(Long user_id) {
+		//计算user_id Liked过的活动数
+		return activityLikedUsersMapper.getLikedActNumByUserId(user_id);
+	}
+
+	@Override
+	public boolean cancelLiked(Long user_id, Long activity_id) {
+		//取消点赞 
+		return activityLikedUsersMapper.cancelLiked(user_id, activity_id);
+	}
+	
+	
+	
+	////like
 
 }

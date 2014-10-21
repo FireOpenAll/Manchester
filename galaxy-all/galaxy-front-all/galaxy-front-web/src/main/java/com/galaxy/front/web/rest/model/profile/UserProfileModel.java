@@ -11,7 +11,7 @@ import com.galaxy.front.web.rest.model.location.SimpleAddress;
 public class UserProfileModel implements Serializable {
 
 	long user_id;
-	String user_name;
+	String user_name;//昵称
 	String avatar;
 	String gender;
 	Date birthday;
