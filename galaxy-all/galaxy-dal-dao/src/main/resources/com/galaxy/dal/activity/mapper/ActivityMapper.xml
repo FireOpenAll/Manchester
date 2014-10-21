@@ -82,4 +82,10 @@
 		FROM ac_activity
 		WHERE id = #{id}
 	</select>
+	<!-- 统计某人发布的活动数 -->
+	<select id="getUserCreatedActNum" parameterType="long">
+	select count(*)
+	from ac_activity
+	where user_id = #{user_id}
+	</select>
 </mapper>

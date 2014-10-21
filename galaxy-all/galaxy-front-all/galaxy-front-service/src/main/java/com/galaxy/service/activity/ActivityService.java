@@ -51,4 +51,12 @@ public interface ActivityService {
 
 	
 	////like
+	
+	////comment
+	//统计user_id评论过的活动数
+	public int getUserComActNum(@Param("user_id") Long user_id);
+	////comment
+	
+	//统计某user_id发布的活动数
+	public int getUserCreatedActNum(@Param("user_id") Long user_id);
 }

@@ -169,10 +169,14 @@ public class UserProfileController {
 				int liked_count = activityService.getLikedActNumByUserId(target_id);
 				profileModel.setLike_count(liked_count);
 				
-				profileModel.setJoined_count(100);
-				profileModel.setLike_count(200);
-				profileModel.setComment_count(300);
-				profileModel.setCreate_count(400);
+				
+				//得到用户评论过的活动数目
+				int comment_count = activityService.getUserComActNum(target_id);
+				profileModel.setLike_count(liked_count);
+				
+				//得到用户创建过的活动数
+				int create_count = activityService.getUserCreatedActNum(user_id);
+				profileModel.setCreate_count(create_count);			
 
 				if (user_id.equals(target_id)) {
 					//查看自己的profile
@@ -192,7 +196,7 @@ public class UserProfileController {
 				resultModel.setData("用户不存在");
 			}
 			
-			
+			/*
 			resultModel.setCode("20000");
 			resultModel.setMessage("update user profile success");
 
@@ -225,6 +229,8 @@ public class UserProfileController {
 			profileModel.setCreate_count(400);
 
 			resultModel.setData(profileModel);
+			
+			*/
 		}else {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 			resultModel.setData("请输入正确的参数");
