@@ -10,8 +10,7 @@ public class UserFriend extends BaseDomain {
 	// 用户关系实体
 	private Long userId;
 	private Long targetId;
-	private boolean following;// userId关注targetId
-	private boolean follwoed;// targetId关注 userId
+	private int relation;// default 0 = 无关系，1=关注，2=被关注，3=互粉
 
 	public Long getUserId() {
 		return userId;
@@ -29,20 +28,12 @@ public class UserFriend extends BaseDomain {
 		this.targetId = targetId;
 	}
 
-	public boolean isFollowing() {
-		return following;
+	public int getRelation() {
+		return relation;
 	}
 
-	public void setFollowing(boolean following) {
-		this.following = following;
-	}
-
-	public boolean isFollwoed() {
-		return follwoed;
-	}
-
-	public void setFollwoed(boolean follwoed) {
-		this.follwoed = follwoed;
+	public void setRelation(int relation) {
+		this.relation = relation;
 	}
 
 }
