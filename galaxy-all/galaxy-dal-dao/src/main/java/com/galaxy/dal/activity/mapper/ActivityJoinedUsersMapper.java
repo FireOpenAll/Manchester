@@ -13,7 +13,6 @@ public interface ActivityJoinedUsersMapper extends
 
 	public List<ActivityJoinedUsers> listAllJoinedUsersFromId(Long activityId,
 			Long fromId, Long size);
-	
 	//计算user_id参加的活动数
 	public int getUserJoinedActNumber(@Param("user_id")Long user_id);
 }

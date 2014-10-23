@@ -19,17 +19,19 @@
 		<result property="updatedTime" column="updated_time" /> 
 		<result property="groupId" column="group_id" />
 		<result property="userId" column="user_id" /> 
+		<result property="userName" column="user_name" /> 
 	</resultMap>
+	
 	<select id="getById" resultMap="chatGroupMember_MAP" parameterType="long">
 		SELECT *
 		FROM im_chat_group_member
 		WHERE id = #{id}
-	</select>
+	</select> 
 	<insert id="insert" parameterType="chatGroupMember" useGeneratedKeys="true"
 		keyProperty="id">
 		INSERT INTO
-		im_chat_group_member(created_time,group_id,user_id,phone,email,description,status)
-		VALUES(#{createdTime},#{groupId},#{userId},#{phone},#{email},#{description},#{status})
+		im_chat_group_member(user_name,created_time,group_id,user_id,phone,email,description,status,role)
+		VALUES(#{userName},#{createdTime},#{groupId},#{userId},#{phone},#{email},#{description},#{status},#{role})
 	</insert>
 	 
 </mapper>

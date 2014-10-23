@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.galaxy.dal.domain.user.User;
+import com.galaxy.dal.domain.user.UserFriend;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.interest.InterestGroup;
 import com.galaxy.front.web.rest.model.interest.InterestModel;
@@ -25,6 +26,7 @@ import com.galaxy.front.web.utils.Code;
 import com.galaxy.front.web.utils.ParamUtils;
 import com.galaxy.front.web.utils.ResultModelUtils;
 import com.galaxy.service.activity.ActivityService;
+import com.galaxy.service.user.UserFriendService;
 import com.galaxy.service.user.UserService;
 
 /**
@@ -39,6 +41,8 @@ public class UserProfileController {
 	private UserService userService;
 	@Autowired
 	private ActivityService activityService;
+	@Autowired
+	private UserFriendService userFriendService;
 	
 
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
@@ -169,18 +173,47 @@ public class UserProfileController {
 				int liked_count = activityService.getLikedActNumByUserId(target_id);
 				profileModel.setLike_count(liked_count);
 				
-				profileModel.setJoined_count(100);
-				profileModel.setLike_count(200);
-				profileModel.setComment_count(300);
-				profileModel.setCreate_count(400);
+				
+				//得到用户评论过的活动数目
+				int comment_count = activityService.getUserComActNum(target_id);
+				profileModel.setComment_count(comment_count);
+				
+				//得到用户创建过的活动数
+				int create_count = activityService.getUserCreatedActNum(user_id);
+				profileModel.setCreate_count(create_count);			
 
-				if (user_id.equals(target_id)) {
+				
+				if (!user_id.equals(target_id)) {
+					//查看他人的profile
+					UserFriend userFriend = userFriendService.getUsersFriend(user_id, target_id);
+					if (userFriend != null) {
+						int relation = userFriend.getRelation();
+						switch (relation) {
+						case 1:
+							profileModel.setIs_followed(false);
+							profileModel.setIs_following(true);
+							break;
+						case 2:
+							profileModel.setIs_followed(true);
+							profileModel.setIs_following(false);
+							break;
+						case 3:
+							profileModel.setIs_followed(true);
+							profileModel.setIs_following(true);
+						default:
+							profileModel.setIs_followed(false);
+							profileModel.setIs_following(false);
+							break;
+						}
+					}else {
+						profileModel.setIs_followed(false);
+						profileModel.setIs_following(false);
+					}
+					
+				}else {
 					//查看自己的profile
 					profileModel.setIs_followed(false);
 					profileModel.setIs_following(false);
-				}else {
-					//查看他人的profile
-					
 				}
 				
 				resultModel.setData(profileModel);
@@ -192,7 +225,7 @@ public class UserProfileController {
 				resultModel.setData("用户不存在");
 			}
 			
-			
+			/*
 			resultModel.setCode("20000");
 			resultModel.setMessage("update user profile success");
 
@@ -225,6 +258,8 @@ public class UserProfileController {
 			profileModel.setCreate_count(400);
 
 			resultModel.setData(profileModel);
+			
+			*/
 		}else {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 			resultModel.setData("请输入正确的参数");

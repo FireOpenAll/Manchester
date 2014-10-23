@@ -20,5 +20,9 @@ public enum ChatGroupRole {
 	 * 会员
 	 */
 	MEMBER;
+	
+	public boolean isManager(){
+		return this.equals(ADMIN)||this.equals(MANAGER);
+	}
 
 }

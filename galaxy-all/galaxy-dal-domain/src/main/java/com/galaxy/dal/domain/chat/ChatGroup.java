@@ -12,6 +12,7 @@ import com.galaxy.dal.domain.BaseDomain;
 public class ChatGroup extends BaseDomain {
 	
 	String name;
+	Long activityId;
 	Long cateId1;
 	Long cateId2;
 	Long cateId3;
@@ -23,6 +24,12 @@ public class ChatGroup extends BaseDomain {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public Long getActivityId() {
+		return activityId;
+	}
+	public void setActivityId(Long activityId) {
+		this.activityId = activityId;
 	}
 	public Long getOwnerUserId() {
 		return ownerUserId;

@@ -27,6 +27,8 @@ import com.galaxy.dal.domain.user.User;
 public class ShiroDbRealm extends AuthorizingRealm {
 	@Autowired
 	protected UserService userService;
+	@Autowired
+	TokenService tokenService;
 
 	/**
 	 * 认证回调函数,登录时调用.
@@ -44,6 +46,8 @@ public class ShiroDbRealm extends AuthorizingRealm {
 			loginUser.setMobile(user.getMobile());
 			loginUser.setNickName(user.getNick());
 			loginUser.setUserId(user.getId());
+			loginUser.setToken(tokenService.generateToken());
+			loginUser.setExpiredToken(tokenService.generateToken());
 			return new SimpleAuthenticationInfo(loginUser, user.getPassword(),ByteSource.Util.bytes(salt), getName());
 		} else {
 			return null;

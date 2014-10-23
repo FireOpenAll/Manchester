@@ -51,4 +51,18 @@
 	and reply_time = #{replyTime}
 	</delete>
 	
+	<!-- 统计user_id评论过的活动数 -->
+	<select id="getUserComActNum" parameterType="long">
+	select count(distinct activity_id)
+	from ac_activity_commented_users
+	where user_id = #{user_id}
+	</select>
+	
+	<!-- 分页获取评论 -->
+	<select id="list" resultMap="ACTIVITY_COMMENT_MAP" parameterType="com.galaxy.dal.base.mapper.PaginationParam">
+	select * from
+	ac_activity_commented_users
+	where activity_id = #{param1.activity_id} limit param2,param3
+	</select>
+	
 </mapper>

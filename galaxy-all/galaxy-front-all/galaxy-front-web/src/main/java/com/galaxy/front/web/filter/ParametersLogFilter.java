@@ -48,7 +48,7 @@ public class ParametersLogFilter implements Filter {
 		StringBuilder sb=new StringBuilder();
 		Set<String> keys=httpRequest.getParameterMap().keySet();
 		for(String key:keys){
-			sb.append(key).append("=").append(request.getParameter(key)).append(",");
+			sb.append(key).append("=").append(request.getParameter(key)).append("&");
 		}
 		logger.error("url="+httpRequest.getRequestURL()+" query string="+httpRequest.getQueryString());
 		logger.error("all string="+sb);
@@ -63,6 +63,7 @@ public class ParametersLogFilter implements Filter {
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}
+	
 
 	/**
 	 * @see Filter#init(FilterConfig)

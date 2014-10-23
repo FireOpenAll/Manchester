@@ -7,7 +7,7 @@ package com.galaxy.dal.domain;
  * @author luolishu
  *
  */
-public enum DBStauts {
+public enum DBStatus {
 	INIT,
 	ACTIVE,
 	REMOVE;

@@ -6,6 +6,7 @@ public class Favorites extends BaseDomain {
 	Long userId;
 	Type type;
 	Long ref_id;
+	String url;
 	int status;
 
 	public Long getUserId() {
@@ -22,6 +23,14 @@ public class Favorites extends BaseDomain {
 
 	public void setType(Type type) {
 		this.type = type;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public Long getRef_id() {
@@ -41,7 +50,9 @@ public class Favorites extends BaseDomain {
 	}
 
 	public enum Type {
-		ACTIVITY
+		ACTIVITY,
+		ARTICLE,
+		DATING
 
 	}
 }

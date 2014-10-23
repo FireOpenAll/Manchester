@@ -4,19 +4,21 @@
 package com.galaxy.dal.domain.chat;
 
 import com.galaxy.dal.domain.BaseDomain;
-import com.galaxy.dal.domain.DBStauts;
+import com.galaxy.dal.domain.DBStatus;
 
 /**
  * @author luolishu
  * 
  */
 public class ChatGroupMember extends BaseDomain {
+	
 	Long groupId;
 	Long userId;
+	String userName; 
 	String phone;
 	String email;
 	String description;
-	DBStauts status;
+	DBStatus status;
 	ChatGroupRole role;
 	public Long getGroupId() {
 		return groupId;
@@ -48,10 +50,10 @@ public class ChatGroupMember extends BaseDomain {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public DBStauts getStatus() {
+	public DBStatus getStatus() {
 		return status;
 	}
-	public void setStatus(DBStauts status) {
+	public void setStatus(DBStatus status) {
 		this.status = status;
 	}
 	public ChatGroupRole getRole() {
@@ -60,6 +62,12 @@ public class ChatGroupMember extends BaseDomain {
 	public void setRole(ChatGroupRole role) {
 		this.role = role;
 	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	} 
 	
 	
 	

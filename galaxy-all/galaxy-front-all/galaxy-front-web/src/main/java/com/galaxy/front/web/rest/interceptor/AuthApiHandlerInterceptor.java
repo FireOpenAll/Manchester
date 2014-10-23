@@ -6,8 +6,13 @@ package com.galaxy.front.web.rest.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.galaxy.front.web.rest.model.ResultModel;
+import com.galaxy.service.user.LoginUserModel;
+import com.galaxy.service.user.UserUtils;
 
 /**
  * @author luolishu
@@ -18,20 +23,37 @@ public class AuthApiHandlerInterceptor implements HandlerInterceptor {
 	
 	
 	 
-	/* (non-Javadoc)
-	 * @see org.springframework.web.servlet.HandlerInterceptor#preHandle(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object)
-	 */
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		// TODO Auto-generated method stub
-		//response.getWriter().write("Hello!");
+		String token=getToken(request);
+		if(StringUtils.isBlank(token)){
+			ResultModel resultModel = new ResultModel();
+			resultModel.setCode("40300");
+			resultModel.setData("has no token!");
+			return false;
+		}
+		LoginUserModel userModel=UserUtils.getUserByToken(token);
+		if(userModel==null){
+			ResultModel resultModel = new ResultModel();
+			resultModel.setCode("40300");
+			resultModel.setData("token invalid!");
+			return false;
+		}
+		if(userModel.isExpired()){
+			ResultModel resultModel = new ResultModel();
+			resultModel.setCode("40300");
+			resultModel.setData("token expired!");
+			return false;
+		}
 		return true;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.springframework.web.servlet.HandlerInterceptor#postHandle(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object, org.springframework.web.servlet.ModelAndView)
-	 */
+	private String getToken(HttpServletRequest request){
+		return null;
+	}
+	 
 	@Override
 	public void postHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler,
@@ -40,9 +62,7 @@ public class AuthApiHandlerInterceptor implements HandlerInterceptor {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see org.springframework.web.servlet.HandlerInterceptor#afterCompletion(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object, java.lang.Exception)
-	 */
+	 
 	@Override
 	public void afterCompletion(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex)

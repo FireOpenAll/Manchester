@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.galaxy.dal.user.mapper.FavoritesMapper">
+
+	<resultMap type="favorites" id="Favorites_MAP">
+		<id property="id" column="id" />
+		<result property="createdTime" column="created_time" />
+		<result property="updatedTime" column="updated_time" />
+		<result property="realNameAuth" column="real_name_auth" />
+		<result property="emailAuth" column="email_auth" />
+		<result property="mobileAuth" column="mobile_auth" />
+		<result property="mobileAuth" column="mobile_auth" />
+		<result property="hasPic" column="haspic" />
+        <result property="loginName" column="login_name"/>
+		<result property="qqOpenid" column="qq_openid" />
+		<result property="weiboOpenid" column="weibo_openid" />
+		<result property="webchatOpenid" column="webchat_openid" />
+
+		<result property="lastVisitTime" column="last_visit_time" />
+	</resultMap>
+	<select id="getById" resultMap="Favorites_MAP" parameterType="long">
+		SELECT *
+		FROM u_user
+		WHERE id = #{id}
+	</select>
+	<!-- private String loginName,sex,birthday,type,nick,followers,fans,realName,email,mobile,password,realNameAuth,emailAuth,mobileAuth,hasPic,avatar,bindOpenId,bindPlatform,lastVisitTime,status; -->
+	<insert id="insert" parameterType="favorites" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO
+		u_user(login_name,created_time,sex,birthday,type,nick,followers,followings,fans,real_name,email,mobile,password,salt,real_name_auth,email_auth,mobile_auth,haspic,avatar,qq_openid,weibo_openid,webchat_openid,last_visit_time,status)
+		VALUES(#{loginName},#{createdTime},#{sex},#{birthday},#{type},#{nick},#{followers},#{followings},#{fans},#{realName},#{email},#{mobile},#{password},#{salt},#{realNameAuth},#{emailAuth},#{mobileAuth},#{hasPic},#{avatar},#{qqOpenid},#{weiboOpenid},#{webchatOpenid},#{lastVisitTime},#{status})
+	</insert>
+	 
+</mapper>
