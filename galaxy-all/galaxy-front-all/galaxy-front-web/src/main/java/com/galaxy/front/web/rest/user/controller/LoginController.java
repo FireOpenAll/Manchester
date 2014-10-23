@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.galaxy.front.web.rest.interceptor.IgnoreAuth;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.user.AuthResultModel;
 import com.galaxy.front.web.utils.Code;
@@ -23,6 +24,7 @@ import com.galaxy.service.user.UserUtils;
 
 @RestController
 @RequestMapping(value = "api/v1/user")
+@IgnoreAuth
 public class LoginController {
 
 	/**
