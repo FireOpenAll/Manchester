@@ -335,7 +335,7 @@ $(function() {
 							<label for="agree" generated="true" class="error" style="display: none;">请阅读并同意该协议</label>
 						</dd>
 						<dd>
-							<input type="button" title="立即注册" class="btn-regist" value="立即注册" name="Submit">
+							<input type="button" title="立即注册" class="btn-regist" value="立即注册" name="Submit" id="submitBtn">
 						</dd>
 					</dl>
 				</form>
@@ -391,7 +391,7 @@ $(function(){
 	jQuery.validator.addMethod("phones", function(value, element) {
 		return this.optional(element) || /^(13[0-9]|15[0|3|6|7|8|9]|18[8|9])\d{8}$/i.test(value);
 	}, "phone number please"); 
-	$('input[name="Submit"]').click(function(){
+	$('#submitBtn').click(function(){
         if($("#register_form").valid()){
         	$("#register_form").submit();
         } else{

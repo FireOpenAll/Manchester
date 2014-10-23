@@ -42,7 +42,7 @@ public class LoginController {
 	 * @return
 	 */
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET, params = {
+	@RequestMapping(value = "/login", method = RequestMethod.POST, params = {
 			"logintext", "password" })
 	public Object loginShiro(HttpServletRequest request,
 			@RequestParam("logintext") String logintext,
