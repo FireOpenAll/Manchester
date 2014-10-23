@@ -81,6 +81,7 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
+	@Transactional
 	public boolean joinActivity(Long activityId, Long userId) {
 		Activity activity=activityMappper.getById(activityId);
 		if(activity==null){
@@ -95,7 +96,9 @@ public class ActivityServiceImpl implements ActivityService {
 		joinedUser.setUserId(user.getUserId());
 		joinedUser.setUserName(user.getLoginName());
 		activityJoinedUsersMapper.insert(joinedUser);
-		return false;
+		activity.setJoinedNum(activity.getJoinedNum()+1);
+		activityMappper.insert(activity);//activity参加人数+1
+		return true;
 	}
 	
 	

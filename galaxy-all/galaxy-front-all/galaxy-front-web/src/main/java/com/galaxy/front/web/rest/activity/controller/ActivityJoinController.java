@@ -6,12 +6,15 @@ package com.galaxy.front.web.rest.activity.controller;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.galaxy.dal.domain.activity.Activity;
+import com.galaxy.dal.domain.user.User;
 import com.galaxy.front.web.rest.model.Contact;
 import com.galaxy.front.web.rest.model.Photo;
 import com.galaxy.front.web.rest.model.ResultModel;
@@ -19,7 +22,11 @@ import com.galaxy.front.web.rest.model.activity.ActivityModel;
 import com.galaxy.front.web.rest.model.interest.InterestModel;
 import com.galaxy.front.web.rest.model.location.LocationInfo;
 import com.galaxy.front.web.rest.model.user.UserModel;
+import com.galaxy.front.web.utils.Code;
+import com.galaxy.front.web.utils.ParamUtils;
+import com.galaxy.front.web.utils.ResultModelUtils;
 import com.galaxy.service.activity.ActivityService;
+import com.galaxy.service.user.UserService;
 
 /**
  * @author luolishu
@@ -31,6 +38,8 @@ import com.galaxy.service.activity.ActivityService;
 public class ActivityJoinController {
 	@Autowired
 	private ActivityService activityService;
+	@Autowired
+	private UserService userService;
 	
 	/**
 	 * 获取我参加过的活动列表，分页查询
@@ -78,6 +87,32 @@ public class ActivityJoinController {
 		
 		return resultModel;
 	}
+	
+	//参加活动
+	@RequestMapping(value = "join",method = RequestMethod.POST,params = {"user_id","activity_id","username","num",})
+	public Object jion(@RequestParam("user_id") Long user_id,@RequestParam("activity_id") Long activity_id){
+		ResultModel resultModel = new ResultModel();
+		
+		if (ParamUtils.isNotEmpty(user_id,activity_id)) {
+			if (activityService.joinActivity(activity_id, user_id)) {
+				//参加成功
+				resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+				resultModel.setData("参加活动成功");
+			}else {
+				//参加失败
+				resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
+				resultModel.setData("活动不存在或用户不存在");
+			}
+		}else {
+			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
+			resultModel.setData("请输入正确的参数");
+		}
+		
+		return resultModel;
+	}
+	
+	//退出活动
+	
 	
 
 }
