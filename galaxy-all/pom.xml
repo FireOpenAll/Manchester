@@ -63,9 +63,9 @@
 		<jodatime.version>2.4</jodatime.version>
 		<jadira-usertype-core.version>3.2.0.GA</jadira-usertype-core.version>
 
-        <!--mail-->
-        <javamail.version>1.4.7</javamail.version>
-        
+		<!--mail -->
+		<javamail.version>1.4.7</javamail.version>
+
 		<!-- Web dependencies -->
 		<webjars-bootstrap.version>2.3.0</webjars-bootstrap.version>
 		<webjars-jquery-ui.version>1.10.3</webjars-jquery-ui.version>
@@ -423,6 +423,16 @@
 		<dependency>
 			<groupId>org.springframework.mobile</groupId>
 			<artifactId>spring-mobile-device</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.javaee</groupId>
+			<artifactId>jboss-transaction-api-1.0.1_spec</artifactId>
+			<version>5.0.2.GA</version>
 		</dependency>
 	</dependencies>
 	<build>
