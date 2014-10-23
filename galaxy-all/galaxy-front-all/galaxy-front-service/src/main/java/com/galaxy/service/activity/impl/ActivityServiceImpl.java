@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +20,7 @@ import com.galaxy.dal.domain.activity.ActivityJoinedUsers;
 import com.galaxy.dal.domain.activity.ActivityLikedUsers;
 import com.galaxy.service.activity.ActivityService;
 import com.galaxy.service.activity.form.ActivityForm;
+import com.galaxy.service.chat.ChatService;
 import com.galaxy.service.user.LoginUserModel;
 import com.galaxy.service.user.UserUtils;
 @Service
@@ -34,6 +34,8 @@ public class ActivityServiceImpl implements ActivityService {
 	ActivityJoinedUsersMapper activityJoinedUsersMapper;
 	@Autowired
 	ActivityLikedUsersMapper activityLikedUsersMapper;
+	@Autowired
+	ChatService chatService;
 
 	@Override
 	@Transactional
@@ -43,6 +45,8 @@ public class ActivityServiceImpl implements ActivityService {
 		ActivityDetail detail=this.createDetail(form);
 		detail.setId(activity.getId());
 		activityDetailMappper.insert(detail);
+		
+		chatService.createGroup(form.getTitle(), form.getUserId(),activity.getId());
 		return activity.getId();
 	}
 	
