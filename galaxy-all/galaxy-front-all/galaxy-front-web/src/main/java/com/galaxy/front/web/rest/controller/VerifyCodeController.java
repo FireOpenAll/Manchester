@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
+import com.galaxy.front.web.rest.interceptor.IgnoreAuth;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
@@ -30,6 +30,7 @@ import com.google.code.kaptcha.Producer;
  */
 @Controller
 @RequestMapping(value = "api/v1/code")
+@IgnoreAuth
 public class VerifyCodeController {
 
 	@Autowired

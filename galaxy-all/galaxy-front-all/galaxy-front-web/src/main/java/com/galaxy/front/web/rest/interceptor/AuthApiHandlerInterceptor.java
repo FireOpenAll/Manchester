@@ -7,53 +7,77 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.service.user.LoginUserModel;
 import com.galaxy.service.user.UserUtils;
+import com.google.gson.Gson;
 
 /**
  * @author luolishu
- *
+ * 
  */
 public class AuthApiHandlerInterceptor implements HandlerInterceptor {
-	
-	
-	
-	 
-	
+
+	String AUTH_HEADER_NAME = "Authorization";
+
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		String token=getToken(request);
-		if(StringUtils.isBlank(token)){
+		String token = getToken(request);
+		if (handler instanceof HandlerMethod) {
+			HandlerMethod handlerMethod = (HandlerMethod) handler;
+			IgnoreAuth ignoreAuth = AnnotationUtils.findAnnotation(
+					handlerMethod.getBeanType(), IgnoreAuth.class);
+			if(ignoreAuth!=null){
+				return true;
+			}
+		}
+		if (StringUtils.isBlank(token)) {
 			ResultModel resultModel = new ResultModel();
 			resultModel.setCode("40300");
 			resultModel.setData("has no token!");
+			Gson gson = new Gson();
+			response.getWriter().write(gson.toJson(resultModel));
 			return false;
 		}
-		LoginUserModel userModel=UserUtils.getUserByToken(token);
-		if(userModel==null){
+		LoginUserModel userModel = UserUtils.getUserByToken(token);
+		if (userModel == null) {
 			ResultModel resultModel = new ResultModel();
 			resultModel.setCode("40300");
 			resultModel.setData("token invalid!");
+			Gson gson = new Gson();
+			response.getWriter().write(gson.toJson(resultModel));
 			return false;
 		}
-		if(userModel.isExpired()){
+		if (userModel.isExpired()) {
 			ResultModel resultModel = new ResultModel();
 			resultModel.setCode("40300");
 			resultModel.setData("token expired!");
+			Gson gson = new Gson();
+			response.getWriter().write(gson.toJson(resultModel));
 			return false;
 		}
+
 		return true;
 	}
 
-	private String getToken(HttpServletRequest request){
-		return null;
+	private String getToken(HttpServletRequest request) {
+		String authToken = StringUtils.trimToEmpty(request
+				.getHeader(AUTH_HEADER_NAME));
+		if (authToken.startsWith("Bearer")) {
+			authToken = StringUtils
+					.trim(authToken.substring("Bearer".length()));
+		}
+
+		return authToken;
 	}
-	 
+
 	@Override
 	public void postHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler,
@@ -62,7 +86,6 @@ public class AuthApiHandlerInterceptor implements HandlerInterceptor {
 
 	}
 
-	 
 	@Override
 	public void afterCompletion(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex)

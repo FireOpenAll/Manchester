@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.galaxy.dal.domain.user.User;
+import com.galaxy.front.web.rest.interceptor.IgnoreAuth;
 import com.galaxy.front.web.utils.Constans;
 import com.galaxy.front.web.utils.EmailUtils;
 import com.galaxy.front.web.utils.MD5Utils;
@@ -24,6 +25,7 @@ import com.galaxy.service.user.UserService;
  */
 @Controller(value = "restEmailController")
 @RequestMapping(value = "api/v1/email")
+@IgnoreAuth
 public class EmailController {
 
 	@Autowired

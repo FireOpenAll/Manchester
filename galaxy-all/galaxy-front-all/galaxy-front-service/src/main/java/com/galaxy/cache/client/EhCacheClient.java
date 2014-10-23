@@ -1,7 +1,5 @@
 package com.galaxy.cache.client;
 
-import java.io.Serializable;
-
 import javax.annotation.Resource;
 
 import net.sf.ehcache.Cache;
@@ -10,7 +8,7 @@ import net.sf.ehcache.Element;
 
 import org.springframework.stereotype.Service;
 @Service
-public class EhCacheClient<T extends Serializable>  implements CacheClient<T> {
+public class EhCacheClient<T extends Object>  implements CacheClient<T> {
 	@Resource(name="sessionEhCacheManager")
 	CacheManager sessionEhCacheManager;
 	String cacheName="sessionCache";

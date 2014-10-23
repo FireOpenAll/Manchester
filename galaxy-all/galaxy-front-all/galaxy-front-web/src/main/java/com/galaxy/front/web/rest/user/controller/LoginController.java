@@ -19,6 +19,7 @@ import com.galaxy.front.web.utils.Code;
 import com.galaxy.front.web.utils.ResultModelUtils;
 import com.galaxy.service.user.LoginUserModel;
 import com.galaxy.service.user.UserService;
+import com.galaxy.service.user.UserUtils;
 
 @RestController
 @RequestMapping(value = "api/v1/user")
@@ -46,15 +47,14 @@ public class LoginController {
 	public Object loginShiro(HttpServletRequest request,
 			@RequestParam("logintext") String logintext,
 			@RequestParam("password") String password) {
-		ResultModel resultModel = new ResultModel();
-  
+		ResultModel resultModel = new ResultModel(); 
 		boolean rememberMe=false;
 		String host=request.getRemoteHost(); 
-		AuthenticationToken token=this.createToken(logintext, password, rememberMe, host); 
+		AuthenticationToken authToken=this.createToken(logintext, password, rememberMe, host); 
 		 
 		try {
 			Subject subject=SecurityUtils.getSubject();
-            subject.login(token);
+            subject.login(authToken);
             resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
             LoginUserModel loginedUser=(LoginUserModel) subject.getPrincipal();
 			AuthResultModel authModel = new AuthResultModel();
@@ -63,8 +63,10 @@ public class LoginController {
 			authModel.setRefreshToken(loginedUser.getExpiredToken());
 			authModel.setExpireshIn(loginedUser.getExpireshIn());
 			authModel.setCreate(loginedUser.getLoginedTime());
+			
 
 			resultModel.setData(authModel);
+			UserUtils.setSubject(loginedUser.getToken(), subject);
         } catch (AuthenticationException e) {
         	resultModel = ResultModelUtils.getResultModelByCode(Code.LOGIN_FAILED);
 			resultModel.setData("登录失败，用户名或密码错误"); 

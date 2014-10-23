@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.galaxy.front.web.rest.interceptor.IgnoreAuth;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.user.AuthResultModel;
 
@@ -18,6 +19,7 @@ import com.galaxy.front.web.rest.model.user.AuthResultModel;
  */
 @RestController
 @RequestMapping(value = "api/v1/user")
+@IgnoreAuth
 public class QQLoginController {
 	@RequestMapping(value = "/qqlogin", method = RequestMethod.POST)
 	public Object login(HttpServletResponse response) {

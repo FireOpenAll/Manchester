@@ -8,12 +8,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.galaxy.front.web.rest.interceptor.IgnoreAuth;
+
 /**
  * @author luolishu
  * 
  */
 @RestController
 @RequestMapping(value = "api/v1/checkcode")
+@IgnoreAuth
 public class CheckCodeController {
 	@RequestMapping(value = "verify",method=RequestMethod.GET)
 	public Object check(String email) {

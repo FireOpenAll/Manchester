@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.galaxy.front.web.rest.interceptor.IgnoreAuth;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.StatusModel;
 import com.galaxy.front.web.utils.Code;
@@ -22,6 +23,7 @@ import com.galaxy.service.user.UserService;
  */
 @RestController(value = "RestCheckController")
 @RequestMapping(value = "api/v1/check")
+@IgnoreAuth
 public class CheckController {
 	
 	/*注册检验控制器，注册时检验邮箱、手机号、用户名是否可以注册*/

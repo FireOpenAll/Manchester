@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.galaxy.dal.domain.user.User;
 import com.galaxy.dal.user.mapper.UserMapper;
+import com.galaxy.front.web.rest.interceptor.IgnoreAuth;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.StatusModel;
 import com.galaxy.front.web.utils.Code;
@@ -29,6 +30,7 @@ import com.google.code.kaptcha.Constants;
 
 @RestController(value ="restRegisterController")
 @RequestMapping(value = "api/v1/user")
+@IgnoreAuth
 public class RegisterController {
 
 	/**
