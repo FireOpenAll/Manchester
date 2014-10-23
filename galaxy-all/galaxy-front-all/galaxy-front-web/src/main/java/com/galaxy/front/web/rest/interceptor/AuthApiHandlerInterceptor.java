@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 public class AuthApiHandlerInterceptor implements HandlerInterceptor {
 
 	String AUTH_HEADER_NAME = "Authorization";
+	String AUTH_HEADER_NAME2 = "authorization";
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,
@@ -70,6 +71,10 @@ public class AuthApiHandlerInterceptor implements HandlerInterceptor {
 	private String getToken(HttpServletRequest request) {
 		String authToken = StringUtils.trimToEmpty(request
 				.getHeader(AUTH_HEADER_NAME));
+		if(StringUtils.isBlank(authToken)){
+			authToken = StringUtils.trimToEmpty(request
+					.getHeader(AUTH_HEADER_NAME2));
+		}
 		if (authToken.startsWith("Bearer")) {
 			authToken = StringUtils
 					.trim(authToken.substring("Bearer".length()));
