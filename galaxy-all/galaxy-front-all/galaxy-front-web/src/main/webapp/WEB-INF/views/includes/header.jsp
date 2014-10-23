@@ -492,6 +492,32 @@
 								</dl>
 							</div>
 						</li>
+						<li class="odd" cat_id="18">
+							<div class="class">
+								<h4>
+									<a href="/activity/list/competition">门票</a>
+								</h4>
+								<span class="recommend-class"> 
+								<a title="体育赛事" href="/activity/list/competition/basketball">体育赛事</a>
+								<a title="演出活动" href="/activity/list/competition/basketball">演出活动</a>
+								<a title="风景名胜" href="/activity/list/competition/basketball">风景名胜</a> 
+								</span><span class="arrow"></span>
+							</div>
+							<div cat_menu_id="17" class="sub-class">
+								<dl>
+									<dt>
+										<h3>
+											<a href="/activity/list/competition">门票</a>
+										</h3>
+									</dt>
+									<dd class="goods-class">
+									  <a title="体育赛事" href="/activity/list/competition/basketball">体育赛事</a>
+								      <a title="演出活动" href="/activity/list/competition/basketball">演出活动</a>
+								      <a title="风景名胜" href="/activity/list/competition/basketball">风景名胜</a> 
+									</dd>
+								</dl>
+							</div>
+						</li>
 						<li class="even" cat_id="21">
 							<div class="class">
 								<h4>
