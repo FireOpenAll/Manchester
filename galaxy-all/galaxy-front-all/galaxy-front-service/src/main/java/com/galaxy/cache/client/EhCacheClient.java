@@ -16,6 +16,9 @@ public class EhCacheClient<T extends Object>  implements CacheClient<T> {
 	public T get(String key) {
 		Cache cache=sessionEhCacheManager.getCache(cacheName);
 		Element el=cache.get(key);
+		if(el==null){
+			return null;
+		}
 		return (T) el.getValue();
 	}
 
@@ -30,6 +33,9 @@ public class EhCacheClient<T extends Object>  implements CacheClient<T> {
 	public T get(String key, Class<T> type) {
 		Cache cache=sessionEhCacheManager.getCache(cacheName);
 		Element el=cache.get(key);
+		if(el==null){
+			return null;
+		}
 		return (T) el.getValue();
 	}
 
