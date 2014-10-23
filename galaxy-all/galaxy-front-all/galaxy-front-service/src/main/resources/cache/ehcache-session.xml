@@ -10,5 +10,5 @@
 	<!-- Special objects setting. -->
 	<!-- Refresh demoCache every hour，按Cache实际大小而不是Element数量进行限制，超过限制后不保存到磁盘。 -->
 	<cache name="sessionCache" maxBytesLocalHeap="200M" eternal="false" timeToIdleSeconds="3600"
-		timeToLiveSeconds="3600" overflowToDisk="false" />
+		timeToLiveSeconds="36000000" overflowToDisk="false" />
 </ehcache>

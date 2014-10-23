@@ -21,6 +21,9 @@ public abstract class UserUtils {
 				.getPrincipal();
 		if (user == null) {
 			Subject subject=(Subject) cachedClient.get(token);
+			if(subject==null){
+				return null;
+			}
 			user = (LoginUserModel) subject.getPrincipal();
 		} 
 		return user;
