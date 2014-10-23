@@ -91,4 +91,39 @@ public class RegisterController {
 		return resultModel;
 	}
 	
+	//test
+	@RequestMapping(value = "register1",method = RequestMethod.POST,params = {"username","email","password"})
+	public Object registerByEmail11(HttpServletRequest request,@RequestParam("username") String username,@RequestParam("email") String email,@RequestParam("password") String password){
+		ResultModel resultModel = new ResultModel();
+		
+		if (ParamUtils.isNotEmpty(username,email,password)&&RegexUtils.checkName(username)&&RegexUtils.checkEmail(email)&&RegexUtils.checkPassword(password)) {
+			if (userService.countUsersByEmail(email)>0) {
+				//email 已被注册
+				resultModel = ResultModelUtils.getResultModelByCode(Code.EMAIL_USED);
+				resultModel.setData("该邮箱已被注册,请用其他邮箱重新注册!");
+			}else if(userService.countUsersByLoginName(username)>0){
+				//用户名已被注册
+				resultModel = ResultModelUtils.getResultModelByCode(Code.USER_NAME_USED);
+				resultModel.setData("该用户名已被注册,请用其他用户名重新注册!");
+			}else{
+				//email、username可用
+				User user = new User();
+				user.setLoginName(username);
+				user.setEmail(email);
+				user.setPassword(password);
+				user.setCreatedTime(new Timestamp(new Date().getTime()));
+				user.setEmailAuth(true);
+				userService.createUser(user);
+				
+				resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+				resultModel.setData("注册成功，请前往邮箱点击链接已完成验证");
+			}
+			
+		}else {
+			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
+		}
+		
+		return resultModel;
+	}
+	
 }

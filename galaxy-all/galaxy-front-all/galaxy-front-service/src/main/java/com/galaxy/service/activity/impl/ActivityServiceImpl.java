@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.galaxy.dal.activity.mapper.ActivityCommentMapper;
 import com.galaxy.dal.activity.mapper.ActivityDetailMapper;
 import com.galaxy.dal.activity.mapper.ActivityJoinedUsersMapper;
 import com.galaxy.dal.activity.mapper.ActivityLikedUsersMapper;
@@ -34,6 +35,8 @@ public class ActivityServiceImpl implements ActivityService {
 	ActivityJoinedUsersMapper activityJoinedUsersMapper;
 	@Autowired
 	ActivityLikedUsersMapper activityLikedUsersMapper;
+	@Autowired
+	ActivityCommentMapper activityCommentMapper;
 
 	@Override
 	@Transactional
@@ -78,6 +81,7 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
+	@Transactional
 	public boolean joinActivity(Long activityId, Long userId) {
 		Activity activity=activityMappper.getById(activityId);
 		if(activity==null){
@@ -92,7 +96,9 @@ public class ActivityServiceImpl implements ActivityService {
 		joinedUser.setUserId(user.getUserId());
 		joinedUser.setUserName(user.getLoginName());
 		activityJoinedUsersMapper.insert(joinedUser);
-		return false;
+		activity.setJoinedNum(activity.getJoinedNum()+1);
+		activityMappper.insert(activity);//activity参加人数+1
+		return true;
 	}
 	
 	
@@ -170,5 +176,22 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	
 	////like
+	
+	////comment
+	//统计user_id评论过的活动数
+	@Override
+	public int getUserComActNum(@Param("user_id") Long user_id){
+		return activityCommentMapper.getUserComActNum(user_id);
+	}
+	////comment
 
+	//统计某user_id发布的活动数
+	@Override
+	public int getUserCreatedActNum(Long user_id) {
+		// TODO Auto-generated method stub
+		return activityMappper.getUserCreatedActNum(user_id);
+	}
+
+	
+	
 }

@@ -12,7 +12,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.galaxy.dal.activity.mapper.ActivityCommentMapper"> 
-	<resultMap type="ActivityComment" id="ACTIVITY_COMMENT_MAP">
+	<resultMap type="activityComment" id="ACTIVITY_COMMENT_MAP">
 		<id property="id" column="id" />
 		<result property="createdTime" column="created_time" />
 		<result property="updatedTime" column="updated_time" />
@@ -22,7 +22,7 @@
 		<result property="replyTime" column="reply_time" />
 		
 	</resultMap>
-	<select id="getById" resultMap="ActivityComment"
+	<select id="getById" resultMap="ACTIVITY_COMMENT_MAP"
 		parameterType="long">
 		SELECT *
 		FROM ac_activity_commented_users
@@ -30,7 +30,7 @@
 	</select>
 
     <!-- 评论活动 -->
-	<insert id="insert" parameterType="ActivityComment"
+	<insert id="insert" parameterType="activityComment"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
 		ac_activity_commented_users(created_time,activity_id,user_id,target_id,reply_time,content)
@@ -50,5 +50,19 @@
 	and activity_id = #{activity_id}
 	and reply_time = #{replyTime}
 	</delete>
+	
+	<!-- 统计user_id评论过的活动数 -->
+	<select id="getUserComActNum" parameterType="long">
+	select count(distinct activity_id)
+	from ac_activity_commented_users
+	where user_id = #{user_id}
+	</select>
+	
+	<!-- 分页获取评论 -->
+	<select id="list" resultMap="ACTIVITY_COMMENT_MAP" parameterType="com.galaxy.dal.base.mapper.PaginationParam">
+	select * from
+	ac_activity_commented_users
+	where activity_id = #{param1.activity_id} limit param2,param3
+	</select>
 	
 </mapper>

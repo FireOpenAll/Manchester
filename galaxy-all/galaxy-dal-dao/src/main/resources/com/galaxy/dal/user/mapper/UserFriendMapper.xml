@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.galaxy.dal.user.mapper.UserFriendMapper">
+
+	<resultMap type="userFriend" id="USER_FRIEND_MAP">
+		<id property="id" column="id" />
+		<result property="createdTime" column="created_time" />
+		<result property="updatedTime" column="updated_time" />
+		<result property="userId" column="user_id" />
+		<result property="targetId" column="target_id" />
+		
+	</resultMap>
+	<select id="getById" resultMap="USER_FRIEND_MAP" parameterType="long">
+		SELECT *
+		FROM u_user_friend
+		WHERE id = #{id}
+	</select>
+	<!-- 添加用户关系 -->
+	<insert id="insert" parameterType="userFriend" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO
+		u_user_friend(created_time,user_id,target_id,relation)
+		VALUES(#{createdTime},#{userId},#{targetId},#{relation})
+	</insert>
+	
+	<!-- 查找两用户关系 -->
+	<select id="getUsersFriend" resultMap="USER_FRIEND_MAP">
+	select * 
+	from u_user_friend
+	where (user_id = #{user_id} and target_id = #{target_id} )
+	or (user_id = #{target_id} and target_id = #{user_id} )
+	limit 1
+	</select>
+	
+	<!-- 更新两用户关系 -->
+	<update id="update" parameterType="userFriend">
+	update u_user_friend
+	set relation = #{relation}
+	where id = #{id}
+	</update>
+	
+	<!-- 删除两用户关系 -->
+	<delete id="deleteById" parameterType="long">
+	delete from u_user_friend
+	where id = #{id}
+	</delete>
+	
+	
+	
+	<!-- 得到我关注所有用户 -->
+	<select id="getFollowings" parameterType="long" resultMap="USER_FRIEND_MAP">
+	select *
+	from u_user_friend
+	where (user_id = #{user_id} and (relation = 1 or relation = 3)) 
+	or (target_id = #{user_id} and relation &gt;= 2)
+	</select>
+	
+	<!-- 分页得到我关注用户 -->
+	<select id="getFollowingsByPage" parameterType="com.galaxy.dal.base.mapper.PaginationParam" resultMap="USER_FRIEND_MAP">
+	select *
+	from u_user_friend
+	where (user_id = #{param1.user_id} and (relation = 1 or relation = 3)) 
+	or (target_id = #{param1.user_id} and relation &gt;= 2)
+	limit param2,param3
+	</select>
+	
+    <!-- 得到我关注的用户数 -->
+	<select id="getFollowingsNum" parameterType="long" resultType="int">
+	select count(*)
+	from u_user_friend
+	where (user_id = #{user_id} and (relation = 1 or relation = 3)) 
+	or (target_id = #{user_id} and relation &gt;= 2)
+	</select>
+	
+	
+	
+	<!-- 得到我的全部粉丝 -->
+	<select id="getFolloweds" parameterType="long" resultMap="USER_FRIEND_MAP">
+	select *
+	from u_user_friend
+	where (user_id = #{user_id} and relation &gt;= 2) 
+	or (target_id = #{user_id} and (relation = 1 or relation = 3))
+	</select>
+	
+	<!-- 分页得到我的粉丝 -->
+	<select id="getFollowedsByPage" parameterType="com.galaxy.dal.base.mapper.PaginationParam" resultMap="USER_FRIEND_MAP">
+	select *
+	from u_user_friend
+	where (user_id = #{param1.user_id} and relation &gt;= 2) 
+	or (target_id = #{param1.user_id} and (relation = 1 or relation = 3))
+	limit param2,param3
+	</select>
+
+	<!-- 得到我粉丝数 -->
+	<select id="getFollowedsNum" parameterType="long" resultType="int">
+	select count(*)
+	from u_user_friend
+	where (user_id = #{user_id} and relation &gt;= 2) 
+	or (target_id = #{user_id} and (relation = 1 or relation = 3))
+	</select>
+	
+	
+	<!--得到全部我的互粉用户 -->
+	<select id="getMutualUsers" parameterType="long" resultMap="USER_FRIEND_MAP">
+	select *
+	from u_user_friend
+	where relation = 3 and (user_id = #{user_id} or target_id = #{user_id})
+	</select>
+	
+	<!--分页得到我的互粉用户 -->
+	<select id="getMutualUsersByPage" parameterType="com.galaxy.dal.base.mapper.PaginationParam" resultMap="USER_FRIEND_MAP">
+	select *
+	from u_user_friend
+	where relation = 3 
+	and (user_id = #{param1.user_id} or target_id = #{param1.user_id})
+	limit param2,param3
+	</select>
+	
+	<!--得到全部我的互粉数 -->
+	<select id="getMutualUsersNum" parameterType="long" resultType="int">
+	select count(*)
+	from u_user_friend
+	where relation = 3 and (user_id = #{user_id} or target_id = #{user_id})
+	</select>
+	
+	
+</mapper>
