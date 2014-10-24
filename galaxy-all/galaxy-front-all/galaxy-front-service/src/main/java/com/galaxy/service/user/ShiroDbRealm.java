@@ -5,8 +5,11 @@
  *******************************************************************************/
 package com.galaxy.service.user;
 
+import java.util.Date;
+
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -48,6 +51,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 			loginUser.setUserId(user.getId());
 			loginUser.setToken(tokenService.generateToken());
 			loginUser.setExpiredToken(tokenService.generateToken());
+			loginUser.setExpireshIn(DateUtils.addDays(new Date(), 30).getTime());
 			return new SimpleAuthenticationInfo(loginUser, user.getPassword(),ByteSource.Util.bytes(salt), getName());
 		} else {
 			return null;

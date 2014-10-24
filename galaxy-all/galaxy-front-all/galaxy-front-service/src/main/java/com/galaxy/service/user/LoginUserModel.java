@@ -11,7 +11,7 @@ public class LoginUserModel implements Serializable{
 	String mobile;
 	String token;
 	String expiredToken;
-	Long expireshIn=7*24*60*60*1000L;
+	Long expireshIn;
 	Date loginedTime=new Date();
 	public Long getUserId() {
 		return userId;

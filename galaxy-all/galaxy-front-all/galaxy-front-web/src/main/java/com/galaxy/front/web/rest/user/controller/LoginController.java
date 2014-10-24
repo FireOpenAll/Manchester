@@ -68,7 +68,7 @@ public class LoginController {
 			
 
 			resultModel.setData(authModel);
-			UserUtils.setSubject(loginedUser.getToken(), subject);
+			UserUtils.setUserModel(loginedUser.getToken(), subject);
         } catch (AuthenticationException e) {
         	resultModel = ResultModelUtils.getResultModelByCode(Code.LOGIN_FAILED);
 			resultModel.setData("登录失败，用户名或密码错误"); 
