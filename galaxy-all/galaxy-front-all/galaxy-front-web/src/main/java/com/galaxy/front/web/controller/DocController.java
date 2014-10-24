@@ -101,6 +101,10 @@ public class DocController {
 				} 
 				requestModel.paramters.add(p);
 			}
+			requestModel.setId(requestModel.url.replaceAll("[/]", "_"));
+			if(requestModel.getId().startsWith("_")){
+				requestModel.setId(requestModel.getId().substring(1));
+			}
 			 
 		}
 		 
@@ -112,6 +116,7 @@ public class DocController {
 		String url;
 		String pack;
 		String method;
+		String id;
 		
 		List<Parameter> paramters=new LinkedList<Parameter>();
 		
@@ -145,6 +150,14 @@ public class DocController {
 
 		public void setMethod(String method) {
 			this.method = method;
+		}
+
+		public String getId() {
+			return id;
+		}
+
+		public void setId(String id) {
+			this.id = id;
 		}
 
 		public static class Parameter{
