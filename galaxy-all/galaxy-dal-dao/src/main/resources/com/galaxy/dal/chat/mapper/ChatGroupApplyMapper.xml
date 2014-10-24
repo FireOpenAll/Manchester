@@ -27,13 +27,13 @@
 		SELECT *
 		FROM im_chat_group_apply
 		WHERE id = #{id}
-	</select>
+	</select> 
 	<!-- private String loginName,sex,birthday,type,nick,followers,fans,realName,email,mobile,password,realNameAuth,emailAuth,mobileAuth,hasPic,avatar,bindOpenId,bindPlatform,lastVisitTime,status; -->
 	<insert id="insert" parameterType="chatGroupApply" useGeneratedKeys="true"
 		keyProperty="id">
 		INSERT INTO
-		im_chat_group_apply(name,activity_id,created_time,cate_id1,cate_id2,cate_id3,owner_user_id,public_desc,member_desc)
-		VALUES(#{name},#{activityId},#{createdTime},#{cateId1},#{cateId2},#{cateId3},#{ownerUserId},#{publicDesc},#{memberDesc})
+		im_chat_group_apply(created_time,group_id,user_id,name,manager_user_id,apply_reason,reject_reason,status)
+		VALUES(#{createdTime},#{groupId},#{userId},#{name},#{managerUserId},#{applyReason},#{rejectReason},#{status})
 	</insert>
 	 
 </mapper>
