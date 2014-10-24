@@ -9,10 +9,11 @@
 </head>
 <body>
 <table>
-<tr><th>请求URL</th><th>请求方法</th></tr>
+<tr><th>请求URL</th><th>请求方法</th><th>传递变量</th></tr>
 <c:forEach var="model" items="${modelList}">
 <tr>
   <td><c:out value="${model.url}"/></td><td><c:out value="${model.method}"/></td>
+  <td><c:forEach var="item" items="${model.paramters}"><c:out value="${item.name}"/>,</c:forEach></td>
  </tr>
 </c:forEach>
 </table>
