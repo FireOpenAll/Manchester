@@ -39,7 +39,8 @@ public class AuthApiHandlerInterceptor implements HandlerInterceptor {
 				return true;
 			}
 		}
-		if (StringUtils.isBlank(token)) {
+		LoginUserModel userModel =UserUtils.getLoginUser();
+		if (StringUtils.isBlank(token)&&userModel==null) {
 			ResultModel resultModel = new ResultModel();
 			resultModel.setCode("40300");
 			resultModel.setData("has no token!");
@@ -47,7 +48,7 @@ public class AuthApiHandlerInterceptor implements HandlerInterceptor {
 			response.getWriter().write(gson.toJson(resultModel));
 			return false;
 		}
-		LoginUserModel userModel = UserUtils.getUserByToken(token);
+		userModel = UserUtils.getUserByToken(token);
 		if (userModel == null) {
 			ResultModel resultModel = new ResultModel();
 			resultModel.setCode("40300");

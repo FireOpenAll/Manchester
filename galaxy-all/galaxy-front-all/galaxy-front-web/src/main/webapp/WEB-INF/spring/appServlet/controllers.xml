@@ -23,7 +23,7 @@
 	</mvc:annotation-driven>
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/api/**" /> 
+			<mvc:mapping path="/api/v1/user/**" /> 
 			<mvc:exclude-mapping path="/user/login" />
 			<mvc:exclude-mapping path="/user/register" />
 			<mvc:exclude-mapping path="/user/logout" />
