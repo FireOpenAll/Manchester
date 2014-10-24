@@ -7,8 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +24,7 @@ import com.google.gson.Gson;
  * 
  */
 public class AuthApiHandlerInterceptor implements HandlerInterceptor {
+	static Logger logger=LoggerFactory.getLogger(AuthApiHandlerInterceptor.class);
 
 	String AUTH_HEADER_NAME = "Authorization";
 	String AUTH_HEADER_NAME2 = "authorization";
@@ -45,7 +47,9 @@ public class AuthApiHandlerInterceptor implements HandlerInterceptor {
 			resultModel.setCode("40300");
 			resultModel.setData("has no token!");
 			Gson gson = new Gson();
-			response.getWriter().write(gson.toJson(resultModel));
+			String json=gson.toJson(resultModel); 
+			logger.error("auth failure!json="+json+" remote ip="+request.getRemoteAddr());
+			response.getWriter().write(json);
 			return false;
 		}
 		userModel = UserUtils.getUserByToken(token);
@@ -54,7 +58,9 @@ public class AuthApiHandlerInterceptor implements HandlerInterceptor {
 			resultModel.setCode("40300");
 			resultModel.setData("token invalid!");
 			Gson gson = new Gson();
-			response.getWriter().write(gson.toJson(resultModel));
+			String json=gson.toJson(resultModel); 
+			logger.error("auth failure!json="+json+" remote ip="+request.getRemoteAddr()+" token="+token);
+			response.getWriter().write(json);
 			return false;
 		}
 		if (userModel.isExpired()) {
@@ -62,7 +68,9 @@ public class AuthApiHandlerInterceptor implements HandlerInterceptor {
 			resultModel.setCode("40300");
 			resultModel.setData("token expired!");
 			Gson gson = new Gson();
-			response.getWriter().write(gson.toJson(resultModel));
+			String json=gson.toJson(resultModel); 
+			logger.error("auth failure!json="+json+" remote ip="+request.getRemoteAddr()+" token="+token);
+			response.getWriter().write(json);
 			return false;
 		}
 
