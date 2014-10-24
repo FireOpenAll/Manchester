@@ -142,7 +142,7 @@ public class ChatServiceImpl implements ChatService {
 		}
 		ChatGroupMember member=getMemberByUserId(groupId,userId);
 		
-		boolean result=chatGroupMemberMapper.grantGroupManager(groupId, ownerId, member.getUserId());
+		boolean result=chatGroupMemberMapper.grantGroupManager(groupId,  member.getUserId());
 		return result;
 	}
 	/**
