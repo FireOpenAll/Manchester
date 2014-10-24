@@ -9,7 +9,7 @@ import org.apache.ibatis.jdbc.SQL;
 public enum Code {
 
 	OK("20000", "ok"),
-	
+	FAILURE("59999","FAILURE"),
 	
 	EMAIL_FORMAT_ERROR("50000","邮箱格式错误"),
 	EMAIL_USED("50001","邮箱已被注册"),
