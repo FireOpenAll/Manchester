@@ -22,22 +22,14 @@
 <script src="/resources/jquery-ui/external/jquery/jquery.js"></script>
 <script src="/resources/jquery-ui/jquery-ui.js"></script>
 <script>
-  var dialog, form;
-  function submitForm() {
-      var valid = true;  
-      if ( valid ) {
-        $( "#users tbody" ).append( "<tr>" +
-          "<td>" + name.val() + "</td>" +
-          "<td>" + email.val() + "</td>" +
-          "<td>" + password.val() + "</td>" +
-        "</tr>" );
-        dialog.dialog( "close" );
-      }
-      return valid;
-    }
+  var dialog; 
   function showDialog(id){
 	  var selector="#"+id+"-form";
-	  dialog = $(selector).dialog({
+	  dialog = $(selector).dialog("open");
+  } 
+  function createDialog(id){
+	  var selector="#"+id+"-form";
+	  $(selector).dialog({
 	      autoOpen: false,
 	      height: 300,
 	      width: 500,
@@ -45,18 +37,17 @@
 	      buttons: {
 	        "提交测试": function(){
 	        	$(this).find("form").submit();
-	        	dialog.dialog( "close" );
+	        	$(this).dialog("close"); 
 	        },
 	        Cancel: function() {
-	          dialog.dialog( "close" );
+	        	$(this).dialog("close"); 
 	        }
 	      },
-	      close: function() {
-	        form[ 0 ].reset();
-	        allFields.removeClass( "ui-state-error" );
+	      close: function() { 
+	    	  $(this).dialog("close"); 
 	      }
 	    });
-	  dialog.dialog( "open" );
+	  //dialog.dialog( "open" );
   } 
   </script>
 </head>
@@ -74,7 +65,7 @@
 <c:forEach var="model" items="${modelList}">
 <div id="<c:out value="${model.id}"/>-form" title="<c:out value="${model.url}"/>测试表单">
   <p class="validateTips">填入测试选项.</p> 
-  <form id="<c:out value="${model.id}"/>" method="<c:out value="${model.method}"/>" action="<c:out value="${model.url}"/>" target="blank">
+  <form id="<c:out value="${model.id}"/>" method="<c:out value="${model.method}"/>" action="<c:out value="${model.url}"/>" target="_blank">
     <fieldset>
       <c:forEach var="item" items="${model.paramters}">
       <label for='<c:out value="${item.name}"/>'><c:out value="${item.name}"/></label>
@@ -84,6 +75,9 @@
     </fieldset>
   </form>
 </div>
+<script type="text/javascript">
+createDialog('<c:out value="${model.id}"/>');
+</script>
 </c:forEach> 
  
 </body>
