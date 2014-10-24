@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
@@ -57,6 +58,7 @@ public class DocController {
 		for(Entry<RequestMappingInfo, HandlerMethod> entry:entrySet){
 			RequestMappingInfo mappingItem=entry.getKey();
 			HandlerMethod handlerMethod=entry.getValue();
+			
 			RestController restAnn=AnnotationUtils.findAnnotation(handlerMethod.getBeanType(), RestController.class);
 			if(restAnn==null){
 				continue;
@@ -89,9 +91,14 @@ public class DocController {
 			modelList.add(requestModel);
 			MethodParameter[] parameters=handlerMethod.getMethodParameters();
 			for(MethodParameter parameter:parameters){
+				RequestParam paramAnn=parameter.getParameterAnnotation(RequestParam.class);
 				Parameter p=new Parameter();
 				p.name=parameter.getParameterName();
 				p.type=parameter.getParameterType();
+				
+				if(paramAnn!=null){
+					p.name=paramAnn.value();
+				} 
 				requestModel.paramters.add(p);
 			}
 			 

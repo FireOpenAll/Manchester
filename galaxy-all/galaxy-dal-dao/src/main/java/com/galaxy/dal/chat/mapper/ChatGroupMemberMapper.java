@@ -10,10 +10,10 @@ import com.galaxy.dal.domain.chat.ChatGroupMember;
 public interface ChatGroupMemberMapper  extends BaseMapper<ChatGroupMember>{
 	boolean removeMember(@Param("groupId")Long groupId,@Param("userId")Long userId);
 	
-	List<ChatGroupMember> getGroupMembers(Long groupId);
+	List<ChatGroupMember> getGroupMembers(@Param("groupId")Long groupId);
 	
-	ChatGroupMember getMemberByUserId(Long groupId,Long userId);
+	ChatGroupMember getMemberByUserId(@Param("groupId")Long groupId,@Param("userId")Long userId);
 	
-	boolean grantGroupManager(Long groupId, Long ownerId, Long userId);
+	boolean grantGroupManager(@Param("groupId")Long groupId,@Param("userId") Long userId);
 
 }

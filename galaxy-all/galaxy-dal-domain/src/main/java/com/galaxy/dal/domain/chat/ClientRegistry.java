@@ -42,7 +42,7 @@ public class ClientRegistry extends BaseDomain {
 		this.clientType = clientType;
 	}
 
-	enum ClientType {
+	public enum ClientType {
 		ANDRIOD, ANDRIOD_HD, IOS, IPAD, MAC;
 
 	}
