@@ -114,8 +114,9 @@
                 /logo.png = anon
                 /shiro.css = anon
                 /*.html = anon
-                /search/*= anon
-                /user/login = anon
+                /search/**= anon
+                /check/** = anon
+                /user/register = anon
                 /user/register = anon
                 # allow WebStart to pull the jars for the swing app:
                 /*.jar = anon

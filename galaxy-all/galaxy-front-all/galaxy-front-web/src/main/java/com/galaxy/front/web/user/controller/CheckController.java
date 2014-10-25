@@ -19,7 +19,7 @@ import com.galaxy.front.web.utils.RegexUtils;
 import com.galaxy.service.user.UserService;
 
 @Controller(value = "WebCheckController")
-@RequestMapping(value = "/user/check")
+@RequestMapping(value = "check/user/")
 public class CheckController {
 	/*网页端注册检验控制器,用户ajax 异步请求，直接返回true or false*/
 	

@@ -5,10 +5,12 @@
 <!-- saved from url=(0059)http://www.o2olive.net/demo/index.php?act=login&op=register -->
 <html>
 <head>
+<title>欢迎注册乐朋网</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+<meta http-equiv="Pragma" content="no-cache"> 
+<meta http-equiv="Cache-Control"      content="no-cache">  
 
-<title>欢迎注册乐朋网</title>
 <meta name="keywords" content="注册乐朋网">
 <meta name="description" content="注册乐朋网">
 <meta name="author" content="乐朋网">
@@ -20,14 +22,7 @@
 <script type="text/javascript" src="/resources/js/jquery.js"
 	charset="utf-8"></script>
 <script type="text/javascript" src="/resources/js/common_register.js"
-	charset="utf-8"></script>
-<script type="text/javascript">
-	$(function() {
-		$('#SubmitFrom').click(function() {
-			$('#search_form').submit();
-		});
-	});
-</script>
+	charset="utf-8"></script> 
 </head>
 <body id="pagetop">
 	<!-- 导航 -->
@@ -91,89 +86,7 @@
 							</span> <label class="error error_reg" for="password_confirm"
 								generated="true" style="display: none;"></label>
 						</dd>
-					</dl>
-					<!-- 
-					<dl>
-						<dt></dt>
-						<dd>
-							<span class="ipt08 in_b"> <input type="text" title=""
-								placeholder="手机" name="mobile" id="mobile">
-							</span> <label class="error error_reg" for="mobile" generated="true"
-								style="display: none;"></label>
-						</dd>
-					</dl>
-					 -->
-					<!--
-        <dl>
-          <dt></dt>
-          <dd> <span class="ipt08 in_b">
-            <input type="text" placeholder="手机号码" name="mobile" id="mobile">
-            </span>
-            <label class="error error_reg" for="mobile" generated="true"  style="display:none;"></label>
-          </dd>
-        </dl>-->
-					<!--
-        <dl style="position:relative;">
-          <dt></dt>
-          <dd>
-          	<div class="ipt10 mr9" id="cityletter_container"><span class='cityletter'>A</span><i class="city_down" data="c_city_letter"></i></div>
-            <div class="ipt10" id="cityname_container"><span class='cityname'>阿里</span><i class="city_down" data="c_city"></i></div>
-            <input type="hidden" name="city_id" id="city_id" value="84">
-            <label class="error error_reg" for="city_id" generated="true"  style="display:none;"></label>
-          </dd>
-          <div id="c_city_letter" style="top:50px; left:0;display: none;" class="slt_wrap slt_box slt_body">
-            <div class="slt_list">
-              <ul class="u_city_letter">
-                <li data-id="A">A</li>
-                <li data-id="B">B</li>
-                <li data-id="C">C</li>
-                <li data-id="D">D</li>
-                <li data-id="E">E</li>
-                <li data-id="F">F</li>
-                <li data-id="G">G</li>
-                <li data-id="H">H</li>
-                <li data-id="I">I</li>
-                <li data-id="J">J</li>
-                <li data-id="K">K</li>
-                <li data-id="L">L</li>
-                <li data-id="M">M</li>
-                <li data-id="N">N</li>
-                <li data-id="O">O</li>
-                <li data-id="P">P</li>
-                <li data-id="Q">Q</li>
-                <li data-id="R">R</li>
-                <li data-id="S">S</li>
-                <li data-id="T">T</li>
-                <li data-id="U">U</li>
-                <li data-id="V">V</li>
-                <li data-id="W">W</li>
-                <li data-id="X">X</li>
-                <li data-id="Y">Y</li>
-                <li data-id="Z">Z</li>
-              </ul>
-            </div>
-          </div>
-          <div id="c_city" style="top:50px; left:187px;display: none;" class="slt_wrap slt_box slt_body">
-            <div class="slt_list">
-              <ul class="u_city">
-                                                <li data-id="84">阿里</li>
-                                <li data-id="7">鞍山</li>
-                                <li data-id="8">安顺</li>
-                                <li data-id="9">阿坝</li>
-                                <li data-id="10">阿拉善</li>
-                                <li data-id="85">安康</li>
-                                <li data-id="24">大同</li>
-                                <li data-id="86">阿克苏</li>
-                                <li data-id="87">安庆</li>
-                                <li data-id="88">阿勒泰</li>
-                                <li data-id="89">安阳</li>
-                                <li data-id="90">澳门</li>
-                                <li data-id="257">乌兰察布</li>
-                                              </ul>
-            </div>
-          </div>
-        </dl>
-		-->
+					</dl> 
 					<dl>
 						<dt></dt>
 						<dd>
@@ -211,52 +124,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		$(function() {
-			$('#cityletter_container').click(function() {
-				$('#c_city_letter').show();
-			});
-			$('#cityname_container').click(function() {
-				$('#c_city').show();
-			});
-			$('.u_city li').live("click", function() {
-				var area = $(this).attr('data-id');
-				var area_name = $(this).html();
-				$('input[name=city_id]').val(area);
-				$('.cityname').html(area_name);
-				$('#c_city').hide();
-			});
-			$('.u_city_letter li')
-					.click(
-							function() {
-								var letter = $(this).html();
-								$
-										.getJSON(
-												'index.php?act=login&op=ajax_getcity&letter='
-														+ letter,
-												function(result) {
-													if (result.done) {
-														$('.u_city').html('');
-														$('.cityname')
-																.html(
-																		result.data[0]['area_name']);
-														$('input[name=city_id]')
-																.val(
-																		result.data[0]['area_id']);
-														for (var i = 0, l = result.data.length; i < l; i++) {
-															$('.u_city')
-																	.append(
-																			'<li data-id="'+result.data[i]['area_id']+'">'
-																					+ result.data[i]['area_name']
-																					+ '</li>');
-														}
-													} else {
-														alert('暂无该字母开头的城市');
-													}
-												});
-								$('.cityletter').html(letter);
-								$('#c_city_letter').hide();
-							});
-
+		$(function() {    
 			jQuery.validator.addMethod("passwordLimit",
 					function(value, element) {
 						return this.optional(element)
@@ -296,12 +164,13 @@
 						lettersmax : true,
 						lettersonly : true,
 						remote : {
-							url : '/user/check/username',
+							url : '/check/user/username',
 							type : 'get',
 							data : {
 								username : function() {
 									return $('#username').val();
-								}
+								},
+			                    t:Math.random()
 							}
 						}
 					},
@@ -319,12 +188,13 @@
 						required : true,
 						email : true,
 						remote : {
-							url : '/user/check/email',
+							url : '/check/user/email',
 							type : 'get',
 							data : {
 								email : function() {
 									return $('#email').val();
-								}
+								},
+			                    t:Math.random()
 							}
 						}
 					},
@@ -336,7 +206,8 @@
 							data : {
 								captcha : function() {
 									return $('#captcha').val();
-								}
+								},
+			                    t:Math.random()
 							}
 						}
 					},
