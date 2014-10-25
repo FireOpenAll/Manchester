@@ -3,12 +3,12 @@ package com.galaxy.dal.domain.activity;
 import com.galaxy.dal.domain.BaseDomain;
 
 public class ActivityLikedUsers extends BaseDomain {
-	private String userId; 
+	private Long userId; 
 	private Long activityId;
-	public String getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 	public Long getActivityId() {

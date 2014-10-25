@@ -36,6 +36,8 @@ public class Activity extends BaseDomain {
 	private Integer joinedNum;// 参会人数
 
 	private Integer ticketsNum;// 门票数量
+	
+	private Integer liked_num;//点赞人数
 
 	// hsq
 	private String haibao_urls;// 活动图片url，以";"分割
@@ -167,6 +169,13 @@ public class Activity extends BaseDomain {
 	}
 	public void setTicketsNum(Integer ticketsNum) {
 		this.ticketsNum = ticketsNum;
+	}
+	
+	public Integer getLiked_num() {
+		return liked_num;
+	}
+	public void setLiked_num(Integer liked_num) {
+		this.liked_num = liked_num;
 	}
 	public String getHaibao_urls() {
 		return haibao_urls;

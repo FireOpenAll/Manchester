@@ -146,9 +146,27 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	////like
 	@Override
+	@Transactional
 	public boolean likeActivity(ActivityLikedUsers activityLikedUsers) {
 		//点赞某活动
-		return activityLikedUsersMapper.insert(activityLikedUsers);
+		Activity activity = activityMappper.getById(activityLikedUsers.getActivityId());
+		if (activity == null) {
+			return false;
+		}
+		activity.setJoinedNum(activity.getLiked_num()+1);
+		return activityLikedUsersMapper.insert(activityLikedUsers) && activityMappper.update(activity) ;
+	}
+	
+	@Override
+	@Transactional
+	public boolean cancelLiked(Long user_id, Long activity_id) {
+		//取消点赞 
+		Activity activity = activityMappper.getById(activity_id);
+		if (activity == null) {
+			return false;
+		}
+		activity.setLiked_num((activity.getLiked_num()-1)>0?(activity.getLiked_num()-1):0);
+		return activityLikedUsersMapper.cancelLiked(user_id, activity_id) && activityMappper.update(activity) ;
 	}
 	
 	@Override
@@ -171,11 +189,7 @@ public class ActivityServiceImpl implements ActivityService {
 		return activityLikedUsersMapper.getLikedActNumByUserId(user_id);
 	}
 
-	@Override
-	public boolean cancelLiked(Long user_id, Long activity_id) {
-		//取消点赞 
-		return activityLikedUsersMapper.cancelLiked(user_id, activity_id);
-	}
+
 	
 	
 	
