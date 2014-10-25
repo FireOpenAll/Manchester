@@ -64,8 +64,8 @@
 	<insert id="insert" parameterType="activity"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
-		ac_activity(id,created_time,type,title,start_time,end_time,province_id,city_id,district_id,address,ref_url,price,tags,user_id,operator_id,joined_num,tickets_num,status,haibao_urls,phone,email,longtitude,latitude,description,catId1,catId2,catId3,sponsor)
-		VALUES(#{id},#{createdTime},#{type},#{title},#{startTime},#{endTime},#{provinceId},#{cityId},#{districtId},#{address},#{refUrl},#{price},#{tags},#{userId},#{operatorId},#{joinedNum},#{ticketsNum},#{status},#{haibao_urls},#{phone},#{email},#{longtitude},#{latitude},#{description},#{catId1},#{catId2},#{catId3},#{sponsor})
+		ac_activity(id,created_time,type,title,start_time,end_time,province_id,city_id,district_id,address,ref_url,price,tags,user_id,operator_id,joined_num,tickets_num,liked_num,status,haibao_urls,phone,email,longtitude,latitude,description,catId1,catId2,catId3,sponsor)
+		VALUES(#{id},#{createdTime},#{type},#{title},#{startTime},#{endTime},#{provinceId},#{cityId},#{districtId},#{address},#{refUrl},#{price},#{tags},#{userId},#{operatorId},#{joinedNum},#{ticketsNum},#{liked_num},#{status},#{haibao_urls},#{phone},#{email},#{longtitude},#{latitude},#{description},#{catId1},#{catId2},#{catId3},#{sponsor})
 	</insert>
 	
 	<!-- 删除活动 -->

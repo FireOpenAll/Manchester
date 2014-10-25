@@ -2,6 +2,8 @@ package com.galaxy.front.web.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.junit.Test;
 /*author:huangshanqi
  *time  :2014年10月7日 上午11:53:49
  *email :hsqmobile@gmail.com
@@ -63,10 +65,10 @@ public class RegexUtils {
 	}
 	/**
 	 * 用户名正则验证，符合返回true
-	 * 不含特许字符，长度1-30
+	 * 不含特许字符，长度6-20
 	 */
 	public static boolean checkName(String name){
-		return (!hasSpecialChar(name))&&(name.length()>6)&&(name.length()<20);
+		return (!hasSpecialChar(name))&&(name.length()>=6)&&(name.length()<=20);
 	}
 	
 	/**
@@ -81,5 +83,10 @@ public class RegexUtils {
 		return checkPassword(password)&&checkName(username)&&((email != null)?checkEmail(email):checkPhone(mobile));
 	}
 	
-
+	/*
+	@Test
+	public void test(){
+		System.out.println(checkName("kangda"));
+	}
+*/
 }
