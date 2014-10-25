@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.galaxy.dal.domain.user.User;
+import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.service.user.UserService;
 
 @RestController(value = "ChatMemberController")
@@ -39,7 +40,10 @@ public class MemberController {
         }
         model.setName(user.getLoginName());
         model.setUserId(user.getId());
-		return model;
+        ResultModel result = new ResultModel();
+		result.setCode("20000");
+		result.setData(model);
+		return result;
 	}
 
 	public static class ChatMemberModel implements Serializable {
