@@ -7,8 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.galaxy.dal.domain.user.User;
@@ -22,8 +22,8 @@ public class MemberController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping(value = "member/{id}")
-	public Object memberInfo(@PathVariable("id") Long memberId) {
+	@RequestMapping(value = "member")
+	public Object memberInfo(@RequestParam("id") Long memberId) {
 		User user = userService.getUser(memberId);
 		if (user == null) {
 			return Collections.EMPTY_MAP;
