@@ -134,6 +134,10 @@ public class ActivityServiceImpl implements ActivityService {
 		return activityJoinedUsersMapper.listAllJoinedUsersFromId(activityId, fromId, size);
 	}
 	
+	public ActivityJoinedUsers getActivityJoinUserByUserId(Long activityId,Long userId){
+		return activityJoinedUsersMapper.getJoinedUserByUserId(activityId,userId);
+	}
+	
 	//计算user_id参加的活动数
 	@Override
 	public int getUserJoinedActNumber(Long user_id) {

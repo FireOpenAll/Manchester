@@ -1,12 +1,12 @@
 package com.galaxy.message.queue;
 
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import com.lepeng.im.message.Message;
 
 public class BlockingMessageQueue implements MessageQueue {
-	BlockingQueue<Message<?>> queue=new ArrayBlockingQueue<Message<?>>(10000);
+	BlockingQueue<Message<?>> queue=new LinkedBlockingQueue<Message<?>>(10000);
 
 	@Override
 	public boolean add(Message<?> msg) { 

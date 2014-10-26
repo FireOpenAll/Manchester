@@ -12,6 +12,7 @@ import com.galaxy.dal.chat.mapper.ChatGroupInviteMapper;
 import com.galaxy.dal.chat.mapper.ChatGroupMapper;
 import com.galaxy.dal.chat.mapper.ChatGroupMemberMapper;
 import com.galaxy.dal.domain.DBStatus;
+import com.galaxy.dal.domain.activity.ActivityJoinedUsers;
 import com.galaxy.dal.domain.chat.ChatGroup;
 import com.galaxy.dal.domain.chat.ChatGroupApply;
 import com.galaxy.dal.domain.chat.ChatGroupInvite;
@@ -60,6 +61,10 @@ public class ChatServiceImpl implements ChatService {
 		if(user==null){
 			throw new ChatException(ChatExceptionCode.USER_NOT_EXIST,"could not find user for id="+userId);
 		} 
+		ActivityJoinedUsers activityJoinUser=activityService.getActivityJoinUserByUserId(activityId,userId);
+		if(activityJoinUser==null){
+			throw new ChatException(ChatExceptionCode.NOT_MEMBER_OF_ACTIVIT,"not member of activity, id="+activityId+" user id="+userId);
+		}
 		
 		ChatGroupMember member=new ChatGroupMember();
 		member.setCreatedTime(new Date());
@@ -99,6 +104,13 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public boolean applyToGroup(Long groupId, Long userId, String applyReason) {
 		ChatGroup group=getGroupById(groupId); 
+		if(group.getActivityId()!=null&&group.getActivityId()>0){
+			ActivityJoinedUsers activityJoinUser=activityService.getActivityJoinUserByUserId(group.getActivityId(),userId);
+			if(activityJoinUser==null){
+				throw new ChatException(ChatExceptionCode.NOT_MEMBER_OF_ACTIVIT,"not member of activity, id="+group.getActivityId()+" user id="+userId);
+			}
+			
+		}
 		User user=userService.getUser(userId); 
 		if(user==null){
 			throw new ChatException(ChatExceptionCode.USER_NOT_EXIST,"could not find user for id="+userId);
@@ -120,6 +132,7 @@ public class ChatServiceImpl implements ChatService {
 		if(user==null){
 			throw new ChatException(ChatExceptionCode.USER_NOT_EXIST,"could not find user for id="+toUserId);
 		} 
+		
 		user=userService.getUser(fromUserId); 
 		if(user==null){
 			throw new ChatException(ChatExceptionCode.USER_NOT_EXIST,"could not find user for id="+fromUserId);

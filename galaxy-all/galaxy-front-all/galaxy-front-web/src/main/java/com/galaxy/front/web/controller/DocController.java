@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import com.galaxy.front.web.controller.DocController.RequestModel.Parameter;
+import com.galaxy.front.web.rest.interceptor.AuthApiHandlerInterceptor;
 
 @Controller()
 public class DocController {
@@ -101,6 +102,12 @@ public class DocController {
 				} 
 				requestModel.paramters.add(p);
 			}
+			
+			Parameter p=new Parameter();
+			p.name=AuthApiHandlerInterceptor.TOKEN_PARAM_NAME;
+			p.type=String.class; 
+			p.value="token value";
+			requestModel.paramters.add(p); 
 			requestModel.setId(requestModel.url.replaceAll("[/]", "_"));
 			if(requestModel.getId().startsWith("_")){
 				requestModel.setId(requestModel.getId().substring(1));
@@ -160,9 +167,20 @@ public class DocController {
 			this.id = id;
 		}
 
+		
+
 		public static class Parameter{
 			Class<?> type;
 			String name;
+
+			String value;
+			public String getValue() {
+				return value;
+			}
+
+			public void setValue(String value) {
+				this.value = value;
+			}
 			public Class<?> getType() {
 				return type;
 			}

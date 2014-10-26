@@ -11,10 +11,14 @@ public abstract class UserUtils {
 	public static LoginUserModel getLoginUser() {
 		LoginUserModel user = (LoginUserModel) SecurityUtils.getSubject()
 				.getPrincipal();
+		if(user==null){
+			user=getUserByToken(UserContext.getContext().getToken());
+		}
 		return user;
 	}
 
-	public static LoginUserModel getUserByToken(String token) {
+	@Deprecated
+	private static LoginUserModel getUserByToken(String token) {
 		LoginUserModel user = (LoginUserModel) SecurityUtils.getSubject()
 				.getPrincipal();
 		if (user == null) {

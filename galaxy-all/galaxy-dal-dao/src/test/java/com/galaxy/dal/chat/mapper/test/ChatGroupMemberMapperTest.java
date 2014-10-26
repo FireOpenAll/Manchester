@@ -16,18 +16,20 @@ public class ChatGroupMemberMapperTest extends BaseDaoTest {
 	ChatGroupMemberMapper chatGroupMemberMapper;
 
 	@Test
-	public void testInsert(){
-		ChatGroupMember member=new ChatGroupMember();
-		member.setCreatedTime(new Date());
-		member.setDescription("fdafasdjlf");
-		member.setEmail("fdasfasfdas");
-		member.setGroupId(32432L);
-		member.setPhone("42349821");
-		member.setRole(ChatGroupRole.MEMBER);
-		member.setStatus(DBStatus.INIT);
-		member.setUserId(342L);
-		member.setUserName("fdaslfj");
-		
-		chatGroupMemberMapper.insert(member);
+	public void testInsert() {
+		for (int i = 1; i < 100; i++) {
+			ChatGroupMember member = new ChatGroupMember();
+			member.setCreatedTime(new Date());
+			member.setDescription("fdafasdjlf");
+			member.setEmail("fdasfasfdas"+i);
+			member.setGroupId(2L);
+			member.setPhone("42349821");
+			member.setRole(ChatGroupRole.MEMBER);
+			member.setStatus(DBStatus.INIT);
+			member.setUserId((long)i);
+			member.setUserName("fdaslfj");
+
+			chatGroupMemberMapper.insert(member);
+		}
 	}
 }

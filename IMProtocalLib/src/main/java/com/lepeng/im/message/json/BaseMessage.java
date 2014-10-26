@@ -1,11 +1,13 @@
 package com.lepeng.im.message.json;
 
+import java.util.Date;
+
 import com.google.gson.Gson;
 import com.lepeng.im.message.Message;
 
 public abstract class BaseMessage implements Message<String> {
 	protected Long id;
-	protected Long createdTime;
+	protected Long createdTime=(new Date().getTime());
 	public String encode() {
 		Gson gson = new Gson();
 		return gson.toJson(this);

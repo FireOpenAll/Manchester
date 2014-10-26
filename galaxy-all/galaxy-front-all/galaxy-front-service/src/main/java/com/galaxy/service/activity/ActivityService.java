@@ -21,12 +21,16 @@ public interface ActivityService {
 	
 
 	public Activity getActivity(Long id);
+	
+	
 
 	public List<Activity> list(Map parameters, int size);
 	
 	////join
 	public boolean joinActivity(Long activityId, Long userId);
 	public List<ActivityJoinedUsers> listAllJoinedUsers(Long activityId);
+	
+	public ActivityJoinedUsers getActivityJoinUserByUserId(Long activityId,Long userId);
 	
 	public List<ActivityJoinedUsers> listAllJoinedUsersFromId(Long activityId,Long fromId,Long size);
 	

@@ -28,7 +28,7 @@ public class ActivityJoinedUsersMapperTest extends BaseDaoTest {
 		joinedUser.setActivityId(11L);
 		joinedUser.setCreatedTime(new Date());
 		joinedUser.setTicketNum(10);
-		joinedUser.setUserId(555L);
+		joinedUser.setUserId(11L);
 		joinedUser.setUserName("中午放大说");
 		activityJoinedUsersMapper.insert(joinedUser);
 
