@@ -33,7 +33,7 @@
 	<select id="getGroupByActivityId" resultMap="chatGroup_MAP" parameterType="long">
 		SELECT *
 		FROM im_chat_group
-		WHERE activityId = #{activityId}
+		WHERE activity_id = #{activityId}
 	</select>
 	<!-- private String loginName,sex,birthday,type,nick,followers,fans,realName,email,mobile,password,realNameAuth,emailAuth,mobileAuth,hasPic,avatar,bindOpenId,bindPlatform,lastVisitTime,status; -->
 	<insert id="insert" parameterType="chatGroup" useGeneratedKeys="true"

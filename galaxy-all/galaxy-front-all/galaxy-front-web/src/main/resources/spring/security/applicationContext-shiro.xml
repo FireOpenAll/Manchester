@@ -55,6 +55,7 @@
 				/api/**= anon
 				/user/logout = logout
 				/user/**=user
+				/check/** = anon
 				/api/secure/** = authcBasic
 			</value>
 		</property>

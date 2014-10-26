@@ -434,6 +434,11 @@
 			<artifactId>jboss-transaction-api-1.0.1_spec</artifactId>
 			<version>5.0.2.GA</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<!-- 默认的主代码目录 -->
