@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -85,8 +85,14 @@
           <li>
             <a href="#">我的账户</a>
           </li>
-          <li c>
-            <a href="#" >欢迎&nbsp;&nbsp;<%=request.getSession().getAttribute("userName")%>&nbsp;</a>
+          <li>
+            <a href="#" >欢迎&nbsp;&nbsp;
+            <shiro:authenticated>
+            <shiro:principal property="loginName"/>
+            </shiro:authenticated>
+            
+            <!--  %=request.getSession().getAttribute("userName")%-->
+            &nbsp;</a>
           </li>
 
           <li >

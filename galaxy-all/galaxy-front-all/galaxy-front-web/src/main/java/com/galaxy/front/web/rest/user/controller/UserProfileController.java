@@ -264,9 +264,6 @@ public class UserProfileController {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 			resultModel.setData("请输入正确的参数");
 		}
-		
-		
-
 		return resultModel;
 	}
 

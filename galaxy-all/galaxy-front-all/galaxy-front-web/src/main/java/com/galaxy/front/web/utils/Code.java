@@ -18,6 +18,7 @@ public enum Code {
 	PHONE_FORMAT_ERROR("50010","手机号码格式错误"),
 	PHONE_USED("50011","手机号已被注册"),
 	PHONE_NOT_AUTH("50012","手机未认证"),
+	PHONE_CODE_ERROR("50013","手机验证码错误或过期"),
 	
 	PASSWORD_FORMAT_ERROR("500020","密码格式错误"),
 	PASSWORD_ERROR("50021","密码错误"),
