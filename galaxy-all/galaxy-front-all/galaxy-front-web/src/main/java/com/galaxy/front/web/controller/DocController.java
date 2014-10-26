@@ -58,7 +58,7 @@ public class DocController {
 		for(Entry<RequestMappingInfo, HandlerMethod> entry:entrySet){
 			RequestMappingInfo mappingItem=entry.getKey();
 			HandlerMethod handlerMethod=entry.getValue();
-			
+			 
 			RestController restAnn=AnnotationUtils.findAnnotation(handlerMethod.getBeanType(), RestController.class);
 			if(restAnn==null){
 				continue;
