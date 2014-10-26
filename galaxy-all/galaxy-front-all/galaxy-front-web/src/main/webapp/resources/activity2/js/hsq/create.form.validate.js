@@ -66,6 +66,15 @@ $(function(){
 				},
 				'<span class="icon"></span><font color=\'red\'>请输入正确的数值！</font>'
 				);
+		
+		//tags
+		//门价格设置
+		jQuery.validator.addMethod('checkTags',
+				function(value,element){
+			    return this.optional(element) || value.length<200;
+				},
+				'<span class="icon"></span><font color=\'red\'>关键词最多200 个字符</font>'
+				);
 	  
 });
 

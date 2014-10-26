@@ -40,6 +40,7 @@
   <script type="text/javascript" src="/resources/activity2/js/hsq/location.js"></script>
   <script type="text/javascript" src="/resources/activity2/js/hsq/create.form.validate.js"></script>
   <script src="/resources/activity2/js/hsq/create.js"></script>
+  <script src="/resources/activity2/js/hsq/category.js"></script>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -179,6 +180,12 @@
               </div>
             </div>
             <div class="form-group">
+              <label for="tags" class="col-lg-2 control-label">活动标签:</label>
+              <div class="col-lg-10">
+                <input type="text" class="form-control" id="tags" name="tags" placeholder="活动标签以及关键词，用空格分割，让大家更容易发现你的活动">
+              </div>
+            </div>
+            <div class="form-group">
               <label for="description" class="col-lg-2 control-label">活动简介:</label>
               <div class="col-lg-10">
                 <textarea class="form-control" id="description" name="description" placeholder="活动简介">
@@ -194,6 +201,8 @@
                 </textarea>
               </div>
             </div>
+            
+            
 
           </div>
         </div>
@@ -238,7 +247,7 @@
           <h5> <strong>推广信息:</strong>
           </h5>
           <hr>        
-          <div id="tuiguangtinfoorm">
+          <div id="tuiguangtinfo">
             <div class="radio">
               <label>
                 <input type="radio" name="optionsRadios" id="optionsRadios" value="1" checked>公开（发布到活动平台）</label>
@@ -249,13 +258,32 @@
             </div>
 
             <br/>        
-            <p>活动分类：</p>
-            <div class="col-lg-2">
+            <!--p>活动分类：</p-->
+            <div class="form-group">
+              <label for="category" class="col-lg-2 control-label">活动分类:</label>
+              <div class="col-lg-10 form-inline" id ="category">
+                 
+                           
+                <select class="col-lg-2 text-center" id="category1" onchange="getCategory2()">
+                  <option value="0">--分类1--</option>
+                 
+                </select>
+                <span>&nbsp;&nbsp;</span>
+                <select class="col-lg-2" id="category2" onchange="setCategory2()">
+                  <option value="0">--分类2--</option>
+                </select>
+
+                <input type="hidden" id=catId1 name="catId1">
+                <input type="hidden" id="catId2" name="catId2">
+              </div>
+            </div>
+            
+            <!--div class="col-lg-2">
               <select class="form-control" id="category_select" onchange="setCategory()">
                 <option value="0">--选择分类--</option>
               </select>
               <input type="hidden" id="category" name="category">
-            </div>
+            </div-->
 
 
           </div>

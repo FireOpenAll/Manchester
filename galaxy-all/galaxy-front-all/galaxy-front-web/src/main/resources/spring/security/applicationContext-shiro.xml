@@ -56,6 +56,7 @@
 				/user/logout = logout
 				/user/**=user
 				/api/secure/** = authcBasic
+				/activity/create = authc
 			</value>
 		</property>
 	</bean>
