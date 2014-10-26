@@ -38,6 +38,8 @@ import com.galaxy.front.web.activity.controller.PostModel.TicketModel;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.service.activity.ActivityService;
 import com.galaxy.service.activity.form.ActivityForm;
+import com.galaxy.service.user.LoginUserModel;
+import com.galaxy.service.user.UserUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -204,7 +206,9 @@ public class ActivityController {
 		
 		ActivityForm activityForm = new ActivityForm();
 		
-		long userId = (long) request.getSession().getAttribute("userId");
+		LoginUserModel loginUserModel = UserUtils.getLoginUser();
+		long userId = loginUserModel.getUserId();
+		System.out.println("userId============================="+userId);
 		//保存海报
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
 		String fold = simpleDateFormat.format(new Date());
@@ -251,7 +255,8 @@ public class ActivityController {
 		
 		activityForm.setUserId(userId);
 		activityForm.setType((model.getOptionsRadios()==1)?ActivityType.ONLINE:ActivityType.OFFLINE);
-		activityForm.setCatId1(model.getCategory());
+		activityForm.setCatId1(model.getCatId1());
+		activityForm.setCatId2(model.getCatId2());
 		activityForm.setTitle(model.getName());
 		activityForm.setStartTime(String2Date(model.getStart_time()));
 		activityForm.setEndTime(String2Date(model.getEnd_time()));
@@ -262,9 +267,13 @@ public class ActivityController {
 		activityForm.setPrice(model.getTicket_price());
 		activityForm.setTicketsNum(model.getTicket_num());
 		activityForm.setPhone(model.getPhone());
+		activityForm.setTags(model.getTags());
 		activityForm.setDescription(model.getDescription().trim());
 		activityForm.setContent(model.getDetail().trim());
 		activityForm.setSponsor(model.getSponsor());
+		
+		activityForm.setJoinedNum(0);
+		activityForm.setLiked_num(0);
 		
 		activityService.create(activityForm);
 		request.setAttribute("message", "创建活动成功");

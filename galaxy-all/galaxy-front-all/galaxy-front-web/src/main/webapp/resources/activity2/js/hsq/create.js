@@ -59,6 +59,11 @@ $(function(){
 				required:true,
 				CheckPhone:true
 			},
+			tags:{
+				required:true,
+				CheckSpecialChar:true,
+				checkTags:true
+			},
 			description:{
 				required:true,
 				CheckSpecialChar:true
@@ -130,6 +135,11 @@ $(function(){
 				required:"请填写活动联系电话",
 				CheckPhone:'请填写正确的联系电话'
 			},
+			tags:{
+				required:"请填写活动标签，让大家更好的发现你的活动",
+				CheckSpecialChar:'活动地址不能含有特殊字符',
+				checkTags:"活动标签最多200字符"
+			},
 			description:{
 				required:'请填写活动描述',
 				CheckSpecialChar:'活动描述不能含有特殊字符'
@@ -147,45 +157,5 @@ $(function(){
 
 });
 
-//加载活动分类
-function loadCategory(){
-	var url = '/activity/geteventcategory';
-	var html = '';
-	
-	$.ajax({
-        type: "GET",
-        url: url,
-        dataType:"json",
-        data:{t:new Date()},
-        success: function(msg) { 
-        	//alert(msg.code);
-        	if (msg.code == "20000") {
-        		var categorylist = msg.data;
-        		//alert(categorylist.length);
-        		var len = categorylist.length;
-		      	for(var i = 0; i < len; i++){
-		      		var item = categorylist[i];
-		      		var id = item.id;
-		      		var name = item.name;
-		      	    html += '<option class="text-center" value="'+id+ '">'+name+'</option>';
-		      	}
-		      	$("#category_select").html(html);
-		      	//alert(html);
-            }else{
-            	alert("error");
-            }
-         }
-     });
-};
-//加载活动分类
 
-//设置活动分类
-function setCategory(){
-	var category=$("#category_select").val();
-	//alert("category=="+category);
-	$("#category").val(category);
-	//var goal = $("#category").val();
-	//alert("category=="+category);
-}
-//设置活动分类
 

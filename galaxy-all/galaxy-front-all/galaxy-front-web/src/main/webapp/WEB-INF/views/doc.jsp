@@ -31,7 +31,8 @@
 	  var selector="#"+id+"-form";
 	  $(selector).dialog({
 	      autoOpen: false,
-	      height: 300,
+	      position: {my:"center top",at:"center top"},
+	      height: 400,
 	      width: 500,
 	      modal: true,
 	      buttons: {
@@ -63,13 +64,13 @@
 </table>
 
 <c:forEach var="model" items="${modelList}">
-<div id="<c:out value="${model.id}"/>-form" title="<c:out value="${model.url}"/>测试表单">
+<div style="display:none;" id="<c:out value="${model.id}"/>-form" title="<c:out value="${model.url}"/>测试表单">
   <p class="validateTips">填入测试选项.</p> 
   <form id="<c:out value="${model.id}"/>" method="<c:out value="${model.method}"/>" action="<c:out value="${model.url}"/>" target="_blank">
     <fieldset>
       <c:forEach var="item" items="${model.paramters}">
       <label for='<c:out value="${item.name}"/>'><c:out value="${item.name}"/></label>
-      <input type="text" name="<c:out value="${item.name}"/>" id="<c:out value="${item.name}"/>" value="" class="text ui-widget-content ui-corner-all">
+      <input type="text" name="<c:out value="${item.name}"/>" id="<c:out value="${item.name}"/>" value="<c:out value="${item.value}"/>" class="text ui-widget-content ui-corner-all">
       </c:forEach>
       <input type="submit" value="提交" tabindex="-1" style="position:absolute; top:-1000px">
     </fieldset>

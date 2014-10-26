@@ -172,7 +172,7 @@
 		<div id="topNav-inner-new" style="width: 1025px;">
 			<ul class="topNav-left">
 			    <shiro:authenticated>
-			    <li class="user_info"><span>您好，<shiro:principal property="loginName"/>,欢迎来到乐朋</span> <a
+			    <li class="user_info"><span>您好，<shiro:principal property="loginName"/>用户ID,欢迎来到乐朋</span> <a
 					class="user-info-login" href="/user/logout">[退出]</a></li>
 			    </shiro:authenticated>
 				<shiro:notAuthenticated>

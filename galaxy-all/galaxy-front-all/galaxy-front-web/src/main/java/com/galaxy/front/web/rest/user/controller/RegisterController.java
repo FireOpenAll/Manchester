@@ -35,8 +35,15 @@ public class RegisterController {
 	@Autowired
 	private EmailUtils emailUtils;
 	
-	
-	@RequestMapping(value = "register", method = RequestMethod.POST,params = {"username","password","email"})
+	/**
+	 * 客户端邮箱注册
+	 * @param request
+	 * @param username
+	 * @param password
+	 * @param email
+	 * @return
+	 */
+	@RequestMapping(value = "registerByEmail", method = RequestMethod.POST,params = {"username","password","email"})
 	public Object registerByEmail(HttpServletRequest request,@RequestParam("username") String username,@RequestParam("password") String password,@RequestParam("email") String email) {
 		ResultModel resultModel = new ResultModel();
 		
@@ -83,87 +90,71 @@ public class RegisterController {
         	resultModel.setData(Code.PARAMS_ERROR.name());
         	return resultModel;
 		}
-		
-		
-		
 	}
-	
 
 	/**
-	 * 客户端邮箱注册表单提交
-	 * 
+	 * 手机号注册
 	 * @param request
-	 * @param email
+	 * @param username
+	 * @param mobile
 	 * @param password
+	 * @param code
 	 * @return
 	 */
-	/*
-	@RequestMapping(value = "register", method = RequestMethod.POST)
-	public Object register(HttpServletRequest request,RegisterForm form) {
+	@RequestMapping(value = "registerByMobile", method = RequestMethod.POST,params = {"username","mobile","password","code"})
+	public Object registerByMobile(HttpServletRequest request,@RequestParam("username") String username,@RequestParam("mobile") String mobile,@RequestParam("password") String password,@RequestParam("code") String code) {
 		ResultModel resultModel = new ResultModel();
-        String loginName=null;
-        String longType = null;//邮箱或者手机号
-        if (form.getUsername() == null) {
-        	resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
-        	resultModel.setData("请填入登录名");
-        	return resultModel;
-		}
-        longType = (form.getEmail()== null)?(form.getPhone_num()):(form.getEmail());
-        if (longType == null) {
-        	resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
-        	resultModel.setData("请用邮箱或手机号注册");
-        	return resultModel;
-		}
-        if (userService.countUsersByLoginName(loginName)>0 || userService.c) {
-			
-		}
-        if(form.getEmail()!=null){
-        	loginName=form.getEmail();
-        }
-        if(form.getPhone_num()!=null){
-        	loginName=form.getPhone_num();
-        }
-        if(form.getUsername()!=null){
-        	loginName=form.getUsername();
-        }
-        if(StringUtils.isBlank(loginName)){
-        	resultModel = ResultModelUtils
-					.getResultModelByCode(Code.PARAMS_ERROR);
+		
+		if (ParamUtils.isNotEmpty(mobile,password,code)) {
+			if (!code.equals("888888")) {
+				//code error
+				resultModel = ResultModelUtils.getResultModelByCode(Code.PHONE_CODE_ERROR);
+				resultModel.setData(Code.PHONE_CODE_ERROR.getMessage());
+				return resultModel;
+			}
+			if (userService.countUsersByLoginName(username)>0) {
+				//用户名已注册
+				resultModel = ResultModelUtils.getResultModelByCode(Code.USER_NAME_USED);
+				resultModel.setData("用户名已被注册");
+				return resultModel;
+			}
+			if (userService.countUsersByMobile(mobile)>0) {
+				//手机号已注册
+				resultModel = ResultModelUtils.getResultModelByCode(Code.PHONE_USED);
+				resultModel.setData("手机号已被注册");
+				return resultModel;
+			}
+			if (RegexUtils.checkAll(username, password, null, mobile)) {
+				User user = new User();
+				user.setLoginName(username);
+				user.setEmail(null);
+				user.setPassword(password);
+				user.setMobile(mobile);
+				user.setNick(username);
+				user.setCreatedTime(new Date());
+				user.setEmailAuth(false);
+				user.setMobileAuth(true); 
+				user.setHasPic(false);
+				user.setType(UserType.NORMAL); 
+				userService.createUser(user);
+				
+				resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+				resultModel.setData("success");
+				return resultModel;
+			}else {
+				resultModel = ResultModelUtils.getResultModelByCode(Code.REGISTER_ERROR);
+				resultModel.setData("参数不符合要求");
+				return resultModel;
+			}
+		}else {
+			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
         	resultModel.setData(Code.PARAMS_ERROR.name());
         	return resultModel;
-        }
-        User user=userService.findUserByLoginName(loginName);
-        if(user!=null){
-        	resultModel = ResultModelUtils
-					.getResultModelByCode(Code.USER_NAME_USED);
-			resultModel.setData(Code.USER_NAME_USED.name());
-			return resultModel;
-        }
-        user = new User();
-		user.setLoginName(loginName);
-		user.setEmail(form.getEmail());
-		user.setPassword(form.getPassword());
-		user.setMobile(form.getPhone_num());
-		user.setNick(form.getUsername());
-		user.setCreatedTime(new Date());
-		user.setEmailAuth(false);
-		user.setMobileAuth(false); 
-		user.setHasPic(false);
-		user.setType(UserType.NORMAL); 
-		userService.createUser(user);
-		if(user.getId()==null||user.getId()<=0){
-			resultModel = ResultModelUtils.getResultModelByCode(Code.FAILURE);
-			resultModel.setData("success");
-			return resultModel;
-		} 
-		
-		resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
-		resultModel.setData("success");
-		notifyRegister(user);
-		return resultModel;
-		 
+		}	
 	}
-	*/
+
+	
+	
 	private void notifyRegister(User user){
 //		String code = MD5Utils.encode2String(email);
 //
