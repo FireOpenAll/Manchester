@@ -60,4 +60,12 @@
 	from ac_activity_liked_users
 	where user_id = #{user_id}
 	</select>
+	
+	<!-- get by user_id and activity_id -->
+	<select id="getByUserIdActId" resultMap="ACTIVITY_LIKED_USERS_MAP">
+	select * 
+	from ac_activity_liked_users
+	where user_id = #{user_id} and activity_id = #{activity_id}
+	limit 1
+	</select>
 </mapper>

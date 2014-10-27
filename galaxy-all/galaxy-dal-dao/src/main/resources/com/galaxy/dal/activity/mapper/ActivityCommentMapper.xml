@@ -52,7 +52,7 @@
 	</delete>
 	
 	<!-- 统计user_id评论过的活动数 -->
-	<select id="getUserComActNum" parameterType="long">
+	<select id="getUserComActNum" parameterType="long" resultType="int">
 	select count(distinct activity_id)
 	from ac_activity_commented_users
 	where user_id = #{user_id}
@@ -65,4 +65,10 @@
 	where activity_id = #{param1.activity_id} limit param2,param3
 	</select>
 	
+	<!-- 统计某个活动评论的人数 -->
+	<select id="getCommUserNum" parameterType="long" resultType="int">
+	select count(DISTINCT user_id)
+	from ac_activity_commented_users
+	where activity_id = #{activity_id}
+	</select>
 </mapper>

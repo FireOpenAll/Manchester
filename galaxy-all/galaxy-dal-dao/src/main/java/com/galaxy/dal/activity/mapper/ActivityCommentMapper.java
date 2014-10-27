@@ -13,4 +13,6 @@ public interface ActivityCommentMapper extends BaseMapper<ActivityComment> {
 
 	//统计user_id评论过的活动数
 	public int getUserComActNum(@Param("user_id") Long user_id);
+	//统计某个活动总的评论人数
+	public int getCommUserNum(@Param("activity_id") Long activityId);
 }

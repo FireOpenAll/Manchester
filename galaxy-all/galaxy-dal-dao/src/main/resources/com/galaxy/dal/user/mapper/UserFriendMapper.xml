@@ -67,7 +67,7 @@
 	</select>
 	
 	<!-- 分页得到我关注用户 -->
-	<select id="getFollowingsByPage" parameterType="com.galaxy.dal.base.mapper.PaginationParam" resultMap="USER_FRIEND_MAP">
+	<select id="getFollowingsByOffset" parameterType="com.galaxy.dal.base.mapper.PaginationParam" resultMap="USER_FRIEND_MAP">
 	select *
 	from u_user_friend
 	where (user_id = #{param1.user_id} and (relation = 1 or relation = 3)) 

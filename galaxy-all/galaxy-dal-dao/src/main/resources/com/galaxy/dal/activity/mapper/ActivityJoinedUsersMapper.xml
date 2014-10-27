@@ -58,4 +58,19 @@
 	from ac_activity_joined_users
 	where user_id = #{user_id}
 	</select>
+	
+	<!-- 列出用户参加的所有活动 -->
+	<select id="listAllJoinedActs" parameterType="long" resultMap="ACTIVITY_JOINED_USERS_MAP">
+	select *
+	from ac_activity_joined_users
+	where user_id = #{user_id}
+	</select>
+	
+	<!-- get by user_id and activity_id -->
+	<select id="getByUserIdActId" resultMap="ACTIVITY_JOINED_USERS_MAP">
+	select *
+	from ac_activity_joined_users
+	where user_id = #{user_id} and activity_id = #{activity_id}
+	limit 1
+	</select>
 </mapper>

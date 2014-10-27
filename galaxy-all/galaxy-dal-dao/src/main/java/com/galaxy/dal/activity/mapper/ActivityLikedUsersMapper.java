@@ -19,4 +19,6 @@ public interface ActivityLikedUsersMapper extends BaseMapper<ActivityLikedUsers>
 	//取消点赞 
 	public boolean cancelLiked(@Param("user_id") Long user_id,@Param("activity_id") Long activity_id);
 
+	//getByUserIdActId
+	public ActivityLikedUsers getByUserIdActId(@Param("user_id") Long user_id,@Param("activity_id") Long activity_id);
 }

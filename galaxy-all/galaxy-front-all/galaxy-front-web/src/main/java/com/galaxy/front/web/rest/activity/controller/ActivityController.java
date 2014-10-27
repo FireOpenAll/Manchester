@@ -114,6 +114,31 @@ public class ActivityController {
 	}
 	
 	
+	
+	/**
+	 * 发现页面 获取活动热门分类
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "hot_category1", method = RequestMethod.GET)
+	public Object getHotActivityCategories1() {
+		/**
+		 * sql
+		 */
+		ResultModel resultModel = new ResultModel();
+
+		resultModel.setCode("20000");
+		resultModel.setMessage("get host activity category");
+
+		ArrayList<InterestModel> interest_list = new ArrayList<InterestModel>();
+		for (int i = 0; i < 5; i++) {
+			interest_list
+					.add(new InterestModel(10000000 + i, "兴趣" + i, "/interest/cover/" + (30 + i) + ".jpg", "兴趣介绍"));
+		}
+
+		resultModel.setData(interest_list);
+		return resultModel;
+	}
 
 
 }
