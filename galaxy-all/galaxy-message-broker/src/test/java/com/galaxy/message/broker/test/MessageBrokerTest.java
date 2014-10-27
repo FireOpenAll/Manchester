@@ -52,6 +52,18 @@ public class MessageBrokerTest {
 			Thread.sleep(111111L);
 		}
 	}
+	
+	@Test
+	public void testJson(){
+		JsonGroupMessage message = new JsonGroupMessage();
+		message.setGroupId(2L);
+		message.setFromId((long)333);
+		message.setContent("Hello world!"+3333);
+		message.setFromId(11111L);
+		message.setMessageType(2);
+		message.setCreatedTime(System.currentTimeMillis());
+		System.out.println(message);
+	}
 
 
 }
