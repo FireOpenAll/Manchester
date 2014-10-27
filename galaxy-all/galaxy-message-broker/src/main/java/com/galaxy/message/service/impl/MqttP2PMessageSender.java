@@ -30,7 +30,7 @@ public class MqttP2PMessageSender implements MessageSender<P2PMessage<?>> {
 	static {
 		try {
 			mqttClient.setClientId(UUID.randomUUID().toString());
-			mqttClient.setHost("182.92.169.209", 1883);
+			mqttClient.setHost("127.0.0.1", 1883);
 
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
