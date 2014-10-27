@@ -14,6 +14,8 @@ import org.fusesource.mqtt.client.MQTT;
 import org.fusesource.mqtt.client.QoS;
 import org.springframework.stereotype.Service;
 
+import com.galaxy.message.broker.MessageEvent;
+import com.galaxy.message.queue.MessageQueueFactory;
 import com.galaxy.message.service.MessageSender;
 import com.lepeng.im.message.P2PMessage;
 @Service("p2pMessageSender")
@@ -22,7 +24,7 @@ public class MqttP2PMessageSender implements MessageSender<P2PMessage<?>> {
 	static final int THREAD_SIZE=50;
 	static final int CONNECTION_POOL_SIZE=1000;
 	static final ThreadPoolExecutor threadPool = (ThreadPoolExecutor) Executors.newFixedThreadPool(THREAD_SIZE);
-	final List<MessageConsumer> consumerList = new ArrayList<MessageConsumer>();
+	final List<P2PMessageConsumer> consumerList = new ArrayList<P2PMessageConsumer>();
 	
 	BlockingQueue<BlockingConnection> connectionPool=new LinkedBlockingQueue<BlockingConnection>(CONNECTION_POOL_SIZE);
 	static {
@@ -39,7 +41,7 @@ public class MqttP2PMessageSender implements MessageSender<P2PMessage<?>> {
 
 	public MqttP2PMessageSender() {
 		for (int i = 0; i < THREAD_SIZE; i++) {
-			MessageConsumer task=new MessageConsumer(this);
+			P2PMessageConsumer task=new P2PMessageConsumer(this);
 			consumerList.add(task); 
 			threadPool.submit(task);
 		}
@@ -52,7 +54,7 @@ public class MqttP2PMessageSender implements MessageSender<P2PMessage<?>> {
 		event.message=message; 
 		int hashCode=hash(queueName);
 		int index=Math.abs(hashCode%consumerList.size()); 
-		MessageConsumer consumer=consumerList.get(index);
+		P2PMessageConsumer consumer=consumerList.get(index);
 		consumer.addEvent(event);
 	}
 	 
@@ -98,18 +100,13 @@ public class MqttP2PMessageSender implements MessageSender<P2PMessage<?>> {
 		
 		return connection;
 	}
+ 
 
-	class MessageEvent {
-		String queueName;
-		P2PMessage<?> message;
-
-	}
-
-	class MessageConsumer implements Runnable {
-		BlockingQueue<MessageEvent> messageQueue = new LinkedBlockingQueue<MessageEvent>();
+	class P2PMessageConsumer implements Runnable {
+		final BlockingQueue<MessageEvent> messageQueue = MessageQueueFactory.createP2PEventQueue();
 		final MqttP2PMessageSender sender;
 
-		MessageConsumer(MqttP2PMessageSender sender) {
+		P2PMessageConsumer(MqttP2PMessageSender sender) {
 			this.sender = sender;
 		}
 		
@@ -122,7 +119,7 @@ public class MqttP2PMessageSender implements MessageSender<P2PMessage<?>> {
 			while (true) {
 				try {
 					MessageEvent event = messageQueue.take();
-					sender.doSend(event.queueName, event.message);
+					sender.doSend(event.queueName, (P2PMessage<?>) event.message);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

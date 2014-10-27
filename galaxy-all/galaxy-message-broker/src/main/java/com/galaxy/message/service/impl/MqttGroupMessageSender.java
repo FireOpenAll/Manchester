@@ -19,6 +19,8 @@ import org.fusesource.mqtt.client.MQTT;
 import org.fusesource.mqtt.client.QoS;
 import org.springframework.stereotype.Service;
 
+import com.galaxy.message.broker.MessageEvent;
+import com.galaxy.message.queue.MessageQueueFactory;
 import com.galaxy.message.service.MessageSender;
 import com.lepeng.im.message.GroupMessage;
 @Service("groupMessageSender")
@@ -27,7 +29,7 @@ public class MqttGroupMessageSender implements MessageSender<GroupMessage<?>> {
 	static final int THREAD_SIZE=50;
 	static final int CONNECTION_POOL_SIZE=100;
 	static final ThreadPoolExecutor threadPool = (ThreadPoolExecutor) Executors.newFixedThreadPool(THREAD_SIZE);
-	final List<MessageConsumer> consumerList = new ArrayList<MessageConsumer>();
+	final List<GroupMessageConsumer> consumerList = new ArrayList<GroupMessageConsumer>();
 	BlockingQueue<BlockingConnection> connectionPool=new LinkedBlockingQueue<BlockingConnection>(CONNECTION_POOL_SIZE);
 	static {
 		try {
@@ -43,7 +45,7 @@ public class MqttGroupMessageSender implements MessageSender<GroupMessage<?>> {
 
 	public MqttGroupMessageSender() {
 		for (int i = 0; i < 50; i++) {
-			MessageConsumer task=new MessageConsumer(this);
+			GroupMessageConsumer task=new GroupMessageConsumer(this);
 			consumerList.add(task); 
 			threadPool.submit(task);
 		}
@@ -56,7 +58,7 @@ public class MqttGroupMessageSender implements MessageSender<GroupMessage<?>> {
 		event.message=message; 
 		int hashCode=hash(queueName);
 		int index=Math.abs(hashCode%consumerList.size());
-		MessageConsumer consumer=consumerList.get(index);
+		GroupMessageConsumer consumer=consumerList.get(index);
 		consumer.addEvent(event);
 	}
 	 
@@ -102,47 +104,18 @@ public class MqttGroupMessageSender implements MessageSender<GroupMessage<?>> {
 		
 		return connection;
 	}
+ 
 
-	class MessageEvent {
-		String queueName;
-		GroupMessage<?> message;
-
-	}
-
-	class MessageConsumer implements Runnable {
-		BlockingQueue<MessageEvent> messageQueue = new LinkedBlockingQueue<MessageEvent>(100000);
-		final MqttGroupMessageSender sender;
-		List<GroupMessage<?>> sendList=new LinkedList<GroupMessage<?>>();
-		Map<String,List<GroupMessage<?>>> sendQueueMap=new HashMap<String,List<GroupMessage<?>>>();
-
-		MessageConsumer(MqttGroupMessageSender sender) {
+	class GroupMessageConsumer implements Runnable {
+		final BlockingQueue<MessageEvent> messageQueue = MessageQueueFactory.createGroupEventQueue();
+		final MqttGroupMessageSender sender; 
+		GroupMessageConsumer(MqttGroupMessageSender sender) {
 			this.sender = sender;
 		}
 		
 		public void addEvent(MessageEvent event){
 			messageQueue.add(event);
-		}
-		private List<GroupMessage<?>> getSendList(String queueName){
-			List<GroupMessage<?>> messageList=sendQueueMap.get(queueName);
-			if(messageList==null){
-				messageList=new LinkedList<GroupMessage<?>>();
-				sendQueueMap.put(queueName, messageList);
-			}
-			return messageList;
-		}
-		
-		private void printSendInfo(){
-			Set<Entry<String,List<GroupMessage<?>>>> entrySet=sendQueueMap.entrySet();
-			for(Entry<String,List<GroupMessage<?>>> entry:entrySet){
-				String queueName=entry.getKey();
-				List<GroupMessage<?>> messageList=entry.getValue();
-				StringBuilder sb=new StringBuilder("queue name="+queueName+" size="+messageList.size()+" send content:=================================================\n");
-				for(GroupMessage<?> msg:messageList){
-					sb.append(msg).append("\n");
-				}
-				System.out.println(sb.toString());
-			}
-		}
+		} 
 
 		@Override
 		public void run() {
@@ -150,7 +123,7 @@ public class MqttGroupMessageSender implements MessageSender<GroupMessage<?>> {
 				try {
 					MessageEvent event = messageQueue.take();
 					System.out.println("send queue="+event.queueName+" message="+event.message);
-					sender.doSend(event.queueName, event.message);
+					sender.doSend(event.queueName, (GroupMessage<?>) event.message);
 					//List<GroupMessage<?>> messageList=getSendList(event.queueName);
 					//messageList.add(event.message);
 					//printSendInfo();
