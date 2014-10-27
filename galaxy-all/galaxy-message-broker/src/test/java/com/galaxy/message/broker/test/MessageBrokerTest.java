@@ -2,18 +2,19 @@ package com.galaxy.message.broker.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.galaxy.message.broker.MessageBroker;
-import com.galaxy.message.broker.impl.MqttMessageBroker;
 import com.lepeng.im.message.json.JsonGroupMessage;
 import com.lepeng.im.message.json.JsonP2PMessage;
 @ContextConfiguration(locations = { "/spring/message-broker-config.xml", "/spring/dao.xml",
 		"/spring/datasource-config.xml"  })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class MessageBrokerTest {
-	MessageBroker messageBroker = new MqttMessageBroker();
+	@Autowired
+	MessageBroker messageBroker;
 
 	@Test
 	public void testReceive() throws Exception {
@@ -28,9 +29,7 @@ public class MessageBrokerTest {
 			//Thread.sleep(1000L);
 		}
 
-		while (true) {
-			Thread.sleep(111111L);
-		}
+		Thread.sleep(111111L);
 	}
 	
 	@Test
@@ -45,7 +44,7 @@ public class MessageBrokerTest {
 			message.setCreatedTime(System.currentTimeMillis());
 
 			messageBroker.receive(message);
-			Thread.sleep(100L);
+			Thread.sleep(1000L);
 		}
 
 		while (true) {
