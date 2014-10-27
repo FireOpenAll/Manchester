@@ -139,7 +139,7 @@ public class MqttGroupMessageSender implements MessageSender<GroupMessage<?>> ,I
 	public void afterPropertiesSet() throws Exception {
 		try {
 			mqttClient.setClientId(UUID.randomUUID().toString());
-			mqttClient.setHost("182.92.169.209", 1883); 
+			mqttClient.setHost("127.0.0.1", 1883); 
 			for (int i = 0; i < THREAD_SIZE; i++) {
 				GroupMessageConsumer task = new GroupMessageConsumer(this);
 				consumerList.add(task);

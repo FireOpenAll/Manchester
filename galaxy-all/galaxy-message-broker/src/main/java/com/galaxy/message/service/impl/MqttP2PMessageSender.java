@@ -151,7 +151,7 @@ public class MqttP2PMessageSender implements MessageSender<P2PMessage<?>>,
 	public void afterPropertiesSet() throws Exception {
 		try {
 			mqttClient.setClientId(UUID.randomUUID().toString());
-			mqttClient.setHost("182.92.169.209", 1883);
+			mqttClient.setHost("127.0.0.1", 1883);
 			for (int i = 0; i < THREAD_SIZE; i++) {
 				P2PMessageConsumer task = new P2PMessageConsumer(this);
 				consumerList.add(task);
