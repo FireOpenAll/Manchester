@@ -16,17 +16,38 @@ public class MessageQueueFactory {
 				while (true) {
 					try {
 						Thread.sleep(5000L);
-						for(int i=0;i<p2pQueueList.size();i++){
-							if(p2pQueueList.get(i).size()>0){
-								System.out.println(p2pQueueList.get(i).hashCode()+"======================p2p========================queue size="+p2pQueueList.get(i).size());
+						int j = 0;
+						for (int i = 0; i < p2pQueueList.size(); i++) {
+							if (p2pQueueList.get(i).size() > 0) {
+								j++;
+								System.out
+										.println(p2pQueueList.get(i).hashCode()
+												+ "======================p2p========================queue size="
+												+ p2pQueueList.get(i).size());
 
 							}
 						}
-						for(int i=0;i<groupQueueList.size();i++){
-							if(groupQueueList.get(i).size()>0){
-								System.out.println(groupQueueList.get(i).hashCode()+"=====================group=========================queue size="+groupQueueList.get(i).size());
+						if (j == 0) {
+							System.out
+									.println("********************all p2p sent***********************");
+							
+						}
+						j = 0;
+						for (int i = 0; i < groupQueueList.size(); i++) {
+							if (groupQueueList.get(i).size() > 0) {
+								j++;
+								System.out
+										.println(groupQueueList.get(i)
+												.hashCode()
+												+ "=====================group=========================queue size="
+												+ groupQueueList.get(i).size());
 
 							}
+						}
+						if (j == 0) {
+							System.out
+									.println("********************all group sent***********************");
+							j = 0;
 						}
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
@@ -48,6 +69,7 @@ public class MessageQueueFactory {
 		p2pQueueList.add(queue);
 		return queue;
 	}
+
 	public static BlockingQueue<MessageEvent> createGroupEventQueue() {
 		BlockingQueue<MessageEvent> queue = new LinkedBlockingQueue<MessageEvent>(
 				100000);

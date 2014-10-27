@@ -7,9 +7,6 @@
         <dependent-module archiveName="galaxy-front-service-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/galaxy-front-service/galaxy-front-service">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="IMProtocalLib-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/IMProtocalLib/IMProtocalLib">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="galaxy-commons-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/galaxy-commons/galaxy-commons">
             <dependency-type>uses</dependency-type>
         </dependent-module>
