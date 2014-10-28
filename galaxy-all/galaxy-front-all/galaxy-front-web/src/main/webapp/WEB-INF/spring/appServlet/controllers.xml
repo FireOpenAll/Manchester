@@ -24,6 +24,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/api/v1/**" /> 
+			<mvc:exclude-mapping path="/api/v1/activity/**" />
 			<mvc:exclude-mapping path="/user/login" />
 			<mvc:exclude-mapping path="/user/register" />
 			<mvc:exclude-mapping path="/user/logout" />
