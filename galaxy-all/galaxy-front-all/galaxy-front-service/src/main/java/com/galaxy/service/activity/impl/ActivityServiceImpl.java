@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.aspectj.apache.bcel.classfile.Constant;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import com.galaxy.dal.activity.mapper.ActivityLikedUsersMapper;
 import com.galaxy.dal.activity.mapper.ActivityMapper;
 import com.galaxy.dal.base.mapper.PaginationParam;
 import com.galaxy.dal.domain.activity.Activity;
+import com.galaxy.dal.domain.activity.ActivityComment;
 import com.galaxy.dal.domain.activity.ActivityDetail;
 import com.galaxy.dal.domain.activity.ActivityJoinedUsers;
 import com.galaxy.dal.domain.activity.ActivityLikedUsers;
@@ -231,6 +233,23 @@ public class ActivityServiceImpl implements ActivityService {
 		List<ActivityLikedUsers> likedUsers = activityLikedUsersMapper.listAllLikedUsersByActId(paginationParam);
 		return likedUsers;
 	}
+	
+	@Override
+	public List<Activity> getUserLikedActByUntilId(long userId, long untilId, long pageSize) {
+		// TODO Auto-generated method stub
+		List<ActivityLikedUsers> list = activityLikedUsersMapper.getUserLikedActByUntilId(userId, untilId, pageSize);
+		if (list == null || list.size() == 0) {
+			return null;
+		}
+		List<Activity> results = new ArrayList<Activity>();
+		for(ActivityLikedUsers activityLikedUsers : list){
+			Activity activity = activityMappper.getById(activityLikedUsers.getActivityId());
+			if (activity != null) {
+				results.add(activity);
+			}
+		}
+		return results;
+	}
 
 	@Override
 	public int getLikedActNumByUserId(Long user_id) {
@@ -264,7 +283,54 @@ public class ActivityServiceImpl implements ActivityService {
 		// TODO Auto-generated method stub
 		return activityCommentMapper.getCommUserNum(activityId);
 	}
+	//评论活动或回复某个人
+	@Override
+	public ActivityComment Comment(ActivityComment activityComment) {
+		// TODO Auto-generated method stub
+		Activity activity = activityMappper.getById(activityComment.getActivityId());
+		if (activity == null) {
+			return null;
+		}
+		activityComment.setReplyTime(activityComment.getCreatedTime());
+		activityCommentMapper.insert(activityComment);
+		return activityComment;
+	}
+
+	//分页得到某活动的评论
+	@Override
+	public List<ActivityComment> getActComByUntilId(Long activityId, Long untilId, int pageSize) {
+		// TODO Auto-generated method stub
+		Activity activity = activityMappper.getById(activityId);
+		if (activity == null) {
+            return null;	
+		}
+		
+		return activityCommentMapper.getActComByUntilId(activityId, untilId, pageSize);
+	}
+	
+	
+	//分页得到用户评论过的活动
+	@Override
+	public List<Activity> getUserComedActByUntilId(long userId, long untilId, long pageSize) {
+		// TODO Auto-generated method stub
+		List<ActivityComment> list = activityCommentMapper.getUserComedActByUntilId(userId, untilId, pageSize);
+		if (list == null || list.size() == 0) {
+			return null;
+		}
+		List<Activity> results = new ArrayList<Activity>();
+		for(ActivityComment activityComment : list){
+			Activity activity = activityMappper.getById(activityComment.getActivityId());
+			if (activity != null) {
+				results.add(activity);
+			}
+		}
+		return results;
+	}
+	
+	
+	
 	////comment
+
 
 	//统计某user_id发布的活动数
 	@Override

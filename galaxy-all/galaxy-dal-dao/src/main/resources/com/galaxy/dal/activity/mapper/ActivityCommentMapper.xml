@@ -58,12 +58,30 @@
 	where user_id = #{user_id}
 	</select>
 	
+	<!-- 分页获取userId评论过的活动 -->
+	<select id="getUserComedActByUntilId" resultMap="ACTIVITY_COMMENT_MAP">
+	select *
+	from ac_activity_commented_users
+	where user_id = #{userId} and activity_id &gt;  #{untilId} 
+	group by activity_id 
+	order by activity_id asc
+	limit #{pageSize}
+	</select>
+	
 	<!-- 分页获取评论 -->
 	<select id="list" resultMap="ACTIVITY_COMMENT_MAP" parameterType="com.galaxy.dal.base.mapper.PaginationParam">
 	select * from
 	ac_activity_commented_users
 	where activity_id = #{param1.activity_id} limit param2,param3
 	</select>
+	
+    <!-- 分页获取评论 -->
+	<select id="getActComByUntilId" resultMap="ACTIVITY_COMMENT_MAP">
+	select * from
+	ac_activity_commented_users
+	where activity_id = #{activityId} and  id &gt; #{untilId} limit #{pageSize}
+	</select>
+	
 	
 	<!-- 统计某个活动评论的人数 -->
 	<select id="getCommUserNum" parameterType="long" resultType="int">

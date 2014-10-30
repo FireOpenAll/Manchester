@@ -39,6 +39,18 @@
 		WHERE activity_id = #{param1.activity_id} limit #{param2},#{param3}
 	</select> 
 
+	<!-- 分页获取userId评论过的活动 -->
+	<select id="getUserLikeedActByUntilId" resultMap="ACTIVITY_LIKED_USERS_MAP">
+	select *
+	from ac_activity_liked_users
+	where user_id = #{userId} and activity_id &gt;  #{untilId} 
+	group by activity_id 
+	order by activity_id asc
+	limit #{pageSize}
+	</select>
+
+
+
     <!-- 点赞某活动 -->
 	<insert id="insert" parameterType="activityLikedUsers"
 		useGeneratedKeys="true" keyProperty="id">

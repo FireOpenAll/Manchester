@@ -133,7 +133,7 @@ public class ActivityJoinController {
 		List<Activity> activityList = activityService.listAllJoinedActs(user_id);
 		
 		resultModel=ResultModelUtils.getResultModelByCode(Code.OK);
-		if (activityList.size() <=0) {
+		if (activityList == null|| activityList.size() <=0) {
 			return resultModel;
 		}
 		 

@@ -1,6 +1,9 @@
 package com.galaxy.dal.activity.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+import org.junit.runners.Parameterized.Parameters;
 
 import com.galaxy.dal.base.mapper.BaseMapper;
 import com.galaxy.dal.domain.activity.ActivityComment;
@@ -15,4 +18,8 @@ public interface ActivityCommentMapper extends BaseMapper<ActivityComment> {
 	public int getUserComActNum(@Param("user_id") Long user_id);
 	//统计某个活动总的评论人数
 	public int getCommUserNum(@Param("activity_id") Long activityId);
+	//分页得到用户评论过的活动
+	public List<ActivityComment> getUserComedActByUntilId(@Param("userId") long userId,@Param("untilId") long untilId,@Param("pageSize") long pageSize);
+	//分页得到某活动的评论
+	public List<ActivityComment> getActComByUntilId(@Param("activityId") Long activityId, @Param("untilId") Long untilId,@Param("pageSize") int PageSize );
 }
