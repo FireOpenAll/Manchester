@@ -30,6 +30,11 @@ public interface ActivityService {
 	public Activity getActivity(Long id);
 
 	public List<Activity> list(Map parameters, int size);
+	////create
+	//分页获取某人发布的活动 
+	public List<Activity> getUserCreatedActByUntilId (long userId,long untilId,int pageSize);
+
+	////create
 	
 	////join
 	public boolean joinActivity(Long activityId, Long userId);

@@ -82,6 +82,15 @@
 		FROM ac_activity
 		WHERE id = #{id}
 	</select>
+	
+	<!-- 分页获取某人发布的活动 -->
+	<select id="getUserCreatedActByUntilId" resultMap="ACTIVITY_MAP" parameterType="long">
+		SELECT *
+		FROM ac_activity
+		where user_id = #{user_id} and activity_id &gt; #{until_id} 
+	    limit #{pageSize}
+	</select>
+	
 	<!-- 统计某人发布的活动数 -->
 	<select id="getUserCreatedActNum" parameterType="long">
 	select count(*)

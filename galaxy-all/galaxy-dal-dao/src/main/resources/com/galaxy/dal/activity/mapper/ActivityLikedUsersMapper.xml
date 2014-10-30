@@ -43,7 +43,7 @@
 	<select id="getUserLikeedActByUntilId" resultMap="ACTIVITY_LIKED_USERS_MAP">
 	select *
 	from ac_activity_liked_users
-	where user_id = #{userId} and activity_id &gt;  #{untilId} 
+	where user_id = #{user_id} and activity_id &gt;  #{until_id} 
 	group by activity_id 
 	order by activity_id asc
 	limit #{pageSize}

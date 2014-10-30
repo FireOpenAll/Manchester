@@ -48,6 +48,7 @@ public class ActivityServiceImpl implements ActivityService {
 	@Autowired
 	UserService userService;
 
+	////create
 	@Override
 	@Transactional
 	public Long create(ActivityForm form) {
@@ -73,6 +74,16 @@ public class ActivityServiceImpl implements ActivityService {
 		return detail;
 	}
 
+	
+	//分页获取某人发布的活动 
+	@Override
+	public List<Activity> getUserCreatedActByUntilId(long userId, long untilId, int pageSize) {
+		// TODO Auto-generated method stub
+		
+		return activityMappper.getUserCreatedActByUntilId(userId, untilId, pageSize);
+	}
+
+	////create
 	@Override
 	@Transactional
 	public boolean modify(ActivityForm form) {
@@ -143,6 +154,7 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	
 	@Override
+	@Transactional
 	public List<User> listTopActJionUser(Long activityId, int size) {
 		// TODO Auto-generated method stub
 		List<ActivityJoinedUsers> list = activityJoinedUsersMapper.listAllJoinedUsersFromId(activityId, 0L, size);
@@ -235,6 +247,7 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 	
 	@Override
+	@Transactional
 	public List<Activity> getUserLikedActByUntilId(long userId, long untilId, long pageSize) {
 		// TODO Auto-generated method stub
 		List<ActivityLikedUsers> list = activityLikedUsersMapper.getUserLikedActByUntilId(userId, untilId, pageSize);
@@ -285,6 +298,7 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 	//评论活动或回复某个人
 	@Override
+	@Transactional
 	public ActivityComment Comment(ActivityComment activityComment) {
 		// TODO Auto-generated method stub
 		Activity activity = activityMappper.getById(activityComment.getActivityId());
@@ -298,6 +312,7 @@ public class ActivityServiceImpl implements ActivityService {
 
 	//分页得到某活动的评论
 	@Override
+	@Transactional
 	public List<ActivityComment> getActComByUntilId(Long activityId, Long untilId, int pageSize) {
 		// TODO Auto-generated method stub
 		Activity activity = activityMappper.getById(activityId);
@@ -311,6 +326,7 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	//分页得到用户评论过的活动
 	@Override
+	@Transactional
 	public List<Activity> getUserComedActByUntilId(long userId, long untilId, long pageSize) {
 		// TODO Auto-generated method stub
 		List<ActivityComment> list = activityCommentMapper.getUserComedActByUntilId(userId, untilId, pageSize);

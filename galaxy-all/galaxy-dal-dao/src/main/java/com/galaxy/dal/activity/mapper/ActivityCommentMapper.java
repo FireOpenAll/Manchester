@@ -19,7 +19,7 @@ public interface ActivityCommentMapper extends BaseMapper<ActivityComment> {
 	//统计某个活动总的评论人数
 	public int getCommUserNum(@Param("activity_id") Long activityId);
 	//分页得到用户评论过的活动
-	public List<ActivityComment> getUserComedActByUntilId(@Param("userId") long userId,@Param("untilId") long untilId,@Param("pageSize") long pageSize);
+	public List<ActivityComment> getUserComedActByUntilId(@Param("user_id") long userId,@Param("until_id") long untilId,@Param("pageSize") long pageSize);
 	//分页得到某活动的评论
-	public List<ActivityComment> getActComByUntilId(@Param("activityId") Long activityId, @Param("untilId") Long untilId,@Param("pageSize") int PageSize );
+	public List<ActivityComment> getActComByUntilId(@Param("activity_id") Long activityId, @Param("until_id") Long untilId,@Param("pageSize") int PageSize );
 }
