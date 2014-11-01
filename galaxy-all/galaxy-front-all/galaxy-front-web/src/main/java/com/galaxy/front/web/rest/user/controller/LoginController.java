@@ -60,6 +60,8 @@ public class LoginController {
 					.getPrincipal();
 			if (loginedUser == null || loginedUser.isExpired()) {
 				subject.login(authToken);
+				 loginedUser = (LoginUserModel) subject
+							.getPrincipal();
 			}
 			resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 
