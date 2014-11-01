@@ -29,6 +29,7 @@ public class ActivityDetailMapperTest extends BaseDaoTest {
 	public void testGetById() {
 		ActivityDetail detail = activityDetailMapper.getById(1L);
 		Assert.assertNotNull(detail);
+		System.out.println(detail);
 
 	}
 }

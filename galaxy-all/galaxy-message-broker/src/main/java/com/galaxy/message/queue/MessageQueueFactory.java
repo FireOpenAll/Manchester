@@ -15,7 +15,7 @@ public class MessageQueueFactory {
 			public void run() {
 				while (true) {
 					try {
-						Thread.sleep(5000L);
+						Thread.sleep(60000L);
 						int j = 0;
 						for (int i = 0; i < p2pQueueList.size(); i++) {
 							if (p2pQueueList.get(i).size() > 0) {

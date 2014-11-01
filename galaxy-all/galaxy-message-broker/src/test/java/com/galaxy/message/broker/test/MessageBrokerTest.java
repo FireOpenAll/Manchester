@@ -54,6 +54,17 @@ public class MessageBrokerTest {
 	
 	@Test
 	public void testJson(){
+		JsonP2PMessage message = new JsonP2PMessage();
+		message.setMessageId(3L);
+		message.setToId(1L);
+		message.setContent("Hello world!");
+		message.setFromId(11111L);
+		message.setMessageType(1);
+		message.setCreatedTime(System.currentTimeMillis());
+		System.out.println(message);
+	}
+	@Test
+	public void testJson2(){
 		JsonGroupMessage message = new JsonGroupMessage();
 		message.setGroupId(2L);
 		message.setFromId((long)333);

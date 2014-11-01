@@ -2,6 +2,7 @@ package com.galaxy.front.web.rest.chat;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.galaxy.dal.domain.PaginationParam;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.message.broker.MessageBroker;
+import com.galaxy.message.service.ChatQueryService;
 import com.lepeng.im.message.Message;
 import com.lepeng.im.message.json.JsonDecoder;
 
@@ -24,6 +27,8 @@ public class MessageController {
 	static Logger logger=LoggerFactory.getLogger(MessageController.class);
 	@Autowired
 	MessageBroker messageBroker;
+	@Autowired
+	ChatQueryService chatQueryService;
 
 	/**
 	 * 发送消息接口
@@ -47,6 +52,50 @@ public class MessageController {
 			result.setCode("40000");
 			logger.error("decode error!",e);
 		}
+		return result;
+	}
+	/**
+	 * 发送消息接口
+	 * 
+	 * @param message
+	 * @return
+	 */
+	@RequestMapping(value = "messageList",method=RequestMethod.GET)
+	public Object messageList(@RequestParam("fromId") Long fromId,@RequestParam("toId") Long toId,@RequestParam(value="utilId",required=false) Long utilId) {
+		ResultModel result = new ResultModel();
+		result.setCode("20000");
+		result.setData((Serializable) Collections.EMPTY_MAP);
+		if(fromId==null||toId==null){
+			result.setCode("40000");
+			result.setMessage("parameter error!fromId="+fromId+",toId="+toId);
+			return result;
+		}
+		PaginationParam pageParam=new PaginationParam();
+		pageParam.setUtilId(utilId);
+		List<Message<?>> messageList=chatQueryService.listMessage(fromId, toId, pageParam);
+		result.setData((Serializable) messageList);
+		return result;
+	}
+	/**
+	 * 发送消息接口
+	 * 
+	 * @param message
+	 * @return
+	 */
+	@RequestMapping(value = "groupMessageList",method=RequestMethod.GET)
+	public Object groupMessageList(@RequestParam("groupId") Long groupId,@RequestParam(value="utilId",required=false) Long utilId) {
+		ResultModel result = new ResultModel();
+		result.setCode("20000");
+		result.setData((Serializable) Collections.EMPTY_MAP);
+		if(groupId==null){
+			result.setCode("40000");
+			result.setMessage("parameter error!groupId="+groupId);
+			return result;
+		}
+		PaginationParam pageParam=new PaginationParam();
+		pageParam.setUtilId(utilId);
+		List<Message<?>> messageList=chatQueryService.listGroupMessage(groupId, pageParam);
+		result.setData((Serializable) messageList);
 		return result;
 	}
 	/**
