@@ -87,6 +87,10 @@ public class RegisterController {
 				card.setUser_id(user.getId());
 				card.setName(user.getNick());
 				card.setEmail(user.getEmail());
+				card.setPhoto(user.getAvatar());
+				if (user.getEmail()!=null) {
+					card.setEmail(user.getEmail());
+				}
 				cardService.createCard(card);
 				
 				

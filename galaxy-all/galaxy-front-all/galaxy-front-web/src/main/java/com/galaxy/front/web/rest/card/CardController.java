@@ -138,7 +138,7 @@ public class CardController {
 		ResultModel resultModel = new ResultModel();
 		
 		if (ParamUtils.isNotEmpty(user_id,target_id)) {
-			if (user_id.equals(target_id)) {
+			if (user_id == target_id) {
 				//查询用户自己的名片
 				
 				Card card = cardService.getCardByUserId(user_id);
@@ -166,7 +166,7 @@ public class CardController {
 					CardModel cardModel = new CardModel();
 					cardModel.setCard(card);
 					
-					if (cardService.checkisAdded(user_id, target_id)) {
+					if (cardService.checkisAddedByUserIdCardId(user_id, card.getCard_id())) {
 						cardModel.setAdded(true);
 					}else {
 						cardModel.setAdded(false);
