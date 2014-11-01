@@ -6,12 +6,14 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.galaxy.dal.base.mapper.PaginationParam;
 import com.galaxy.dal.domain.user.User;
 import com.galaxy.dal.domain.user.UserFriend;
 import com.galaxy.dal.user.mapper.UserFriendMapper;
 import com.galaxy.service.user.UserFriendService;
+import com.galaxy.service.user.UserService;
 
 /*author:huangshanqi
  *time  :2014年10月22日 上午11:08:41
@@ -21,12 +23,20 @@ import com.galaxy.service.user.UserFriendService;
 public class UserFriendServiceImpl implements UserFriendService {
 	
 	@Autowired
+	private UserService userService;
+	@Autowired
 	private UserFriendMapper userFriendMapper;
 
 	 //insert
 	@Override
+	@Transactional
 	public boolean insert(UserFriend userFriend) {
 		// TODO Auto-generated method stub
+		User user = userService.getUser(userFriend.getUserId());
+		User targetUser = userService.getUser(userFriend.getTargetId());
+		if (user == null || targetUser == null) {
+			return false;
+		}
 		return userFriendMapper.insert(userFriend);
 	}
 
@@ -37,7 +47,14 @@ public class UserFriendServiceImpl implements UserFriendService {
 		return userFriendMapper.deleteById(id);
 	}
 	//update
+	@Override
 	public boolean update(UserFriend userFriend){
+		User user = userService.getUser(userFriend.getUserId());
+		User targetUser = userService.getUser(userFriend.getTargetId());
+		if (user == null || targetUser == null) {
+			return false;
+		}
+		
 		return userFriendMapper.update(userFriend);
 	}
 
@@ -90,6 +107,12 @@ public class UserFriendServiceImpl implements UserFriendService {
 		
 		return relations;
 	}
+	
+	@Override
+	public List<UserFriend> getFollowingsByUntilId(Long userId,long untilId,int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	/**
 	 * 得到我关注的用户数
@@ -132,6 +155,12 @@ public class UserFriendServiceImpl implements UserFriendService {
 		
 		
 		return relations;
+	}
+
+	@Override
+	public List<UserFriend> getFollowedsByUntilId(Long userId,long untilId,int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**
@@ -177,6 +206,11 @@ public class UserFriendServiceImpl implements UserFriendService {
 		return relations;
 	}
 
+	@Override
+	public List<UserFriend> getMutualUsersByUntilId(Long userId,long untilId,int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	/**
 	 * 得到全部我的互粉数
 	 */
@@ -186,23 +220,11 @@ public class UserFriendServiceImpl implements UserFriendService {
 		return userFriendMapper.getMutualUsersNum(user_id);
 	}
 
-	@Override
-	public List<UserFriend> getFollowingsByUntilId(PaginationParam paginationParam) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public List<UserFriend> getFollowedsByUntilId(PaginationParam paginationParam) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public List<UserFriend> getMutualUsersByUntilId(PaginationParam paginationParam) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
+
 	
 	
 	

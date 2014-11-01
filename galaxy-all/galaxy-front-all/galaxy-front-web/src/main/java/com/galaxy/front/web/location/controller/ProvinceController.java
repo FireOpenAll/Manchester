@@ -22,7 +22,7 @@ import com.galaxy.service.location.ProvinceService;
  */
 
 @RestController
-@RequestMapping(value = "api/v1/location")
+@RequestMapping(value = "location")
 public class ProvinceController {
 	/*
 	 * 省份相关控制器

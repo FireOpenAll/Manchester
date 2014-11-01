@@ -162,8 +162,8 @@ public class UserProfileController {
 				profileModel.setInterest_group(new InterestGroup(5, lisInterests));
 				//待完善
 				
-				profileModel.setFollowed(user.getFollowers());
-				profileModel.setFollowing(user.getFans());
+				profileModel.setFollowed(user.getFans());
+				profileModel.setFollowing(user.getFollowers());
 				
 				//得到用户参加过的活动数目
 				int joined_count = activityService.getUserJoinedActNumber(target_id);
@@ -190,10 +190,22 @@ public class UserProfileController {
 						int relation = userFriend.getRelation();
 						switch (relation) {
 						case 1:
-							profileModel.setIs_followed(false);
-							profileModel.setIs_following(true);
+							if (user_id == userFriend.getUserId()) {
+								profileModel.setIs_followed(false);
+								profileModel.setIs_following(true);
+							}else {
+								profileModel.setIs_followed(true);
+								profileModel.setIs_following(false);
+							}
 							break;
 						case 2:
+							if (user_id == userFriend.getUserId()) {
+								profileModel.setIs_followed(true);
+								profileModel.setIs_following(false);
+							}else {
+								profileModel.setIs_followed(false);
+								profileModel.setIs_following(true);
+							}
 							profileModel.setIs_followed(true);
 							profileModel.setIs_following(false);
 							break;

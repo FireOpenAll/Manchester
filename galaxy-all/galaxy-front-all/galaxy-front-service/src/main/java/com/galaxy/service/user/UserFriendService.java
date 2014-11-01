@@ -33,7 +33,7 @@ public interface UserFriendService {
 	//分页得到我关注的用户
 	public List<UserFriend> getFollowingsByOffset(Long user_id,int pageNum,int pageSize);
 	//分页得到我关注的用户
-	public List<UserFriend> getFollowingsByUntilId(PaginationParam paginationParam);
+	public List<UserFriend> getFollowingsByUntilId(Long userId,long untilId,int pageSize);
 	//得到我关注的用户数
 	public int getFollowingsNum(Long user_id);
 	
@@ -43,7 +43,7 @@ public interface UserFriendService {
 	//分页得到我的粉丝
 	public List<UserFriend> getFollowedsByOffset(Long user_id,int pageNum,int pageSize);
 	//分页得到我的粉丝
-	public List<UserFriend> getFollowedsByUntilId(PaginationParam paginationParam);
+	public List<UserFriend> getFollowedsByUntilId(Long userId,long untilId,int pageSize);
 	//得到我的全部粉丝数
 	public int getFollowedsNum(Long user_id);
 
@@ -54,7 +54,7 @@ public interface UserFriendService {
     //分页得到我的互粉用户
 	public List<UserFriend> getMutualUsersByOffset(Long user_id,int pageNum,int pageSize);
 	//分页得到我的互粉用户
-	public List<UserFriend> getMutualUsersByUntilId(PaginationParam paginationParam);
+	public List<UserFriend> getMutualUsersByUntilId(Long userId,long untilId,int pageSize);
     //得到全部我的互粉数
 	public int getMutualUsersNum(Long user_id);
 

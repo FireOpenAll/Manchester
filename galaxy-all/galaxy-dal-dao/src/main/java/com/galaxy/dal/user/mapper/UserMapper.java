@@ -16,6 +16,13 @@ public interface UserMapper extends BaseMapper<User> {
 	 * 查找有这email的用户数
 	 */
 	int countUsersByEmail(@Param("email") String email);
+	
+	////update
+	int updateUserFansNumById(@Param("userId")Long userId,@Param("num")int num);
+	
+	int updateUserFollowersNumById(@Param("userId")Long userId,@Param("num")int num);
+	
+	////update
 
 	/**
 	 * 查找有这email的用户数

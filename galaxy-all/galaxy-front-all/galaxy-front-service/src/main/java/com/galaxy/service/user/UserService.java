@@ -12,7 +12,12 @@ public interface UserService {
 	User getUser(Long userId);
 
 	boolean createUser(User user);
+	////update
+	public boolean update(User user);
+	public boolean updateUserFansNumById(Long userId,int num);
 	
+	public boolean updateUserFollowersNumById(Long userId,int num);
+	////update
 	/**
 	 * 查找有这email的用户数
 	 * @param email

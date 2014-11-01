@@ -259,6 +259,12 @@ public class ActivityCommentsController {
 				
 				
 				//修改活动兴趣
+				ArrayList<CategoryModel> interest_list = new ArrayList<CategoryModel>();
+				for (int i = 0; i < 4; i++) {
+					interest_list
+							.add(new CategoryModel(10000000 + i, "兴趣" + i, "/interest/cover/" + (20 + i) + ".jpg", "兴趣介绍"));
+				}
+				activityModel.setInterest_list(interest_list);
 				
 				//活动分类
 				

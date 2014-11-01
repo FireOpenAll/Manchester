@@ -268,7 +268,7 @@ public class CardController {
 	@RequestMapping(value = "add",method = RequestMethod.POST, params = {"user_id","card_id"})
 	public Object addCardToMyBook(@RequestParam("user_id") Long user_id,@RequestParam("card_id") Long card_id){
 		ResultModel resultModel = new ResultModel();
-		/*sql
+		
 		if (ParamUtils.isNotEmpty(user_id,card_id)) {
 			if (cardService.checkisAddedByUserIdCardId(user_id, card_id)) {
 				//已添加
@@ -291,11 +291,13 @@ public class CardController {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 			resultModel.setData(new StatusModel("failed"));
 		}
-		*/
+		
 		
 		//假的
+		/*
 		resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 		resultModel.setData(new StatusModel("ok"));
+		*/
 		//
 		return resultModel;
 	}
@@ -309,7 +311,7 @@ public class CardController {
 	@RequestMapping(value = "delete",method = RequestMethod.DELETE, params = {"user_id","card_id"})
 	public Object deleteCardFormMyBook(@RequestParam("user_id") Long user_id,@RequestParam("card_id") Long card_id){
 		ResultModel resultModel = new ResultModel();
-		/*sql
+		
 		if (ParamUtils.isNotEmpty(user_id,card_id)) {
 			if (cardService.deleteCardFormMyBook(user_id, card_id)) {
 				resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
@@ -322,11 +324,11 @@ public class CardController {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 			resultModel.setData(new StatusModel("failed"));
 		}
-		*/
 		
+		/*
 		resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 		resultModel.setData(new StatusModel("ok"));
-		
+		*/
 		return resultModel;
 	}
 	
@@ -339,21 +341,25 @@ public class CardController {
 	public Object getAllCradFromMyBook(@RequestParam("user_id") Long user_id){
 		ResultModel resultModel = new ResultModel();
 		
-		/*sql
+		
 		if (ParamUtils.isNotEmpty(user_id)) {
-			ListModel<Card> listModel = new ListModel<Card>();
-			List<Card> cardModels = cardService.getAllCradsFromMyBook(user_id);
-			listModel.setCount(cardModels.size());
-			listModel.setList(cardModels);
-			resultModel.setData(listModel);
+			
+			//ListModel<Card> listModel = new ListModel<Card>();
+			ArrayList<Card> cardModels = cardService.getAllCradsFromMyBook(user_id);
+			//.setCount(cardModels.size());
+			//listModel.setList(cardModels);
+			
+			resultModel=ResultModelUtils.getResultModelByCode(Code.OK);
+			resultModel.setData(cardModels);
 			
 		}else {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 			resultModel.setData(new StatusModel("failed"));
 		}
-		*/
+		
 		
 		//假的
+		/*
 		resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 		
 		
@@ -377,7 +383,7 @@ public class CardController {
 			cards.add(card);
 		}
 		resultModel.setData(cards);
-		
+		*/
 		//
 		return resultModel;
 	}

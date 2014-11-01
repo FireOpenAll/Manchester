@@ -1,8 +1,10 @@
 package com.galaxy.front.web.rest.user.controller;
 
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,13 +41,13 @@ public class FriendsController {
 
 	
 	/*得到我关注的人*/
-	@RequestMapping(value = "/following" ,method = RequestMethod.GET,params={"user_id","until_id","pageSize"})
-	public Object getFollowing(@RequestParam("user_id") Long user_id,@RequestParam("until_id") long untilId,@RequestParam("pageSize") int pageSize){
+	@RequestMapping(value = "/following" ,method = RequestMethod.GET,params={"user_id","pageNum","pageSize"})
+	public Object getFollowing(@RequestParam("user_id") Long user_id,@RequestParam("pageNum") int pageNum,@RequestParam("pageSize") int pageSize){
 		/*
 		 * parameter:
 		 * userid，untilid,count
 		 */
-		
+		/*
 		ResultModel resultModel = new ResultModel();
 		resultModel.setCode("20000");
 		resultModel.setMessage("get following success");
@@ -67,7 +69,7 @@ public class FriendsController {
 		resultModel.setData(listModel);
 		
 		return resultModel;
-		/*
+		*/
 		ResultModel resultModel = new ResultModel();
 		
 		if (ParamUtils.isNotEmpty(user_id,pageNum,pageSize)) {
@@ -77,10 +79,12 @@ public class FriendsController {
 			if (relations == null) {
 				return resultModel;
 			}
+			ListModel<FollowshipUserModel> listModel = new ListModel<FollowshipUserModel>();
+			
 			ArrayList<FollowshipUserModel> resultList = new ArrayList<FollowshipUserModel>();
 			for(UserFriend userFriend:relations){
 				Long target_id = (user_id == userFriend.getTargetId())?userFriend.getUserId():userFriend.getTargetId();
-				User user = userService.getUser(target_id);
+				User user = userService.getUser(target_id);//user==他人的信息
 				if (user != null) {
 					FollowshipUserModel followshipUserModel = new FollowshipUserModel();
 					followshipUserModel.setUserid(user.getId());
@@ -121,14 +125,16 @@ public class FriendsController {
 					resultList.add(followshipUserModel);
 				}
 			}
-			resultModel.setData(resultList);
+			listModel.setList(resultList);
+			listModel.setCount(resultList.size());
+			resultModel.setData(listModel);
 		}else {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 			resultModel.setData("get fans error");
 		}
 			
 		return resultModel;
-		*/
+		
 	}
 	
 	/*关注某人*/
@@ -158,8 +164,12 @@ public class FriendsController {
 				newUserFriend.setCreatedTime(new Date());
 				newUserFriend.setRelation(1);
 			    if (userFriendService.insert(newUserFriend)) {
+			    	User user = userService.getUser(user_id);
+					User targetUser = userService.getUser(target_id);
+					userService.updateUserFollowersNumById(user.getId(),user.getFollowers()+1);
+					userService.updateUserFansNumById(targetUser.getId(),targetUser.getFans()+1);
 					resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
-					resultModel.setData(new StatusModel("ok"));
+					resultModel.setData(new StatusModel("ok"));		
 					return resultModel;
 			    }else {
 			    	resultModel = ResultModelUtils.getResultModelByCode(Code.SQL_ADD_ERROR);
@@ -169,18 +179,59 @@ public class FriendsController {
 			}else {
 				switch (userFriend.getRelation()) {
 				case 2:
-					userFriend.setRelation(3);
-					if (userFriendService.update(userFriend)) {
+					if(user_id == userFriend.getUserId()){
+						userFriend.setRelation(3);
+						if (userFriendService.update(userFriend)) {
+							//success
+							User user = userService.getUser(user_id);
+							User targetUser = userService.getUser(target_id);
+							userService.updateUserFollowersNumById(user.getId(), user.getFollowers()+1);
+							userService.updateUserFansNumById(targetUser.getId(), targetUser.getFans()+1);
+						}else {
+							//failed
+							resultModel = ResultModelUtils.getResultModelByCode(Code.SQL_UPDATE_ERROR);
+							resultModel.setData(new StatusModel("follow error"));
+						}
+					}else {
+						//已经关注
 						resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 						resultModel.setData(new StatusModel("ok"));
-					}else {
-						resultModel = ResultModelUtils.getResultModelByCode(Code.SQL_UPDATE_ERROR);
-						resultModel.setData(new StatusModel("follow error"));
 					}
 					break;
+				case 1:
+					if (user_id == userFriend.getTargetId()) {
+						userFriend.setRelation(3);
+						if (userFriendService.update(userFriend)) {
+							//success
+							User user = userService.getUser(user_id);
+							User targetUser = userService.getUser(target_id);
+							userService.updateUserFollowersNumById(user.getId(), user.getFollowers()+1);
+							userService.updateUserFansNumById(targetUser.getId(), targetUser.getFans()+1);
+							resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+							resultModel.setData(new StatusModel("ok"));
+						}else {
+							//failed
+							resultModel = ResultModelUtils.getResultModelByCode(Code.SQL_UPDATE_ERROR);
+							resultModel.setData(new StatusModel("follow error"));
+						}
+					}else {
+						//已经关注
+						resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+						resultModel.setData(new StatusModel("already follow"));
+					}
+					break;
+
 				case 0:
-					userFriend.setRelation(1);
+					if (user_id == userFriend.getUserId()) {
+						userFriend.setRelation(1);
+					}else {
+						userFriend.setRelation(2);
+					}
 					if (userFriendService.update(userFriend)) {
+						User user = userService.getUser(user_id);
+						User targetUser = userService.getUser(target_id);
+						userService.updateUserFollowersNumById(user.getId(), user.getFollowers()+1);
+						userService.updateUserFansNumById(targetUser.getId(), targetUser.getFans()+1);
 						resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 						resultModel.setData(new StatusModel("ok"));
 					}else {
@@ -228,8 +279,16 @@ public class FriendsController {
 			}else {
 				switch (userFriend.getRelation()) {
 				case 3:
-					userFriend.setRelation(2);
+					if (user_id == userFriend.getUserId()) {
+						userFriend.setRelation(2);
+					}else {
+						userFriend.setRelation(1);
+					}
 					if (userFriendService.update(userFriend)) {
+						User user = userService.getUser(user_id);
+						User targetUser = userService.getUser(target_id);
+						userService.updateUserFollowersNumById(user.getId(), (user.getFollowers()>0)?(user.getFollowers()-1):0);
+						userService.updateUserFansNumById(targetUser.getId(), (targetUser.getFans()>0)?(targetUser.getFans()-1):0);
 						resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 						resultModel.setData(new StatusModel("ok"));
 					}else {
@@ -238,23 +297,53 @@ public class FriendsController {
 					}
 					break;
 				case 1:
-					userFriend.setRelation(0);
-					if (userFriendService.update(userFriend)) {
-						resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
-						resultModel.setData(new StatusModel("ok"));
+					if (user_id == userFriend.getUserId()) {
+						userFriend.setRelation(0);
+						if (userFriendService.update(userFriend)) {
+							User user = userService.getUser(user_id);
+							User targetUser = userService.getUser(target_id);
+							userService.updateUserFollowersNumById(user.getId(), (user.getFollowers()>0)?(user.getFollowers()-1):0);
+							userService.updateUserFansNumById(targetUser.getId(), (targetUser.getFans()>0)?(targetUser.getFans()-1):0);
+							resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+							resultModel.setData(new StatusModel("ok"));
+						}else {
+							//失败
+							resultModel = ResultModelUtils.getResultModelByCode(Code.SQL_UPDATE_ERROR);
+							resultModel.setData(new StatusModel("unfollow error"));
+						}
 					}else {
+						//还没有关注他
 						resultModel = ResultModelUtils.getResultModelByCode(Code.SQL_UPDATE_ERROR);
-						resultModel.setData(new StatusModel("unfollow error"));
+						resultModel.setData(new StatusModel("you have not follow him"));
+					}
+					break;
+				case 2:
+					if (user_id == userFriend.getUserId()) {
+						//还没有关注他
+						resultModel = ResultModelUtils.getResultModelByCode(Code.SQL_UPDATE_ERROR);
+						resultModel.setData(new StatusModel("you have not follow him"));
+					}else {
+						userFriend.setRelation(0);
+						if (userFriendService.update(userFriend)) {
+							User user = userService.getUser(user_id);
+							User targetUser = userService.getUser(target_id);
+							userService.updateUserFollowersNumById(user.getId(), (user.getFollowers()>0)?(user.getFollowers()-1):0);
+							userService.updateUserFansNumById(targetUser.getId(), (targetUser.getFans()>0)?(targetUser.getFans()-1):0);
+							resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+							resultModel.setData(new StatusModel("ok"));
+						}else {
+							//失败
+							resultModel = ResultModelUtils.getResultModelByCode(Code.SQL_UPDATE_ERROR);
+							resultModel.setData(new StatusModel("unfollow error"));
+						}
 					}
 					break;
 				default:
-					resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
-					resultModel.setData(new StatusModel("ok"));
+					resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
+					resultModel.setData("unfollow error");
 					break;
 				}
-				
 				return resultModel;
-				
 			}
 		}else {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
@@ -451,6 +540,8 @@ public class FriendsController {
 			if (relations == null) {
 				return resultModel;
 			}
+			ListModel<FollowshipUserModel> listModel = new ListModel<FollowshipUserModel>();
+			
 			ArrayList<FollowshipUserModel> resultList = new ArrayList<FollowshipUserModel>();
 			for(UserFriend userFriend:relations){
 				Long target_id = (user_id == userFriend.getTargetId())?userFriend.getUserId():userFriend.getTargetId();
@@ -495,7 +586,9 @@ public class FriendsController {
 					resultList.add(followshipUserModel);
 				}
 			}
-			resultModel.setData(resultList);
+			listModel.setList(resultList);
+			listModel.setCount(resultList.size());
+			resultModel.setData(listModel);
 		}else {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 			resultModel.setData("get fans error");

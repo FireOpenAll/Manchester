@@ -27,6 +27,8 @@ public interface UserFriendMapper extends BaseMapper<UserFriend> {
 	public List<UserFriend> getFollowings(@Param("user_id") Long user_id);
 	//分页得到我关注的用户
 	public List<UserFriend> getFollowingsByOffset(PaginationParam paginationParam);
+	//todo
+	public List<UserFriend> getFollowingsByUntilId(Long userId,long untilId,int pageSize);
 	//得到我关注的用户数
 	public int getFollowingsNum(@Param("user_id") Long user_id);
 	
@@ -35,6 +37,8 @@ public interface UserFriendMapper extends BaseMapper<UserFriend> {
 	public List<UserFriend> getFolloweds(@Param("user_id") Long user_id);
 	//分页得到我的粉丝
 	public List<UserFriend> getFollowedsByOffset(PaginationParam paginationParam);
+	//todo
+	public List<UserFriend> getFollowedsByUntilId(Long userId,long untilId,int pageSize);
 	//得到我的全部粉丝数
 	public int getFollowedsNum(@Param("user_id") Long user_id);
 
@@ -44,7 +48,9 @@ public interface UserFriendMapper extends BaseMapper<UserFriend> {
 	public List<UserFriend> getMutualUsers(@Param("user_id") Long user_id);
     //分页得到我的互粉用户
 	public List<UserFriend> getMutualUsersByOffset(PaginationParam paginationParam);
-    //得到全部我的互粉数
+	//todo
+	public List<UserFriend> getMutualUsersByUntilId(Long userId,long untilId,int pageSize);
+	//得到全部我的互粉数
 	public int getMutualUsersNum(@Param("user_id") Long user_id);
 
 	

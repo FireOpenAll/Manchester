@@ -133,8 +133,8 @@ public class ActivityNewsController {
 				
 				//地点信息
 				LocationInfo locationInfo = new LocationInfo();
-				locationInfo.setLongitude((activity.getLongtitude() == null)?null:activity.getLongtitude());
-				locationInfo.setLatitude((activity.getLatitude() == null)?null:activity.getLatitude());
+				locationInfo.setLongitude((activity.getLongtitude() == null)?(double)0:activity.getLongtitude());
+				locationInfo.setLatitude((activity.getLatitude() == null)?(double)0:activity.getLatitude());
 				locationInfo.setAddress(activity.getAddress());
 				activityModel.setLocationInfo(locationInfo);
 				

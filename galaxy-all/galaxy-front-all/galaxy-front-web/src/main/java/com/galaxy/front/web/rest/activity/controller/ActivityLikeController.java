@@ -144,21 +144,30 @@ public class ActivityLikeController {
 				//活动相关参与人员,推荐相关
 				int num = 6;//暂定6个
 				List<User> users =  activityService.listTopActJionUser(activity.getId(), num);
-				List<UserModel> list = new ArrayList<UserModel>();
-				for(User user : users){
-					UserModel userModel = new UserModel();
-					userModel.setUserid(user.getId());
-					userModel.setAvatar(user.getAvatar());
-					userModel.setName(user.getLoginName());
-					userModel.setGender(user.getSex());
-					
-					list.add(userModel);
+				if (users != null) {
+					List<UserModel> list = new ArrayList<UserModel>();
+					for(User user : users){
+						UserModel userModel = new UserModel();
+						userModel.setUserid(user.getId());
+						userModel.setAvatar(user.getAvatar());
+						userModel.setName(user.getLoginName());
+						userModel.setGender(user.getSex());
+						
+						list.add(userModel);
+					}
 				}
+				
 				
 				//活动标签
 				
 				
 				//修改活动兴趣
+				ArrayList<CategoryModel> interest_list = new ArrayList<CategoryModel>();
+				for (int i = 0; i < 4; i++) {
+					interest_list
+							.add(new CategoryModel(10000000 + i, "兴趣" + i, "/interest/cover/" + (20 + i) + ".jpg", "兴趣介绍"));
+				}
+				activityModel.setInterest_list(interest_list);
 				
 				//活动分类
 				

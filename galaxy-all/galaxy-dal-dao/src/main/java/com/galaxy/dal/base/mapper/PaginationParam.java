@@ -14,9 +14,9 @@ public class PaginationParam implements Serializable {
 
 	Map pageData;
 
-	int offset=0;
+	Integer offset=0;
 
-	int size=10;
+	Integer size=10;
 
 	 
 
