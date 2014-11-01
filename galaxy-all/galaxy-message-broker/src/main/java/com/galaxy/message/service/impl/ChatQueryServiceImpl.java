@@ -18,9 +18,9 @@ public class ChatQueryServiceImpl implements ChatQueryService {
 	ChatMessageMapper chatMessageMapper;
 
 	@Override
-	public List<Message<?>> listMessage(Long fromId, Long toId,
+	public List<Message<?>> listMessage(Long userId,Long toId,
 			PaginationParam pageParam) {
-		List<ChatMessage> messageList=chatMessageMapper.listMessage(fromId, toId, pageParam); 
+		List<ChatMessage> messageList=chatMessageMapper.listMessage(userId, toId, pageParam); 
 		List<Message<?>> resultList=new LinkedList<Message<?>>();
 		if(messageList!=null){
 			for(ChatMessage msg:messageList){
@@ -32,9 +32,9 @@ public class ChatQueryServiceImpl implements ChatQueryService {
 	}
 
 	@Override
-	public List<Message<?>> listGroupMessage(Long groupId,
+	public List<Message<?>> listGroupMessage(Long userId,Long groupId,
 			PaginationParam pageParam) {
-		List<ChatMessage> messageList=chatMessageMapper.listGroupMessage(groupId, pageParam); 
+		List<ChatMessage> messageList=chatMessageMapper.listGroupMessage(userId,groupId, pageParam); 
 		List<Message<?>> resultList=new LinkedList<Message<?>>();
 		if(messageList!=null){
 			for(ChatMessage msg:messageList){

@@ -7,8 +7,8 @@ import com.lepeng.im.message.Message;
 
 public interface ChatQueryService {
 	
-	List<Message<?>> listMessage(Long fromId,Long toId,PaginationParam pageParam);
+	List<Message<?>> listMessage(Long userId,Long toId,PaginationParam pageParam);
 	
-	List<Message<?>> listGroupMessage(Long groupId,PaginationParam pageParam);
+	List<Message<?>> listGroupMessage(Long userId,Long groupId,PaginationParam pageParam);
 
 }

@@ -1,11 +1,12 @@
 package com.galaxy.dal.domain;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class PaginationParam implements Serializable {
-	Long utilId;
-	Map pageData;
+	Long utilId; 
+	Map pageData=new LinkedHashMap();
 
 	Long offset=0L;
 
@@ -42,6 +43,8 @@ public class PaginationParam implements Serializable {
 	public void setSize(Long size) {
 		this.size = size;
 	}
+
+	 
 	
 	
 

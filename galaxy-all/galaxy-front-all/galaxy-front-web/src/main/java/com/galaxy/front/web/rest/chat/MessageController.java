@@ -18,13 +18,14 @@ import com.galaxy.dal.domain.PaginationParam;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.message.broker.MessageBroker;
 import com.galaxy.message.service.ChatQueryService;
+import com.galaxy.service.user.UserUtils;
 import com.lepeng.im.message.Message;
 import com.lepeng.im.message.json.JsonDecoder;
 
 @RestController(value = "MqttMessageController")
 @RequestMapping(value = "api/v1/chat")
 public class MessageController {
-	static Logger logger=LoggerFactory.getLogger(MessageController.class);
+	static Logger logger = LoggerFactory.getLogger(MessageController.class);
 	@Autowired
 	MessageBroker messageBroker;
 	@Autowired
@@ -36,7 +37,7 @@ public class MessageController {
 	 * @param message
 	 * @return
 	 */
-	@RequestMapping(value = "send",method=RequestMethod.GET)
+	@RequestMapping(value = "send", method = RequestMethod.GET)
 	public Object sendMessage(@RequestParam("message") String message) {
 		ResultModel result = new ResultModel();
 		result.setCode("20000");
@@ -50,62 +51,90 @@ public class MessageController {
 			messageBroker.receive(msg);
 		} catch (Exception e) {
 			result.setCode("40000");
-			logger.error("decode error!",e);
+			logger.error("decode error!", e);
 		}
 		return result;
 	}
+
 	/**
 	 * 发送消息接口
 	 * 
 	 * @param message
 	 * @return
 	 */
-	@RequestMapping(value = "messageList",method=RequestMethod.GET)
-	public Object messageList(@RequestParam("fromId") Long fromId,@RequestParam("toId") Long toId,@RequestParam(value="utilId",required=false) Long utilId) {
+	@RequestMapping(value = "messageList", method = RequestMethod.GET)
+	public Object messageList( 
+			@RequestParam("toId") Long toId,
+			@RequestParam(value = "beforeTime", required = false) Long beforeTime,
+			@RequestParam(value = "afterTime", required = false) Long afterTime,
+			@RequestParam(value = "count", required = false) Long pageSize) {
 		ResultModel result = new ResultModel();
 		result.setCode("20000");
 		result.setData((Serializable) Collections.EMPTY_MAP);
-		if(fromId==null||toId==null){
+		if ( toId == null) {
 			result.setCode("40000");
-			result.setMessage("parameter error!fromId="+fromId+",toId="+toId);
+			result.setMessage("parameter error!toId="
+					+ toId);
 			return result;
 		}
-		PaginationParam pageParam=new PaginationParam();
-		pageParam.setUtilId(utilId);
-		List<Message<?>> messageList=chatQueryService.listMessage(fromId, toId, pageParam);
+		PaginationParam pageParam = new PaginationParam();
+		pageParam.getPageData().put("beforeTime", beforeTime);
+		pageParam.getPageData().put("afterTime", afterTime);
+		if (pageSize != null && pageSize > 50) {
+			pageSize = 50L;
+		}
+		if (pageSize != null) {
+			pageParam.setSize(pageSize);
+		}
+		List<Message<?>> messageList = chatQueryService.listMessage(UserUtils.getLoginUser().getUserId(),
+				toId, pageParam);
 		result.setData((Serializable) messageList);
 		return result;
 	}
+
 	/**
 	 * 发送消息接口
 	 * 
 	 * @param message
 	 * @return
 	 */
-	@RequestMapping(value = "groupMessageList",method=RequestMethod.GET)
-	public Object groupMessageList(@RequestParam("groupId") Long groupId,@RequestParam(value="utilId",required=false) Long utilId) {
+	@RequestMapping(value = "groupMessageList", method = RequestMethod.GET)
+	public Object groupMessageList(
+			@RequestParam("groupId") Long groupId,
+			@RequestParam(value = "beforeTime", required = false) Long beforeTime,
+			@RequestParam(value = "afterTime", required = false) Long afterTime,
+			@RequestParam(value = "count", required = false) Long pageSize) {
 		ResultModel result = new ResultModel();
 		result.setCode("20000");
 		result.setData((Serializable) Collections.EMPTY_MAP);
-		if(groupId==null){
+		if (groupId == null) {
 			result.setCode("40000");
-			result.setMessage("parameter error!groupId="+groupId);
+			result.setMessage("parameter error!groupId=" + groupId);
 			return result;
 		}
-		PaginationParam pageParam=new PaginationParam();
-		pageParam.setUtilId(utilId);
-		List<Message<?>> messageList=chatQueryService.listGroupMessage(groupId, pageParam);
+		PaginationParam pageParam = new PaginationParam();
+		pageParam.getPageData().put("beforeTime", beforeTime);
+		pageParam.getPageData().put("afterTime", afterTime);
+		if (pageSize != null && pageSize > 50) {
+			pageSize = 50L;
+		}
+		if (pageSize != null) {
+			pageParam.setSize(pageSize);
+		}
+		List<Message<?>> messageList = chatQueryService.listGroupMessage(UserUtils.getLoginUser().getUserId(),
+				groupId, pageParam);
 		result.setData((Serializable) messageList);
 		return result;
 	}
+
 	/**
 	 * 发送消息接口
 	 * 
 	 * @param message
 	 * @return
 	 */
-	@RequestMapping(value = "send",method=RequestMethod.POST)
-	public Object sendMessagePost(@RequestBody Map<?,?> message) {
+	@RequestMapping(value = "send", method = RequestMethod.POST)
+	public Object sendMessagePost(@RequestBody Map<?, ?> message) {
 		ResultModel result = new ResultModel();
 		result.setCode("20000");
 		result.setData((Serializable) Collections.EMPTY_MAP);
@@ -118,7 +147,7 @@ public class MessageController {
 			messageBroker.receive(msg);
 		} catch (Exception e) {
 			result.setCode("40000");
-			logger.error("decode error!",e);
+			logger.error("decode error!", e);
 		}
 		return result;
 	}
