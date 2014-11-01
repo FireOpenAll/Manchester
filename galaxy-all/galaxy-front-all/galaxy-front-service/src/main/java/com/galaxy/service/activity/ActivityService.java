@@ -46,7 +46,7 @@ public interface ActivityService {
 	public List<ActivityJoinedUsers> listAllJoinedUsersFromId(Long activityId,Long fromId,int size);
 	
 	//列出某活动的前几个参加用户
-	public List<User> listTopActJionUser(Long activityId,int size);
+	public List<User> listTopActJionUser(Long activityId,int num);
 	//计算user_id参加的活动数
 	public int getUserJoinedActNumber(Long user_id);
 	

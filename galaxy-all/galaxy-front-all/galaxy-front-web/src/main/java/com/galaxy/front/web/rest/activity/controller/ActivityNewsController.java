@@ -16,7 +16,7 @@ import com.galaxy.front.web.rest.model.Contact;
 import com.galaxy.front.web.rest.model.Photo;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.activity.ActivityModel;
-import com.galaxy.front.web.rest.model.interest.InterestModel;
+import com.galaxy.front.web.rest.model.interest.CategoryModel;
 import com.galaxy.front.web.rest.model.location.LocationInfo;
 import com.galaxy.front.web.rest.model.user.UserModel;
 import com.galaxy.front.web.utils.Code;
@@ -91,7 +91,7 @@ public class ActivityNewsController {
 			List<Activity> activities = activityService.getUserCreatedActByUntilId(userId, untilId, pageSize);
 			ArrayList<ActivityModel> results = new ArrayList<ActivityModel>();
 			resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
-			if (activities == null) {
+			if (activities == null || activities.size()==0) {
 			    return resultModel;	
 			}
 			for(Activity activity : activities){
@@ -133,30 +133,41 @@ public class ActivityNewsController {
 				
 				//地点信息
 				LocationInfo locationInfo = new LocationInfo();
-				locationInfo.setLongitude(activity.getLongtitude());
-				locationInfo.setLatitude(activity.getLatitude());
+				locationInfo.setLongitude((activity.getLongtitude() == null)?null:activity.getLongtitude());
+				locationInfo.setLatitude((activity.getLatitude() == null)?null:activity.getLatitude());
 				locationInfo.setAddress(activity.getAddress());
 				activityModel.setLocationInfo(locationInfo);
 				
 				//活动相关参与人员,推荐相关
 				int num = 6;//暂定6个
 				List<User> users =  activityService.listTopActJionUser(activity.getId(), num);
-				List<UserModel> list = new ArrayList<UserModel>();
-				for(User user : users){
-					UserModel userModel = new UserModel();
-					userModel.setUserid(user.getId());
-					userModel.setAvatar(user.getAvatar());
-					userModel.setName(user.getLoginName());
-					userModel.setGender(user.getSex());
+				if (users == null || users.size() ==0) {
+					activityModel.setRelative_user(null);
+				}else{
+					ArrayList<UserModel> list = new ArrayList<UserModel>();
+				    for(User user : users){
+				    	UserModel userModel = new UserModel();
+				    	userModel.setUserid(user.getId());
+				    	userModel.setAvatar(user.getAvatar());
+				    	userModel.setName(user.getLoginName());
+				    	userModel.setGender(user.getSex());
 					
-					list.add(userModel);
+				    	list.add(userModel);
+				    }
+				    activityModel.setRelative_user(list);
 				}
+				
 				
 				//活动标签
 				
 				
 				//修改活动兴趣
-				
+				ArrayList<CategoryModel> interest_list = new ArrayList<CategoryModel>();
+				for (int i = 0; i < 4; i++) {
+					interest_list
+							.add(new CategoryModel(10000000 + i, "兴趣" + i, "/interest/cover/" + (20 + i) + ".jpg", "兴趣介绍"));
+				}
+				activityModel.setInterest_list(interest_list);
 				//活动分类
 				
 				

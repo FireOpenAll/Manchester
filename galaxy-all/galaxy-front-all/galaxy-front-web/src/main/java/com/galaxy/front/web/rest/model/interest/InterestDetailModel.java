@@ -22,7 +22,7 @@ public class InterestDetailModel implements Serializable {
 	private int activity_count;// 兴趣包含活动数
 	private int member_count;// 兴趣内人数
 	private ArrayList<UserModel> recomment_user;// 推荐用户
-	private ArrayList<InterestModel> relative_interest;// 与之相关的兴趣
+	private ArrayList<CategoryModel> relative_interest;// 与之相关的兴趣
 
 	public InterestDetailModel() {
 		super();
@@ -30,7 +30,7 @@ public class InterestDetailModel implements Serializable {
 
 	public InterestDetailModel(long interest_id, String interest_name, Photo cover, String description,
 			int activity_count, int member_count, ArrayList<UserModel> recomment_user,
-			ArrayList<InterestModel> relative_interest) {
+			ArrayList<CategoryModel> relative_interest) {
 		super();
 		this.interest_id = interest_id;
 		this.interest_name = interest_name;
@@ -98,11 +98,11 @@ public class InterestDetailModel implements Serializable {
 		this.recomment_user = recomment_user;
 	}
 
-	public ArrayList<InterestModel> getRelative_interest() {
+	public ArrayList<CategoryModel> getRelative_interest() {
 		return relative_interest;
 	}
 
-	public void setRelative_interest(ArrayList<InterestModel> relative_interest) {
+	public void setRelative_interest(ArrayList<CategoryModel> relative_interest) {
 		this.relative_interest = relative_interest;
 	}
 

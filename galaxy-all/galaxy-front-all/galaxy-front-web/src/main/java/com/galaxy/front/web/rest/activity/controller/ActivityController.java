@@ -13,7 +13,7 @@ import com.galaxy.front.web.rest.model.GoldTimeModel;
 import com.galaxy.front.web.rest.model.Photo;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.activity.ActivityModel;
-import com.galaxy.front.web.rest.model.interest.InterestModel;
+import com.galaxy.front.web.rest.model.interest.CategoryModel;
 import com.galaxy.front.web.rest.model.location.LocationInfo;
 import com.galaxy.front.web.rest.model.user.UserModel;
 import com.galaxy.service.activity.ActivityService;
@@ -37,10 +37,10 @@ public class ActivityController {
 		resultModel.setCode("20000");
 		resultModel.setMessage("get host activity category");
 
-		ArrayList<InterestModel> interest_list = new ArrayList<InterestModel>();
+		ArrayList<CategoryModel> interest_list = new ArrayList<CategoryModel>();
 		for (int i = 0; i < 5; i++) {
 			interest_list
-					.add(new InterestModel(10000000 + i, "兴趣" + i, "/interest/cover/" + (30 + i) + ".jpg", "兴趣介绍"));
+					.add(new CategoryModel(10000000 + i, "兴趣" + i, "/interest/cover/" + (30 + i) + ".jpg", "兴趣介绍"));
 		}
 
 		resultModel.setData(interest_list);
@@ -95,10 +95,10 @@ public class ActivityController {
 					"/interest/cover/" + (10 + i) + ".jpg"));
 		}
 
-		ArrayList<InterestModel> interest_list = new ArrayList<InterestModel>();
+		ArrayList<CategoryModel> interest_list = new ArrayList<CategoryModel>();
 		for (int i = 0; i < 4; i++) {
 			interest_list
-					.add(new InterestModel(10000000 + i, "兴趣" + i, "/interest/cover/" + (20 + i) + ".jpg", "兴趣介绍"));
+					.add(new CategoryModel(10000000 + i, "兴趣" + i, "/interest/cover/" + (20 + i) + ".jpg", "兴趣介绍"));
 		}
 
 		for (int i = 0; i < 4; i++) {
@@ -130,10 +130,10 @@ public class ActivityController {
 		resultModel.setCode("20000");
 		resultModel.setMessage("get host activity category");
 
-		ArrayList<InterestModel> interest_list = new ArrayList<InterestModel>();
+		ArrayList<CategoryModel> interest_list = new ArrayList<CategoryModel>();
 		for (int i = 0; i < 5; i++) {
 			interest_list
-					.add(new InterestModel(10000000 + i, "兴趣" + i, "/interest/cover/" + (30 + i) + ".jpg", "兴趣介绍"));
+					.add(new CategoryModel(10000000 + i, "兴趣" + i, "/interest/cover/" + (30 + i) + ".jpg", "兴趣介绍"));
 		}
 
 		resultModel.setData(interest_list);

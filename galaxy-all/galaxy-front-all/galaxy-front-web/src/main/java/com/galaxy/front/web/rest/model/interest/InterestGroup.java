@@ -10,13 +10,13 @@ import java.util.List;
 public class InterestGroup implements Serializable {
 
 	private int count;
-	private List<InterestModel> interests;
+	private List<CategoryModel> interests;
 
 	public InterestGroup() {
 		super();
 	}
 
-	public InterestGroup(int count, List<InterestModel> interests) {
+	public InterestGroup(int count, List<CategoryModel> interests) {
 		super();
 		this.count = count;
 		this.interests = interests;
@@ -30,11 +30,11 @@ public class InterestGroup implements Serializable {
 		this.count = count;
 	}
 
-	public List<InterestModel> getInterests() {
+	public List<CategoryModel> getInterests() {
 		return interests;
 	}
 
-	public void setInterests(List<InterestModel> interests) {
+	public void setInterests(List<CategoryModel> interests) {
 		this.interests = interests;
 	}
 

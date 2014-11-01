@@ -140,7 +140,7 @@ public class CardController {
 		if (ParamUtils.isNotEmpty(user_id,target_id)) {
 			if (user_id.equals(target_id)) {
 				//查询用户自己的名片
-				/*
+				
 				Card card = cardService.getCardByUserId(user_id);
 				if (card != null) {
 					
@@ -151,14 +151,16 @@ public class CardController {
 					resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 					resultModel.setData("参数错误或者用户未创建名片");
 				}
-				*/
+				
 				//
+				/*
 				resultModel=ResultModelUtils.getResultModelByCode(Code.OK);
 				resultModel.setData(getCard(user_id));
+				*/
 				//
 			}else {
 				//用户查询他人的
-				/*
+				
 				Card card = cardService.getCardByUserId(target_id);
 				if (card != null) {
 					CardModel cardModel = new CardModel();
@@ -176,14 +178,16 @@ public class CardController {
 					resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 					resultModel.setData("参数错误或者用户未创建名片");
 				}
-				*/
+				
 				
 				//假的
+				/*
 				resultModel=ResultModelUtils.getResultModelByCode(Code.OK);
 				CardModel cardModel = new CardModel();
 				cardModel.setCard(getCard(target_id));
 				cardModel.setAdded(false);
 				resultModel.setData(cardModel);
+				*/
 				//
 			}
 		}else {
@@ -230,7 +234,7 @@ public class CardController {
 		ResultModel resultModel = new ResultModel();
 		
 		System.out.println("card==="+card.toString());
-		/*sql
+		
 		if (ParamUtils.isNotEmpty(card.getUser_id())) {
 			if (cardService.modefyCard(card)) {
 				card = cardService.getCardByUserId(card.getUser_id());
@@ -244,11 +248,13 @@ public class CardController {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 			resultModel.setData("name字段必须有");
 		}	
-		*/
+		
 		
 		//假的
+		/*
 		resultModel=ResultModelUtils.getResultModelByCode(Code.OK);
 		resultModel.setData(card);
+		*/
 		//
 		return resultModel;
 	}

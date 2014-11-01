@@ -39,13 +39,13 @@ public class FriendsController {
 
 	
 	/*得到我关注的人*/
-	@RequestMapping(value = "/following" ,method = RequestMethod.GET,params={"user_id","pageNum","pageSize"})
-	public Object getFollowing(@RequestParam("user_id") Long user_id,@RequestParam("pageNum") int pageNum,@RequestParam("pageSize") int pageSize){
+	@RequestMapping(value = "/following" ,method = RequestMethod.GET,params={"user_id","until_id","pageSize"})
+	public Object getFollowing(@RequestParam("user_id") Long user_id,@RequestParam("until_id") long untilId,@RequestParam("pageSize") int pageSize){
 		/*
 		 * parameter:
 		 * userid，untilid,count
 		 */
-		/*
+		
 		ResultModel resultModel = new ResultModel();
 		resultModel.setCode("20000");
 		resultModel.setMessage("get following success");
@@ -65,8 +65,9 @@ public class FriendsController {
 		listModel.setList(list);
 		
 		resultModel.setData(listModel);
-		*/
 		
+		return resultModel;
+		/*
 		ResultModel resultModel = new ResultModel();
 		
 		if (ParamUtils.isNotEmpty(user_id,pageNum,pageSize)) {
@@ -127,6 +128,7 @@ public class FriendsController {
 		}
 			
 		return resultModel;
+		*/
 	}
 	
 	/*关注某人*/

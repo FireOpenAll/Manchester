@@ -33,11 +33,10 @@
 		FROM ac_activity_joined_users
 		WHERE activity_id = #{activityId}
 	</select>
-	<select id="listAllJoinedUsersFromId" resultMap="ACTIVITY_JOINED_USERS_MAP"
-		parameterType="long">
+	<select id="listAllJoinedUsersFromId" resultMap="ACTIVITY_JOINED_USERS_MAP">
 		SELECT *
 		FROM ac_activity_joined_users
-		WHERE activity_id = #{activityId} and id>#{fromId} limit #{size}
+		WHERE activity_id = #{activityId} and id &gt; #{fromId} limit #{size}
 	</select> 
 	<!-- 
 	<result property="userId" column="user_id" />
@@ -53,7 +52,7 @@
 	</insert>
 	
 	<!-- 计算user_id参加的活动数 -->
-	<select id="getUserJoinedActNumber" parameterType="long">
+	<select id="getUserJoinedActNumber" parameterType="long" resultType="int">
 	select count(id) 
 	from ac_activity_joined_users
 	where user_id = #{user_id}

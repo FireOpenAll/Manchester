@@ -12,7 +12,7 @@ import com.galaxy.front.web.rest.model.Photo;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.interest.InterestDetailModel;
 import com.galaxy.front.web.rest.model.interest.InterestGroup;
-import com.galaxy.front.web.rest.model.interest.InterestModel;
+import com.galaxy.front.web.rest.model.interest.CategoryModel;
 import com.galaxy.front.web.rest.model.user.UserModel;
 
 /*author:huangshanqi
@@ -34,9 +34,9 @@ public class InterestController {
 		resultModel.setCode("20000");
 		resultModel.setMessage("get interest category list success");
 
-		List<InterestModel> interestModels = new ArrayList<InterestModel>();
+		List<CategoryModel> interestModels = new ArrayList<CategoryModel>();
 		for (int i = 0; i < 12; i++) {
-			interestModels.add(new InterestModel(10000000 + i, "推荐兴趣" + i, "/interest/cover/" + (10 + i) + ".jpg", i
+			interestModels.add(new CategoryModel(10000000 + i, "推荐兴趣" + i, "/interest/cover/" + (10 + i) + ".jpg", i
 					+ "热门兴趣描述"));
 		}
 		InterestGroup interestGroup = new InterestGroup(12, interestModels);
@@ -72,9 +72,9 @@ public class InterestController {
 		}
 		interestDetailModel.setRecomment_user(recomment_user);
 		
-		ArrayList<InterestModel> interestModels = new ArrayList<InterestModel>();
+		ArrayList<CategoryModel> interestModels = new ArrayList<CategoryModel>();
 		for (int i = 0; i < 12; i++) {
-			interestModels.add(new InterestModel(10000000 + i, "推荐兴趣" + i, "/interest/cover/" + (10 + i) + ".jpg", i
+			interestModels.add(new CategoryModel(10000000 + i, "推荐兴趣" + i, "/interest/cover/" + (10 + i) + ".jpg", i
 					+ "热门兴趣描述"));
 		}
 		interestDetailModel.setRelative_interest(interestModels);

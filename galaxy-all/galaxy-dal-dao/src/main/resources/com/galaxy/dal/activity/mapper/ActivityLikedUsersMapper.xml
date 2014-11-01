@@ -40,7 +40,7 @@
 	</select> 
 
 	<!-- 分页获取userId评论过的活动 -->
-	<select id="getUserLikeedActByUntilId" resultMap="ACTIVITY_LIKED_USERS_MAP">
+	<select id="getUserLikedActByUntilId" resultMap="ACTIVITY_LIKED_USERS_MAP">
 	select *
 	from ac_activity_liked_users
 	where user_id = #{user_id} and activity_id &gt;  #{until_id} 
@@ -67,8 +67,8 @@
 	</delete>
 	
 	<!-- 计算user_id Liked的活动数 -->
-	<select id="getLikedActNumByUserId" parameterType="long">
-	select count(*) 
+	<select id="getLikedActNumByUserId" parameterType="long" resultType="int">
+	select count(id) 
 	from ac_activity_liked_users
 	where user_id = #{user_id}
 	</select>

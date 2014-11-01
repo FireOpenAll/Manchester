@@ -18,7 +18,7 @@ import com.galaxy.front.web.rest.model.Photo;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.StatusModel;
 import com.galaxy.front.web.rest.model.activity.ActivityModel;
-import com.galaxy.front.web.rest.model.interest.InterestModel;
+import com.galaxy.front.web.rest.model.interest.CategoryModel;
 import com.galaxy.front.web.rest.model.location.LocationInfo;
 import com.galaxy.front.web.rest.model.user.UserModel;
 import com.galaxy.front.web.utils.Code;
@@ -94,7 +94,7 @@ public class ActivityLikeController {
 			List<Activity> activities = activityService.getUserLikedActByUntilId(userId, untilId, pageSize);
 			ArrayList<ActivityModel> results = new ArrayList<ActivityModel>();
 			resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
-			if (activities == null) {
+			if (activities == null ||activities.size()==0) {
 			    return resultModel;	
 			}
 			for(Activity activity : activities){
