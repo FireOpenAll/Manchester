@@ -15,20 +15,58 @@
 
 	<resultMap type="chatMessage" id="chatMessage_MAP">
 		<id property="id" column="id" />
+		<result property="createdTime" column="created_time" /> 
 		<result property="messageType" column="message_type" />
-		<result property="userId" column="user_id" /> 
-	</resultMap> 
+		<result property="userId" column="user_id" />
+		<result property="groupId" column="group_id" />
+		<result property="toId" column="to_id" />
+	</resultMap>
 	<select id="getById" resultMap="chatMessage_MAP" parameterType="long">
 		SELECT *
 		FROM im_chat_message
 		WHERE id = #{id}
 	</select>
+	<select id="listMessage" resultMap="chatMessage_MAP" parameterType="paginationParam">
+		SELECT *
+		FROM im_chat_message
+		WHERE user_id = #{userId} and to_id=#{toId}
+		<if test="page.pageData.beforeTime!=null">
+		<![CDATA[ 
+		and created_time<#{page.pageData.beforeTime}
+		]]>
+		</if>
+		<if test="page.pageData.afterTime!=null">
+		<![CDATA[ 
+		and created_time>#{page.pageData.afterTime}
+		]]>
+		</if>
+		limit #{page.size} offset #{page.offset}
+	</select>
+	<select id="listGroupMessage" resultMap="chatMessage_MAP" parameterType="paginationParam">
+		SELECT *
+		FROM
+		im_chat_message
+		WHERE user_id = #{userId} and group_id=#{groupId}
+		<if test="page.pageData.beforeTime!=null">
+		<![CDATA[ 
+		and created_time<#{page.pageData.beforeTime}
+		]]>
+		</if>
+		<if test="page.pageData.afterTime!=null">
+		<![CDATA[ 
+		and created_time>#{page.pageData.afterTime}
+		]]>
+		</if>
+		limit #{page.size} offset #{page.offset}
+	</select>
+
+
 	<!-- private String loginName,sex,birthday,type,nick,followers,fans,realName,email,mobile,password,realNameAuth,emailAuth,mobileAuth,hasPic,avatar,bindOpenId,bindPlatform,lastVisitTime,status; -->
-	<insert id="insert" parameterType="chatMessage" useGeneratedKeys="true"
-		keyProperty="id">
+	<insert id="insert" parameterType="chatMessage"
+		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
 		im_chat_message(created_time,message_type,user_id,body,status)
 		VALUES(#{createdTime},#{messageType},#{userId},#{body},#{status})
 	</insert>
-	
+
 </mapper>
