@@ -887,22 +887,19 @@
 				</div>
 				<div class="login-box">
 					<div class="login-qs">
-						<a href="http://www.o2olive.net/demo/shop/api.php?act=toqq"
-							class="btn-qq J-trigger"><i class="icon-qq"></i>QQ登录</a> <a
-							href="http://www.o2olive.net/demo/shop/api.php?act=tosina"
-							class="btn-sina J-trigger"><i class="icon-sina"></i>新浪微博登录</a>
+						<a href="/user/qqlogin" class="btn-qq J-trigger"><i class="icon-qq"></i>QQ登录</a> 
+						<a href="/user/wblogin" class="btn-sina J-trigger"><i class="icon-sina"></i>新浪微博登录</a>
 					</div>
 					<div class="login-other">
-						（本地生活帐号）<a href="http://www.o2olive.net/demo/index.php?act=login"
-							class="ml5">登录</a><i class="split">|</i><a
-							href="http://www.o2olive.net/demo/index.php?act=login&op=register">注册</a>
+						（本地生活帐号）<a href="/user/login" class="ml5">登录</a><i class="split">|</i>
+						<a href="/user/register">注册</a>
 					</div>
 				</div>
 			</div>
 			<div class="block-line  hot-tuan">
 				<div class="block-title mr10">
 					<span>热门活动</span><a
-						href="http://www.o2olive.net/demo/index.php?act=groupbuy"
+						href="/activity/more"
 						target="_blank" class="more">更多</a>
 				</div>
 				<ul class="block-list" style="height: 392px;">

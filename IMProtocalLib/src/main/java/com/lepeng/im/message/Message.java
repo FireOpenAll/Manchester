@@ -3,7 +3,7 @@ package com.lepeng.im.message;
 import java.util.Map;
 
 public interface Message<T> {
-	public Long getId();
+	public Long getMessageId();
 
 	public Message<?> decode(T payload);
 	/**

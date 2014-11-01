@@ -35,7 +35,7 @@ public class JsonP2PMessage extends BaseMessage implements P2PMessage<String>{
 	public JsonP2PMessage decode(Map<?, ?> values) {
 		toId = getLong((Number) values.get("toId"));
 		fromId = getLong((Number) values.get("fromId"));
-		id = getLong((Number) values.get("id"));
+		messageId = getLong((Number) values.get("id"));
 		messageType = getInteger((Number) values.get("messageType"));
 		content = (String) values.get("content");
 		return this;

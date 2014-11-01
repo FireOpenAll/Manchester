@@ -35,7 +35,7 @@ public class JsonGroupMessage extends BaseMessage implements GroupMessage<String
 	public JsonGroupMessage decode(Map<?, ?> values) {
 		groupId = getLong((Number) values.get("groupId"));
 		fromId = getLong((Number) values.get("fromId"));
-		id = getLong((Number) values.get("id"));
+		messageId = getLong((Number) values.get("id"));
 		messageType = getInteger((Number) values.get("messageType"));
 		content = (String) values.get("content");
 		return this;

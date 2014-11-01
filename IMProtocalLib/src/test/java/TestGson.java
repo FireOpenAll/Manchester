@@ -12,7 +12,7 @@ public class TestGson {
 		Gson gson=new Gson();
 		JsonGroupMessage group=new JsonGroupMessage();
 		group.setContent("Helllo world!");
-		group.setId(1L);
+		group.setMessageId(1L);
 		group.setMessageType(2);
 		//group.setFromId(111L);
 		group.setGroupId(555L);
@@ -29,7 +29,7 @@ public class TestGson {
 		Gson gson=new Gson();
 		JsonGroupMessage group=new JsonGroupMessage();
 		group.setContent("Helllo world!");
-		group.setId(1L);
+		group.setMessageId(1L);
 		group.setMessageType(2);
 		//group.setFromId(111L);
 		group.setGroupId(555L);

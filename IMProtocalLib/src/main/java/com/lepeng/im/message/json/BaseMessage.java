@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import com.lepeng.im.message.Message;
 
 public abstract class BaseMessage implements Message<String> {
-	protected Long id;
+	protected Long messageId;
 	protected Long createdTime=(new Date().getTime());
 	public String encode() {
 		Gson gson = new Gson();
@@ -27,12 +27,12 @@ public abstract class BaseMessage implements Message<String> {
 		return number.intValue();
 	}
 
-	public Long getId() {
-		return id;
+	public Long getMessageId() {
+		return messageId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setMessageId(Long id) {
+		this.messageId = id;
 	}
 	
 	public Long getCreatedTime() {
