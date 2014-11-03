@@ -153,6 +153,7 @@ public class CardController {
 				}
 				*/
 				//
+				
 				resultModel=ResultModelUtils.getResultModelByCode(Code.OK);
 				resultModel.setData(getCard(user_id));
 				//
