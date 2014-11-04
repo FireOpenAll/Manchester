@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.galaxy.dal.domain.user.User;
-import com.galaxy.front.web.utils.Constans;
+import com.galaxy.front.web.utils.Constants;
 import com.galaxy.front.web.utils.EmailUtils;
 import com.galaxy.front.web.utils.MD5Utils;
 import com.galaxy.front.web.utils.RegexUtils;
@@ -62,7 +62,7 @@ public class RegisterController {
 
 				StringBuilder stringBuilder = new StringBuilder("");
 				stringBuilder.append("欢迎注册galaxy，点击以下完成邮箱验证!").append("\n");
-				stringBuilder.append(Constans.remotehost);
+				stringBuilder.append(Constants.remotehost);
 				stringBuilder.append("api/v1/email/verify?email=")
 						.append(email);
 				stringBuilder.append("&code=").append(code);

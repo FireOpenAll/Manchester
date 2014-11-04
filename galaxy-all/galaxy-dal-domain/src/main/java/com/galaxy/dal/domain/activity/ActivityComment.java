@@ -40,6 +40,12 @@ public class ActivityComment extends BaseDomain {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public Date getReplyTime() {
+		return replyTime;
+	}
+	public void setReplyTime(Date replyTime) {
+		this.replyTime = replyTime;
+	}
 	
 	
 

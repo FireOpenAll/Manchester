@@ -20,7 +20,7 @@ import com.galaxy.service.location.DistrictService;
  */
 
 @RestController
-@RequestMapping(value = "api/v1/location")
+@RequestMapping(value = "location")
 public class DistrictController {
 	/*
 	 * 区相关控制器

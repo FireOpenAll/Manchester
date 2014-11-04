@@ -39,6 +39,18 @@
 		WHERE activity_id = #{param1.activity_id} limit #{param2},#{param3}
 	</select> 
 
+	<!-- 分页获取userId评论过的活动 -->
+	<select id="getUserLikedActByUntilId" resultMap="ACTIVITY_LIKED_USERS_MAP">
+	select *
+	from ac_activity_liked_users
+	where user_id = #{user_id} and activity_id &gt;  #{until_id} 
+	group by activity_id 
+	order by activity_id asc
+	limit #{pageSize}
+	</select>
+
+
+
     <!-- 点赞某活动 -->
 	<insert id="insert" parameterType="activityLikedUsers"
 		useGeneratedKeys="true" keyProperty="id">
@@ -55,9 +67,17 @@
 	</delete>
 	
 	<!-- 计算user_id Liked的活动数 -->
-	<select id="getLikedActNumByUserId" parameterType="long">
-	select count(*) 
+	<select id="getLikedActNumByUserId" parameterType="long" resultType="int">
+	select count(id) 
 	from ac_activity_liked_users
 	where user_id = #{user_id}
+	</select>
+	
+	<!-- get by user_id and activity_id -->
+	<select id="getByUserIdActId" resultMap="ACTIVITY_LIKED_USERS_MAP">
+	select * 
+	from ac_activity_liked_users
+	where user_id = #{user_id} and activity_id = #{activity_id}
+	limit 1
 	</select>
 </mapper>

@@ -25,7 +25,7 @@ public class Activity extends BaseDomain {
 
 	private String refUrl;
 
-	private Double price;
+	private Float price;
 
 	private String tags;
 
@@ -134,10 +134,10 @@ public class Activity extends BaseDomain {
 	public void setRefUrl(String refUrl) {
 		this.refUrl = refUrl;
 	}
-	public Double getPrice() {
+	public Float getPrice() {
 		return price;
 	}
-	public void setPrice(Double price) {
+	public void setPrice(Float price) {
 		this.price = price;
 	}
 	public String getTags() {

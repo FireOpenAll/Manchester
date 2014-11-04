@@ -1,9 +1,12 @@
 package com.galaxy.service.activity.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+import org.aspectj.apache.bcel.classfile.Constant;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +19,16 @@ import com.galaxy.dal.activity.mapper.ActivityLikedUsersMapper;
 import com.galaxy.dal.activity.mapper.ActivityMapper;
 import com.galaxy.dal.base.mapper.PaginationParam;
 import com.galaxy.dal.domain.activity.Activity;
+import com.galaxy.dal.domain.activity.ActivityComment;
 import com.galaxy.dal.domain.activity.ActivityDetail;
 import com.galaxy.dal.domain.activity.ActivityJoinedUsers;
 import com.galaxy.dal.domain.activity.ActivityLikedUsers;
+import com.galaxy.dal.domain.user.User;
 import com.galaxy.service.activity.ActivityService;
 import com.galaxy.service.activity.form.ActivityForm;
 import com.galaxy.service.chat.ChatService;
 import com.galaxy.service.user.LoginUserModel;
+import com.galaxy.service.user.UserService;
 import com.galaxy.service.user.UserUtils;
 @Service
 public class ActivityServiceImpl implements ActivityService {
@@ -39,7 +45,10 @@ public class ActivityServiceImpl implements ActivityService {
 	ChatService chatService; 
 	@Autowired 
 	ActivityCommentMapper activityCommentMapper; 
+	@Autowired
+	UserService userService;
 
+	////create
 	@Override
 	@Transactional
 	public Long create(ActivityForm form) {
@@ -65,6 +74,16 @@ public class ActivityServiceImpl implements ActivityService {
 		return detail;
 	}
 
+	
+	//分页获取某人发布的活动 
+	@Override
+	public List<Activity> getUserCreatedActByUntilId(long userId, long untilId, int pageSize) {
+		// TODO Auto-generated method stub
+		
+		return activityMappper.getUserCreatedActByUntilId(userId, untilId, pageSize);
+	}
+
+	////create
 	@Override
 	@Transactional
 	public boolean modify(ActivityForm form) {
@@ -129,25 +148,65 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
-	public List<ActivityJoinedUsers> listAllJoinedUsersFromId(Long activityId,
-			Long fromId, Long size) { 
+	public List<ActivityJoinedUsers> listAllJoinedUsersFromId(Long activityId,Long fromId, int size) { 
 		return activityJoinedUsersMapper.listAllJoinedUsersFromId(activityId, fromId, size);
 	}
 	
-	public ActivityJoinedUsers getActivityJoinUserByUserId(Long activityId,Long userId){
-		return activityJoinedUsersMapper.getJoinedUserByUserId(activityId,userId);
-	}
 	
+	@Override
+	@Transactional
+	public List<User> listTopActJionUser(Long activityId, int size) {
+		// TODO Auto-generated method stub
+		List<ActivityJoinedUsers> list = activityJoinedUsersMapper.listAllJoinedUsersFromId(activityId, 0L, size);
+		if (list.size() <= 0) {
+			return null;
+		}
+		List<User> users = new ArrayList<User>();
+		for(ActivityJoinedUsers activityJoinedUsers:list){
+			User user = userService.getUser(activityJoinedUsers.getUserId());
+			if (user != null) {
+				users.add(user);
+			}
+		}
+		return users;
+	}
+
 	//计算user_id参加的活动数
 	@Override
 	public int getUserJoinedActNumber(Long user_id) {
 		// TODO Auto-generated method stub
 		return activityJoinedUsersMapper.getUserJoinedActNumber(user_id);
 	}
-
+     
+	
+	@Override
+	@Transactional
+	public List<Activity> listAllJoinedActs(Long userId) {
+		// TODO Auto-generated method stub
+		List<ActivityJoinedUsers> list = activityJoinedUsersMapper.listAllJoinedActs(userId);
+		if (list == null || list.size() ==0) {
+			return null;
+		}
+		List<Activity> activities = new ArrayList<Activity>();
+		for (ActivityJoinedUsers activityJoinedUsers:list) {
+			Activity activity = activityMappper.getById(activityJoinedUsers.getActivityId());
+			if (activities != null) {
+				activities.add(activity);
+			}
+		}
+		return activities;
+	}
+	
+	
+	//用户user_id是否已参加某活动activity_id]
+	@Override
+	public boolean isUserJoinedActivity(Long userId,Long activityId){
+		return (null == activityJoinedUsersMapper.getByUserIdActId(userId, activityId))?false:true;
+	}
 
 	////join
-	
+
+
 	////like
 	@Override
 	@Transactional
@@ -186,6 +245,24 @@ public class ActivityServiceImpl implements ActivityService {
 		List<ActivityLikedUsers> likedUsers = activityLikedUsersMapper.listAllLikedUsersByActId(paginationParam);
 		return likedUsers;
 	}
+	
+	@Override
+	@Transactional
+	public List<Activity> getUserLikedActByUntilId(long userId, long untilId, long pageSize) {
+		// TODO Auto-generated method stub
+		List<ActivityLikedUsers> list = activityLikedUsersMapper.getUserLikedActByUntilId(userId, untilId, pageSize);
+		if (list == null || list.size() == 0) {
+			return null;
+		}
+		List<Activity> results = new ArrayList<Activity>();
+		for(ActivityLikedUsers activityLikedUsers : list){
+			Activity activity = activityMappper.getById(activityLikedUsers.getActivityId());
+			if (activity != null) {
+				results.add(activity);
+			}
+		}
+		return results;
+	}
 
 	@Override
 	public int getLikedActNumByUserId(Long user_id) {
@@ -193,19 +270,83 @@ public class ActivityServiceImpl implements ActivityService {
 		return activityLikedUsersMapper.getLikedActNumByUserId(user_id);
 	}
 
-
+	@Override
+	public boolean isUserLikedActivity(Long UserId, Long activityId) {
+		// 用户是否已经点赞某活动
+		return (null == activityLikedUsersMapper.getByUserIdActId(UserId, activityId))?false:true;
+	}
+	
 	
 	
 	
 	////like
 	
+
+
 	////comment
 	//统计user_id评论过的活动数
 	@Override
 	public int getUserComActNum(Long user_id){
 		return activityCommentMapper.getUserComActNum(user_id);
 	}
+	
+	//统计某个活动总的评论人数
+	@Override
+	public int getCommUserNum(Long activityId) {
+		// TODO Auto-generated method stub
+		return activityCommentMapper.getCommUserNum(activityId);
+	}
+	//评论活动或回复某个人
+	@Override
+	@Transactional
+	public ActivityComment Comment(ActivityComment activityComment) {
+		// TODO Auto-generated method stub
+		Activity activity = activityMappper.getById(activityComment.getActivityId());
+		if (activity == null) {
+			return null;
+		}
+		activityComment.setReplyTime(activityComment.getCreatedTime());
+		activityCommentMapper.insert(activityComment);
+		return activityComment;
+	}
+
+	//分页得到某活动的评论
+	@Override
+	@Transactional
+	public List<ActivityComment> getActComByUntilId(Long activityId, Long untilId, int pageSize) {
+		// TODO Auto-generated method stub
+		Activity activity = activityMappper.getById(activityId);
+		if (activity == null) {
+            return null;	
+		}
+		
+		return activityCommentMapper.getActComByUntilId(activityId, untilId, pageSize);
+	}
+	
+	
+	//分页得到用户评论过的活动
+	@Override
+	@Transactional
+	public List<Activity> getUserComedActByUntilId(long userId, long untilId, long pageSize) {
+		// TODO Auto-generated method stub
+		List<ActivityComment> list = activityCommentMapper.getUserComedActByUntilId(userId, untilId, pageSize);
+		if (list == null || list.size() == 0) {
+			return null;
+		}
+		List<Activity> results = new ArrayList<Activity>();
+		for(ActivityComment activityComment : list){
+			Activity activity = activityMappper.getById(activityComment.getActivityId());
+			if (activity != null) {
+				results.add(activity);
+			}
+		}
+		return results;
+	}
+	
+	
+	
 	////comment
+
 
 	//统计某user_id发布的活动数
 	@Override
@@ -213,6 +354,8 @@ public class ActivityServiceImpl implements ActivityService {
 		// TODO Auto-generated method stub
 		return activityMappper.getUserCreatedActNum(user_id);
 	}
+
+
 
 	
 	

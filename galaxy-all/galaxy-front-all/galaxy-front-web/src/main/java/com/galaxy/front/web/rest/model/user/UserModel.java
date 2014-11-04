@@ -8,10 +8,6 @@ import java.io.Serializable;
  */
 public class UserModel implements Serializable {
 
-	/*
-	 * user { user_id: XXXXX, avatar: XXXXXX, name: XXXXX, gender: XXXXX,0为男，1为女
-	 * }
-	 */
 
 	private long userid;// 用户id，8未
 	private String avatar;// 用户头像

@@ -4,13 +4,13 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.galaxy.dal.domain.card.Card;
 import com.galaxy.dal.domain.user.User;
 import com.galaxy.dal.domain.user.UserType;
 import com.galaxy.front.web.rest.interceptor.IgnoreAuth;
@@ -20,6 +20,7 @@ import com.galaxy.front.web.utils.EmailUtils;
 import com.galaxy.front.web.utils.ParamUtils;
 import com.galaxy.front.web.utils.RegexUtils;
 import com.galaxy.front.web.utils.ResultModelUtils;
+import com.galaxy.service.card.CardService;
 import com.galaxy.service.user.UserService;
 
 @RestController(value = "restRegisterController")
@@ -34,6 +35,8 @@ public class RegisterController {
 	private UserService userService;
 	@Autowired
 	private EmailUtils emailUtils;
+	@Autowired
+	private CardService cardService;
 	
 	/**
 	 * 客户端邮箱注册
@@ -62,6 +65,7 @@ public class RegisterController {
 			}
 			if (RegexUtils.checkAll(username, password, email, null)) {
 				User user = new User();
+				user.setAvatar("/user/avatar/default.jpg");//设定用户默认头像
 				user.setLoginName(username);
 				user.setEmail(email);
 				user.setPassword(password);
@@ -71,8 +75,24 @@ public class RegisterController {
 				user.setEmailAuth(true);
 				user.setMobileAuth(false); 
 				user.setHasPic(false);
+				user.setSex("male");
 				user.setType(UserType.NORMAL); 
 				userService.createUser(user);
+				
+				user = userService.findUserByLoginName(username);
+				
+				
+				//建立名片
+				Card card = new Card();
+				card.setUser_id(user.getId());
+				card.setName(user.getNick());
+				card.setEmail(user.getEmail());
+				card.setPhoto(user.getAvatar());
+				if (user.getEmail()!=null) {
+					card.setEmail(user.getEmail());
+				}
+				cardService.createCard(card);
+				
 				
 				//邮箱验证
 				

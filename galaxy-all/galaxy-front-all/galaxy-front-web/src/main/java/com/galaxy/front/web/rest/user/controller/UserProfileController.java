@@ -18,7 +18,7 @@ import com.galaxy.dal.domain.user.User;
 import com.galaxy.dal.domain.user.UserFriend;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.interest.InterestGroup;
-import com.galaxy.front.web.rest.model.interest.InterestModel;
+import com.galaxy.front.web.rest.model.interest.CategoryModel;
 import com.galaxy.front.web.rest.model.location.SimpleAddress;
 import com.galaxy.front.web.rest.model.profile.CreditInfo;
 import com.galaxy.front.web.rest.model.profile.UserProfileModel;
@@ -65,9 +65,9 @@ public class UserProfileController {
 		profileModel.setCredit_info(new CreditInfo(35, "活动达人"));
 		profileModel.setLocation(new SimpleAddress("广东省", "广州市"));
 
-		List<InterestModel> lisInterests = new ArrayList<InterestModel>();
+		List<CategoryModel> lisInterests = new ArrayList<CategoryModel>();
 		for (int i = 1; i < 6; i++) {
-			lisInterests.add(new InterestModel((long) i * 10000000, "兴趣" + i,"/interest/cover/"+(10+i)+".jpg",i+"热门兴趣描述"));
+			lisInterests.add(new CategoryModel((long) i * 10000000, "兴趣" + i,"/interest/cover/"+(10+i)+".jpg",i+"热门兴趣描述"));
 		}
 		profileModel.setInterest_group(new InterestGroup(5, lisInterests));
 
@@ -87,8 +87,8 @@ public class UserProfileController {
 		return resultModel;
 	}
 
-	@RequestMapping(value = "/profile", method = RequestMethod.GET,params={"user_id","target_id"})
-	public Object getProfile(@RequestParam("user_id") Long user_id,@RequestParam("target_id") Long target_id) {
+	@RequestMapping(value = "/profile1", method = RequestMethod.GET,params={"user_id","target_id"})
+	public Object getProfile1(@RequestParam("user_id") Long user_id,@RequestParam("target_id") Long target_id) {
 		/**
 		 * 假数据
 		 */
@@ -108,9 +108,9 @@ public class UserProfileController {
 		profileModel.setCredit_info(new CreditInfo(35, "活动达人"));
 		profileModel.setLocation(new SimpleAddress("广东省", "广州市"));
 
-		List<InterestModel> lisInterests = new ArrayList<InterestModel>();
+		List<CategoryModel> lisInterests = new ArrayList<CategoryModel>();
 		for (int i = 1; i < 6; i++) {
-			lisInterests.add(new InterestModel((long) i * 10000000, "兴趣" + i,"/interest/cover/"+(10+i)+".jpg",i+"热门兴趣描述"));
+			lisInterests.add(new CategoryModel((long) i * 10000000, "兴趣" + i,"/interest/cover/"+(10+i)+".jpg",i+"热门兴趣描述"));
 
 		}
 		profileModel.setInterest_group(new InterestGroup(5, lisInterests));
@@ -132,8 +132,8 @@ public class UserProfileController {
 	}
 	
 	
-	@RequestMapping(value = "/profile1", method = RequestMethod.GET,params={"user_id","target_id"})
-	public Object getProfile1(@RequestParam("user_id") Long user_id,@RequestParam("target_id") Long target_id) {
+	@RequestMapping(value = "/profile", method = RequestMethod.GET,params={"user_id","target_id"})
+	public Object getProfile(@RequestParam("user_id") Long user_id,@RequestParam("target_id") Long target_id) {
 		/**
 		 * sql数据
 		 */
@@ -154,16 +154,16 @@ public class UserProfileController {
 				profileModel.setCredit_info(new CreditInfo(35, "活动达人"));
 				profileModel.setLocation(new SimpleAddress("广东省", "广州市"));
 
-				List<InterestModel> lisInterests = new ArrayList<InterestModel>();
+				List<CategoryModel> lisInterests = new ArrayList<CategoryModel>();
 				for (int i = 1; i < 6; i++) {
-					lisInterests.add(new InterestModel((long) i * 10000000, "兴趣" + i,"/interest/cover/"+(10+i)+".jpg",i+"热门兴趣描述"));
+					lisInterests.add(new CategoryModel((long) i * 10000000, "兴趣" + i,"/interest/cover/"+(10+i)+".jpg",i+"热门兴趣描述"));
 
 				}
 				profileModel.setInterest_group(new InterestGroup(5, lisInterests));
 				//待完善
 				
-				profileModel.setFollowed(user.getFollowers());
-				profileModel.setFollowing(user.getFans());
+				profileModel.setFollowed(user.getFans());
+				profileModel.setFollowing(user.getFollowers());
 				
 				//得到用户参加过的活动数目
 				int joined_count = activityService.getUserJoinedActNumber(target_id);
@@ -190,10 +190,22 @@ public class UserProfileController {
 						int relation = userFriend.getRelation();
 						switch (relation) {
 						case 1:
-							profileModel.setIs_followed(false);
-							profileModel.setIs_following(true);
+							if (user_id == userFriend.getUserId()) {
+								profileModel.setIs_followed(false);
+								profileModel.setIs_following(true);
+							}else {
+								profileModel.setIs_followed(true);
+								profileModel.setIs_following(false);
+							}
 							break;
 						case 2:
+							if (user_id == userFriend.getUserId()) {
+								profileModel.setIs_followed(true);
+								profileModel.setIs_following(false);
+							}else {
+								profileModel.setIs_followed(false);
+								profileModel.setIs_following(true);
+							}
 							profileModel.setIs_followed(true);
 							profileModel.setIs_following(false);
 							break;
@@ -215,7 +227,7 @@ public class UserProfileController {
 					profileModel.setIs_followed(false);
 					profileModel.setIs_following(false);
 				}
-				
+				resultModel=ResultModelUtils.getResultModelByCode(Code.OK);
 				resultModel.setData(profileModel);
 				
 				
