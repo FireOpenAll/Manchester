@@ -5,6 +5,7 @@ package com.galaxy.front.web.rest.activity.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import com.galaxy.front.web.rest.model.Contact;
 import com.galaxy.front.web.rest.model.Photo;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.activity.ActivityModel;
-import com.galaxy.front.web.rest.model.interest.InterestModel;
+import com.galaxy.front.web.rest.model.interest.CategoryModel;
 import com.galaxy.front.web.rest.model.location.LocationInfo;
 import com.galaxy.front.web.rest.model.user.UserModel;
 import com.galaxy.front.web.utils.Code;
@@ -48,8 +49,8 @@ public class ActivityJoinController {
 	 * @param pageSize
 	 * @return
 	 */
-	@RequestMapping(value = "getMyJoinedActivity",method = RequestMethod.GET,params = {"user_id","until_id","pageSize"})
-	public Object getJoinedActivity(@RequestParam("user_id") long user_id,@RequestParam("until_id") long until_id,@RequestParam("pageSize") int pageSize){
+	@RequestMapping(value = "getMyJoinedActivity1",method = RequestMethod.GET,params = {"user_id","until_id","pageSize"})
+	public Object getJoinedActivity1(@RequestParam("user_id") long user_id,@RequestParam("until_id") long until_id,@RequestParam("pageSize") int pageSize){
 		ResultModel resultModel = new ResultModel();
 
 		resultModel.setCode("20000");
@@ -69,10 +70,10 @@ public class ActivityJoinController {
 					"/interest/cover/" + (10 + i) + ".jpg"));
 		}
 
-		ArrayList<InterestModel> interest_list = new ArrayList<InterestModel>();
+		ArrayList<CategoryModel> interest_list = new ArrayList<CategoryModel>();
 		for (int i = 0; i < 4; i++) {
 			interest_list
-					.add(new InterestModel(10000000 + i, "兴趣" + i, "/interest/cover/" + (20 + i) + ".jpg", "兴趣介绍"));
+					.add(new CategoryModel(10000000 + i, "兴趣" + i, "/interest/cover/" + (20 + i) + ".jpg", "兴趣介绍"));
 		}
 
 		for (int i = 0; i < 10; i++) {
@@ -113,6 +114,111 @@ public class ActivityJoinController {
 	
 	//退出活动
 	
+	
+	
+	/**
+	 * 获取我参加过的活动列表，分页查询
+	 * @param user_id
+	 * @param until_id
+	 * @param pageSize
+	 * @return
+	 */
+	@RequestMapping(value = "getMyJoinedActivity",method = RequestMethod.GET,params = {"user_id","until_id","pageSize"})
+	public Object getJoinedActivity(@RequestParam("user_id") long user_id,@RequestParam("until_id") long until_id,@RequestParam("pageSize") int pageSize){
+		/*
+		 * sql
+		 */
+		ResultModel resultModel = new ResultModel();
+		
+		List<Activity> activityList = activityService.listAllJoinedActs(user_id);
+		
+		resultModel=ResultModelUtils.getResultModelByCode(Code.OK);
+		if (activityList == null|| activityList.size() <=0) {
+			return resultModel;
+		}
+		 
+		ArrayList<ActivityModel> activityModelList = new ArrayList<ActivityModel>();
+		
+		for(Activity activity : activityList){
+			ActivityModel activityModel = new ActivityModel();
+			
+			activityModel.setFeed_type("activity");
+			
+			activityModel.setActivity_id(activity.getId());
+			activityModel.setActivity_name(activity.getTitle());
+			activityModel.setPrice(activity.getPrice());
+			//用户是否已经点赞
+			boolean hasLiked = activityService.isUserLikedActivity(user_id, activity.getId());
+			activityModel.setLike(hasLiked);
+			
+			activityModel.setLike_count(activity.getLiked_num());
+			//用户是否已经参加
+			boolean hasJoined = activityService.isUserJoinedActivity(user_id, activity.getId());
+			activityModel.setJoin(hasJoined);
+			
+			activityModel.setJoin_count(activity.getJoinedNum());
+			
+			//活动总评论人数
+			int comment_count = activityService.getCommUserNum(activity.getId());
+			activityModel.setComment_count(comment_count);
+			
+			activityModel.setOwner(activity.getSponsor());
+			activityModel.setStart_time(activity.getStartTime());
+			activityModel.setEnd_time(activity.getEndTime());
+			activityModel.setContact(new Contact(activity.getPhone()));
+			activityModel.setSummary(activity.getDescription());
+			activityModel.setUrl(activity.getRefUrl());
+			
+			//海报
+			ArrayList<Photo> photoList = new ArrayList<Photo>();
+			for(String photo:activity.getHaibao_urls().split(";")){
+				photoList.add(new Photo(photo, photo, photo));
+			}
+			activityModel.setPhoto_list(photoList);
+			
+			//地点信息
+			LocationInfo locationInfo = new LocationInfo();
+			locationInfo.setLongitude(activity.getLongtitude());
+			locationInfo.setLatitude(activity.getLatitude());
+			locationInfo.setAddress(activity.getAddress());
+			activityModel.setLocationInfo(locationInfo);
+			
+			//活动相关参与人员,推荐相关
+			int num = 6;//暂定6个
+			List<User> users =  activityService.listTopActJionUser(activity.getId(), num);
+			List<UserModel> list = new ArrayList<UserModel>();
+			for(User user : users){
+				UserModel userModel = new UserModel();
+				userModel.setUserid(user.getId());
+				userModel.setAvatar(user.getAvatar());
+				userModel.setName(user.getLoginName());
+				userModel.setGender(user.getSex());
+				
+				list.add(userModel);
+			}
+			
+			//活动标签
+			
+			
+			//修改活动兴趣
+			ArrayList<CategoryModel> interest_list = new ArrayList<CategoryModel>();
+			for (int i = 0; i < 4; i++) {
+				interest_list
+						.add(new CategoryModel(10000000 + i, "兴趣" + i, "/interest/cover/" + (20 + i) + ".jpg", "兴趣介绍"));
+			}
+			activityModel.setInterest_list(interest_list);
+			
+			//活动分类
+			
+			
+			
+			activityModelList.add(activityModel);
+		}
+		
+		resultModel.setData(activityModelList);
+		
+		return resultModel;
+	}
 	
 
 }

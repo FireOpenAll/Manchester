@@ -1,5 +1,6 @@
 package com.galaxy.service.card;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.galaxy.dal.base.mapper.PaginationParam;
@@ -26,7 +27,7 @@ public interface CardService {
 	//从我的名片本获取名片,分页paginationParam.map.key = {user_id}
 	public List<Card> getCradsFromMyBook(PaginationParam paginationParam);
 	//从我的名片本获取所有名片
-	public List<Card> getAllCradsFromMyBook(Long user_id);
+	public ArrayList<Card> getAllCradsFromMyBook(Long user_id);
 	
 	//查看是否已经添加某人名片，已添加返回true,两人的user_id
 	boolean checkisAdded(long user_id,Long target_id);

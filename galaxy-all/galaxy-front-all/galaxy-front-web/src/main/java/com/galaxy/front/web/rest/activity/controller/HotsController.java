@@ -17,7 +17,7 @@ import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.activity.ActivityModel;
 import com.galaxy.front.web.rest.model.activity.HotItemModel;
 import com.galaxy.front.web.rest.model.activity.HotItemModel.JoinedPeopleInfo;
-import com.galaxy.front.web.rest.model.interest.InterestModel;
+import com.galaxy.front.web.rest.model.interest.CategoryModel;
 import com.galaxy.front.web.rest.model.location.LocationInfo;
 import com.galaxy.front.web.rest.model.user.UserModel;
 import com.galaxy.service.activity.ActivityService;
@@ -66,9 +66,9 @@ public class HotsController {
 					"/interest/cover/" + (10 + i) + ".jpg"));
 		}
 
-		ArrayList<InterestModel> interest_list = new ArrayList<InterestModel>();
+		ArrayList<CategoryModel> interest_list = new ArrayList<CategoryModel>();
 		for (int i = 0; i < 4; i++) {
-			interest_list.add(new InterestModel(10000000+i, "兴趣"+i, "/interest/cover/" + (10 + i) + ".jpg", "兴趣介绍"));
+			interest_list.add(new CategoryModel(10000000+i, "兴趣"+i, "/interest/cover/" + (10 + i) + ".jpg", "兴趣介绍"));
 		}
 		
 		for (int i = 0; i < 10; i++) {

@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.galaxy.front.web.rest.model.interest.InterestGroup;
-import com.galaxy.front.web.rest.model.interest.InterestModel;
+import com.galaxy.front.web.rest.model.interest.CategoryModel;
 import com.galaxy.front.web.rest.model.location.SimpleAddress;
 
 public class UserProfileModel implements Serializable {

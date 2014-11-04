@@ -1,6 +1,6 @@
 //显示省
 function getProvince(){
-	var url = '/api/v1/location/province';
+	var url = '/location/province';
 	
 	var defaultProvince = '<option value="0">--省--</option>';
 	var defaultCity = '<option value="0">--市--</option>';
@@ -47,7 +47,7 @@ function getCity(){
 	//设置provice的input值
 	$("#province").val(province_code);
 	//设置provice的input值
-	var url = '/api/v1/location/city';
+	var url = '/location/city';
 	
 	var defaultCity = '<option value="0">--市--</option>';
 	var defaultDistrict = '<option value="0">--区--</option>';
@@ -90,7 +90,7 @@ function getDistrict(){
 	$("#city").val(city_code);
 	//设置city的input值
 	
-	var url = '/api/v1/location/district';
+	var url = '/location/district';
 	
 	var defaultDistrict = '<option value="0">--区--</option>';
 	$("#district_select").html(defaultDistrict);

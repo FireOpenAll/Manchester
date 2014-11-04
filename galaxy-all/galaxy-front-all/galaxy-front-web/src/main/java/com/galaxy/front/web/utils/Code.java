@@ -40,6 +40,10 @@ public enum Code {
 	SQL_SELECT_NOT_EXISTS("51004","没有此记录"),
 	
 	
+	//评论
+	COMMENT_FIAL("52000","评论失败"),
+	
+	
 	
 	
 	

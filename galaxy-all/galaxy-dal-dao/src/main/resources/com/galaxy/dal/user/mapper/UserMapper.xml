@@ -102,10 +102,25 @@
 	email_auth = 1
 	</select>
 	
+	<!-- email auth  -->
 	<update id="setUserEmailAuthByEmail" parameterType="Map">
 	update u_user
 	set email_auth = #{email_auth}
 	where email = #{email}
 	
+	</update>
+	
+	<!-- update fans -->
+	<update id="updateUserFansNumById" >
+	update u_user
+	set fans = #{num}
+	where id = #{userId}
+	</update>
+	
+	<!-- update fans -->
+	<update id="updateUserFollowersNumById" >
+	update u_user
+	set followers = #{num}
+	where id = #{userId}
 	</update>
 </mapper>

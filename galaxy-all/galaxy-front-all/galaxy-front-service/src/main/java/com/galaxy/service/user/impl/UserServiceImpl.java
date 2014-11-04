@@ -19,6 +19,31 @@ public class UserServiceImpl implements UserService {
 	public User getUser(Long userId) { 
 		return userMapper.getById(userId);
 	}
+	
+	////update
+	
+	@Override
+	public boolean update(User user) {
+		// TODO Auto-generated method stub
+		return userMapper.update(user);
+	}
+
+	@Override
+	public boolean updateUserFansNumById(Long userId, int num) {
+		// TODO Auto-generated method stub
+		return (userMapper.updateUserFansNumById(userId, num)>0)?true:false;
+	}
+
+	@Override
+	public boolean updateUserFollowersNumById(Long userId, int num) {
+		// TODO Auto-generated method stub
+		return (userMapper.updateUserFollowersNumById(userId, num)>0)?true:false;
+	}
+	
+    ////update
+
+
+
 	/**
 	 * 设定安全的密码，生成随机的salt并经过1024次 sha-1 hash
 	 */

@@ -1,14 +1,19 @@
 package com.galaxy.service.user.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.galaxy.dal.base.mapper.PaginationParam;
+import com.galaxy.dal.domain.user.User;
 import com.galaxy.dal.domain.user.UserFriend;
 import com.galaxy.dal.user.mapper.UserFriendMapper;
 import com.galaxy.service.user.UserFriendService;
+import com.galaxy.service.user.UserService;
 
 /*author:huangshanqi
  *time  :2014年10月22日 上午11:08:41
@@ -18,12 +23,20 @@ import com.galaxy.service.user.UserFriendService;
 public class UserFriendServiceImpl implements UserFriendService {
 	
 	@Autowired
+	private UserService userService;
+	@Autowired
 	private UserFriendMapper userFriendMapper;
 
 	 //insert
 	@Override
+	@Transactional
 	public boolean insert(UserFriend userFriend) {
 		// TODO Auto-generated method stub
+		User user = userService.getUser(userFriend.getUserId());
+		User targetUser = userService.getUser(userFriend.getTargetId());
+		if (user == null || targetUser == null) {
+			return false;
+		}
 		return userFriendMapper.insert(userFriend);
 	}
 
@@ -32,6 +45,17 @@ public class UserFriendServiceImpl implements UserFriendService {
 	public boolean deleteById(Long id) {
 		// TODO Auto-generated method stub
 		return userFriendMapper.deleteById(id);
+	}
+	//update
+	@Override
+	public boolean update(UserFriend userFriend){
+		User user = userService.getUser(userFriend.getUserId());
+		User targetUser = userService.getUser(userFriend.getTargetId());
+		if (user == null || targetUser == null) {
+			return false;
+		}
+		
+		return userFriendMapper.update(userFriend);
 	}
 
 	//getById
@@ -64,9 +88,30 @@ public class UserFriendServiceImpl implements UserFriendService {
 	 * 分页得到我关注的用户
 	 */
 	@Override
-	public List<UserFriend> getFollowingsByPage(PaginationParam paginationParam) {
+	public List<UserFriend> getFollowingsByOffset(Long user_id,int pageNum,int pageSize) {
 		// TODO Auto-generated method stub
-		return userFriendMapper.getFollowingsByPage(paginationParam);
+		// TODO Auto-generated method stub
+		if (pageSize <=0 || pageSize >=100) {
+			pageSize = 10;
+		}
+		if (pageNum <= 0) {
+			pageNum = 1;
+		}
+		PaginationParam paginationParam = new PaginationParam();
+		paginationParam.setSize(pageSize);
+		paginationParam.setOffset((pageNum-1)*pageSize);
+		Map<String, Long> map = new HashMap<String, Long>();
+		map.put("user_id", user_id);
+		paginationParam.setPageData(map);
+		List<UserFriend> relations = userFriendMapper.getFollowingsByOffset(paginationParam);
+		
+		return relations;
+	}
+	
+	@Override
+	public List<UserFriend> getFollowingsByUntilId(Long userId,long untilId,int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**
@@ -92,9 +137,30 @@ public class UserFriendServiceImpl implements UserFriendService {
 	 * 分页得到我的粉丝
 	 */
 	@Override
-	public List<UserFriend> getFollowedsByPage(PaginationParam paginationParam) {
+	public List<UserFriend> getFollowedsByOffset(Long user_id,int pageNum,int pageSize) {
 		// TODO Auto-generated method stub
-		return userFriendMapper.getFollowedsByPage(paginationParam);
+		if (pageSize <=0 || pageSize >=100) {
+			pageSize = 10;
+		}
+		if (pageNum <= 0) {
+			pageNum = 1;
+		}
+		PaginationParam paginationParam = new PaginationParam();
+		paginationParam.setSize(pageSize);
+		paginationParam.setOffset((pageNum-1)*pageSize);
+		Map<String, Long> map = new HashMap<String, Long>();
+		map.put("user_id", user_id);
+		paginationParam.setPageData(map);
+		List<UserFriend> relations = userFriendMapper.getFollowedsByOffset(paginationParam);
+		
+		
+		return relations;
+	}
+
+	@Override
+	public List<UserFriend> getFollowedsByUntilId(Long userId,long untilId,int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**
@@ -120,11 +186,31 @@ public class UserFriendServiceImpl implements UserFriendService {
 	 * 分页得到我的互粉用户
 	 */
 	@Override
-	public List<UserFriend> getMutualUsersByPage(PaginationParam paginationParam) {
+	public List<UserFriend> getMutualUsersByOffset(Long user_id,int pageNum,int pageSize) {
 		// TODO Auto-generated method stub
-		return userFriendMapper.getMutualUsersByPage(paginationParam);
+		if (pageSize <=0 || pageSize >=100) {
+			pageSize = 10;
+		}
+		if (pageNum <= 0) {
+			pageNum = 1;
+		}
+		PaginationParam paginationParam = new PaginationParam();
+		paginationParam.setSize(pageSize);
+		paginationParam.setOffset((pageNum-1)*pageSize);
+		Map<String, Long> map = new HashMap<String, Long>();
+		map.put("user_id", user_id);
+		paginationParam.setPageData(map);
+		List<UserFriend> relations = userFriendMapper.getMutualUsersByOffset(paginationParam);
+		
+		
+		return relations;
 	}
 
+	@Override
+	public List<UserFriend> getMutualUsersByUntilId(Long userId,long untilId,int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	/**
 	 * 得到全部我的互粉数
 	 */
@@ -133,6 +219,12 @@ public class UserFriendServiceImpl implements UserFriendService {
 		// TODO Auto-generated method stub
 		return userFriendMapper.getMutualUsersNum(user_id);
 	}
+
+
+
+
+
+
 	
 	
 	

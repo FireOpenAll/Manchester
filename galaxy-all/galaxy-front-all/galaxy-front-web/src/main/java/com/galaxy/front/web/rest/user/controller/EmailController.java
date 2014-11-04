@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.galaxy.dal.domain.user.User;
 import com.galaxy.front.web.rest.interceptor.IgnoreAuth;
-import com.galaxy.front.web.utils.Constans;
+import com.galaxy.front.web.utils.Constants;
 import com.galaxy.front.web.utils.EmailUtils;
 import com.galaxy.front.web.utils.MD5Utils;
 import com.galaxy.front.web.utils.RegexUtils;
@@ -66,7 +66,7 @@ public class EmailController {
 		} else {
 			stringBuffer.append("邮箱验证失败,链接已失效或地址错误！");
 			stringBuffer.append(email).append(" 重新注册：");
-			stringBuffer.append(Constans.localhost);
+			stringBuffer.append(Constants.localhost);
 			stringBuffer.append("user/register");
 			request.setAttribute("message", stringBuffer.toString());
 		}

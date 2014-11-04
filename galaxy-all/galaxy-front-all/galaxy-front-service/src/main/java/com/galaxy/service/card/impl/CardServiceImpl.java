@@ -1,5 +1,6 @@
 package com.galaxy.service.card.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,7 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public List<Card> getAllCradsFromMyBook(Long user_id) {
+	public ArrayList<Card> getAllCradsFromMyBook(Long user_id) {
 		// TODO Auto-generated method stub
 		return cardMapper.getAllCradsFromMyBook(user_id);
 	}
