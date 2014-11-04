@@ -36,7 +36,7 @@ $(function(){
 	    //输入不能有特殊字符
 		jQuery.validator.addMethod('CheckSpecialChar',
 				function(value,element){
-					var str = element.val().trim();
+					var str = value.replace(/(^\s*)|(\s*$)/g,"");
 					return isNoSpecialChar(str); 
 				},
 				'<span class="icon"></span><font color=\'red\'>不能含特殊字符！</font>'
@@ -80,7 +80,7 @@ $(function(){
 
 /*没有特殊字符*/
 function isNoSpecialChar(str){
-    str = $.trim(str);
+    str = str.replace(/(^\s*)|(\s*$)/g,"");
     if(str.indexOf("\"") == -1 && str.indexOf("'") == -1 && str.indexOf("<") == -1 && str.indexOf(">") == -1  && str.indexOf("*") == -1  && str.indexOf("%") == -1 && str.indexOf("&") == -1 && str.indexOf("$") == -1    && str.indexOf("!") == -1){
       return true;
     }    

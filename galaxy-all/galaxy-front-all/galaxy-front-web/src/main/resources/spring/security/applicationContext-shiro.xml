@@ -57,6 +57,7 @@
 				/user/**=user
 				/check/** = anon
 				/api/secure/** = authcBasic
+				/activity/create = user
 			</value>
 		</property>
 	</bean>

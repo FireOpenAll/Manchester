@@ -22,10 +22,8 @@
 
 	<select id="getCategories" resultMap="CATEGORY_MAP">
 		SELECT *
-		FROM cat_category1
-		where
-		level = #{level} and parent_id = #{parent_id}
-		order by seq
+		FROM cat_category
+		where parent_id = #{parent_id}
 	</select>
 
 </mapper>

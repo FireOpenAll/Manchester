@@ -22,8 +22,11 @@
   <script src="/resources/activity2/js/jquery/jquery.datetimepicker.js"></script>
   <!--jquery validate js-->
   <script src="/resources/activity2/js/jquery/jquery.validate.js"></script>
-
-
+   
+   <!-- baidu map -->
+   <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=CAmOf78i9fRk5nT89tt8c7Er"></script>
+   <script src="/resources/activity2/js/hsq/baidumap.js"></script>
+   
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="/resources/activity2/js/bootstrap/bootstrap.min.js"></script>
 
@@ -155,9 +158,14 @@
             </div>
             <div class="form-group">
               <label for="address_detail" class="col-lg-2 control-label">活动详细地址:</label>
-              <div class="col-lg-10">
+              <div class="col-lg-6">
                 <input type="text" class="form-control" id="address_detail" name="address_detail" placeholder="活动详细地址">
               </div>
+              <div class="col-lg-offset-2 col-lg-6" id="l-map" style="height:300px;"></div>
+              <input type="hidden" id="longtitude" name="longtitide">
+              <input type="hidden" id="latitude" name="latitude">
+              <div id = "item"> </div>
+              <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
             </div>
             <div class="form-group">
               <label for="haibaos" class="col-lg-2 control-label">活动海报:</label>
@@ -308,3 +316,59 @@
 
 </body>
 </html>
+<script type="text/javascript">
+	// 百度地图API功能
+	function G(id) {
+		return document.getElementById(id);
+	}
+
+	var map = new BMap.Map("l-map");
+	map.centerAndZoom("北京",12);                   // 初始化地图,设置城市和地图级别。
+
+	var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+		{"input" : "address_detail"
+		,"location" : map
+	});
+
+	ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+	var str = "";
+		var _value = e.fromitem.value;
+		var value = "";
+		if (e.fromitem.index > -1) {
+			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		}    
+		str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+		
+		value = "";
+		if (e.toitem.index > -1) {
+			_value = e.toitem.value;
+			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		}    
+		str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+		G("searchResultPanel").innerHTML = str;
+	});
+
+	var myValue;
+	ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+	var _value = e.item.value;
+        var str = '&province=' + _value.province + '&city=' + _value.city + '&district=' + _value.district + '&street=' + _value.street+ '&address=' + _value.business;
+        getPoint(str);
+		myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+		
+		setPlace();
+	});
+
+	function setPlace(){
+		map.clearOverlays();    //清除地图上所有覆盖物
+		function myFun(){
+			var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+			map.centerAndZoom(pp, 18);
+			map.addOverlay(new BMap.Marker(pp));    //添加标注
+		}
+		var local = new BMap.LocalSearch(map, { //智能搜索
+		  onSearchComplete: myFun
+		});
+		local.search(myValue);
+	}
+</script>
