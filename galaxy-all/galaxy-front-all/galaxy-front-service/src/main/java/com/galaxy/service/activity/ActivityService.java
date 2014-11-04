@@ -7,6 +7,7 @@ import java.util.Map;
 
 
 
+
 import org.apache.ibatis.annotations.Param;
 
 import com.galaxy.dal.base.mapper.PaginationParam;
@@ -89,4 +90,6 @@ public interface ActivityService {
 	
 	//统计某user_id发布的活动数
 	public int getUserCreatedActNum(Long user_id);
+
+	public ActivityJoinedUsers getActivityJoinUserByUserId(Long activityId, Long userId);
 }

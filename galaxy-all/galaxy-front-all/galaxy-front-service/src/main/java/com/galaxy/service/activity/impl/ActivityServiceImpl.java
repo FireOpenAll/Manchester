@@ -355,6 +355,17 @@ public class ActivityServiceImpl implements ActivityService {
 		return activityMappper.getUserCreatedActNum(user_id);
 	}
 
+	@Override
+	public ActivityJoinedUsers getActivityJoinUserByUserId(Long activityId, Long userId) {
+		// TODO Auto-generated method stub
+		Activity activity = activityMappper.getById(activityId);
+		if (activity == null) {
+			return null;
+		}
+		ActivityJoinedUsers activityJoinedUsers = activityJoinedUsersMapper.getByUserIdActId(userId, activityId);
+		return activityJoinedUsers;
+	}
+
 
 
 	
