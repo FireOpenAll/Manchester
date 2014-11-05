@@ -9,8 +9,7 @@
 
 <title>乐朋</title>
 <meta name="keywords" content="交友 社交">
-<meta name="description"
-	content="乐朋网">
+<meta name="description" content="乐朋网">
 <meta name="author" content="乐朋"> 
 </head>
 <body id="pagetop">
