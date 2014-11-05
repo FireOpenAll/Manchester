@@ -13,15 +13,16 @@ function getPoint(str){
         		
         		$('#longtitude').val(point.lng);
         		$('#latitude').val(point.lat);
-        		alert('long='+$('#longtitude').val()+';lat=' + $('#latitude').val());
-            }else{
-            	$('#longtitude').val(0.00);
-        		$('#latitude').val(0.00);
-        		alert('long='+$('#longtitude').val()+';lat=' + $('#latitude').val());
+        		//alert('long='+$('#longtitude').val()+';lat=' + $('#latitude').val());
             }
          }
       });
 }
 
+//通过isEqual工具方法判断数值是否相等
+function isEqual(number1, number2, digits){
+digits = digits == undefined? 10: digits; // 默认精度为10
+return number1.toFixed(digits) === number2.toFixed(digits);
+}
 
 

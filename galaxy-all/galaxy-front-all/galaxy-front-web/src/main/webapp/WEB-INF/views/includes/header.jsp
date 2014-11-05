@@ -172,7 +172,7 @@
 		<div id="topNav-inner-new" style="width: 1025px;">
 			<ul class="topNav-left">
 			    <shiro:authenticated>
-			    <li class="user_info"><span>您好，<shiro:principal property="loginName"/>用户ID,欢迎来到乐朋</span> <a
+			    <li class="user_info"><span>您好，<shiro:principal property="loginName"/>&nbsp;，欢迎来到乐朋</span> <a
 					class="user-info-login" href="/user/logout">[退出]</a></li>
 			    </shiro:authenticated>
 				<shiro:notAuthenticated>
@@ -212,7 +212,7 @@
 			</ul>
 			<ul class="topNav-right">
 				<li class="user-orders"><a target="_blank"
-					href="/user/myactivity">我的活动</a></li>
+					href="/activity/create">发布活动</a></li>
 				<li class="line">|</li>
 				<li class="dropdown dropdown-account">
 				   <a href="/user/myactivity" class="dropdown-tog"> <span>我的乐朋</span>

@@ -43,9 +43,9 @@ import com.galaxy.service.user.UserUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-/**
- * @author luolishu
- * 
+/*author:huangshanqi
+ *time  :2014年11月5日 上午9:57:49
+ *email :hsqmobile@gmail.com
  */
 @Controller
 @RequestMapping(value = "/activity")
@@ -264,6 +264,8 @@ public class ActivityController {
 		activityForm.setCityId(model.getCity());
 		activityForm.setDistrictId(model.getDistrict());
 		activityForm.setAddress(model.getAddress_detail());
+		activityForm.setLongtitude(model.getLongtitude());
+		activityForm.setLatitude(model.getLatitude());
 		activityForm.setPrice(model.getTicket_price());
 		activityForm.setTicketsNum(model.getTicket_num());
 		activityForm.setPhone(model.getPhone());
@@ -277,7 +279,7 @@ public class ActivityController {
 		
 		activityService.create(activityForm);
 		request.setAttribute("message", "创建活动成功");
-		return "activity/postsuccess";
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "post", method = RequestMethod.POST)

@@ -13,6 +13,9 @@ public class CreateModel {
 	private Long city;
 	private Long district;
 	private String address_detail;
+	private double longtitude;
+	private double latitude;
+
 	private String sponsor;
 	private String phone;
 	private String tags;
@@ -25,6 +28,21 @@ public class CreateModel {
 	private Long catId1;
 	private Long catId2;
 
+	public double getLongtitude() {
+		return longtitude;
+	}
+
+	public void setLongtitude(double longtitude) {
+		this.longtitude = longtitude;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
 	public String getName() {
 		return name;
 	}

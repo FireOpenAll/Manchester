@@ -7,6 +7,16 @@ $(function(){
 	//加载活动分类
 	loadCategory();
 	
+	$("#address_detail").blur(
+	  function(){
+		 var detail = $("#address_detail").val();
+	     if($("#longtitude").val() == 0){
+	    	 getPoint('&address=' + detail);
+	     }
+	  }
+	
+	);
+	
 	//提交事件
 	$('input[name="Submit"]').click(function(){
         if($("#form").valid()){

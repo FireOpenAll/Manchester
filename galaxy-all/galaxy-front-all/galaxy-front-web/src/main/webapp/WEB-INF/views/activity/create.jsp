@@ -71,7 +71,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Galaxy</a>
+        <a class="navbar-brand" href="/">友朋</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -87,7 +87,7 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="#">我的账户</a>
+            <a href="#">我的信息</a>
           </li>
           <li>
             <a href="#" >欢迎&nbsp;&nbsp;
@@ -157,13 +157,14 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="address_detail" class="col-lg-2 control-label">活动详细地址:</label>
-              <div class="col-lg-6">
-                <input type="text" class="form-control" id="address_detail" name="address_detail" placeholder="活动详细地址">
+              <label for="address-form" class="col-lg-2 control-label">活动详细地址:</label>
+              <div class="col-lg-10" id="address-form">
+                <input type="text" class=" col-lg-6 form-control" id="address_detail" name="address_detail" placeholder="活动详细地址">
+                <label>点击地图详细地址，让小伙伴们更好的发现你的活动</label>
               </div>
               <div class="col-lg-offset-2 col-lg-6" id="l-map" style="height:300px;"></div>
-              <input type="hidden" id="longtitude" name="longtitide">
-              <input type="hidden" id="latitude" name="latitude">
+              <input type="hidden" id="longtitude" name="longtitude" value="0">
+              <input type="hidden" id="latitude" name="latitude" value="0">
               <div id = "item"> </div>
               <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
             </div>
