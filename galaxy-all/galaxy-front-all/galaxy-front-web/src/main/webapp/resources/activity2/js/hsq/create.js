@@ -79,8 +79,7 @@ $(function(){
 				CheckSpecialChar:true
 			},
 			detail:{
-				required:true,
-				CheckSpecialChar:true
+				required:true
 			},
 			ticket_name:{
 				required:true,
@@ -155,8 +154,7 @@ $(function(){
 				CheckSpecialChar:'活动描述不能含有特殊字符'
 			},
 			detail:{
-				required:'请填写活动详情',
-				CheckSpecialChar:'活动详情不能含有特殊字符'
+				required:'请填写活动详情'
 			},
 			category:{
 				required:'请选择活动分类',

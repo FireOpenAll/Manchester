@@ -9,6 +9,6 @@ import com.galaxy.dal.domain.category.Category;
  */
 public interface CategoryService {
 
-	public ArrayList<Category> getCategories(int level,Long parent_id);
+	public ArrayList<Category> getCategories(long parent_id);
 
 }

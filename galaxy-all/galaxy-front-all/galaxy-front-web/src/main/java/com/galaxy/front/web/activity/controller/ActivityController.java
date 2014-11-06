@@ -279,7 +279,7 @@ public class ActivityController {
 		
 		activityService.create(activityForm);
 		request.setAttribute("message", "创建活动成功");
-		return "redirect:/";
+		return "activity/postsuccess";
 	}
 
 	@RequestMapping(value = "post", method = RequestMethod.POST)

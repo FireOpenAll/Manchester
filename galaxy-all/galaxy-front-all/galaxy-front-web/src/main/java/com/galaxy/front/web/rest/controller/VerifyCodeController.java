@@ -109,7 +109,8 @@ public class VerifyCodeController {
 	
 	@RequestMapping(value = "/check_image", method = RequestMethod.GET,params={"captcha"})
 	public void checkImageCode(HttpServletRequest request,HttpServletResponse response,@RequestParam("captcha") String captcha) throws IOException {
-		if (captcha.equalsIgnoreCase(request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY).toString())){
+		
+		if (request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY)!= null && captcha.equalsIgnoreCase(request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY).toString())){
 			response.getOutputStream().print(true);
 		}else {
 			response.getOutputStream().print(false);

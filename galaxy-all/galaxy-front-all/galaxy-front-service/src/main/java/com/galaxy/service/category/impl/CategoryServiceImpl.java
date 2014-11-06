@@ -19,9 +19,9 @@ public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	private CategoryMapper categoryMapper;
 	@Override
-	public ArrayList<Category> getCategories(int level, Long parent_id) {
+	public ArrayList<Category> getCategories(long parent_id) {
 		// TODO Auto-generated method stub
-		return categoryMapper.getCategories(level, parent_id);
+		return categoryMapper.getCategories(parent_id);
 	}
 
 }

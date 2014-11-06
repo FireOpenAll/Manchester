@@ -26,13 +26,13 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 
-	@RequestMapping(value = "get",method = RequestMethod.GET,params = {"level","parent_id"})
-	public Object getCategories(@RequestParam("level") int level,@RequestParam("parent_id") Long parent_id){
+	@RequestMapping(value = "get",method = RequestMethod.GET,params = {"parent_id"})
+	public Object getCategories(@RequestParam("parent_id") Long parent_id){
 		ResultModel resultModel = new ResultModel();
 		
 		resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 		
-		ArrayList<Category> lists = categoryService.getCategories(level, parent_id);
+		ArrayList<Category> lists = categoryService.getCategories(parent_id);
 		
 		resultModel.setData(lists);
 		

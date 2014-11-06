@@ -12,6 +12,6 @@ import com.galaxy.dal.domain.category.Category;
  */
 public interface CategoryMapper extends BaseMapper<Category> {
 	
-	public ArrayList<Category> getCategories(@Param("level") int level,@Param("parent_id") Long parent_id);
+	public ArrayList<Category> getCategories(@Param("parent_id") Long parent_id);
 
 }
