@@ -1,5 +1,6 @@
 package com.galaxy.service.user;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
@@ -9,8 +10,12 @@ public abstract class UserUtils {
 	static CacheClient cachedClient = null;
 
 	public static LoginUserModel getLoginUser() {
-		LoginUserModel user = (LoginUserModel) SecurityUtils.getSubject()
+		String token=UserContext.getContext().getToken();
+		LoginUserModel user =null;
+		if(StringUtils.isBlank(token)){
+		 user = (LoginUserModel) SecurityUtils.getSubject()
 				.getPrincipal();
+		}
 		if(user==null){
 			user=getUserByToken(UserContext.getContext().getToken());
 		}

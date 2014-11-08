@@ -7,5 +7,13 @@ import com.galaxy.dal.domain.BaseDomain;
  *email :hsqmobile@gmail.com
  */
 public class ActivityTag extends BaseDomain {
+	private String name;
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

@@ -45,6 +45,7 @@ public interface ActivityService {
 	
 	////join
 	public boolean joinActivity(Long activityId, Long userId);
+	public boolean unjoinActivity(Long activityId, Long userId);
 	public List<ActivityJoinedUsers> listAllJoinedUsers(Long activityId);
 	
 	//用户参加的所有活动
@@ -85,7 +86,7 @@ public interface ActivityService {
 	//统计user_id评论过的活动数
 	public int getUserComActNum( Long user_id);
 	//统计某个活动总的评论人数
-	public int getCommUserNum(Long activityId);
+	public int getActComNum(Long activityId);
 	//分页得到某活动的评论
 	public List<ActivityComment> getActComByUntilId(Long activityId,Long untilId,int pageSize);
 	//分页得到用户评论过的活动

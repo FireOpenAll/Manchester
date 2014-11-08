@@ -79,13 +79,13 @@
 	<select id="getActComByUntilId" resultMap="ACTIVITY_COMMENT_MAP">
 	select * from
 	ac_activity_commented_users
-	where activity_id = #{activity_id} and  id &gt; #{until_id} limit #{pageSize}
+	where activity_id = #{activityId} and  id &gt; #{untilId} limit #{pageSize}
 	</select>
 	
 	
 	<!-- 统计某个活动评论的人数 -->
-	<select id="getCommUserNum" parameterType="long" resultType="int">
-	select count(DISTINCT user_id)
+	<select id="getActComNum" parameterType="long" resultType="int">
+	select count(*)
 	from ac_activity_commented_users
 	where activity_id = #{activity_id}
 	</select>

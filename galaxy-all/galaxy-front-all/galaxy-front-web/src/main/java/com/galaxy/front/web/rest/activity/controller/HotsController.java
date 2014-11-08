@@ -218,8 +218,8 @@ public class HotsController {
 
 				activityModel.setJoin_count(activity.getJoinedNum());
 
-				// 活动总评论人数
-				int comment_count = activityService.getCommUserNum(activity.getId());
+				// 活动总评论数
+				int comment_count = activityService.getActComNum(activity.getId());
 				activityModel.setComment_count(comment_count);
 
 				activityModel.setOwner(activity.getSponsor());

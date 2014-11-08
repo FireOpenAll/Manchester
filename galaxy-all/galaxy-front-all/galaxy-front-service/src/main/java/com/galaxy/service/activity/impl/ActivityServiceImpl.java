@@ -144,19 +144,40 @@ public class ActivityServiceImpl implements ActivityService {
 			return false;
 		}
 		
-		ActivityJoinedUsers joinedUser=new ActivityJoinedUsers();
-		LoginUserModel user=UserUtils.getLoginUser();
-		joinedUser.setActivityId(activityId);
-		joinedUser.setCreatedTime(new Date());
-		joinedUser.setTicketNum(1);
-		joinedUser.setUserId(user.getUserId());
-		joinedUser.setUserName(user.getLoginName());
-		activityJoinedUsersMapper.insert(joinedUser);
-		activity.setJoinedNum(activity.getJoinedNum()+1);
-		activityMappper.insert(activity);//activity参加人数+1
-		return true;
+		ActivityJoinedUsers activityJoinedUsers = activityJoinedUsersMapper.getByUserIdActId(userId, activityId);
+		if (activityJoinedUsers != null) {
+			return false;
+		}else {
+			activityJoinedUsers = new ActivityJoinedUsers();
+			
+			LoginUserModel user=UserUtils.getLoginUser();
+			System.out.println("LoginUserModel.userid=============="+user.getUserId()+";userId====="+userId);
+			activityJoinedUsers.setActivityId(activityId);
+			activityJoinedUsers.setCreatedTime(new Date());
+			activityJoinedUsers.setTicketNum(1);
+			activityJoinedUsers.setUserId(user.getUserId());
+			activityJoinedUsers.setUserName(user.getLoginName());
+			System.out.println("activityJoinedUsers.userId====" + activityJoinedUsers.getUserId());
+			return activityJoinedUsersMapper.insert(activityJoinedUsers) && activityMappper.updateActJoinedNum(activityJoinedUsers.getTicketNum()+activity.getJoinedNum(), activityId);
+		}
 	}
 	
+	public boolean unjoinActivity(Long activityId, Long userId){
+		Activity activity=activityMappper.getById(activityId);
+		if(activity==null){
+			//todo error handle
+			return false;
+		}
+		
+		ActivityJoinedUsers activityJoinedUsers = activityJoinedUsersMapper.getByUserIdActId(userId, activityId);
+		if (activityJoinedUsers == null) {
+			return false;
+		}else {
+			int joinNum = (activity.getJoinedNum()-activityJoinedUsers.getTicketNum()>0)?(activity.getJoinedNum()-activityJoinedUsers.getTicketNum()):0;
+			
+			return activityJoinedUsersMapper.deleteById(activityJoinedUsers.getId()) && activityMappper.updateActJoinedNum(joinNum, activityId);
+		}
+	}
 	
 
 	@Override
@@ -335,9 +356,9 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	//统计某个活动总的评论人数
 	@Override
-	public int getCommUserNum(Long activityId) {
+	public int getActComNum(Long activityId) {
 		// TODO Auto-generated method stub
-		return activityCommentMapper.getCommUserNum(activityId);
+		return activityCommentMapper.getActComNum(activityId);
 	}
 	//评论活动或回复某个人
 	@Override

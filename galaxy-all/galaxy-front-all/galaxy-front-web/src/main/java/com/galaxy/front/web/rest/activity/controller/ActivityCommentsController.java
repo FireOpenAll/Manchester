@@ -42,9 +42,9 @@ public class ActivityCommentsController {
 	 * 
 	 * @return ResultModel
 	 */
-	@RequestMapping(value = "comment", method = RequestMethod.GET, params = { "activity_id", "until_id", "count" })
+	@RequestMapping(value = "comment", method = RequestMethod.GET, params = { "activity_id", "until_id", "pageSize" })
 	public Object getCommentByActId(@RequestParam("activity_id") Long activityId,
-			@RequestParam("until_id") Long untilId, int count) {
+			@RequestParam("until_id") long untilId, @RequestParam("pageSize")int pageSize) {
 
 		/*
 		 * ResultModel resultModel = new ResultModel();
@@ -62,14 +62,15 @@ public class ActivityCommentsController {
 		 * resultModel.setData(commentModels); return resultModel;
 		 */
 		ResultModel resultModel = new ResultModel();
-		if (ParamUtils.isNotEmpty(activityId, untilId, count)) {
-			if (count > Constants.MAX_PAGESIZE) {
-				count = Constants.MAX_PAGESIZE;
+		if (ParamUtils.isNotEmpty(activityId, untilId, pageSize)) {
+			if (pageSize > Constants.MAX_PAGESIZE) {
+				pageSize = Constants.MAX_PAGESIZE;
 			}
-			if (count <= 0) {
-				count = Constants.PAGESIZE;
+			if (pageSize <= 0) {
+				pageSize = Constants.PAGESIZE;
 			}
-			List<ActivityComment> list = activityService.getActComByUntilId(activityId, untilId, count);
+			
+			List<ActivityComment> list = activityService.getActComByUntilId(activityId, untilId, pageSize);
 			if (list == null) {
 				resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 				resultModel.setData("can not get commment");
@@ -94,7 +95,9 @@ public class ActivityCommentsController {
 					results.add(commentModel);
 				}
 			}
-			return results;
+			resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+			resultModel.setData(results);
+			return resultModel;
 		} else {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 			resultModel.setData(Code.PARAMS_ERROR.getMessage());
@@ -106,10 +109,9 @@ public class ActivityCommentsController {
 	 * @param :activity_id,user_id,content
 	 * @return
 	 */
-	@RequestMapping(value = "comment", method = RequestMethod.POST, params = { "activity_id", "user_id", "content",
-			"target_id" })
+	@RequestMapping(value = "comment", method = RequestMethod.POST, params = { "activity_id", "user_id", "content"})
 	public Object postCommentByActId(@RequestParam("activity_id") Long activityId,
-			@RequestParam("user_id") Long userId, @RequestParam("target_id") Long targetId,
+			@RequestParam("user_id") Long userId,
 			@RequestParam("content") String content) {
 		/*
 		 * ResultModel resultModel = new ResultModel();
@@ -125,17 +127,41 @@ public class ActivityCommentsController {
 			ActivityComment activityComment = new ActivityComment();
 			activityComment.setActivityId(activityId);
 			activityComment.setUserId(userId);
-			activityComment.setTargetId(targetId);
 			activityComment.setCreatedTime(new Date());
+			activityComment.setContent(content);
+			activityComment.setReplyTime(activityComment.getCreatedTime());
 
 			activityComment = activityService.Comment(activityComment);
 			if (activityComment == null) {
 				resultModel = ResultModelUtils.getResultModelByCode(Code.COMMENT_FIAL);
 				return resultModel;
 			}
-			resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
-			resultModel.setData(activityComment);
-			return resultModel;
+			User user = userService.getUser(activityComment.getUserId());
+			if (user != null) {
+				UserModel userModel = new UserModel();
+				userModel.setAvatar(user.getAvatar());
+				userModel.setUserid(user.getId());
+				userModel.setGender(user.getSex());
+				userModel.setName(user.getLoginName());
+				
+				CommentModel commentModel = new CommentModel();
+				commentModel.setcomment_id(activityComment.getId());
+				commentModel.setContent(content);
+				commentModel.setCreate_time(activityComment.getCreatedTime());
+				commentModel.setAuthor(userModel);
+				
+				resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+				resultModel.setData(commentModel);
+				return resultModel;
+				
+			}else {
+				resultModel = ResultModelUtils.getResultModelByCode(Code.COMMENT_FIAL);
+				resultModel.setData("user nor exitst");
+				return resultModel;
+			}
+			
+			
+			
 
 		} else {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
@@ -217,8 +243,8 @@ public class ActivityCommentsController {
 
 				activityModel.setJoin_count(activity.getJoinedNum());
 
-				// 活动总评论人数
-				int comment_count = activityService.getCommUserNum(activity.getId());
+				// 活动总评论数
+				int comment_count = activityService.getActComNum(activity.getId());
 				activityModel.setComment_count(comment_count);
 
 				activityModel.setOwner(activity.getSponsor());

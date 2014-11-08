@@ -18,5 +18,5 @@ public interface ActivityJoinedUsersMapper extends
 	public List<ActivityJoinedUsers> listAllJoinedActs(@Param("user_id")Long userId);
 	
 	//
-	public ActivityJoinedUsers getByUserIdActId(@Param("user_id") Long userId,@Param("activity_id") Long activityId);
+	public ActivityJoinedUsers getByUserIdActId(@Param("userId") Long userId,@Param("activityId") Long activityId);
 }

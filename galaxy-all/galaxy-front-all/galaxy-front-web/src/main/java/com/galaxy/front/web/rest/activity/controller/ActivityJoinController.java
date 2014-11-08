@@ -19,6 +19,7 @@ import com.galaxy.dal.domain.user.User;
 import com.galaxy.front.web.rest.model.Contact;
 import com.galaxy.front.web.rest.model.Photo;
 import com.galaxy.front.web.rest.model.ResultModel;
+import com.galaxy.front.web.rest.model.StatusModel;
 import com.galaxy.front.web.rest.model.activity.ActivityModel;
 import com.galaxy.front.web.rest.model.interest.CategoryModel;
 import com.galaxy.front.web.rest.model.location.LocationInfo;
@@ -91,30 +92,50 @@ public class ActivityJoinController {
 	}
 	*/
 	//参加活动
-	@RequestMapping(value = "join",method = RequestMethod.POST,params = {"user_id","activity_id","username","num",})
-	public Object jion(@RequestParam("user_id") Long user_id,@RequestParam("activity_id") Long activity_id){
+	@RequestMapping(value = "join",method = RequestMethod.POST,params = {"user_id","activity_id"})
+	public Object JionActivity(@RequestParam("user_id") Long userId,@RequestParam("activity_id") Long activityId){
 		ResultModel resultModel = new ResultModel();
 		
-		if (ParamUtils.isNotEmpty(user_id,activity_id)) {
-			if (activityService.joinActivity(activity_id, user_id)) {
+		if (ParamUtils.isNotEmpty(userId,activityId)) {
+			if (activityService.joinActivity(activityId, userId)) {
 				//参加成功
 				resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
-				resultModel.setData("参加活动成功");
+				resultModel.setData(new StatusModel("ok"));
 			}else {
 				//参加失败
 				resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
-				resultModel.setData("活动不存在或用户不存在");
+				resultModel.setData(new StatusModel("join failed"));
 			}
 		}else {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
-			resultModel.setData("请输入正确的参数");
+			resultModel.setData(new StatusModel("join failed"));
 		}
 		
 		return resultModel;
 	}
 	
 	//退出活动
-	
+	@RequestMapping(value = "unjoin",method = RequestMethod.POST,params = {"user_id","activity_id"})
+	public Object unJionAcitvity(@RequestParam("user_id") Long userId,@RequestParam("activity_id") Long activityId){
+		ResultModel resultModel = new ResultModel();
+		
+		if (ParamUtils.isNotEmpty(userId,activityId)) {
+			if (activityService.unjoinActivity(activityId, userId)) {
+				//退出活动成功
+				resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+				resultModel.setData(new StatusModel("ok"));
+			}else {
+				//退出失败
+				resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
+				resultModel.setData(new StatusModel("unjoin failed"));
+			}
+		}else {
+			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
+			resultModel.setData(new StatusModel("unjoin failed"));
+		}
+		
+		return resultModel;
+	}
 	
 	
 	/**
@@ -160,7 +181,7 @@ public class ActivityJoinController {
 			activityModel.setJoin_count(activity.getJoinedNum());
 			
 			//活动总评论人数
-			int comment_count = activityService.getCommUserNum(activity.getId());
+			int comment_count = activityService.getActComNum(activity.getId());
 			activityModel.setComment_count(comment_count);
 			
 			activityModel.setOwner(activity.getSponsor());
