@@ -97,4 +97,24 @@
 	from ac_activity
 	where user_id = #{user_id}
 	</select>
+	
+	<select id="getActsSortByJionedNum" resultMap="ACTIVITY_MAP">
+	select * 
+	from ac_activity
+	order by joined_num desc
+	limit #{offset},#{pageSize}
+	</select>
+	
+	<update id="updateActlikedNum">
+	update ac_activity
+	set liked_num = #{num}
+	where id = #{activityId}
+	</update>
+	
+	<update id="updateActJoinedNum">
+	update ac_activity
+	set joined_num = #{num}
+	where id = #{activityId}
+	</update>
+	
 </mapper>

@@ -8,6 +8,7 @@ import java.util.Map;
 
 
 
+
 import org.apache.ibatis.annotations.Param;
 
 import com.galaxy.dal.base.mapper.PaginationParam;
@@ -26,7 +27,12 @@ public interface ActivityService {
 
 	public boolean removeById(Long id);
 
-	
+    public List<Activity> getActsSortByJionedNum(int offset,int pageSize);
+    ////update
+    public boolean updateActlikedNum(int num,Long activityId);
+    public boolean updateActJoinedNum(int num,Long activityId);
+    
+    ////update
 
 	public Activity getActivity(Long id);
 

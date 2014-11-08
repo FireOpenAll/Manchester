@@ -187,6 +187,8 @@ public class FriendsController {
 							User targetUser = userService.getUser(target_id);
 							userService.updateUserFollowersNumById(user.getId(), user.getFollowers()+1);
 							userService.updateUserFansNumById(targetUser.getId(), targetUser.getFans()+1);
+							resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+							resultModel.setData(new StatusModel("ok"));
 						}else {
 							//failed
 							resultModel = ResultModelUtils.getResultModelByCode(Code.SQL_UPDATE_ERROR);

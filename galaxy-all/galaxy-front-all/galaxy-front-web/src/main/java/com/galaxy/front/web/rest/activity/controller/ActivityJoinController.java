@@ -49,6 +49,7 @@ public class ActivityJoinController {
 	 * @param pageSize
 	 * @return
 	 */
+	/*
 	@RequestMapping(value = "getMyJoinedActivity1",method = RequestMethod.GET,params = {"user_id","until_id","pageSize"})
 	public Object getJoinedActivity1(@RequestParam("user_id") long user_id,@RequestParam("until_id") long until_id,@RequestParam("pageSize") int pageSize){
 		ResultModel resultModel = new ResultModel();
@@ -88,7 +89,7 @@ public class ActivityJoinController {
 		
 		return resultModel;
 	}
-	
+	*/
 	//参加活动
 	@RequestMapping(value = "join",method = RequestMethod.POST,params = {"user_id","activity_id","username","num",})
 	public Object jion(@RequestParam("user_id") Long user_id,@RequestParam("activity_id") Long activity_id){
@@ -186,15 +187,18 @@ public class ActivityJoinController {
 			//活动相关参与人员,推荐相关
 			int num = 6;//暂定6个
 			List<User> users =  activityService.listTopActJionUser(activity.getId(), num);
-			List<UserModel> list = new ArrayList<UserModel>();
-			for(User user : users){
-				UserModel userModel = new UserModel();
-				userModel.setUserid(user.getId());
-				userModel.setAvatar(user.getAvatar());
-				userModel.setName(user.getLoginName());
-				userModel.setGender(user.getSex());
-				
-				list.add(userModel);
+			if (users != null) {
+				ArrayList<UserModel> list = new ArrayList<UserModel>();
+				for(User user : users){
+					UserModel userModel = new UserModel();
+					userModel.setUserid(user.getId());
+					userModel.setAvatar(user.getAvatar());
+					userModel.setName(user.getLoginName());
+					userModel.setGender(user.getSex());
+					
+					list.add(userModel);
+				}
+				activityModel.setRelative_user(list);
 			}
 			
 			//活动标签

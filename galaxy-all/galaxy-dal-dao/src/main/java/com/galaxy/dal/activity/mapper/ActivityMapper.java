@@ -13,4 +13,8 @@ public interface ActivityMapper extends BaseMapper<Activity>{
 	public int getUserCreatedActNum(@Param("user_id") Long user_id);
 	//分页获取某人发布的活动 
 	public List<Activity> getUserCreatedActByUntilId (@Param("user_id") long userId,@Param("until_id") long untilId,@Param("pageSize") int pageSize);
+    public List<Activity> getActsSortByJionedNum(@Param("offset") int offset,@Param("pageSize") int pageSize);
+
+    public boolean updateActlikedNum(@Param("num") int num,@Param("activityId") Long activityId);
+    public boolean updateActJoinedNum(@Param("num") int num,@Param("activityId") Long activityId);
 }

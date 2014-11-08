@@ -145,7 +145,7 @@ public class ActivityLikeController {
 				int num = 6;//暂定6个
 				List<User> users =  activityService.listTopActJionUser(activity.getId(), num);
 				if (users != null) {
-					List<UserModel> list = new ArrayList<UserModel>();
+					ArrayList<UserModel> list = new ArrayList<UserModel>();
 					for(User user : users){
 						UserModel userModel = new UserModel();
 						userModel.setUserid(user.getId());
@@ -155,6 +155,7 @@ public class ActivityLikeController {
 						
 						list.add(userModel);
 					}
+					activityModel.setRelative_user(list);
 				}
 				
 				
@@ -206,6 +207,7 @@ public class ActivityLikeController {
 			activityLikedUsers.setActivityId(activity_id);
 			activityLikedUsers.setCreatedTime(new Date());
 			activityLikedUsers.setUserId(user_id);
+			
 			if (activityService.likeActivity(activityLikedUsers)) {
 				resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 				resultModel.setData(new StatusModel("ok"));

@@ -47,6 +47,30 @@ public class ActivityServiceImpl implements ActivityService {
 	ActivityCommentMapper activityCommentMapper; 
 	@Autowired
 	UserService userService;
+	
+	////update
+	@Override
+	public boolean updateActlikedNum(int num, Long activityId) {
+		// TODO Auto-generated method stub
+		Activity activity = activityMappper.getById(activityId);
+		if (activity == null) {
+			return false;
+		}
+		return activityMappper.updateActlikedNum(activity.getLiked_num()+1, activityId);
+	}
+
+	@Override
+	public boolean updateActJoinedNum(int num, Long activityId) {
+		// TODO Auto-generated method stub
+		Activity activity = activityMappper.getById(activityId);
+		if (activity == null) {
+			return false;
+		}
+		return activityMappper.updateActJoinedNum(activity.getJoinedNum()+1, activityId);
+	}
+	
+	
+	////update
 
 	////create
 	@Override
@@ -62,6 +86,8 @@ public class ActivityServiceImpl implements ActivityService {
 		return activity.getId();
 	}
 	
+
+
 	private Activity createActivity(ActivityForm form){
 		Activity activity=new Activity();
 		BeanUtils.copyProperties(form, activity);
@@ -84,6 +110,12 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	////create
+	
+    public List<Activity> getActsSortByJionedNum(int offset,int pageSize){
+    	return activityMappper.getActsSortByJionedNum(offset, pageSize);
+    }
+
+	
 	@Override
 	@Transactional
 	public boolean modify(ActivityForm form) {
@@ -111,6 +143,7 @@ public class ActivityServiceImpl implements ActivityService {
 			//todo error handle
 			return false;
 		}
+		
 		ActivityJoinedUsers joinedUser=new ActivityJoinedUsers();
 		LoginUserModel user=UserUtils.getLoginUser();
 		joinedUser.setActivityId(activityId);
@@ -216,8 +249,13 @@ public class ActivityServiceImpl implements ActivityService {
 		if (activity == null) {
 			return false;
 		}
-		activity.setJoinedNum(activity.getLiked_num()+1);
-		return activityLikedUsersMapper.insert(activityLikedUsers) && activityMappper.update(activity) ;
+		ActivityLikedUsers like = activityLikedUsersMapper.getByUserIdActId(activityLikedUsers.getUserId(), activityLikedUsers.getActivityId());
+		if (like != null) {
+			//已点赞
+			return true;
+		}
+		
+		return activityLikedUsersMapper.insert(activityLikedUsers) && activityMappper.updateActlikedNum(activity.getLiked_num()+1, activityLikedUsers.getActivityId());
 	}
 	
 	@Override
@@ -228,9 +266,14 @@ public class ActivityServiceImpl implements ActivityService {
 		if (activity == null) {
 			return false;
 		}
-		activity.setLiked_num((activity.getLiked_num()-1)>0?(activity.getLiked_num()-1):0);
-		return activityLikedUsersMapper.cancelLiked(user_id, activity_id) && activityMappper.update(activity) ;
-	}
+		ActivityLikedUsers like = activityLikedUsersMapper.getByUserIdActId(user_id, activity_id);
+		if (like == null) {
+			//未点赞
+			return false;
+		}
+		return activityLikedUsersMapper.deleteById(like.getId()) && activityMappper.updateActlikedNum((activity.getLiked_num()-1)>0?(activity.getLiked_num()-1):0, activity_id);
+
+     }
 	
 	@Override
 	public List<ActivityLikedUsers> listAllLikedUsers(Long activity_id) {

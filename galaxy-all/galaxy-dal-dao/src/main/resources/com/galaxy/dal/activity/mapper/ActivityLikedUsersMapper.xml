@@ -61,9 +61,13 @@
 	
 	<!-- 取消点赞 -->
 	<delete id="cancelLiked">
-	drop from ac_activity_liked_users
+	delete from ac_activity_liked_users
 	where user_id = #{user_id}
 	and activity_id = #{activity_id}
+	</delete>
+	<delete id="deleteById">
+	delete from ac_activity_liked_users
+	where id = #{id}
 	</delete>
 	
 	<!-- 计算user_id Liked的活动数 -->
