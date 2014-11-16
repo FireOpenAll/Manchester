@@ -25,7 +25,21 @@
 	charset="utf-8"></script>
 <script type="text/javascript">
 	$(function() {
-		$('.category').show();
+		$("#category").hide(); 
+		$("#category_toggle").mouseover(function(){
+			$("#category").show();
+		});
+		$("#category_toggle").mouseout(function(){
+			$("#category").hide();
+		});
+		$("#category").hover(
+				function () {
+				    $("#category").show();
+				  }, 
+				  function () {
+					$("#category").hide();   
+				}		
+		);
 		//首页左侧分类菜单
 		$(".category ul.menu").find("li").each(function() {
 			$(this).hover(function() {
@@ -215,7 +229,7 @@
 					href="/activity/create">发布活动</a></li>
 				<li class="line">|</li>
 				<li class="dropdown dropdown-account">
-				   <a href="/user/myactivity" class="dropdown-tog"> <span>我的乐朋</span>
+				   <a href="/user/index" class="dropdown-tog"> <span>我的乐朋</span>
 						<i class="tri tri-dropdown"></i>
 				   </a>
 					<ul
@@ -350,11 +364,11 @@
 	<div id="main-nav" style="background: #e64d5e;">
 		<div id="main-nav-wrap" style="width: 1025px;">
 			<div class="section-main sub-nav">
-				<a href="http://www.lookpeng.com/#" target="_blank"><span
+				<a id="category_toggle" href="http://www.lookpeng.com/#" target="_blank"><span
 					class="nc-cates">全部分类</span></a>
 				<!--div class="category" style="display: block;"-->
-				<div class="category" style="display:none;">
-					<ul class="menu">
+				<div class="category" id="category" style="display: none;" >
+					<ul class="menu" >
 						<li class="odd" cat_id="1">
 							<div class="class">
 								<h4>
@@ -669,7 +683,7 @@
 				.load(
 						function() {
 							$(function() {
-								$('.category').show();
+								//$('.category').show();
 								$('#apt_date').datepicker({
 									dateFormat : 'yy-mm-dd',
 									minDate : '0'

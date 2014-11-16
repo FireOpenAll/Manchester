@@ -11,17 +11,18 @@
 <meta name="keywords" content="交友 社交">
 <meta name="description" content="乐朋网">
 <meta name="author" content="乐朋"> 
+
 </head>
 <body id="pagetop">
 	 <jsp:include page="./includes/header.jsp" />
 
 	<div class="warp-index">
 		<div class="warp-left">
-			<div class="block-line mb10">
+			<div class="block-line mb10" >
 				<div class="block-title">
 					<span>知名讲师</span>
 				</div>
-				<ul class="vip-list">
+				<ul class="vip-list"  style="display: none;">
 					<li><a
 						href="http://www.o2olive.net/demo/index.php?act=membershow&mid=117"
 						target="_blank" title="">
@@ -114,12 +115,7 @@
 						<p class="cp-line"></p></li>
 				</ul>
 			</div>
-			<h4 class="wi-ad">
-				<a href="http://www.shopnc.net/" target="_blank"
-					style="cursor: pointer"><img
-					src="/resources/images/db2bed5a09f266f22fe47e68fc832c38.jpg"
-					width="215" height="270"></a>
-			</h4>
+			
 		</div>
 		<div class="warp-leftside-index">
 			<div class="layer-top-index">
@@ -1132,7 +1128,7 @@
 		</div>
 		<div id="tbox">
 			<a style="display: block;" title="返回顶部"
-				href="http://www.o2olive.net/demo/#pagetop" id="gotop">&nbsp;</a>
+				href="#pagetop" id="gotop">&nbsp;</a>
 		</div>
 		<script type="text/javascript">
 			$(function() {

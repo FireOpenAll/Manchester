@@ -17,4 +17,5 @@ public interface ActivityMapper extends BaseMapper<Activity>{
 
     public boolean updateActlikedNum(@Param("num") int num,@Param("activityId") Long activityId);
     public boolean updateActJoinedNum(@Param("num") int num,@Param("activityId") Long activityId);
+    public boolean updateActUrlById(@Param("activityId") Long activityId,@Param("newUrl") String newUrl);
 }

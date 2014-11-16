@@ -117,4 +117,10 @@
 	where id = #{activityId}
 	</update>
 	
+	<update id="updateActUrlById">
+	update ac_activity
+	set ref_url = #{newUrl}
+	where id = #{activityId}
+	</update>
+	
 </mapper>

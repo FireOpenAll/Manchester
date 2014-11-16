@@ -9,11 +9,14 @@ import java.util.Map;
 
 
 
+
+
 import org.apache.ibatis.annotations.Param;
 
 import com.galaxy.dal.base.mapper.PaginationParam;
 import com.galaxy.dal.domain.activity.Activity;
 import com.galaxy.dal.domain.activity.ActivityComment;
+import com.galaxy.dal.domain.activity.ActivityDetail;
 import com.galaxy.dal.domain.activity.ActivityJoinedUsers;
 import com.galaxy.dal.domain.activity.ActivityLikedUsers;
 import com.galaxy.dal.domain.user.User;
@@ -21,6 +24,9 @@ import com.galaxy.service.activity.form.ActivityForm;
 
 public interface ActivityService {
 
+	////detail
+	public ActivityDetail getDetailByActId(Long id);
+	////detail
 	public Long create(ActivityForm form);
 	
 	public boolean modify(ActivityForm form);
@@ -31,6 +37,7 @@ public interface ActivityService {
     ////update
     public boolean updateActlikedNum(int num,Long activityId);
     public boolean updateActJoinedNum(int num,Long activityId);
+
     
     ////update
 

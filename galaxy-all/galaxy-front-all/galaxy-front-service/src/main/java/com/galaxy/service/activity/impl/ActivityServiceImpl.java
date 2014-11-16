@@ -32,11 +32,11 @@ import com.galaxy.service.user.UserService;
 import com.galaxy.service.user.UserUtils;
 @Service
 public class ActivityServiceImpl implements ActivityService {
-	
+
 	@Autowired
 	ActivityMapper activityMappper;
 	@Autowired
-	ActivityDetailMapper activityDetailMappper;
+	ActivityDetailMapper activityDetailMapper;
 	@Autowired
 	ActivityJoinedUsersMapper activityJoinedUsersMapper;
 	@Autowired
@@ -48,6 +48,13 @@ public class ActivityServiceImpl implements ActivityService {
 	@Autowired
 	UserService userService;
 	
+	////detail
+	@Override
+	public ActivityDetail getDetailByActId(Long id) {
+		// TODO Auto-generated method stub
+		return activityDetailMapper.getById(id);
+	}
+    ////detail
 	////update
 	@Override
 	public boolean updateActlikedNum(int num, Long activityId) {
@@ -78,9 +85,10 @@ public class ActivityServiceImpl implements ActivityService {
 	public Long create(ActivityForm form) {
 		Activity activity=createActivity(form);
 		activityMappper.insert(activity);
+		activityMappper.updateActUrlById(activity.getId(), "/activity/detail/"+activity.getId());
 		ActivityDetail detail=this.createDetail(form);
 		detail.setId(activity.getId());
-		activityDetailMappper.insert(detail);
+		activityDetailMapper.insert(detail);
 		
 		chatService.createGroup(form.getTitle(), form.getUserId(),activity.getId());
 		return activity.getId();
@@ -123,8 +131,8 @@ public class ActivityServiceImpl implements ActivityService {
 		
 		activityMappper.update(activity);
 		
-		ActivityDetail detail=activityDetailMappper.getById(form.getId());
-		activityDetailMappper.update(detail);
+		ActivityDetail detail=activityDetailMapper.getById(form.getId());
+		activityDetailMapper.update(detail);
 		return true;
 	}
 	private void updateActivity(Activity activity,ActivityForm form){

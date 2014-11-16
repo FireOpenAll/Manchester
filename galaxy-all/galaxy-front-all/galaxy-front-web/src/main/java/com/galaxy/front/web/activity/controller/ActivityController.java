@@ -15,6 +15,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.soap.Detail;
 
 import org.aspectj.weaver.NewConstructorTypeMunger;
 import org.junit.Test;
@@ -30,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.galaxy.dal.domain.activity.Activity;
+import com.galaxy.dal.domain.activity.ActivityDetail;
 import com.galaxy.dal.domain.activity.ActivityType;
 import com.galaxy.front.web.activity.controller.PostModel.CreateModel;
 import com.galaxy.front.web.activity.controller.PostModel.EvenBaseInfoModel;
@@ -290,6 +292,19 @@ public class ActivityController {
 	@RequestMapping(value = "modify/{id}", method = RequestMethod.GET)
 	public String modify(@PathVariable Long id) {
 		return "activity/postactivity";
+	}
+	
+	@RequestMapping(value="detail/{id}",method=RequestMethod.GET)
+	public String Detail(@PathVariable Long id,HttpServletRequest request){
+		Activity activity = activityService.getActivity(id);
+		if (activity == null) {
+			request.setAttribute("message", "你访问的页面不存在！");
+			return "activity/postsuccess";
+		}
+		ActivityDetail activityDetail = activityService.getDetailByActId(id);
+		request.setAttribute("detail", (activityDetail!=null)?activityDetail.getContent():"can not get detail");
+		request.setAttribute("activity", activity);
+		return "activity/detailtest";
 	}
 
 	@ResponseBody
