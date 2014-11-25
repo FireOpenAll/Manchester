@@ -84,6 +84,13 @@
 	</select>
 	
 	<!-- 分页获取某人发布的活动 -->
+	
+	<select id="getUserCreatedActByOffset" resultMap="ACTIVITY_MAP">
+		SELECT *
+		FROM ac_activity
+		where user_id = #{userId} order by created_time desc
+	    limit #{offset},#{pageSize}
+	</select>
 	<select id="getUserCreatedActByUntilId" resultMap="ACTIVITY_MAP">
 		SELECT *
 		FROM ac_activity

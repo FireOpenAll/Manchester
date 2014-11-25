@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -179,13 +181,14 @@ public class UserProfileController {
 				profileModel.setComment_count(comment_count);
 				
 				//得到用户创建过的活动数
-				int create_count = activityService.getUserCreatedActNum(user_id);
+				int create_count = activityService.getUserCreatedActNum(target_id);
 				profileModel.setCreate_count(create_count);			
 
 				
 				if (!user_id.equals(target_id)) {
 					//查看他人的profile
 					UserFriend userFriend = userFriendService.getUsersFriend(user_id, target_id);
+					System.out.println("userFriend========================"+ToStringBuilder.reflectionToString(userFriend));
 					if (userFriend != null) {
 						int relation = userFriend.getRelation();
 						switch (relation) {
@@ -212,6 +215,7 @@ public class UserProfileController {
 						case 3:
 							profileModel.setIs_followed(true);
 							profileModel.setIs_following(true);
+							break;
 						default:
 							profileModel.setIs_followed(false);
 							profileModel.setIs_following(false);
@@ -228,6 +232,7 @@ public class UserProfileController {
 					profileModel.setIs_following(false);
 				}
 				resultModel=ResultModelUtils.getResultModelByCode(Code.OK);
+				System.out.println("profileModel==============="+ToStringBuilder.reflectionToString(profileModel));
 				resultModel.setData(profileModel);
 				
 				

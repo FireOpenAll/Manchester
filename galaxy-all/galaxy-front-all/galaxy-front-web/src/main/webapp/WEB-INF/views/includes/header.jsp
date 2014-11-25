@@ -215,22 +215,23 @@
 					href="/activity/create">发布活动</a></li>
 				<li class="line">|</li>
 				<li class="dropdown dropdown-account">
-				   <a href="/user/myactivity" class="dropdown-tog"> <span>我的乐朋</span>
+				   <a href="/user/act/published" class="dropdown-tog"> <span>我的乐朋</span>
 						<i class="tri tri-dropdown"></i>
 				   </a>
 					<ul
 						class="dropdown-menu dropdown-menu-text dropdown-menu-account account-menu">
-						<li><a href="/user/myactivity"
+						<li><a href="/user/act/published"
 							class="dropdown-menu-item first">我的活动</a></li>
 						<li><a href="/user/mydating" class="dropdown-menu-item first">我的约会</a></li>
-						<li><a href="/user/mycomments" class="dropdown-menu-item">我的评价</a></li>
+						<li><a href="/user/act/comments" class="dropdown-menu-item">我的评价</a></li>
 						<li><a href="/user/favorites" class="dropdown-menu-item">我的收藏</a></li>
-						<li><a href="/user/points" class="dropdown-menu-item">我的积分</a></li>
+						<li><a href="/account/credit" class="dropdown-menu-item">我的积分</a></li>
 						<li><a href="/user/lottery" class="dropdown-menu-item">我的抽奖</a></li>
-						<li><a href="/user/coupon" class="dropdown-menu-item">优惠券</a></li>
+						<li><a href="/account/coupons" class="dropdown-menu-item">优惠券</a></li>
 						<li><a href="/account/charge" class="dropdown-menu-item">账户充值</a></li>
 						<li><a href="/account/settings" class="dropdown-menu-item">账户设置</a></li>
-					</ul></li>
+					</ul>
+				</li>
 				<li class="line">|</li>
 				<li class="dropdown dropdown-cart"><a href="/cart"
 					class="dropdown-tog"> <i class="icon icon-cart"></i> <span>购物车<em

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" session="false"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html> 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
-
+<link rel="SHORTCUT ICON" href="/resources/images/lookpengicon.png">
 <title>乐朋</title>
 <meta name="keywords" content="交友 社交">
 <meta name="description" content="乐朋网">
@@ -16,104 +17,11 @@
 <body id="pagetop">
 	 <jsp:include page="./includes/header.jsp" />
 
-	<div class="warp-index">
-		<div class="warp-left">
+	<div class="warp-index" >
+		<div class="warp-left" >
 			<div class="block-line mb10" >
-				<div class="block-title">
-					<span>知名讲师</span>
-				</div>
-				<ul class="vip-list"  style="display: none;">
-					<li><a
-						href="http://www.o2olive.net/demo/index.php?act=membershow&mid=117"
-						target="_blank" title="">
-							<div class="vip-pic">
-								<img alt="chomyoeng" src="/resources/images/member.png">
-							</div>
-							<div class="vip-txt">
-								<h4>chomyoeng</h4>
-								<p>
-									<span class="level-icon-5 sp-growth-icons level-icon" title=""></span><span
-										class="cnum">(点评数：8)</span>
-								</p>
-							</div>
-					</a>
-						<p class="cp-line"></p></li>
-					<li><a
-						href="http://www.o2olive.net/demo/index.php?act=membershow&mid=17"
-						target="_blank" title="">
-							<div class="vip-pic">
-								<img alt="如鱼得水" src="/resources/images/avatar_17.jpg">
-							</div>
-							<div class="vip-txt">
-								<h4>如鱼得水</h4>
-								<p>
-									<span class="level-icon-6 sp-growth-icons level-icon" title=""></span><span
-										class="cnum">(点评数：6)</span>
-								</p>
-							</div>
-					</a>
-						<p class="cp-line"></p></li>
-					<li><a
-						href="http://www.o2olive.net/demo/index.php?act=membershow&mid=13"
-						target="_blank" title="">
-							<div class="vip-pic">
-								<img alt="lzpsnake" src="/resources/images/avatar_13.jpg">
-							</div>
-							<div class="vip-txt">
-								<h4>lzpsnake</h4>
-								<p>
-									<span class="level-icon-6 sp-growth-icons level-icon" title=""></span><span
-										class="cnum">(点评数：6)</span>
-								</p>
-							</div>
-					</a>
-						<p class="cp-line"></p></li>
-					<li><a
-						href="http://www.o2olive.net/demo/index.php?act=membershow&mid=15"
-						target="_blank" title="">
-							<div class="vip-pic">
-								<img alt="神医华佗" src="/resources/images/avatar_15.jpg">
-							</div>
-							<div class="vip-txt">
-								<h4>神医华佗</h4>
-								<p>
-									<span class="level-icon-4 sp-growth-icons level-icon" title=""></span><span
-										class="cnum">(点评数：4)</span>
-								</p>
-							</div>
-					</a>
-						<p class="cp-line"></p></li>
-					<li><a
-						href="http://www.o2olive.net/demo/index.php?act=membershow&mid=18"
-						target="_blank" title="">
-							<div class="vip-pic">
-								<img alt="颖颖_众木成林" src="/resources/images/avatar_18.jpg">
-							</div>
-							<div class="vip-txt">
-								<h4>颖颖_众木成林</h4>
-								<p>
-									<span class="level-icon-6 sp-growth-icons level-icon" title=""></span><span
-										class="cnum">(点评数：4)</span>
-								</p>
-							</div>
-					</a>
-						<p class="cp-line"></p></li>
-					<li><a
-						href="http://www.o2olive.net/demo/index.php?act=membershow&mid=14"
-						target="_blank" title="">
-							<div class="vip-pic">
-								<img alt="森林使者" src="/resources/images/avatar_14.jpg">
-							</div>
-							<div class="vip-txt">
-								<h4>森林使者</h4>
-								<p>
-									<span class="level-icon-5 sp-growth-icons level-icon" title=""></span><span
-										class="cnum">(点评数：4)</span>
-								</p>
-							</div>
-					</a>
-						<p class="cp-line"></p></li>
-				</ul>
+				
+			
 			</div>
 			
 		</div>
@@ -211,7 +119,7 @@
 									href="http://www.o2olive.net/demo/index.php?act=index&op=list"
 									target="_blank">全部分类</a></li>
 							</ul></li>
-						<li class="term-list-item"><strong class="term">商区:</strong>
+						<!--li class="term-list-item"><strong class="term">商区:</strong>
 							<ul id="hotregion" class="desc Fix">
 								<li><a style="color: #dc2c40;" title="滨江道"
 									href="http://www.o2olive.net/demo/index.php?act=index&op=list&city_id=1&area_id=5&mall_id=333"
@@ -246,7 +154,8 @@
 								<li><a class="more"
 									href="http://www.o2olive.net/demo/index.php?act=index&op=list"
 									target="_blank">全部商区</a></li>
-							</ul></li>
+							</ul>
+					    </li-->
 					</ul>
 				</div>
 				<script type="text/javascript">
@@ -876,21 +785,24 @@
 		</div>
 		<div class="aside warp-rightside mt10">
 			<!-- 登录 -->
-			<div class="block-line not-login">
-				<div class="hd">
-					<p>快速登录</p>
-				</div>
-				<div class="login-box">
-					<div class="login-qs">
-						<a href="/user/qqlogin" class="btn-qq J-trigger"><i class="icon-qq"></i>QQ登录</a> 
-						<a href="/user/wblogin" class="btn-sina J-trigger"><i class="icon-sina"></i>新浪微博登录</a>
+			<shiro:notAuthenticated>
+               <div class="block-line not-login">
+					<div class="hd">
+						<p>快速登录</p>
 					</div>
-					<div class="login-other">
-						（本地生活帐号）<a href="/user/login" class="ml5">登录</a><i class="split">|</i>
-						<a href="/user/register">注册</a>
+					<div class="login-box">
+						<div class="login-qs">
+							<a href="/user/qqlogin" class="btn-qq J-trigger"><i class="icon-qq"></i>QQ登录</a> 
+							<a href="/user/wblogin" class="btn-sina J-trigger"><i class="icon-sina"></i>新浪微博登录</a>
+						</div>
+						<div class="login-other">
+							（本地生活帐号）<a href="/user/login" class="ml5">登录</a><i class="split">|</i>
+							<a href="/user/register">注册</a>
+						</div>
 					</div>
 				</div>
-			</div>
+            </shiro:notAuthenticated>
+			
 			<div class="block-line  hot-tuan">
 				<div class="block-title mr10">
 					<span>热门活动</span><a

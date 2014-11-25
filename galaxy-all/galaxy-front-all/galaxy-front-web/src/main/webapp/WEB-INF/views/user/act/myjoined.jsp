@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html> 
 <html>
@@ -45,7 +46,7 @@ height: 15px;
 
 </head>
 <body id="pagetop">
-	 <jsp:include page="../includes/my_header.jsp" />
+	 <jsp:include page="../../includes/my_header.jsp" />
    
 	<div class="warp-index">
 		<div class="warp-left" style="border: 10px">
@@ -58,9 +59,9 @@ height: 15px;
                             </li>
                             <li class="left_menu">
                                 <ul >
-                                    <li class="a_selected"><a href="#" style="height: 7px;padding-left: 30px;">已发布活动 &nbsp;&nbsp;>></a></li>
-                                    <li><a href="#" style="height: 7px;padding-left:30px;">进行中活动</a></li>
-                                    <li><a href="#" style="height: 7px;padding-left: 30px;">已参加活动</a></li>
+                                    <li><a href="/user/act/published" style="height: 7px;padding-left: 30px;">已发布活动</a></li>
+                                    <li><a href="/user/act/joining" style="height: 7px;padding-left:30px;">进行中活动</a></li>
+                                    <li class="a_selected"><a href="#" style="height: 7px;padding-left: 30px;">已参加活动</a></li>
                                 </ul>
                             </li>
                          </ul>
@@ -74,8 +75,8 @@ height: 15px;
                             </li>
                             <li class="left_menu">
                                 <ul >
-                                    <li><a href="#" style="height: 7px;padding-left:30px;">待评价</a></li>
-                                    <li><a href="#" style="height: 7px;padding-left:30px;">已评价</a></li>
+                                    <li><a href="/user/act/uncomment" style="height: 7px;padding-left:30px;">待评价</a></li>
+                                    <li><a href="/user/act/commented" style="height: 7px;padding-left:30px;">已评价</a></li>
                                 </ul>
                             </li>
                          </ul>
@@ -90,7 +91,7 @@ height: 15px;
                             </li>
                             <li class="left_menu">
                                 <ul>
-                                    <li><a href="#" style="height: 7px;padding-left:30px;">我的点赞</a></li>
+                                    <li><a href="/user/act/like" style="height: 7px;padding-left:30px;">我的点赞</a></li>
                                     
                                 </ul>
                             </li>
@@ -104,7 +105,7 @@ height: 15px;
                             </li>
                             <li class="left_menu">
                                 <ul>
-                                    <li><a href="#" style="height: 7px;padding-left:30px;">我的抽奖</a></li>
+                                    <li><a href="/user/lottery" style="height: 7px;padding-left:30px;">我的抽奖</a></li>
                                     
                                 </ul>
                             </li>
@@ -119,11 +120,13 @@ height: 15px;
                             </li>
                             <li class="left_menu">
                                 <ul >
-                                    <li><a href="#" style="height: 7px;padding-left:30px;">我的积分</a></li>
-                                    <li><a href="#" style="height: 7px;padding-left:30px;">抵用券</a></li>
-                                     <li><a href="#" style="height: 7px;padding-left:30px;">我的余额</a></li>
-                                    <li><a href="#" style="height: 7px;padding-left:30px;">账户设置</a></li>
-                                    <li><a href="#" style="height: 7px;padding-left:30px;">安全中心</a></li>
+                                    <li><a href="/user/card" style="height: 7px;padding-left:30px;">我的名片</a></li>
+                                    <li><a href="/user/cardbook" style="height: 7px;padding-left:30px;">我的名片夹</a></li>
+                                    <li><a href="/account/credit" style="height: 7px;padding-left:30px;">我的积分</a></li>
+                                    <li><a href="/account/coupons" style="height: 7px;padding-left:30px;">抵用券</a></li>
+                                     <li><a href="/account/balance" style="height: 7px;padding-left:30px;">账户余额</a></li>
+                                    <li><a href="/account/settings" style="height: 7px;padding-left:30px;">账户设置</a></li>
+                                    <li><a href="/account/security" style="height: 7px;padding-left:30px;">安全中心</a></li>
                                     
                                 </ul>
                             </li>
@@ -138,7 +141,41 @@ height: 15px;
 			
 		</div>
 		<div class="warp-leftside-index" style="width: auto">
-			<div class="timeNode">
+		    
+		    <c:choose>
+		    	<c:when test="${not empty list}">
+		    		
+		    		<c:forEach var="item" items="${list}">
+		    			<div class="timeNode">
+							<div class="nodeL">                                            
+				     			<div class="logo">
+				         			<span><img src="http://www.huodongshu.com/html/h5/data/event/event_logo/7.jpg"></span>
+				     			</div>                                            
+		         			</div>
+		         			<div class="nodeR">                                       
+		             			<div class="info title">
+		                  			<a href="http://www.huodongshu.com/event/10001357/?is_easy=2" class="font_0097e0" style="color: #000000"><strong><c:out value="${item['title']}"></c:out></strong></a>
+		             			</div>                                      
+                     			<div class="info area">
+                          			<span class="icon"></span> <c:out value="${item['address']}"></c:out>
+                     			</div>                                       
+                     			<div class="info time">
+                          			<span class="icon"></span>
+                          			<fmt:formatDate value="${item['start']}" type="both" pattern="yyyy年MM月dd日 HH:mm:ss"/> ~ <fmt:formatDate value="${item['end']}" type="both" pattern="yyyy年MM月dd日 HH:mm:ss"/>
+                     			</div>                                        
+                  			</div>
+						</div>
+						<p class="cp-line"></p>
+						<hr>
+		    		</c:forEach>
+		    	</c:when>
+		    	<c:otherwise>
+		    		<h1 style="text-align: center;">你还没参加过活动</h1>
+		    	</c:otherwise>
+		    </c:choose>
+		    
+		    
+			<!--div class="timeNode">
 				<div class="nodeL">                                            
 				     <div class="logo">
 				         <span><img src="http://www.huodongshu.com/html/h5/data/event/event_logo/7.jpg"></span>
@@ -158,6 +195,7 @@ height: 15px;
 			</div>
 			<p class="cp-line"></p>
 			<hr>
+			
 			<div class="timeNode">
 				<div class="nodeL">                                            
 				     <div class="logo">
@@ -297,7 +335,7 @@ height: 15px;
                   </div>
 			</div>
 			<p class="cp-line" ></p>
-			<hr>
+			<hr-->
 
 		</div>
 		

@@ -6,9 +6,10 @@
 	list-style-type: none;
 	font-family: arial, sans-serif, 'SimSun', "Microsoft YaHei";
 }
+/*
 a:visited {
 	color: #666;
-}
+}*/
 a:active {
 	background: none;
 }
@@ -319,10 +320,13 @@ ul, ol {
 	text-indent: -999em;
 	display: block;
 }
+
 #content {
 	width: 100%;
 	margin: auto;
 }
+
+
 /*====更多分类css====*/
 .category_list, .nc_sortlist {
 	clear: both;
@@ -7917,6 +7921,8 @@ text-align: center;
 	display: block;
 	cursor: pointer;
 	height: 50px;
+	color:#666;
+	text-decoration:none;
 }
 .warp-left .vip-list li .vip-pic, .warp-left .vip-list li .vip-pic img {
 	height: 48px;

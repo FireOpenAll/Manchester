@@ -116,10 +116,17 @@ public class ActivityServiceImpl implements ActivityService {
 		
 		return activityMappper.getUserCreatedActByUntilId(userId, untilId, pageSize);
 	}
+	
+    @Override
+	public List<Activity> getUserCreatedActByOffset(long userId, int offset, int pageSize) {
+		// TODO Auto-generated method stub
+		return activityMappper.getUserCreatedActByOffset(userId, offset, pageSize);
+	}
+	
 
 	////create
-	
-    public List<Activity> getActsSortByJionedNum(int offset,int pageSize){
+
+	public List<Activity> getActsSortByJionedNum(int offset,int pageSize){
     	return activityMappper.getActsSortByJionedNum(offset, pageSize);
     }
 
@@ -424,6 +431,8 @@ public class ActivityServiceImpl implements ActivityService {
 	@Override
 	public int getUserCreatedActNum(Long user_id) {
 		// TODO Auto-generated method stub
+		//LoginUserModel loginUserModel = UserUtils.getLoginUser();
+		//System.out.println("userid==============================================="+loginUserModel.getUserId());
 		return activityMappper.getUserCreatedActNum(user_id);
 	}
 

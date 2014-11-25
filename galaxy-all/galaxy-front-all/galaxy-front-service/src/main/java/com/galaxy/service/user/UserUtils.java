@@ -10,7 +10,10 @@ public abstract class UserUtils {
 	static CacheClient cachedClient = null;
 
 	public static LoginUserModel getLoginUser() {
-		String token=UserContext.getContext().getToken();
+		String token=null;
+		if(UserContext.getContext()!=null){
+			token=UserContext.getContext().getToken();
+		}
 		LoginUserModel user =null;
 		if(StringUtils.isBlank(token)){
 		 user = (LoginUserModel) SecurityUtils.getSubject()

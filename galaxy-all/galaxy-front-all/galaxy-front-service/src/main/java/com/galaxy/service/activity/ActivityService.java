@@ -46,6 +46,7 @@ public interface ActivityService {
 	public List<Activity> list(Map parameters, int size);
 	////create
 	//分页获取某人发布的活动 
+	public List<Activity> getUserCreatedActByOffset (long userId,int offset,int pageSize);
 	public List<Activity> getUserCreatedActByUntilId (long userId,long untilId,int pageSize);
 
 	////create
