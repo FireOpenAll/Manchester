@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.soap.Detail;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.aspectj.weaver.NewConstructorTypeMunger;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -303,7 +304,7 @@ public class ActivityController {
 		}
 		ActivityDetail activityDetail = activityService.getDetailByActId(id);
 		request.setAttribute("detail", (activityDetail!=null)?activityDetail.getContent():"can not get detail");
-		request.setAttribute("activity", activity);
+		request.setAttribute("activity", ToStringBuilder.reflectionToString(activity));
 		return "activity/detailtest";
 	}
 

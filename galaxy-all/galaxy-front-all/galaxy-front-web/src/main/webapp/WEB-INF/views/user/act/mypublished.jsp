@@ -149,12 +149,12 @@ height: 15px;
 		    			<div class="timeNode">
 							<div class="nodeL">                                            
 				     			<div class="logo">
-				         			<span><img src="http://www.huodongshu.com/html/h5/data/event/event_logo/7.jpg"></span>
+				         			<span><img src="${item.thumnail}"></span>
 				     			</div>                                            
 		         			</div>
 		         			<div class="nodeR">                                       
 		             			<div class="info title">
-		                  			<a href="http://www.huodongshu.com/event/10001357/?is_easy=2" class="font_0097e0" style="color: #000000"><strong><c:out value="${item['title']}"></c:out></strong></a>
+		                  			<a href="/activity/detail/${item.id}" class="font_0097e0" style="color: #000000"><strong><c:out value="${item['title']}"></c:out></strong></a>
 		             			</div>                                      
                      			<div class="info area">
                           			<span class="icon"></span> <c:out value="${item['address']}"></c:out>

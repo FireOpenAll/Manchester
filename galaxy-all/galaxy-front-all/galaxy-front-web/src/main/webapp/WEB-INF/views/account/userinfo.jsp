@@ -13,6 +13,9 @@
 <meta name="keywords" content="交友 社交">
 <meta name="description" content="乐朋网">
 <meta name="author" content="乐朋"> 
+<script src="/resources/activity2/js/jquery/1.11.1.jquery.min.js"></script>
+<script type="text/javascript" src="/resources/activity2/js/hsq/ajaxfileupload.js"></script>
+
 <style type="text/css">
 .a_selected {background: #e64d5e;}
 a {
@@ -324,7 +327,7 @@ border-bottom: 1px solid #aaa;
                 				<div style="width: 110px;height: 35px">
                 					<div class="div1">
                 							<input type="button" class="div2" value="上传头像" tabindex="0" >
-                							<input type="file"  class="inputstyle" accept="image/*">
+                							<input type="file"  class="inputstyle" accept="image/*" id="avatar" name="avatar">
                 					</div>
                 				</div>
                 			</div>
@@ -526,5 +529,6 @@ border-bottom: 1px solid #aaa;
  
          });
 </script>
+
 </body>
 </html>
