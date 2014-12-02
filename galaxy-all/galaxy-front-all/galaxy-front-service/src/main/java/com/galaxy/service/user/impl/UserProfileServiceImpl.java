@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.galaxy.dal.domain.user.UserProfiles;
+import com.galaxy.dal.domain.user.UserProfile;
 import com.galaxy.dal.user.mapper.UserProfilesMapper;
 import com.galaxy.service.user.UserProfileService;
 
@@ -21,25 +21,25 @@ public class UserProfileServiceImpl implements UserProfileService {
 
 	
 	@Override
-	public boolean insert(UserProfiles userProfiles) {
+	public boolean insert(UserProfile userProfiles) {
 		// TODO Auto-generated method stub
 		return userProfilesMapper.insert(userProfiles);
 	}
 
 	@Override
-	public UserProfiles getByUserIdName(Long user_id, String name) {
+	public UserProfile getByUserIdName(Long user_id, String name) {
 		// TODO Auto-generated method stub
 		return userProfilesMapper.getByUserIdName(user_id, name);
 	}
 
 	@Override
-	public UserProfiles deleteByUserIdName(Long user_id, String name) {
+	public UserProfile deleteByUserIdName(Long user_id, String name) {
 		// TODO Auto-generated method stub
 		return userProfilesMapper.deleteByUserIdName(user_id, name);
 	}
 
 	@Override
-	public List<UserProfiles> getAllByUserId(Long user_id) {
+	public List<UserProfile> getAllByUserId(Long user_id) {
 		// TODO Auto-generated method stub
 		return userProfilesMapper.getAllByUserId(user_id);
 	}

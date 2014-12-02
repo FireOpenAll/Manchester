@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.galaxy.dal.domain.user.UserProfiles;
+import com.galaxy.dal.domain.user.UserProfile;
 
 /*author:huangshanqi
  *time  :2014年10月19日 下午1:23:19
@@ -13,14 +13,14 @@ import com.galaxy.dal.domain.user.UserProfiles;
 public interface UserProfileService {
 	
 	//插入属性
-	public boolean insert(UserProfiles userProfiles);
+	public boolean insert(UserProfile userProfiles);
 
 	//得到用户的name 属性数据
-	public UserProfiles getByUserIdName(@Param("user_id") Long user_id,@Param("name") String name);
+	public UserProfile getByUserIdName(@Param("user_id") Long user_id,@Param("name") String name);
 	//删除用户的name 属性数据
-	public UserProfiles deleteByUserIdName(@Param("user_id") Long user_id,@Param("name") String name);
+	public UserProfile deleteByUserIdName(@Param("user_id") Long user_id,@Param("name") String name);
 		
 	//得到用户id的所有属性
-	public List<UserProfiles> getAllByUserId(@Param("user_id") Long user_id);
+	public List<UserProfile> getAllByUserId(@Param("user_id") Long user_id);
 	//
 }

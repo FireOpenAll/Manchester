@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.galaxy.dal.base.test.BaseDaoTest;
-import com.galaxy.dal.domain.user.UserProfiles;
+import com.galaxy.dal.domain.user.UserProfile;
 import com.galaxy.dal.user.mapper.UserProfilesMapper;
 
 /**
@@ -23,7 +23,7 @@ public class TestUserProfilesMapper extends BaseDaoTest {
 
 	@Test
 	public void testInsert() {
-		UserProfiles profile = new UserProfiles();
+		UserProfile profile = new UserProfile();
 		profile.setCreatedTime(new Date());
 		profile.setUserId(11L);
 		profile.setName("key1");
@@ -34,7 +34,7 @@ public class TestUserProfilesMapper extends BaseDaoTest {
 
 	@Test
 	public void testGetById() {
-		UserProfiles profile = userProfilesMapper.getById(1L);
+		UserProfile profile = userProfilesMapper.getById(1L);
 		Assert.assertNotNull(profile);
 		System.out.println(profile);
 
