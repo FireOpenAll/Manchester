@@ -2,23 +2,11 @@ package com.galaxy.service.activity;
 
 import java.util.List;
 import java.util.Map;
- 
-
-
-
-
-
-
-
-
 import org.apache.ibatis.annotations.Param;
-
 import com.galaxy.dal.base.mapper.PaginationParam;
 import com.galaxy.dal.domain.activity.Activity;
 import com.galaxy.dal.domain.activity.ActivityComment;
 import com.galaxy.dal.domain.activity.ActivityDetail;
-import com.galaxy.dal.domain.activity.ActivityJoinedUsers;
-import com.galaxy.dal.domain.activity.ActivityLikedUsers;
 import com.galaxy.dal.domain.user.User;
 import com.galaxy.service.activity.form.ActivityForm;
 
@@ -54,12 +42,10 @@ public interface ActivityService {
 	////join
 	public boolean joinActivity(Long activityId, Long userId);
 	public boolean unjoinActivity(Long activityId, Long userId);
-	public List<ActivityJoinedUsers> listAllJoinedUsers(Long activityId);
 	
 	//用户参加的所有活动
 	public List<Activity> listAllJoinedActs(Long userId);
 	
-	public List<ActivityJoinedUsers> listAllJoinedUsersFromId(Long activityId,Long fromId,int size);
 	
 	//列出某活动的前几个参加用户
 	public List<User> listTopActJionUser(Long activityId,int num);
@@ -73,12 +59,7 @@ public interface ActivityService {
 	
 	
 	////like
-	public boolean likeActivity(ActivityLikedUsers activityLikedUsers);
 	
-	//分页列出某个活动点赞的用户
-	public List<ActivityLikedUsers> listAllLikedUsers(Long activity_id);
-	//分页列出某个活动点赞的用户
-	public List<ActivityLikedUsers> listAllLikedUsersByActId(PaginationParam paginationParam);
 	//分页得到用户点赞过的活动
 	public List<Activity> getUserLikedActByUntilId(long userId,long untilId,long pageSize);
 	//计算user_id Liked过的活动数
@@ -106,5 +87,4 @@ public interface ActivityService {
 	//统计某user_id发布的活动数
 	public int getUserCreatedActNum(Long user_id);
 
-	public ActivityJoinedUsers getActivityJoinUserByUserId(Long activityId, Long userId);
 }

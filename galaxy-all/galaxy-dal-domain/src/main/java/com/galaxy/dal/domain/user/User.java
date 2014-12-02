@@ -12,7 +12,7 @@ public class User extends BaseDomain {
 
 	private String LoginName;
 	private String password;
-	private String gender;
+	private Gender gender;
 	private Date birthday;
 	private UserType userType;
 	private String nick;
@@ -41,10 +41,10 @@ public class User extends BaseDomain {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getGender() {
+	public Gender getGender() {
 		return gender;
 	}
-	public void setGender(String gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 	public Date getBirthday() {

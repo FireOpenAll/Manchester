@@ -166,11 +166,11 @@ public class ActivityController {
 			activityForm.setDescription(evenBaseInfoModel.getDescription());
 			activityForm.setContent(editor_text_zyc);// 详情
 
-			activityForm.setHaibao_urls(evenBaseInfoModel.getHaibao_urls());
+			activityForm.setPictures(evenBaseInfoModel.getHaibao_urls());
 
 			activityForm.setCatId1(Long.valueOf(evenBaseInfoModel.getEvent_category1()));
 
-			activityForm.setType((evenBaseInfoModel.getEvent_yinsi() % 2 == 0) ? ActivityType.ONLINE
+			activityForm.setActivityType((evenBaseInfoModel.getEvent_yinsi() % 2 == 0) ? ActivityType.ONLINE
 					: ActivityType.OFFLINE);
 
 			activityService.create(activityForm);
@@ -245,7 +245,7 @@ public class ActivityController {
 					"/activity/"+userId+"/"+fold+"/"+filename2+";"+
 					"/activity/"+userId+"/"+fold+"/"+filename3;
 			System.out.println("haibao_urls======="+haibao_urls);
-			activityForm.setHaibao_urls(haibao_urls);
+			activityForm.setPictures(haibao_urls);
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -256,8 +256,8 @@ public class ActivityController {
 		//保存海报
 		
 		
-		activityForm.setUserId(userId);
-		activityForm.setType((model.getOptionsRadios()==1)?ActivityType.ONLINE:ActivityType.OFFLINE);
+		activityForm.setOrganizerId(userId);
+		activityForm.setActivityType((model.getOptionsRadios()==1)?ActivityType.ONLINE:ActivityType.OFFLINE);
 		activityForm.setCatId1(model.getCatId1());
 		activityForm.setCatId2(model.getCatId2());
 		activityForm.setTitle(model.getName());
@@ -265,20 +265,20 @@ public class ActivityController {
 		activityForm.setEndTime(String2Date(model.getEnd_time()));
 		activityForm.setProvinceId(model.getProvince());
 		activityForm.setCityId(model.getCity());
-		activityForm.setDistrictId(model.getDistrict());
+		activityForm.setAreaId(model.getDistrict());
 		activityForm.setAddress(model.getAddress_detail());
 		activityForm.setLongtitude(model.getLongtitude());
 		activityForm.setLatitude(model.getLatitude());
-		activityForm.setPrice(model.getTicket_price());
+		//activityForm.setPrice(model.getTicket_price());
 		activityForm.setTicketsNum(model.getTicket_num());
 		activityForm.setPhone(model.getPhone());
 		activityForm.setTags(model.getTags());
 		activityForm.setDescription(model.getDescription().trim());
 		activityForm.setContent(model.getDetail().trim());
-		activityForm.setSponsor(model.getSponsor());
+		//activityForm.setSponsor(model.getSponsor());
 		
 		activityForm.setJoinedNum(0);
-		activityForm.setLiked_num(0);
+		//activityForm.setLiked_num(0);
 		
 		activityService.create(activityForm);
 		request.setAttribute("message", "创建活动成功");

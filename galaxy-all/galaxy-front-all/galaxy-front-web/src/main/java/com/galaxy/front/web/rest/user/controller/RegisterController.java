@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.galaxy.dal.domain.card.Card;
+import com.galaxy.dal.domain.user.Gender;
 import com.galaxy.dal.domain.user.User;
 import com.galaxy.dal.domain.user.UserType;
 import com.galaxy.front.web.rest.interceptor.IgnoreAuth;
@@ -20,7 +21,6 @@ import com.galaxy.front.web.utils.EmailUtils;
 import com.galaxy.front.web.utils.ParamUtils;
 import com.galaxy.front.web.utils.RegexUtils;
 import com.galaxy.front.web.utils.ResultModelUtils;
-import com.galaxy.service.card.CardService;
 import com.galaxy.service.user.UserService;
 
 @RestController(value = "restRegisterController")
@@ -35,8 +35,6 @@ public class RegisterController {
 	private UserService userService;
 	@Autowired
 	private EmailUtils emailUtils;
-	@Autowired
-	private CardService cardService;
 	
 	/**
 	 * 客户端邮箱注册
@@ -74,9 +72,8 @@ public class RegisterController {
 				user.setCreatedTime(new Date());
 				user.setEmailAuth(true);
 				user.setMobileAuth(false); 
-				user.setHasPic(false);
-				user.setSex("male");
-				user.setType(UserType.NORMAL); 
+				user.setGender(Gender.male);
+				user.setUserType(UserType.NORMAL); 
 				userService.createUser(user);
 				
 				user = userService.findUserByLoginName(username);

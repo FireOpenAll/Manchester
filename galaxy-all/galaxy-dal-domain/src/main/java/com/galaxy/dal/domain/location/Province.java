@@ -12,43 +12,26 @@ public class Province implements Serializable{
 	 * 省份Model
 	 */
 	private Integer id;
-	private Integer province_code;
-	private String province_name;
-
-	public Province() {
-		super();
-	}
-
-	public Province(int id, int province_code, String province_name) {
-		super();
-		this.id = id;
-		this.province_code = province_code;
-		this.province_name = province_name;
-	}
-
+	private Integer provinceCode;
+	private String provinceName;
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public Integer getProvince_code() {
-		return province_code;
+	public Integer getProvinceCode() {
+		return provinceCode;
+	}
+	public void setProvinceCode(Integer provinceCode) {
+		this.provinceCode = provinceCode;
+	}
+	public String getProvinceName() {
+		return provinceName;
+	}
+	public void setProvinceName(String provinceName) {
+		this.provinceName = provinceName;
 	}
 
-	public void setProvince_code(Integer province_code) {
-		this.province_code = province_code;
-	}
-
-	public String getProvince_name() {
-		return province_name;
-	}
-
-	public void setProvince_name(String province_name) {
-		this.province_name = province_name;
-	}
- 
-
+	
 }
