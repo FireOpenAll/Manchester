@@ -49,31 +49,34 @@ public class RegisterController {
 		ResultModel resultModel = new ResultModel();
 		
 		if (ParamUtils.isNotEmpty(username,password,email)) {
-			if (userService.countUsersByLoginName(username)>0) {
+			if (userService.isLoginNameExisted(username)) {
 				//用户名已注册
 				resultModel = ResultModelUtils.getResultModelByCode(Code.USER_NAME_USED);
 				resultModel.setData("用户名已被注册");
 				return resultModel;
 			}
-			if (userService.countUsersByEmail(email)>0) {
+			if (userService.isEmailExisted(email)) {
 				//邮箱已注册
 				resultModel = ResultModelUtils.getResultModelByCode(Code.EMAIL_USED);
 				resultModel.setData("邮箱已被注册");
 				return resultModel;
 			}
 			if (RegexUtils.checkAll(username, password, email, null)) {
+				
 				User user = new User();
-				user.setAvatar("/user/avatar/default.jpg");//设定用户默认头像
-				user.setLoginName(username);
-				user.setEmail(email);
-				user.setPassword(password);
-				user.setMobile(null);
-				user.setNick(username);
 				user.setCreatedTime(new Date());
-				user.setEmailAuth(true);
-				user.setMobileAuth(false); 
+				user.setUpdatedTime(user.getUpdatedTime());
+				user.setLoginName(username);
+				user.setPassword(password);
 				user.setGender(Gender.male);
-				user.setUserType(UserType.NORMAL); 
+				user.setUserType(UserType.NORMAL);
+				user.setNick(username);
+				user.setFriendNum(0);
+				user.setEmail(email);
+				user.setAvatar("/user/avatar/default.jpg");//设定用户默认头像
+	            user.setLastVisitTime(user.getCreatedTime());
+				
+	            user.setEmailAuth(true);
 				userService.createUser(user);
 				
 				user = userService.findUserByLoginName(username);

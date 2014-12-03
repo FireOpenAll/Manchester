@@ -18,7 +18,7 @@ public interface CardMapper extends BaseMapper<Card>{
 	
 
 	//根据user_id获取他的名片
-	public Card getByUserId(@Param("user_id") Long user_id);
+	public Card getByUserId(@Param("userId") Long userId);
 
 	//添加名片到我的名片夹
 	public boolean addCardToMyBook(CardBook cardBook);
