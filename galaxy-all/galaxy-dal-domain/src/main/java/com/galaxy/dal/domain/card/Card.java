@@ -9,11 +9,11 @@ import com.galaxy.dal.domain.BaseDomain;
  *time  :2014年10月15日 下午4:50:31
  *email :hsqmobile@gmail.com
  */
-public class Card extends BaseDomain{
+public class Card extends BaseDomain {
 
 	/* 名片实体类定义 */
-	
-	private Long user_id;
+
+	private Long userId;
 
 	private String username;// 名字
 
@@ -33,16 +33,16 @@ public class Card extends BaseDomain{
 
 	private String weixin;
 
-	private String photo;// 头像URL
+	private String avatar;// 头像URL
 
 	private String qrcodeUrl;// 名片二维码地址
 
-	public Long getUser_id() {
-		return user_id;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(Long user_id) {
-		this.user_id = user_id;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public String getUsername() {
@@ -117,12 +117,12 @@ public class Card extends BaseDomain{
 		this.weixin = weixin;
 	}
 
-	public String getPhoto() {
-		return photo;
+	public String getAvatar() {
+		return avatar;
 	}
 
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 	public String getQrcodeUrl() {
@@ -132,6 +132,5 @@ public class Card extends BaseDomain{
 	public void setQrcodeUrl(String qrcodeUrl) {
 		this.qrcodeUrl = qrcodeUrl;
 	}
-	
 
 }

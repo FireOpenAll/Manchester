@@ -14,14 +14,17 @@
 <mapper namespace="com.galaxy.dal.location.mapper.CityMapper">
 
 	<resultMap type="city" id="CITY_MAP">
-	<id property="id" column="id" />
+		<id property="id" column="id" />
+		<id property="cityCode" column="city_code" />
+		<id property="cityName" column="city_name" />
+		<id property="provinceCode" column="province_code" />
 	</resultMap>
 	<select id="getCitysByProvinceCode" parameterType="String"
 		resultMap="CITY_MAP">
 		SELECT *
 		FROM l_city
 		where
-		province_code = #{province_code}
+		province_code = #{provinceCode}
 	</select>
 
 </mapper>

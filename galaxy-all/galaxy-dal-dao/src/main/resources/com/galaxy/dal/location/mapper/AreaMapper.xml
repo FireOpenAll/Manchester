@@ -11,17 +11,20 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.galaxy.dal.location.mapper.ProvinceMapper">
+<mapper namespace="com.galaxy.dal.location.mapper.AreaMapper">
 
-	<resultMap type="province" id="PROVINCE_MAP">
+	<resultMap type="district" id="AREA_MAP">
 		<id property="id" column="id" />
-		<id property="provinceCode" column="province_code" />
-		<id property="provinceName" column="province_name" />
+		<id property="areaCode" column="area_code" />
+		<id property="areaName" column="area_name" />
+		<id property="cityCode" column="city_code" />
 	</resultMap>
 
-	<select id="getAllProvince" resultMap="PROVINCE_MAP">
+	<select id="getAreasByCityCode" parameterType="String"
+		resultMap="AREA_MAP">
 		SELECT *
-		FROM l_province
+		FROM l_area
+		where city_code = #{cityCode}
 	</select>
 
 </mapper>

@@ -12,7 +12,7 @@ import com.galaxy.dal.chat.mapper.ChatGroupInviteMapper;
 import com.galaxy.dal.chat.mapper.ChatGroupMapper;
 import com.galaxy.dal.chat.mapper.ChatGroupMemberMapper;
 import com.galaxy.dal.domain.DBStatus;
-import com.galaxy.dal.domain.activity.ActivityJoinedUsers;
+import com.galaxy.dal.domain.activity.ActivityJoinedUser;
 import com.galaxy.dal.domain.chat.ChatGroup;
 import com.galaxy.dal.domain.chat.ChatGroupApply;
 import com.galaxy.dal.domain.chat.ChatGroupInvite;
@@ -57,11 +57,11 @@ public class ChatServiceImpl implements ChatService {
 	public Long joinGroup(Long activityId, Long userId) {
 		ChatGroup chatGroup=getGroupByActivityId(activityId); 
 		
-		User user=userService.getUser(userId); 
+		User user=userService.getUserById(userId); 
 		if(user==null){
 			throw new ChatException(ChatExceptionCode.USER_NOT_EXIST,"could not find user for id="+userId);
 		} 
-		ActivityJoinedUsers activityJoinUser=activityService.getActivityJoinUserByUserId(activityId,userId);
+		ActivityJoinedUser activityJoinUser=activityService.getActivityJoinUserByUserId(activityId,userId);
 		if(activityJoinUser==null){
 			throw new ChatException(ChatExceptionCode.NOT_MEMBER_OF_ACTIVIT,"not member of activity, id="+activityId+" user id="+userId);
 		}
@@ -105,13 +105,13 @@ public class ChatServiceImpl implements ChatService {
 	public boolean applyToGroup(Long groupId, Long userId, String applyReason) {
 		ChatGroup group=getGroupById(groupId); 
 		if(group.getActivityId()!=null&&group.getActivityId()>0){
-			ActivityJoinedUsers activityJoinUser=activityService.getActivityJoinUserByUserId(group.getActivityId(),userId);
+			ActivityJoinedUser activityJoinUser=activityService.getActivityJoinUserByUserId(group.getActivityId(),userId);
 			if(activityJoinUser==null){
 				throw new ChatException(ChatExceptionCode.NOT_MEMBER_OF_ACTIVIT,"not member of activity, id="+group.getActivityId()+" user id="+userId);
 			}
 			
 		}
-		User user=userService.getUser(userId); 
+		User user=userService.getUserById(userId); 
 		if(user==null){
 			throw new ChatException(ChatExceptionCode.USER_NOT_EXIST,"could not find user for id="+userId);
 		} 
@@ -128,12 +128,12 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public boolean inviteToGroup(Long groupId, Long fromUserId, Long toUserId) {
 		ChatGroup group=getGroupById(groupId); 
-		User user=userService.getUser(toUserId); 
+		User user=userService.getUserById(toUserId); 
 		if(user==null){
 			throw new ChatException(ChatExceptionCode.USER_NOT_EXIST,"could not find user for id="+toUserId);
 		} 
 		
-		user=userService.getUser(fromUserId); 
+		user=userService.getUserById(fromUserId); 
 		if(user==null){
 			throw new ChatException(ChatExceptionCode.USER_NOT_EXIST,"could not find user for id="+fromUserId);
 		} 

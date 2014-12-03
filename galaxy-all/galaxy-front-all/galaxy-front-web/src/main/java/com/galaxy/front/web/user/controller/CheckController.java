@@ -37,8 +37,7 @@ public class CheckController {
 	public void wCheck(HttpServletRequest request, HttpServletResponse response,@RequestParam("email") String email) throws IOException {
 		
 		if (RegexUtils.checkEmail(email)) {
-			int count = userService.countUsersByEmail(email);
-			if (count > 0) {
+			if (userService.isEmailExisted(email)) {
 				response.getOutputStream().print(false);
 			} else {
 				response.getOutputStream().print(true);
@@ -58,8 +57,7 @@ public class CheckController {
 	public void checkEmail(HttpServletRequest request, HttpServletResponse response,@RequestParam("mobile") String mobile) throws IOException {
 		
 		if (RegexUtils.checkPhone(mobile)) {
-			int count = userService.countUsersByMobile(mobile);
-			if (count > 0) {
+			if (userService.isMobileExisted(mobile)) {
 				response.getOutputStream().print(false);
 			} else {
 				response.getOutputStream().print(true);
@@ -79,8 +77,7 @@ public class CheckController {
 	public void checkUsername(HttpServletRequest request, HttpServletResponse response,@RequestParam("username") String username) throws IOException {
 		
 		if (RegexUtils.checkName(username)) {
-			int count = userService.countUsersByLoginName(username);
-			if (count > 0) {
+			if (userService.isLoginNameExisted(username)) {
 				response.getOutputStream().print(false);
 			} else {
 				response.getOutputStream().print(true);

@@ -41,8 +41,7 @@ public class CheckController {
 	public Object checkEmail(@RequestParam("email")String email) {
 		ResultModel resultModel = new ResultModel();
 		if (RegexUtils.checkEmail(email)) {
-			int count = userService.countUsersByEmail(email);
-			if (count > 0) {
+			if (userService.isEmailExisted(email)) {
 				resultModel = ResultModelUtils.getResultModelByCode(Code.EMAIL_USED);
 				resultModel.setData(new StatusModel("email unusable"));
 			} else {
@@ -66,8 +65,7 @@ public class CheckController {
 	public Object checkUsername(@RequestParam("username")String username) {
 		ResultModel resultModel = new ResultModel();
 		if (RegexUtils.checkName(username)) {
-			int count = userService.countUsersByLoginName(username);
-			if (count > 0) {
+			if (userService.isLoginNameExisted(username)) {
 				resultModel = ResultModelUtils.getResultModelByCode(Code.USER_NAME_USED);
 				resultModel.setData(new StatusModel("username unusable"));
 			} else {
@@ -91,8 +89,7 @@ public class CheckController {
 	public Object checkMobile(@RequestParam("mobile")String mobile) {
 		ResultModel resultModel = new ResultModel();
 		if (RegexUtils.checkPhone(mobile)) {
-			int count = userService.countUsersByMobile(mobile);
-			if (count > 0) {
+			if (userService.isMobileExisted(mobile)) {
 				resultModel = ResultModelUtils.getResultModelByCode(Code.PHONE_USED);
 				resultModel.setData(new StatusModel("mobile unusable"));
 			} else {

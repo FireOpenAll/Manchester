@@ -12,7 +12,7 @@ import com.galaxy.dal.domain.location.Area;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.utils.Code;
 import com.galaxy.front.web.utils.ResultModelUtils;
-import com.galaxy.service.location.DistrictService;
+import com.galaxy.service.location.AreaService;
 
 /*author:huangshanqi
  *time  :2014年10月7日 下午11:33:22
@@ -27,7 +27,7 @@ public class DistrictController {
 	 */
 
 	@Autowired
-	DistrictService districtService;
+	AreaService districtService;
 
 	@RequestMapping(value = "district", method = RequestMethod.GET, params = {"city_code"})
 	public Object getProvince(@RequestParam("city_code") String city_code) {

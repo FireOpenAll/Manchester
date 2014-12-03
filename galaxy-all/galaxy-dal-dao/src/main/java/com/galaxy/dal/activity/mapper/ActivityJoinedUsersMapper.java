@@ -5,18 +5,18 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.galaxy.dal.base.mapper.BaseMapper;
-import com.galaxy.dal.domain.activity.ActivityJoinedUsers;
+import com.galaxy.dal.domain.activity.ActivityJoinedUser;
 
 public interface ActivityJoinedUsersMapper extends
-		BaseMapper<ActivityJoinedUsers> {
-	public List<ActivityJoinedUsers> listAllJoinedUsers(Long activityId);
+		BaseMapper<ActivityJoinedUser> {
+	public List<ActivityJoinedUser> listAllJoinedUsers(Long activityId);
 
-	public List<ActivityJoinedUsers> listAllJoinedUsersFromId(@Param("activityId")Long activityId,@Param("fromId")Long fromId, @Param("size")int size);
+	public List<ActivityJoinedUser> listAllJoinedUsersFromId(@Param("activityId")Long activityId,@Param("fromId")Long fromId, @Param("size")int size);
 	//计算user_id参加的活动数
 	public int getUserJoinedActNumber(@Param("user_id")Long user_id);
 	
-	public List<ActivityJoinedUsers> listAllJoinedActs(@Param("user_id")Long userId);
+	public List<ActivityJoinedUser> listAllJoinedActs(@Param("user_id")Long userId);
 	
 	//
-	public ActivityJoinedUsers getByUserIdActId(@Param("userId") Long userId,@Param("activityId") Long activityId);
+	public ActivityJoinedUser getByUserIdActId(@Param("userId") Long userId,@Param("activityId") Long activityId);
 }

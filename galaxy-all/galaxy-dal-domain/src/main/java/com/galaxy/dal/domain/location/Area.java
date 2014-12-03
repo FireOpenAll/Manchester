@@ -13,7 +13,7 @@ public class Area implements Serializable{
 	 */
 	private Integer id;
 	private Integer areaCode;
-	private String dareaName;
+	private String areaName;
 	private Integer cityCode;
 	public Integer getId() {
 		return id;
@@ -27,11 +27,11 @@ public class Area implements Serializable{
 	public void setAreaCode(Integer areaCode) {
 		this.areaCode = areaCode;
 	}
-	public String getDareaName() {
-		return dareaName;
+	public String getAreaName() {
+		return areaName;
 	}
-	public void setDareaName(String dareaName) {
-		this.dareaName = dareaName;
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
 	}
 	public Integer getCityCode() {
 		return cityCode;

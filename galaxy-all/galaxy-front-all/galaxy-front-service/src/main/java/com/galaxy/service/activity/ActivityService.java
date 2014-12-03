@@ -2,11 +2,11 @@ package com.galaxy.service.activity;
 
 import java.util.List;
 import java.util.Map;
-import org.apache.ibatis.annotations.Param;
-import com.galaxy.dal.base.mapper.PaginationParam;
+
 import com.galaxy.dal.domain.activity.Activity;
 import com.galaxy.dal.domain.activity.ActivityComment;
 import com.galaxy.dal.domain.activity.ActivityDetail;
+import com.galaxy.dal.domain.activity.ActivityJoinedUser;
 import com.galaxy.dal.domain.user.User;
 import com.galaxy.service.activity.form.ActivityForm;
 
@@ -86,5 +86,6 @@ public interface ActivityService {
 	
 	//统计某user_id发布的活动数
 	public int getUserCreatedActNum(Long user_id);
+	public ActivityJoinedUser getActivityJoinUserByUserId(Long activityId, Long userId);
 
 }
