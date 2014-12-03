@@ -3,6 +3,8 @@ package com.galaxy.service.activity.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.galaxy.dal.domain.activity.Activity;
 import com.galaxy.dal.domain.activity.ActivityComment;
 import com.galaxy.dal.domain.activity.ActivityDetail;
@@ -15,6 +17,7 @@ import com.galaxy.service.activity.form.ActivityForm;
  *time  :2014年12月3日 下午9:01:37
  *email :hsqmobile@gmail.com
  */
+@Service
 public class ActivityServiceImpl implements ActivityService {
 
 	@Override

@@ -12,7 +12,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.galaxy.dal.activity.mapper.ActivityJoinedUsersMapper"> 
-	<resultMap type="activityJoinedUsers" id="ACTIVITY_JOINED_USERS_MAP">
+	<resultMap type="activityJoinedUser" id="ACTIVITY_JOINED_USERS_MAP">
 		<id property="id" column="id" />
 		<result property="createdTime" column="created_time" />
 		<result property="updatedTime" column="updated_time" />
@@ -48,7 +48,7 @@
 		<result property="activityId" column="activity_id" />
 		<result property="ticketNum" column="ticket_num" />
     -->
-	<insert id="insert" parameterType="activityJoinedUsers"
+	<insert id="insert" parameterType="activityJoinedUser"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
 		ac_activity_joined_users(created_time,user_id,user_name,activity_id,ticket_num)

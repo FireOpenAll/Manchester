@@ -13,7 +13,7 @@
 
 <mapper namespace="com.galaxy.dal.location.mapper.AreaMapper">
 
-	<resultMap type="district" id="AREA_MAP">
+	<resultMap type="area" id="AREA_MAP">
 		<id property="id" column="id" />
 		<id property="areaCode" column="area_code" />
 		<id property="areaName" column="area_name" />
