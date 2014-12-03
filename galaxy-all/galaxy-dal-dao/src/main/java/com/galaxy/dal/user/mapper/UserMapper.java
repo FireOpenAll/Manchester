@@ -10,44 +10,20 @@ import com.galaxy.dal.domain.user.User;
 
 public interface UserMapper extends BaseMapper<User> {
 
-	public boolean updateLoginInfo(Long id, Date visitTime);
-
-	/**
-	 * 查找有这email的用户数
-	 */
-	int countUsersByEmail(@Param("email") String email);
+	public boolean updateLoginInfo(@Param("id")Long id, @Param("LastVisitTime")Date LastVisitTime);
+	
+	public User getUserByEmail(@Param("email") String email);
+	public User getUserByLoginName(@Param("loginName") String loginName);
+	public User getUserByMobile(@Param("mobile") String mobile);
+    public User getUserByEmailPassword(@Param("email") String email,@Param("password") String password);
+    public User getUserByLoginNamePassword(@Param("loginName") String loginName,@Param("password") String password);
+    public User getUserByMobilePassword(@Param("mobile") String mobile,@Param("password") String password);
 	
 	////update
-	int updateUserFansNumById(@Param("userId")Long userId,@Param("num")int num);
-	
-	int updateUserFollowersNumById(@Param("userId")Long userId,@Param("num")int num);
-	
+	int updateUserFriendNumByUserId(@Param("userId")Long userId,@Param("num")int num);
+	int updateEmailAuthByEmail(@Param("email") String email,@Param("emailAuth") Boolean emailAuth);
+	int updateMobileAuthByMobile(@Param("mobile") String mobile,@Param("mobileAuth") Boolean mobileAuth);
 	////update
 
-	/**
-	 * 查找有这email的用户数
-	 * 
-	 * @param email
-	 * @return
-	 */
-	int countUsersByMobile(@Param("mobile") String mobile);
-
-	/**
-	 * 查找有这email的用户数
-	 */
-	int countUsersByLoginName(@Param("login_name") String login_name);
-
-	// 通过邮箱验证
-	int setUserEmailAuthByEmail(Map<String, Object> map);
-
-	int countEmailAuthed(@Param("email") String email);
-
-	// 邮箱密码登陆
-	User getUserbyEmailPassword(Map<String, String> map);
-
-	User getUserbyMobilePassword(Map<String, String> map);
-
-	User getUserbyLoginNamePassword(Map<String, String> map);
-	
 	public User findUserByLoginName(@Param("loginName")String loginName);
 }

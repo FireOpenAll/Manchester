@@ -28,6 +28,7 @@ public class User extends BaseDomain {
 	private String webcharOpenId;
 	private String qqOpenId;
 	private Date lastVisitTime;
+	private String userStatus;
 	private String salt;
 	public String getLoginName() {
 		return LoginName;
@@ -136,6 +137,13 @@ public class User extends BaseDomain {
 	}
 	public void setLastVisitTime(Date lastVisitTime) {
 		this.lastVisitTime = lastVisitTime;
+	}
+	
+	public String getUserStatus() {
+		return userStatus;
+	}
+	public void setUserStatus(String userStatus) {
+		this.userStatus = userStatus;
 	}
 	public String getSalt() {
 		return salt;
