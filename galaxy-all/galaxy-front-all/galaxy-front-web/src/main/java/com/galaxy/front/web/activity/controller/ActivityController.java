@@ -170,8 +170,8 @@ public class ActivityController {
 
 			activityForm.setCatId1(Long.valueOf(evenBaseInfoModel.getEvent_category1()));
 
-			activityForm.setActivityType((evenBaseInfoModel.getEvent_yinsi() % 2 == 0) ? ActivityType.ONLINE
-					: ActivityType.OFFLINE);
+			activityForm.setActivityType((evenBaseInfoModel.getEvent_yinsi() % 2 == 0) ? ActivityType.opening
+					: ActivityType.privacy);
 
 			activityService.create(activityForm);
 
@@ -254,19 +254,22 @@ public class ActivityController {
 			e.printStackTrace();
 		}
 		//保存海报
-		
-		
-		activityForm.setOrganizerId(userId);
-		activityForm.setActivityType((model.getOptionsRadios()==1)?ActivityType.ONLINE:ActivityType.OFFLINE);
-		activityForm.setCatId1(model.getCatId1());
-		activityForm.setCatId2(model.getCatId2());
 		activityForm.setTitle(model.getName());
 		activityForm.setStartTime(String2Date(model.getStart_time()));
 		activityForm.setEndTime(String2Date(model.getEnd_time()));
 		activityForm.setProvinceId(model.getProvince());
 		activityForm.setCityId(model.getCity());
-		activityForm.setAreaId(model.getDistrict());
+		activityForm.setAreaId(model.getArea());
 		activityForm.setAddress(model.getAddress_detail());
+		
+		activityForm.setOrganizerId(userId);
+		activityForm.setActivityType((model.getOptionsRadios()==1)?ActivityType.opening:ActivityType.privacy);
+		activityForm.setCatId1(model.getCatId1());
+		activityForm.setCatId2(model.getCatId2());
+		activityForm.setDetailUrl("activity/detail");
+		
+		
+		
 		activityForm.setLongtitude(model.getLongtitude());
 		activityForm.setLatitude(model.getLatitude());
 		//activityForm.setPrice(model.getTicket_price());

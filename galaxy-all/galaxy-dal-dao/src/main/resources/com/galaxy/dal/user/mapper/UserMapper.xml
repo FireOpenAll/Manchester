@@ -67,7 +67,7 @@
 	
 	<update id="updateLoginInfo">
 		update u_user
-		set last_visit_time =#{LastVisitTime}
+		set last_visit_time =#{lastVisitTime}
 		where id = #{id}
 	</update>
 	

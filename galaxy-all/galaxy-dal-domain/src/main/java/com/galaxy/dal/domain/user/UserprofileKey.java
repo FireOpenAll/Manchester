@@ -9,6 +9,11 @@ public enum UserprofileKey {
 	 */
 PROVICE,
 CITY,
-AREA
+AREA,
+TAGS,
+SCHOOL,
+POSITION,
+MARRIAGE,
+
 
 }

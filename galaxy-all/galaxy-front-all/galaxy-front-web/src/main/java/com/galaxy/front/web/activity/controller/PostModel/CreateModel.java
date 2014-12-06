@@ -11,7 +11,7 @@ public class CreateModel {
 	private String end_time;
 	private Long province;
 	private Long city;
-	private Long district;
+	private Long area;
 	private String address_detail;
 	private double longtitude;
 	private double latitude;
@@ -83,12 +83,14 @@ public class CreateModel {
 		this.city = city;
 	}
 
-	public Long getDistrict() {
-		return district;
+	
+
+	public Long getArea() {
+		return area;
 	}
 
-	public void setDistrict(Long district) {
-		this.district = district;
+	public void setArea(Long area) {
+		this.area = area;
 	}
 
 	public String getAddress_detail() {

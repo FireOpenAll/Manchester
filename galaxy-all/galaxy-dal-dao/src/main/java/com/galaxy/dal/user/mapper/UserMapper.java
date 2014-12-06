@@ -10,7 +10,7 @@ import com.galaxy.dal.domain.user.User;
 
 public interface UserMapper extends BaseMapper<User> {
 
-	public boolean updateLoginInfo(@Param("id")Long id, @Param("LastVisitTime")Date LastVisitTime);
+	public boolean updateLoginInfo(@Param("id")Long id, @Param("lastVisitTime")Date lastVisitTime);
 	
 	public User getUserByEmail(@Param("email") String email);
 	public User getUserByLoginName(@Param("loginName") String loginName);

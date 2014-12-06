@@ -10,7 +10,6 @@ import com.galaxy.dal.card.mapper.CardMapper;
 import com.galaxy.dal.card.mapper.UserCardMapper;
 import com.galaxy.dal.domain.card.Card;
 import com.galaxy.dal.domain.card.UserCard;
-import com.galaxy.dal.user.mapper.UserMapper;
 import com.galaxy.service.card.CardService;
 
 /*author:huangshanqi

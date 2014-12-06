@@ -17,55 +17,55 @@
 		<id property="id" column="id" />
 		<result property="createdTime" column="created_time" />
 		<result property="updatedTime" column="updated_time" />
+		<result property="title" column="title"/>
 		<result property="startTime" column="start_time"/>
 		<result property="endTime" column="end_time"/>
 		<result property="provinceId" column="province_id"/>
 		<result property="cityId" column="city_id"/>
-		<result property="districtId" column="district_id"/>
-		<result property="refUrl" column="ref_url"/>
-		<result property="operatorId" column="operator_id"/>
+		<result property="areaId" column="area_id"/>
+		<result property="address" column="address"/>
+		<result property="detailUrl" column="detail_url"/>
+		<result property="tags" column="tags"/>
 		<result property="joinedNum" column="joined_num"/>
+		<result property="commentNum" column="comment_num"/>
 		<result property="ticketsNum" column="tickets_num"/>
-		<result property="userId" column="user_id"/>
-		
+		<result property="collectNum" column="collect_num"/>
+		<result property="activityStatus" column="activity_status"/>
+		<result property="needAudit" column="need_audit"/>
+		<result property="phone" column="phone"/>
+		<result property="description" column="description"/>
+		<result property="pictures" column="pictures"/>
+		<result property="email" column="email"/>
+		<result property="catId1" column="catId1"/>
+		<result property="catId2" column="catId2"/>
+		<result property="longtitude" column="longtitude"/>
+		<result property="latitude" column="latitude"/>
+		<result property="activityType" column="activity_type"/>
+		<result property="organizerId" column="organizer_id"/>
+		<result property="free" column="free"/>
 	</resultMap>
 	
-
-	<!-- private ActivityType type;
-	private String title;
-	private Date startTime;
-	private Date endTime;
-	private Long provinceId; 
-	private Long cityId; 
-	private Long districtId; 
-	private String address;
-
-	private String refUrl;
-
-	private Double price;
-
-	private String tags;
-	
-	private Long userId;//发布人ID
-	
-	private Long operatorId;//操作人ID
-	
-	private Integer joinedNum;//参会人数
-	
-	private Integer ticketsNum;//门票数量
-	haibao_urls
-	email 
-	catId1
-	catId2
-	catId3
-	sponsor
-	-->
 	<!-- 添加活动 -->
 	<insert id="insert" parameterType="activity"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
-		ac_activity(id,created_time,type,title,start_time,end_time,province_id,city_id,district_id,address,ref_url,price,tags,user_id,operator_id,joined_num,tickets_num,liked_num,status,haibao_urls,phone,email,longtitude,latitude,description,catId1,catId2,catId3,sponsor)
-		VALUES(#{id},#{createdTime},#{type},#{title},#{startTime},#{endTime},#{provinceId},#{cityId},#{districtId},#{address},#{refUrl},#{price},#{tags},#{userId},#{operatorId},#{joinedNum},#{ticketsNum},#{liked_num},#{status},#{haibao_urls},#{phone},#{email},#{longtitude},#{latitude},#{description},#{catId1},#{catId2},#{catId3},#{sponsor})
+		ac_activity(
+		created_time,updated_time,title,start_time,
+		end_time,province_id,city_id,area_id,
+		address,detail_url,tags,joined_num,
+		comment_num,tickets_num,collect_num,activity_status,
+		need_audit,phone,description,pictures,
+		email,catId1,catId2,longtitude,
+		latitude,activity_type,organizer_id,free
+		)values (
+		#{createdTime},#{updatedTime},#{title},#{startTime},
+		#{endTime},#{provinceId},#{cityId},#{areaId},
+		#{address},#{detailUrl},#{tags},#{joinedNum},
+		#{commentNum},#{ticketsNum},#{collectNum},#{activityStatus},
+		#{needAudit},#{phone},#{description},#{pictures},
+		#{email},#{catId1},#{catId2},#{longtitude},
+		#{latitude},#{activityType},#{organizerId},#{free}
+		)
 	</insert>
 	
 	<!-- 删除活动 -->
@@ -88,13 +88,14 @@
 	<select id="getUserCreatedActByOffset" resultMap="ACTIVITY_MAP">
 		SELECT *
 		FROM ac_activity
-		where user_id = #{userId} order by created_time desc
+		where organizer_id = #{userId} 
+		order by created_time desc
 	    limit #{offset},#{pageSize}
 	</select>
 	<select id="getUserCreatedActByUntilId" resultMap="ACTIVITY_MAP">
 		SELECT *
 		FROM ac_activity
-		where user_id = #{user_id} and id &gt; #{until_id} 
+		where organizer_id = #{userId} and id &gt; #{untilId} 
 	    limit #{pageSize}
 	</select>
 	
@@ -102,32 +103,7 @@
 	<select id="getUserCreatedActNum" parameterType="long" resultType="int">
 	select count(id)
 	from ac_activity
-	where user_id = #{user_id}
+	where organizer_id = #{userId}
 	</select>
-	
-	<select id="getActsSortByJionedNum" resultMap="ACTIVITY_MAP">
-	select * 
-	from ac_activity
-	order by joined_num desc
-	limit #{offset},#{pageSize}
-	</select>
-	
-	<update id="updateActlikedNum">
-	update ac_activity
-	set liked_num = #{num}
-	where id = #{activityId}
-	</update>
-	
-	<update id="updateActJoinedNum">
-	update ac_activity
-	set joined_num = #{num}
-	where id = #{activityId}
-	</update>
-	
-	<update id="updateActUrlById">
-	update ac_activity
-	set ref_url = #{newUrl}
-	where id = #{activityId}
-	</update>
 	
 </mapper>

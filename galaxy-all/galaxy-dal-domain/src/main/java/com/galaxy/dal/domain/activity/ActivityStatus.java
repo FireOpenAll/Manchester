@@ -4,7 +4,7 @@ package com.galaxy.dal.domain.activity;
  *email :hsqmobile@gmail.com
  */
 public enum ActivityStatus {
-UNBEGIN,
-RUNNING,
-FINISHED
+unbegin,
+running,
+finished
 }

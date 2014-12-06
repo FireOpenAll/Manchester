@@ -46,9 +46,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean updateLoginInfo(Long id, Date LastVisitTime) {
+	public boolean updateLoginInfo(Long id, Date lastVisitTime) {
 		// TODO Auto-generated method stub
-		return userMapper.updateLoginInfo(id, LastVisitTime);
+		return userMapper.updateLoginInfo(id, lastVisitTime);
 	}
 
 	@Override

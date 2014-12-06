@@ -14,7 +14,7 @@ public class User extends BaseDomain {
 	private String password;
 	private Gender gender;
 	private Date birthday;
-	private UserType userType;
+	private UserType userType;// 个人、商家
 	private String nick;
 	private Integer friendNum;
 	private String realName;
@@ -28,129 +28,167 @@ public class User extends BaseDomain {
 	private String webcharOpenId;
 	private String qqOpenId;
 	private Date lastVisitTime;
-	private String userStatus;
+	private UserStatus userStatus;// 状态
 	private String salt;
+
 	public String getLoginName() {
 		return LoginName;
 	}
+
 	public void setLoginName(String loginName) {
 		LoginName = loginName;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public Gender getGender() {
 		return gender;
 	}
+
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
+
 	public Date getBirthday() {
 		return birthday;
 	}
+
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
+
 	public UserType getUserType() {
 		return userType;
 	}
+
 	public void setUserType(UserType userType) {
 		this.userType = userType;
 	}
+
 	public String getNick() {
 		return nick;
 	}
+
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
+
 	public Integer getFriendNum() {
 		return friendNum;
 	}
+
 	public void setFriendNum(Integer friendNum) {
 		this.friendNum = friendNum;
 	}
+
 	public String getRealName() {
 		return realName;
 	}
+
 	public void setRealName(String realName) {
 		this.realName = realName;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getMobile() {
 		return mobile;
 	}
+
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+
 	public Boolean getRealNameAuth() {
 		return realNameAuth;
 	}
+
 	public void setRealNameAuth(Boolean realNameAuth) {
 		this.realNameAuth = realNameAuth;
 	}
+
 	public Boolean getEmailAuth() {
 		return emailAuth;
 	}
+
 	public void setEmailAuth(Boolean emailAuth) {
 		this.emailAuth = emailAuth;
 	}
+
 	public Boolean getMobileAuth() {
 		return mobileAuth;
 	}
+
 	public void setMobileAuth(Boolean mobileAuth) {
 		this.mobileAuth = mobileAuth;
 	}
+
 	public String getAvatar() {
 		return avatar;
 	}
+
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
+
 	public String getWeiboOpenId() {
 		return weiboOpenId;
 	}
+
 	public void setWeiboOpenId(String weiboOpenId) {
 		this.weiboOpenId = weiboOpenId;
 	}
+
 	public String getWebcharOpenId() {
 		return webcharOpenId;
 	}
+
 	public void setWebcharOpenId(String webcharOpenId) {
 		this.webcharOpenId = webcharOpenId;
 	}
+
 	public String getQqOpenId() {
 		return qqOpenId;
 	}
+
 	public void setQqOpenId(String qqOpenId) {
 		this.qqOpenId = qqOpenId;
 	}
+
 	public Date getLastVisitTime() {
 		return lastVisitTime;
 	}
+
 	public void setLastVisitTime(Date lastVisitTime) {
 		this.lastVisitTime = lastVisitTime;
 	}
-	
-	public String getUserStatus() {
+
+	public UserStatus getUserStatus() {
 		return userStatus;
 	}
-	public void setUserStatus(String userStatus) {
+
+	public void setUserStatus(UserStatus userStatus) {
 		this.userStatus = userStatus;
 	}
+
 	public String getSalt() {
 		return salt;
 	}
+
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
-	
-	
+
 }
