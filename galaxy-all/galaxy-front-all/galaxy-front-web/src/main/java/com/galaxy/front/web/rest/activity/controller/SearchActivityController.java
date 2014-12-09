@@ -18,7 +18,6 @@ import com.galaxy.front.web.rest.model.Contact;
 import com.galaxy.front.web.rest.model.Photo;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.activity.ActivityModel;
-import com.galaxy.front.web.rest.model.interest.CategoryModel;
 import com.galaxy.front.web.rest.model.location.LocationInfo;
 import com.galaxy.front.web.rest.model.user.UserModel;
 
@@ -32,12 +31,12 @@ public class SearchActivityController {
 	
 	@RequestMapping(value = "search")
 	public Object searchActivity(HttpServletRequest request){
-		
+		ResultModel resultModel = new ResultModel();
 		/*
 		String queryString = request.getQueryString();
 		
 		
-		ResultModel resultModel = new ResultModel();
+		
 		int pageSize = 0;
 		int pageNum = 1;
 		
@@ -63,8 +62,7 @@ public class SearchActivityController {
 			}
 		}
 		
-		request.get
-		*/
+		
 		
 		ResultModel resultModel = new ResultModel();
 		resultModel.setCode("20000");
@@ -98,8 +96,9 @@ public class SearchActivityController {
 					);
 		}
 		resultModel.setData(recomment_activity);
-		
+		*/
 		return resultModel;
+		
 	}
 
 	

@@ -23,7 +23,7 @@ public class CreateModel {
 	private String detail;
 	private String ticket_name;
 	private int ticket_num;
-	private Float ticket_price;
+	private Double ticket_price;
 	private int optionsRadios;
 	private Long catId1;
 	private Long catId2;
@@ -157,11 +157,13 @@ public class CreateModel {
 		this.ticket_num = ticket_num;
 	}
 
-	public Float getTicket_price() {
+
+
+	public Double getTicket_price() {
 		return ticket_price;
 	}
 
-	public void setTicket_price(Float ticket_price) {
+	public void setTicket_price(Double ticket_price) {
 		this.ticket_price = ticket_price;
 	}
 

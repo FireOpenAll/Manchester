@@ -4,11 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.galaxy.front.web.rest.model.interest.InterestGroup;
-import com.galaxy.front.web.rest.model.interest.CategoryModel;
 import com.galaxy.front.web.rest.model.location.SimpleAddress;
 
 public class UserProfileModel implements Serializable {
+	/*
 
 	long user_id;
 	String user_name;//昵称
@@ -188,5 +187,5 @@ public class UserProfileModel implements Serializable {
 		this.create_count = create_count;
 	}
 
-	
+	*/
 }

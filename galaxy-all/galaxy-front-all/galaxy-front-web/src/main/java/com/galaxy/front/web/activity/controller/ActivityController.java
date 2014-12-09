@@ -33,14 +33,18 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.galaxy.dal.domain.activity.Activity;
 import com.galaxy.dal.domain.activity.ActivityDetail;
+import com.galaxy.dal.domain.activity.ActivityTicket;
 import com.galaxy.dal.domain.activity.ActivityType;
+import com.galaxy.dal.domain.ticket.Ticket;
 import com.galaxy.front.web.activity.controller.PostModel.CreateModel;
 import com.galaxy.front.web.activity.controller.PostModel.EvenBaseInfoModel;
 import com.galaxy.front.web.activity.controller.PostModel.OrgModel;
 import com.galaxy.front.web.activity.controller.PostModel.TicketModel;
 import com.galaxy.front.web.rest.model.ResultModel;
+import com.galaxy.front.web.utils.ActivityUtils;
 import com.galaxy.service.activity.ActivityService;
 import com.galaxy.service.activity.form.ActivityForm;
+import com.galaxy.service.ticket.TicketService;
 import com.galaxy.service.user.LoginUserModel;
 import com.galaxy.service.user.UserUtils;
 import com.google.gson.Gson;
@@ -56,6 +60,8 @@ public class ActivityController {
 
 	@Autowired
 	private ActivityService activityService;
+	@Autowired
+	private TicketService ticketService;
 
 	/**
 	 * ajax创建活动表单提交第一版
@@ -211,6 +217,8 @@ public class ActivityController {
 		
 		LoginUserModel loginUserModel = UserUtils.getLoginUser();
 		long userId = loginUserModel.getUserId();
+		
+		
 		System.out.println("userId============================="+userId);
 		//保存海报
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
@@ -261,29 +269,46 @@ public class ActivityController {
 		activityForm.setCityId(model.getCity());
 		activityForm.setAreaId(model.getArea());
 		activityForm.setAddress(model.getAddress_detail());
+		activityForm.setTags(model.getTags());
+		activityForm.setJoinedNum(0);
+		activityForm.setCommentNum(0);;
+		activityForm.setTicketsNum(model.getTicket_num());
+		activityForm.setCollectNum(0);
 		
-		activityForm.setOrganizerId(userId);
-		activityForm.setActivityType((model.getOptionsRadios()==1)?ActivityType.opening:ActivityType.privacy);
+		activityForm.setActivityStatus(ActivityUtils.getActivityStatus(activityForm.getStartTime(), activityForm.getEndTime()));
+		activityForm.setNeedAudit(false);
+		activityForm.setPhone(model.getPhone());
+		activityForm.setDescription(model.getDescription().trim());
+        //无email
 		activityForm.setCatId1(model.getCatId1());
 		activityForm.setCatId2(model.getCatId2());
-		activityForm.setDetailUrl("activity/detail");
-		
-		
-		
 		activityForm.setLongtitude(model.getLongtitude());
 		activityForm.setLatitude(model.getLatitude());
-		//activityForm.setPrice(model.getTicket_price());
-		activityForm.setTicketsNum(model.getTicket_num());
-		activityForm.setPhone(model.getPhone());
-		activityForm.setTags(model.getTags());
-		activityForm.setDescription(model.getDescription().trim());
+		activityForm.setActivityType((model.getOptionsRadios()==1)?ActivityType.opening:ActivityType.privacy);
+		activityForm.setOrganizerId(userId);
 		activityForm.setContent(model.getDetail().trim());
-		//activityForm.setSponsor(model.getSponsor());
+		activityForm.setFree(model.getTicket_price()>0?false:true);
 		
-		activityForm.setJoinedNum(0);
-		//activityForm.setLiked_num(0);
+		Long activityId = activityService.create(activityForm);
 		
-		activityService.create(activityForm);
+		ActivityTicket activityTicket = new ActivityTicket();
+		activityTicket.setCreatedTime(new Date());
+		activityTicket.setUpdatedTime(activityTicket.getCreatedTime());
+		activityTicket.setActivityId(activityId);
+		
+		
+		
+		Ticket ticket = new Ticket();
+		ticket.setCreatedTime(new Date());
+		ticket.setUpdatedTime(ticket.getCreatedTime());
+		ticket.setTicketName("默认门票");
+		ticket.setPrice(model.getTicket_price());
+		ticket.setTotal(model.getTicket_num());
+		ticket.setRemain(ticket.getTotal());
+		ticket.setActivityId(activityId);
+		
+		ticketService.createTicket(ticket);
+		
 		request.setAttribute("message", "创建活动成功");
 		return "activity/postsuccess";
 	}

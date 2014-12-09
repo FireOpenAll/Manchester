@@ -51,7 +51,7 @@
 		#{gender},#{birthday},#{userType},#{nick},
 		#{friendNum},#{realName},#{email},#{mobile},
 		#{realNameAuth},#{emailAuth},#{mobileAuth},#{avatar},
-		#{webcharOpenId},#{webcharOpenId},#{qqOpenId},#{lastVisitTime},#{userStatus},salt)
+		#{webcharOpenId},#{webcharOpenId},#{qqOpenId},#{lastVisitTime},#{userStatus},#{salt})
 	</insert>
 		
 	<delete id="deleteById" parameterType="long">

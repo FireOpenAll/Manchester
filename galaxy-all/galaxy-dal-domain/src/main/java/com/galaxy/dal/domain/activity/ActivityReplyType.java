@@ -7,5 +7,5 @@ public enum ActivityReplyType {
 	/**
 	 * 评论回复类型，回复用户或者直接评论活动
 	 */
-USER,ACTIVITY
+user,activity
 }

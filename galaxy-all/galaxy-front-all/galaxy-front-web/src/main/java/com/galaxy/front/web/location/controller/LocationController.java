@@ -39,10 +39,10 @@ public class LocationController {
 
 	}
 	
-	@RequestMapping(value = "city", method = RequestMethod.GET, params = { "province_code" })
-	public Object getCitys(@RequestParam("province_code") String province_code) {
+	@RequestMapping(value = "city", method = RequestMethod.GET, params = { "provinceCode" })
+	public Object getCitys(@RequestParam("provinceCode") String provinceCode) {
 		ResultModel resulltModel = new ResultModel();
-		ArrayList<City> list = locationService.getCitysByProvinceCode(province_code);
+		ArrayList<City> list = locationService.getCitysByProvinceCode(provinceCode);
 
 		resulltModel = ResultModelUtils.getResultModelByCode(Code.OK);
 		resulltModel.setData(list);
@@ -50,10 +50,10 @@ public class LocationController {
 		return resulltModel;
 	}
 	
-	@RequestMapping(value = "district", method = RequestMethod.GET, params = {"city_code"})
-	public Object getProvince(@RequestParam("city_code") String city_code) {
+	@RequestMapping(value = "area", method = RequestMethod.GET, params = {"cityCode"})
+	public Object getProvince(@RequestParam("cityCode") String cityCode) {
 		ResultModel resulltModel = new ResultModel();
-		ArrayList<Area> list = locationService.getAreasByCityCode(city_code);
+		ArrayList<Area> list = locationService.getAreasByCityCode(cityCode);
 
 		resulltModel = ResultModelUtils.getResultModelByCode(Code.OK);
 		resulltModel.setData(list);

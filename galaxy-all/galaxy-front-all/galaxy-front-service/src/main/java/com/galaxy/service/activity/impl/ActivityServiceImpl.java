@@ -1,17 +1,26 @@
 package com.galaxy.service.activity.impl;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.galaxy.dal.activity.mapper.ActivityCommentMapper;
+import com.galaxy.dal.activity.mapper.ActivityDetailMapper;
+import com.galaxy.dal.activity.mapper.ActivityMapper;
+import com.galaxy.dal.activity.mapper.ActivityUserMapper;
 import com.galaxy.dal.domain.activity.Activity;
 import com.galaxy.dal.domain.activity.ActivityComment;
 import com.galaxy.dal.domain.activity.ActivityDetail;
-import com.galaxy.dal.domain.activity.ActivityJoinedUser;
-import com.galaxy.dal.domain.user.User;
+import com.galaxy.dal.domain.activity.ActivityUser;
+import com.galaxy.dal.domain.ticket.Ticket;
+import com.galaxy.dal.ticket.mapper.TicketMapper;
 import com.galaxy.service.activity.ActivityService;
 import com.galaxy.service.activity.form.ActivityForm;
+import com.galaxy.service.chat.ChatService;
 
 /*author:huangshanqi
  *time  :2014年12月3日 下午9:01:37
@@ -20,172 +29,228 @@ import com.galaxy.service.activity.form.ActivityForm;
 @Service
 public class ActivityServiceImpl implements ActivityService {
 
+	@Autowired 
+	private ActivityMapper activityMappper;
+	@Autowired 
+	private ActivityDetailMapper activityDetailMapper;
+	@Autowired
+	private ActivityUserMapper activityUserMapper;
+	@Autowired
+	private ActivityCommentMapper activityCommentMapper;
+	@Autowired
+	private TicketMapper ticketMapper;
+	
+	@Autowired 
+	private ChatService chatService; 
+	
+	@Override
+	@Transactional
+	public Long create(ActivityForm form) {
+		Activity activity=createActivity(form);
+		activityMappper.insert(activity);
+		activityMappper.updateActUrlById(activity.getId(), "/activity/detail/"+activity.getId());
+		ActivityDetail detail=this.createDetail(form);
+		detail.setId(activity.getId());
+		activityDetailMapper.insert(detail);
+		
+		chatService.createGroup(form.getTitle(), form.getOrganizerId(),activity.getId());
+		return activity.getId();
+	}
+	
+	private Activity createActivity(ActivityForm form){
+		Activity activity=new Activity();
+		BeanUtils.copyProperties(form, activity);
+		
+		return activity;
+	}
+	private ActivityDetail createDetail(ActivityForm form){
+		ActivityDetail detail=new ActivityDetail();
+		BeanUtils.copyProperties(form, detail);
+		return detail;
+	}
+	
+	@Override
+	public Activity getActivity(Long id) {
+		// TODO Auto-generated method stub
+		return activityMappper.getById(id);
+	}
+	
 	@Override
 	public ActivityDetail getDetailByActId(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public Long create(ActivityForm form) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
+	@Transactional
 	public boolean modify(ActivityForm form) {
-		// TODO Auto-generated method stub
-		return false;
+		Activity activity=activityMappper.getById(form.getId());
+		
+		activityMappper.update(activity);
+		
+		ActivityDetail detail=activityDetailMapper.getById(form.getId());
+		activityDetailMapper.update(detail);
+		return true;
 	}
 
 	@Override
 	public boolean removeById(Long id) {
 		// TODO Auto-generated method stub
-		return false;
+		return activityMappper.deleteById(id);
 	}
 
+	
 	@Override
-	public List<Activity> getActsSortByJionedNum(int offset, int pageSize) {
+	public List<Activity> getActivitySortInJoinNum(Integer offset, Integer pageSize) {
 		// TODO Auto-generated method stub
-		return null;
+		return activityMappper.getActivitySortInJoinNum(offset, pageSize);
 	}
 
 	@Override
-	public boolean updateActlikedNum(int num, Long activityId) {
+	public List<Activity> getActivitySortInCommentNum(Integer offset, Integer pageSize) {
 		// TODO Auto-generated method stub
-		return false;
+		return activityMappper.getActivitySortInCommentNum(offset, pageSize);
 	}
 
 	@Override
-	public boolean updateActJoinedNum(int num, Long activityId) {
+	public List<Activity> getActivitySortInCreateTime(Integer offset, Integer pageSize) {
 		// TODO Auto-generated method stub
-		return false;
+		return activityMappper.getActivitySortInCreateTime(offset, pageSize);
+	}
+
+
+	
+	//activityuser
+
+	@Override
+	@Transactional
+	public boolean joinActivity(ActivityUser activityUser) {
+		Activity activity=activityMappper.getById(activityUser.getActivityId());
+		if(activity==null){
+			//todo error handle
+			return false;
+		}
+		
+		ActivityUser temp = activityUserMapper.getByUserIdActIdTicketId(activityUser.getUserId(), activityUser.getActivityId(),activityUser.getTicketId());
+		if (temp != null) {
+			return false;
+		}else {
+			Ticket ticket = ticketMapper.getById(activityUser.getTicketId()) ;
+			if(ticket == null){
+				return false;
+			}
+			//
+			ticket.setUpdatedTime(new Date());
+			ticket.setRemain((ticket.getTotal()-activityUser.getNum()>0)?(ticket.getTotal()-activityUser.getNum()):0);
+			ticketMapper.update(ticket);
+			//
+			activityMappper.updateActivityJoinNum(activityUser.getActivityId(), activity.getJoinedNum() + activityUser.getNum());
+			return activityUserMapper.insert(activityUser);
+		}
 	}
 
 	@Override
-	public Activity getActivity(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Activity> list(Map parameters, int size) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Activity> getUserCreatedActByOffset(long userId, int offset, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Activity> getUserCreatedActByUntilId(long userId, long untilId, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean joinActivity(Long activityId, Long userId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean unjoinActivity(Long activityId, Long userId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public List<Activity> listAllJoinedActs(Long userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<User> listTopActJionUser(Long activityId, int num) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int getUserJoinedActNumber(Long user_id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean isUserJoinedActivity(Long userId, Long activityId) {
+	public boolean unjoinActivity(ActivityUser activityUser) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+
+
 	@Override
-	public List<Activity> getUserLikedActByUntilId(long userId, long untilId, long pageSize) {
+	public boolean updateAcitvityUserInfo(ActivityUser activityUser) {
 		// TODO Auto-generated method stub
-		return null;
+		return activityUserMapper.update(activityUser);
 	}
 
 	@Override
-	public int getLikedActNumByUserId(Long user_id) {
+	public ActivityUser getAcitvityUserById(Long id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return activityUserMapper.getById(id);
 	}
 
 	@Override
-	public boolean cancelLiked(Long user_id, Long activity_id) {
+	public List<ActivityUser> listJoinedUsersSortInTime(Long activityId, Date jionTime, int pageSize) {
 		// TODO Auto-generated method stub
-		return false;
+		return activityUserMapper.listJoinedUsersSortInTime(activityId, jionTime, pageSize);
 	}
 
 	@Override
-	public boolean isUserLikedActivity(Long UserId, Long activityId) {
+	public int getUserJoinedActNumber(Long userId) {
 		// TODO Auto-generated method stub
-		return false;
+		return activityUserMapper.getUserJoinedActNumber(userId);
 	}
 
 	@Override
-	public int getUserComActNum(Long user_id) {
+	public List<ActivityUser> listUserJoinedActs(Long userId, Date jionTime, int pageSize) {
 		// TODO Auto-generated method stub
-		return 0;
+		return activityUserMapper.listUserJoinedActs(userId, jionTime, pageSize);
 	}
 
 	@Override
-	public int getActComNum(Long activityId) {
+	public ActivityUser getByUserIdActIdTicketId(Long userId, Long activityId,Long ticketId) {
 		// TODO Auto-generated method stub
-		return 0;
+		return activityUserMapper.getByUserIdActIdTicketId(userId, activityId, ticketId);
+	}
+
+	//activityuser
+
+
+	//comment
+
+	@Override
+	public int getUserComActNum(Long userId) {
+		// TODO Auto-generated method stub
+		return activityCommentMapper.getUserComActNum(userId);
 	}
 
 	@Override
-	public List<ActivityComment> getActComByUntilId(Long activityId, Long untilId, int pageSize) {
+	public List<ActivityComment> getActComSortByTime(Long activityId, Date commentTime, Integer pageSize) {
 		// TODO Auto-generated method stub
-		return null;
+		return activityCommentMapper.getActComSortByTime(activityId, commentTime, pageSize);
 	}
 
 	@Override
-	public List<Activity> getUserComedActByUntilId(long userId, long untilId, long pageSize) {
+	public List<ActivityComment> getUserComedActSortByTime(Long activityId, Long userId, Date commentTime, Long pageSize) {
 		// TODO Auto-generated method stub
-		return null;
+		return activityCommentMapper.getUserComedActSortByTime(activityId, userId, commentTime, pageSize);
 	}
 
 	@Override
-	public ActivityComment Comment(ActivityComment activityComment) {
+	public boolean Comment(ActivityComment activityComment) {
 		// TODO Auto-generated method stub
-		return null;
+		return activityCommentMapper.insert(activityComment);
 	}
 
 	@Override
-	public int getUserCreatedActNum(Long user_id) {
+	public boolean deleteComment(Long commentId) {
 		// TODO Auto-generated method stub
-		return 0;
+		return activityCommentMapper.deleteById(commentId);
 	}
 
 	@Override
-	public ActivityJoinedUser getActivityJoinUserByUserId(Long activityId, Long userId) {
+	public boolean modifyComment(ActivityComment activityComment) {
 		// TODO Auto-generated method stub
-		return null;
+		return activityCommentMapper.update(activityComment);
 	}
 
+	@Override
+	public ActivityComment getCommentById(Long commentId) {
+		// TODO Auto-generated method stub
+		return activityCommentMapper.getById(commentId);
+	}
+
+
+	@Override
+	public ActivityUser getByUserIdActId(Long userId, Long activityId) {
+		// TODO Auto-generated method stub
+		return activityUserMapper.getByUserIdActId(userId, activityId);
+	}
+
+	//comment
+	
+
+	
 }

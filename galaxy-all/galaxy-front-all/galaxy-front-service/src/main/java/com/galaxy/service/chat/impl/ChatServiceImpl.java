@@ -12,7 +12,7 @@ import com.galaxy.dal.chat.mapper.ChatGroupInviteMapper;
 import com.galaxy.dal.chat.mapper.ChatGroupMapper;
 import com.galaxy.dal.chat.mapper.ChatGroupMemberMapper;
 import com.galaxy.dal.domain.DBStatus;
-import com.galaxy.dal.domain.activity.ActivityJoinedUser;
+import com.galaxy.dal.domain.activity.ActivityUser;
 import com.galaxy.dal.domain.chat.ChatGroup;
 import com.galaxy.dal.domain.chat.ChatGroupApply;
 import com.galaxy.dal.domain.chat.ChatGroupInvite;
@@ -61,8 +61,8 @@ public class ChatServiceImpl implements ChatService {
 		if(user==null){
 			throw new ChatException(ChatExceptionCode.USER_NOT_EXIST,"could not find user for id="+userId);
 		} 
-		ActivityJoinedUser activityJoinUser=activityService.getActivityJoinUserByUserId(activityId,userId);
-		if(activityJoinUser==null){
+		ActivityUser activityUser=activityService.getByUserIdActId(userId, activityId);
+		if(activityUser==null){
 			throw new ChatException(ChatExceptionCode.NOT_MEMBER_OF_ACTIVIT,"not member of activity, id="+activityId+" user id="+userId);
 		}
 		
@@ -105,8 +105,8 @@ public class ChatServiceImpl implements ChatService {
 	public boolean applyToGroup(Long groupId, Long userId, String applyReason) {
 		ChatGroup group=getGroupById(groupId); 
 		if(group.getActivityId()!=null&&group.getActivityId()>0){
-			ActivityJoinedUser activityJoinUser=activityService.getActivityJoinUserByUserId(group.getActivityId(),userId);
-			if(activityJoinUser==null){
+			ActivityUser activityUser=activityService.getByUserIdActId(userId, group.getActivityId());
+			if(activityUser==null){
 				throw new ChatException(ChatExceptionCode.NOT_MEMBER_OF_ACTIVIT,"not member of activity, id="+group.getActivityId()+" user id="+userId);
 			}
 			

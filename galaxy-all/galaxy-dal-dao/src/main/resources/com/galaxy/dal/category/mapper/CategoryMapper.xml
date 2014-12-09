@@ -17,6 +17,12 @@
 	<result property="id" column="id"/>
 	<result property="createdTime" column="created_time"/>
 	<result property="updatedTime" column="updated_time"/>
+	<result property="nameEn" column="name_en"/>
+	<result property="nameCh" column="name_ch"/>
+	<result property="parentId" column="parent_id"/>
+	<result property="path" column="path"/>
+	<result property="coverUrl" column="cover_url"/>
+	<result property="description" column="description"/>
 	
 	</resultMap>
 
@@ -24,6 +30,35 @@
 		SELECT *
 		FROM cat_category
 		where parent_id = #{parent_id}
+	</select>
+	
+	<insert id="insert" parameterType="category" keyColumn="id" useGeneratedKeys="true">
+	insert into
+	cat_category(created_time,updated_time,name_en,name_ch,parent_id,path,cover_url,description)
+	values(#{createdTime},#{updatedTime},#{nameEn},#{nameCh},#{parentId},#{path},#{coverUrl},#{description})
+	</insert>
+	
+	<update id="update" parameterType="category">
+	update cat_category
+	set updated_time = #{updatedTime},name_en = #{nameEn},
+	name_ch = #{nameCh},parent_id = #{parentId},path = #{path},
+	cover_url = #{coverUrl},description = #{description}
+	where id = #{id}
+	</update>
+	
+	<delete id="deleteById">
+	delete from cat_category
+	where id = #{id}
+	</delete>
+	
+	<select id="getAllCategory" resultMap="CATEGORY_MAP">
+	select *
+	from cat_category
+	</select>
+	<select id="getChildrenCategory" parameterType="long" resultMap="CATEGORY_MAP">
+	select *
+	from cat_category
+	where parent_id = #{parentId}
 	</select>
 
 </mapper>

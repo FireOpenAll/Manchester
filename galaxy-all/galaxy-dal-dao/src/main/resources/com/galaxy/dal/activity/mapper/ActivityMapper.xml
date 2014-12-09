@@ -83,27 +83,51 @@
 		WHERE id = #{id}
 	</select>
 	
-	<!-- 分页获取某人发布的活动 -->
+	<update id="updateActUrlById">
+	update ac_activity
+	set detailUrl = #{newUrl}
+	where id = #{activityId}
+	</update>
 	
-	<select id="getUserCreatedActByOffset" resultMap="ACTIVITY_MAP">
-		SELECT *
-		FROM ac_activity
-		where organizer_id = #{userId} 
-		order by created_time desc
-	    limit #{offset},#{pageSize}
-	</select>
-	<select id="getUserCreatedActByUntilId" resultMap="ACTIVITY_MAP">
-		SELECT *
-		FROM ac_activity
-		where organizer_id = #{userId} and id &gt; #{untilId} 
-	    limit #{pageSize}
-	</select>
-	
-	<!-- 统计某人发布的活动数 -->
-	<select id="getUserCreatedActNum" parameterType="long" resultType="int">
-	select count(id)
+	<select id="getActivitySortInJoinNum" resultMap="ACTIVITY_MAP">
+	select *
 	from ac_activity
-	where organizer_id = #{userId}
+	order by joined_num desc
+	limit #{offset},#{pageSize}
 	</select>
+	<select id="getActivitySortInCommentNum" resultMap="ACTIVITY_MAP">
+	select *
+	from ac_activity
+	order by comment_num desc
+	limit #{offset},#{pageSize}
+	</select>
+	<select id="getActivitySortInCreateTime" resultMap="ACTIVITY_MAP">
+	select *
+	from ac_activity
+	order by created_time desc
+	limit #{offset},#{pageSize}
+	</select>
+	
+	<update id="updateActivityJoinNum">
+	update ac_activity
+	set joined_num = #{number}
+	where id = #{activityId}
+	</update>
+	
+	<update id="updateActivityCommentNum">
+	update ac_activity
+	set comment_num = #{number}
+	where id = #{activityId}
+	</update>
+	<update id="updateActivityTicketNum">
+	update ac_activity
+	set tickets_num = #{number}
+	where id = #{activityId}
+	</update>
+	<update id="updateActivityCollectNum">
+	update ac_activity
+	set collect_num = #{number}
+	where id = #{activityId}
+	</update>
 	
 </mapper>

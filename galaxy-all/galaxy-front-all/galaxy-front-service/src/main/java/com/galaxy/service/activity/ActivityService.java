@@ -1,21 +1,67 @@
 package com.galaxy.service.activity;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import com.galaxy.dal.domain.activity.Activity;
 import com.galaxy.dal.domain.activity.ActivityComment;
 import com.galaxy.dal.domain.activity.ActivityDetail;
-import com.galaxy.dal.domain.activity.ActivityJoinedUser;
-import com.galaxy.dal.domain.user.User;
+import com.galaxy.dal.domain.activity.ActivityUser;
 import com.galaxy.service.activity.form.ActivityForm;
 
 public interface ActivityService {
+	public Activity getActivity(Long id);
+	public Long create(ActivityForm form);
+	public ActivityDetail getDetailByActId(Long id);
+	
+	public List<Activity> getActivitySortInJoinNum(Integer offset,Integer pageSize);
+	public List<Activity> getActivitySortInCommentNum(Integer offset,Integer pageSize);
+	public List<Activity> getActivitySortInCreateTime(Integer offset,Integer pageSize);
+	
+	public boolean modify(ActivityForm form);
+	public boolean removeById(Long id);
+	
+	//ActivityUser
+	public boolean joinActivity(ActivityUser activityUser);
+	public boolean unjoinActivity(ActivityUser activityUser);
+	public boolean updateAcitvityUserInfo(ActivityUser activityUser);
+	public ActivityUser getAcitvityUserById(Long id);
+
+	public List<ActivityUser> listJoinedUsersSortInTime(Long activityId,Date jionTime, int pageSize);
+	//计算user_id参加的活动数
+	public int getUserJoinedActNumber(Long userId);
+	
+	public List<ActivityUser> listUserJoinedActs(Long userId,Date jionTime,int pageSize);
+	
+	public ActivityUser getByUserIdActIdTicketId( Long userId,Long activityId,Long ticketId);
+	public ActivityUser getByUserIdActId( Long userId,Long activityId);
+	
+	//ActivityUser
+	
+	
+	
+	////comment
+	//统计user_id评论过的活动数
+	public int getUserComActNum(Long userId);
+	//分页得到某活动的评论
+	public List<ActivityComment> getActComSortByTime(Long activityId,Date commentTime,Integer pageSize);
+	//分页得到用户评论过的活动
+	public List<ActivityComment> getUserComedActSortByTime(Long activityId,Long userId,Date commentTime,Long pageSize);
+	public boolean Comment(ActivityComment activityComment);
+	public ActivityComment getCommentById(Long commentId);
+	public boolean deleteComment(Long commentId);
+	public boolean modifyComment(ActivityComment activityComment);
+	////comment
+	
+	
+	
+	
+	/*
 
 	////detail
-	public ActivityDetail getDetailByActId(Long id);
+	
 	////detail
-	public Long create(ActivityForm form);
+	
 	
 	public boolean modify(ActivityForm form);
 
@@ -29,7 +75,7 @@ public interface ActivityService {
     
     ////update
 
-	public Activity getActivity(Long id);
+	
 
 	public List<Activity> list(Map parameters, int size);
 	////create
@@ -87,5 +133,7 @@ public interface ActivityService {
 	//统计某user_id发布的活动数
 	public int getUserCreatedActNum(Long user_id);
 	public ActivityJoinedUser getActivityJoinUserByUserId(Long activityId, Long userId);
+*/
+
 
 }

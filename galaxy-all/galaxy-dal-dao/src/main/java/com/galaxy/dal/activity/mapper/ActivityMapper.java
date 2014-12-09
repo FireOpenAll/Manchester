@@ -9,6 +9,30 @@ import com.galaxy.dal.domain.activity.Activity;
 
 public interface ActivityMapper extends BaseMapper<Activity>{
 
+    public boolean updateActUrlById(@Param("activityId") Long activityId,@Param("newUrl") String newUrl);
+	public List<Activity> getActivitySortInJoinNum(@Param("offset") Integer offset,@Param("pageSize") Integer pageSize);
+	public List<Activity> getActivitySortInCommentNum(@Param("offset") Integer offset,@Param("pageSize") Integer pageSize);
+	public List<Activity> getActivitySortInCreateTime(@Param("offset") Integer offset,@Param("pageSize") Integer pageSize);
+
+	public boolean updateActivityJoinNum(@Param("activityId") Long activityId,@Param("number") int number);
+	public boolean updateActivityCommentNum(@Param("activityId") Long activityId,@Param("number") int number);
+	public boolean updateActivityTicketNum(@Param("activityId") Long activityId,@Param("number") int number);
+	public boolean updateActivityCollectNum(@Param("activityId") Long activityId,@Param("number") int number);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
 	//统计某user_id发布的活动数
 	public int getUserCreatedActNum(@Param("userId") Long userId);
 	//分页获取某人发布的活动 
@@ -19,4 +43,5 @@ public interface ActivityMapper extends BaseMapper<Activity>{
     public boolean updateActlikedNum(@Param("num") int num,@Param("activityId") Long activityId);
     public boolean updateActJoinedNum(@Param("num") int num,@Param("activityId") Long activityId);
     public boolean updateActUrlById(@Param("activityId") Long activityId,@Param("newUrl") String newUrl);
+    */
 }
