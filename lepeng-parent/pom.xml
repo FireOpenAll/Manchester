@@ -8,9 +8,8 @@
 	<packaging>pom</packaging>
 	<description>group of lepeng project</description>
 	<properties>
-		<org.springframework.version>4.0.7.RELEASE</org.springframework.version>
-		<org.springframework.boot.version>1.1.9.RELEASE</org.springframework.boot.version>
-		<org.springframework.batch.version>3.0.2.RELEASE</org.springframework.batch.version>
+		<org.springframework.version>4.0.6.RELEASE</org.springframework.version>
+		
 	</properties>
 
 
@@ -114,21 +113,6 @@
 				<scope>test</scope>
 			</dependency>
 			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-batch</artifactId>
-				<version>${org.springframework.boot.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-web</artifactId>
-				<version>${org.springframework.boot.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.batch</groupId>
-				<artifactId>spring-batch-core</artifactId>
-				<version>${org.springframework.batch.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-validator</artifactId>
 				<version>5.0.3.Final</version>
@@ -164,6 +148,52 @@
 				<artifactId>mysql-connector-java</artifactId>
 				<version>5.1.6</version>
 			</dependency>
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>3.2.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-spring</artifactId>
+				<version>1.2.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.tomcat</groupId>
+				<artifactId>tomcat-jdbc</artifactId>
+				<version>7.0.54</version>
+			</dependency>
+			<dependency>
+				<groupId>jstl</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>jsp-api</artifactId>
+				<version>2.2</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>2.3</version>
+			</dependency>
+			<dependency>
+	            <groupId>org.apache.shiro</groupId>
+	            <artifactId>shiro-core</artifactId>
+	            <version>1.2.2</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.shiro</groupId>
+	            <artifactId>shiro-web</artifactId>
+	            <version>1.2.2</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.shiro</groupId>
+	            <artifactId>shiro-spring</artifactId>
+	            <version>1.2.2</version>
+	        </dependency>
 			<dependency>
 				<groupId>dom4j</groupId>
 				<artifactId>dom4j</artifactId>
@@ -350,12 +380,13 @@
   <modules>
     <module>lepeng-api</module>
     <module>lepeng-data</module>
-    
-    
     <module>lepeng-merchants</module>
-    <module>cctv-admin</module>
+    
     <module>lepeng-admin</module>
-    <module>lepeng-site</module>
+    
+    
+    
+    
     <module>lepeng-web</module>
   </modules>
 </project>

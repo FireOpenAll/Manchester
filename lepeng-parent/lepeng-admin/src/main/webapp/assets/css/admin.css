@@ -1,0 +1,6 @@
+/**
+ * 定制css
+ */
+body.modal-open {
+	margin-right: 0px;
+}
