@@ -380,7 +380,7 @@
   <modules>
     <module>lepeng-api</module>
     <module>lepeng-data</module>
-    <module>lepeng-merchants</module>
+    <module>lepeng-admin</module>
     
     <module>lepeng-admin</module>
     
