@@ -1,6 +1,5 @@
 package com.galaxy.front.web.rest.activity.controller;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -14,13 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  *email :hsqmobile@gmail.com
  */
 
-import com.galaxy.front.web.rest.model.Contact;
-import com.galaxy.front.web.rest.model.Photo;
 import com.galaxy.front.web.rest.model.ResultModel;
-import com.galaxy.front.web.rest.model.activity.ActivityModel;
-import com.galaxy.front.web.rest.model.interest.CategoryModel;
-import com.galaxy.front.web.rest.model.location.LocationInfo;
-import com.galaxy.front.web.rest.model.user.UserModel;
 
 
 @RestController(value = "restSearchActivityController")
@@ -32,12 +25,12 @@ public class SearchActivityController {
 	
 	@RequestMapping(value = "search")
 	public Object searchActivity(HttpServletRequest request){
-		
+		ResultModel resultModel = new ResultModel();
 		/*
 		String queryString = request.getQueryString();
 		
 		
-		ResultModel resultModel = new ResultModel();
+		
 		int pageSize = 0;
 		int pageNum = 1;
 		
@@ -63,8 +56,7 @@ public class SearchActivityController {
 			}
 		}
 		
-		request.get
-		*/
+		
 		
 		ResultModel resultModel = new ResultModel();
 		resultModel.setCode("20000");
@@ -98,8 +90,9 @@ public class SearchActivityController {
 					);
 		}
 		resultModel.setData(recomment_activity);
-		
+		*/
 		return resultModel;
+		
 	}
 
 	

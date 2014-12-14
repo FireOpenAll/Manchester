@@ -13,5 +13,5 @@ import com.galaxy.dal.domain.location.City;
  */
 public interface CityMapper extends BaseMapper<City> {
 
-	public ArrayList<City> getCitysByProvinceCode(@Param("province_code") String province_code);
+	public ArrayList<City> getCitysByProvinceCode(@Param("provinceCode") String provinceCode);
 }

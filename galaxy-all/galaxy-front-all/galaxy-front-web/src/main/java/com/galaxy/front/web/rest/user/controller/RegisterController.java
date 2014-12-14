@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.galaxy.dal.domain.card.Card;
+import com.galaxy.dal.domain.user.Gender;
 import com.galaxy.dal.domain.user.User;
 import com.galaxy.dal.domain.user.UserType;
 import com.galaxy.front.web.rest.interceptor.IgnoreAuth;
@@ -51,46 +52,48 @@ public class RegisterController {
 		ResultModel resultModel = new ResultModel();
 		
 		if (ParamUtils.isNotEmpty(username,password,email)) {
-			if (userService.countUsersByLoginName(username)>0) {
+			if (userService.isLoginNameExisted(username)) {
 				//用户名已注册
 				resultModel = ResultModelUtils.getResultModelByCode(Code.USER_NAME_USED);
 				resultModel.setData("用户名已被注册");
 				return resultModel;
 			}
-			if (userService.countUsersByEmail(email)>0) {
+			if (userService.isEmailExisted(email)) {
 				//邮箱已注册
 				resultModel = ResultModelUtils.getResultModelByCode(Code.EMAIL_USED);
 				resultModel.setData("邮箱已被注册");
 				return resultModel;
 			}
 			if (RegexUtils.checkAll(username, password, email, null)) {
+				
 				User user = new User();
-				user.setAvatar("/user/avatar/default.jpg");//设定用户默认头像
-				user.setLoginName(username);
-				user.setEmail(email);
-				user.setPassword(password);
-				user.setMobile(null);
-				user.setNick(username);
 				user.setCreatedTime(new Date());
-				user.setEmailAuth(true);
-				user.setMobileAuth(false); 
-				user.setHasPic(false);
-				user.setSex("male");
-				user.setType(UserType.NORMAL); 
+				user.setUpdatedTime(user.getUpdatedTime());
+				user.setLoginName(username);
+				user.setPassword(password);
+				user.setGender(Gender.male);
+				user.setUserType(UserType.NORMAL);
+				user.setNick(username);
+				user.setFriendNum(0);
+				user.setEmail(email);
+				user.setAvatar("/user/avatar/default.jpg");//设定用户默认头像
+	            user.setLastVisitTime(user.getCreatedTime());
+				
+	            user.setEmailAuth(true);
 				userService.createUser(user);
 				
-				user = userService.findUserByLoginName(username);
+				user = userService.getUserByEmail(email);
 				
 				
 				//建立名片
 				Card card = new Card();
-				card.setUser_id(user.getId());
-				card.setName(user.getNick());
+				card.setCreatedTime(new Date());
+				card.setUpdatedTime(card.getCreatedTime());
+				card.setUserId(user.getId());
+				card.setUsername(user.getLoginName());
 				card.setEmail(user.getEmail());
-				card.setPhoto(user.getAvatar());
-				if (user.getEmail()!=null) {
-					card.setEmail(user.getEmail());
-				}
+				card.setAvatar(user.getAvatar());
+				
 				cardService.createCard(card);
 				
 				
@@ -132,31 +135,49 @@ public class RegisterController {
 				resultModel.setData(Code.PHONE_CODE_ERROR.getMessage());
 				return resultModel;
 			}
-			if (userService.countUsersByLoginName(username)>0) {
+			if (userService.isLoginNameExisted(username)) {
 				//用户名已注册
 				resultModel = ResultModelUtils.getResultModelByCode(Code.USER_NAME_USED);
 				resultModel.setData("用户名已被注册");
 				return resultModel;
 			}
-			if (userService.countUsersByMobile(mobile)>0) {
+			if (userService.isMobileExisted(mobile)) {
 				//手机号已注册
 				resultModel = ResultModelUtils.getResultModelByCode(Code.PHONE_USED);
 				resultModel.setData("手机号已被注册");
 				return resultModel;
 			}
 			if (RegexUtils.checkAll(username, password, null, mobile)) {
+
 				User user = new User();
-				user.setLoginName(username);
-				user.setEmail(null);
-				user.setPassword(password);
-				user.setMobile(mobile);
-				user.setNick(username);
 				user.setCreatedTime(new Date());
-				user.setEmailAuth(false);
-				user.setMobileAuth(true); 
-				user.setHasPic(false);
-				user.setType(UserType.NORMAL); 
+				user.setUpdatedTime(user.getUpdatedTime());
+				user.setLoginName(username);
+				user.setPassword(password);
+				user.setGender(Gender.male);
+				user.setUserType(UserType.NORMAL);
+				user.setNick(username);
+				user.setFriendNum(0);
+				user.setMobile(mobile);
+				user.setAvatar("/user/avatar/default.jpg");//设定用户默认头像
+	            user.setLastVisitTime(user.getCreatedTime());
+				
+	            user.setEmailAuth(true);
 				userService.createUser(user);
+				
+				user = userService.getUserByMobile(mobile);
+				
+				
+				//建立名片
+				Card card = new Card();
+				card.setCreatedTime(new Date());
+				card.setUpdatedTime(card.getCreatedTime());
+				card.setUserId(user.getId());
+				card.setUsername(user.getLoginName());
+				card.setPhone(user.getMobile());
+				card.setAvatar(user.getAvatar());
+				
+				cardService.createCard(card);
 				
 				resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 				resultModel.setData("success");

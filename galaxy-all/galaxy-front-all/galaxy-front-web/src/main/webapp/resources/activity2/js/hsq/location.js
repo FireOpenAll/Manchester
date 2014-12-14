@@ -25,8 +25,8 @@ function getProvince(){
 	        		var len = provincelist.length;
 			      	for(var i = 0; i < len; i++){
 			      		var item = provincelist[i];
-			      		var name = item.province_name;
-			      		var code = item.province_code;
+			      		var name = item.provinceName;
+			      		var code = item.provinceCode;
 			      	    html += '<option class="text-center" value="'+code+ '">'+name+'</option>';
 			      	}
 			      	$("#province_select").html(html);
@@ -42,10 +42,10 @@ function getProvince(){
 //显示市
 function getCity(){
 
-	var province_code = $("#province_select").val();
+	var provinceCode = $("#province_select").val();
 	
 	//设置provice的input值
-	$("#province").val(province_code);
+	$("#province").val(provinceCode);
 	//设置provice的input值
 	var url = '/location/city';
 	
@@ -59,7 +59,7 @@ function getCity(){
 	        type: "GET",
 	        url: url,
 	        dataType:"json",
-	        data:{province_code:province_code,t:new Date()},
+	        data:{provinceCode:provinceCode,t:new Date()},
 	        success: function(msg) { 
 	        	//alert(msg.code);
 	        	if (msg.code == "20000") {
@@ -68,8 +68,8 @@ function getCity(){
 	        		var len = citylist.length;
 			      	for(var i = 0; i < len; i++){
 			      		var item = citylist[i];
-			      		var name = item.city_name;
-			      		var code = item.city_code;
+			      		var name = item.cityName;
+			      		var code = item.cityCode;
 			      	    html += '<option class="text-center" value="'+code+ '">'+name+'</option>';
 			      	}
 			      	$("#city_select").html(html);
@@ -85,12 +85,12 @@ function getCity(){
 //显示区
 function getDistrict(){
 	
-	var city_code = $("#city_select").val();
+	var cityCode = $("#city_select").val();
 	//设置city的input值
-	$("#city").val(city_code);
+	$("#city").val(cityCode);
 	//设置city的input值
 	
-	var url = '/location/district';
+	var url = '/location/area';
 	
 	var defaultDistrict = '<option value="0">--区--</option>';
 	$("#district_select").html(defaultDistrict);
@@ -99,7 +99,7 @@ function getDistrict(){
 	        type: "GET",
 	        url: url,
 	        dataType:"json",
-	        data:{city_code:city_code,t:new Date()},
+	        data:{cityCode:cityCode,t:new Date()},
 	        success: function(msg) { 
 	        	//alert(msg.code);
 	        	if (msg.code == "20000") {
@@ -108,8 +108,8 @@ function getDistrict(){
 	        		var len = districtlist.length;
 			      	for(var i = 0; i < len; i++){
 			      		var item = districtlist[i];
-			      		var name = item.district_name;
-			      		var code = item.district_code;
+			      		var name = item.areaName;
+			      		var code = item.areaCode;
 			      	    html += '<option class="text-center" value="'+code+ '">'+name+'</option>';
 			      	}
 			      	$("#district_select").html(html);
@@ -127,7 +127,7 @@ function setDistrict(){
 	//设置district的input值
 	var dis = $("#district_select").val();
 	//alert('dis='+dis);
-	$("#district").val(dis);
+	$("#area").val(dis);
 	//var district = $("#district").val();
 	//alert('district='+district);
 }

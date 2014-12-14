@@ -4,63 +4,55 @@ import java.util.Date;
 
 import com.galaxy.dal.domain.BaseDomain;
 
+/*author:huangshanqi
+ *time  :2014年12月2日 下午5:12:53
+ *email :hsqmobile@gmail.com
+ */
 public class User extends BaseDomain {
 
-	private String loginName;
-
-	private String sex;
-
-	private Date birthday;// 2000-01-01 00:00:00 生日,年月日就够了
-
-	private UserType type;// 用户类型。普通用户，商家
-
-	private String nick;// 昵称
-
-	private int followers;// 被关注,粉丝
-
-	private int fans;//关注
-
-	private String realName;// 真实姓名
-
-	private String email;
-
-	private String mobile;
-
+	private String LoginName;
 	private String password;
-
-	private String salt;// 用于生成密码和校验密码
-
-	private boolean realNameAuth;// 实名认证
-
-	private boolean emailAuth;// 邮箱验证
-
-	private boolean mobileAuth;// 手机验证
-
-	private boolean hasPic;// 是否有图片
-
-	private String avatar;// 用户头像url
-	private String qqOpenid;// 绑定的openId
-	private String webchatOpenid;// 绑定的openId
-	private String weiboOpenid;// 绑定的openId
-
-	private Date lastVisitTime;// 上一次访问时间
-
-	private UserStatus status;
+	private Gender gender;
+	private Date birthday;
+	private UserType userType;// 个人、商家
+	private String nick;
+	private Integer friendNum;
+	private String realName;
+	private String email;
+	private String mobile;
+	private Boolean realNameAuth;
+	private Boolean emailAuth;
+	private Boolean mobileAuth;
+	private String avatar;
+	private String weiboOpenId;
+	private String webcharOpenId;
+	private String qqOpenId;
+	private Date lastVisitTime;
+	private UserStatus userStatus;// 状态
+	private String salt;
 
 	public String getLoginName() {
-		return loginName;
+		return LoginName;
 	}
 
 	public void setLoginName(String loginName) {
-		this.loginName = loginName;
+		LoginName = loginName;
 	}
 
-	public String getSex() {
-		return sex;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 
 	public Date getBirthday() {
@@ -71,12 +63,12 @@ public class User extends BaseDomain {
 		this.birthday = birthday;
 	}
 
-	public UserType getType() {
-		return type;
+	public UserType getUserType() {
+		return userType;
 	}
 
-	public void setType(UserType type) {
-		this.type = type;
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
 
 	public String getNick() {
@@ -87,20 +79,12 @@ public class User extends BaseDomain {
 		this.nick = nick;
 	}
 
-	public int getFollowers() {
-		return followers;
+	public Integer getFriendNum() {
+		return friendNum;
 	}
 
-	public void setFollowers(int followers) {
-		this.followers = followers;
-	}
-
-	public int getFans() {
-		return fans;
-	}
-
-	public void setFans(int fans) {
-		this.fans = fans;
+	public void setFriendNum(Integer friendNum) {
+		this.friendNum = friendNum;
 	}
 
 	public String getRealName() {
@@ -127,52 +111,28 @@ public class User extends BaseDomain {
 		this.mobile = mobile;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getSalt() {
-		return salt;
-	}
-
-	public void setSalt(String salt) {
-		this.salt = salt;
-	}
-
-	public boolean isRealNameAuth() {
+	public Boolean getRealNameAuth() {
 		return realNameAuth;
 	}
 
-	public void setRealNameAuth(boolean realNameAuth) {
+	public void setRealNameAuth(Boolean realNameAuth) {
 		this.realNameAuth = realNameAuth;
 	}
 
-	public boolean isEmailAuth() {
+	public Boolean getEmailAuth() {
 		return emailAuth;
 	}
 
-	public void setEmailAuth(boolean emailAuth) {
+	public void setEmailAuth(Boolean emailAuth) {
 		this.emailAuth = emailAuth;
 	}
 
-	public boolean isMobileAuth() {
+	public Boolean getMobileAuth() {
 		return mobileAuth;
 	}
 
-	public void setMobileAuth(boolean mobileAuth) {
+	public void setMobileAuth(Boolean mobileAuth) {
 		this.mobileAuth = mobileAuth;
-	}
-
-	public boolean isHasPic() {
-		return hasPic;
-	}
-
-	public void setHasPic(boolean hasPic) {
-		this.hasPic = hasPic;
 	}
 
 	public String getAvatar() {
@@ -183,28 +143,28 @@ public class User extends BaseDomain {
 		this.avatar = avatar;
 	}
 
-	public String getQqOpenid() {
-		return qqOpenid;
+	public String getWeiboOpenId() {
+		return weiboOpenId;
 	}
 
-	public void setQqOpenid(String qqOpenid) {
-		this.qqOpenid = qqOpenid;
+	public void setWeiboOpenId(String weiboOpenId) {
+		this.weiboOpenId = weiboOpenId;
 	}
 
-	public String getWebchatOpenid() {
-		return webchatOpenid;
+	public String getWebcharOpenId() {
+		return webcharOpenId;
 	}
 
-	public void setWebchatOpenid(String webchatOpenid) {
-		this.webchatOpenid = webchatOpenid;
+	public void setWebcharOpenId(String webcharOpenId) {
+		this.webcharOpenId = webcharOpenId;
 	}
 
-	public String getWeiboOpenid() {
-		return weiboOpenid;
+	public String getQqOpenId() {
+		return qqOpenId;
 	}
 
-	public void setWeiboOpenid(String weiboOpenid) {
-		this.weiboOpenid = weiboOpenid;
+	public void setQqOpenId(String qqOpenId) {
+		this.qqOpenId = qqOpenId;
 	}
 
 	public Date getLastVisitTime() {
@@ -215,12 +175,20 @@ public class User extends BaseDomain {
 		this.lastVisitTime = lastVisitTime;
 	}
 
-	public UserStatus getStatus() {
-		return status;
+	public UserStatus getUserStatus() {
+		return userStatus;
 	}
 
-	public void setStatus(UserStatus status) {
-		this.status = status;
+	public void setUserStatus(UserStatus userStatus) {
+		this.userStatus = userStatus;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 }

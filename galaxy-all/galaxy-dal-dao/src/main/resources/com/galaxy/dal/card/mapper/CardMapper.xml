@@ -14,109 +14,55 @@
 <mapper namespace="com.galaxy.dal.card.mapper.CardMapper">
 
 	<resultMap type="card" id="CARD_MAP">
-		<id property="card_id" column="id" />
+		<id property="id" column="id" />
 		<result property="createdTime" column="created_time" />
 		<result property="updatedTime" column="updated_time" />
+		<result property="userId" column="user_id" />
+		<result property="username" column="username" />
+		<result property="company" column="company" />
+		<result property="title" column="title" />
+		<result property="phone" column="phone" />
+		<result property="email" column="email" />
+		<result property="address" column="address" />
+		<result property="website" column="website" />
+		<result property="qq" column="qq" />
+		<result property="weixin" column="weixin" />
+		<result property="avatar" column="avatar" />
+		<result property="qrcodeUrl" column="qrcode_url" />
 	</resultMap>
 	
-	<!-- 查询card_id名片 -->
-	<select id="getById" resultMap="CARD_MAP"
-		parameterType="long">
-		SELECT *
-		FROM u_card
-		WHERE id = #{id}
+	<insert id="insert" parameterType="card" useGeneratedKeys="true" keyProperty="id">
+		insert into u_card
+		(created_time,updated_time,user_id,username,company,title,phone,email,address,website,qq,weixin,avatar,qrcode_url)
+		values(#{createdTime},#{updatedTime},#{userId},#{username},#{company},#{title},#{phone},#{email},#{address},#{website},#{qq},#{weixin},#{avatar},#{qrcodeUrl})
+	</insert>
+	
+	<delete id="deleteById" parameterType="long">
+		delete from u_card
+		where id =#{id}
+	</delete>
+	
+	<select id="getById" parameterType="long" resultMap="CARD_MAP">
+		select * from u_card
+		where id = #{id}
 	</select>
 	
-	<!-- 查询user_id名片 -->
+	<!-- 查询userId名片 -->
 	<select id="getByUserId" resultMap="CARD_MAP"
 		parameterType="long">
 		SELECT *
 		FROM u_card
-		WHERE user_id = #{user_id}
+		WHERE user_id = #{userId}
 	</select>
 	
-	<!-- 查询所有名片 -->
-	<!-- 	
-	private Long user_id;
-	private String name;// 名字
-	private String company;// 公司
-	private String title;// 职位
-	private String phone;
-	private String email;
-	private String address;
-	private String website;// 个人主页
-	private String qq;
-	private String weixin;
-	private String photo;// 头像URL
-	private String qrcode;// 名片二维码地址
-	-->
-	
-	<!-- 创建名片 -->
-	<insert id="insert" parameterType="card"
-		useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO
-		u_card(id,created_time,user_id,name,company,title,phone,email,address,website,qq,weixin,photo,qrcode)
-		VALUES(#{card_id},#{createdTime},#{user_id},#{name},#{company},#{title},#{phone},#{email},#{address},#{website},#{qq},#{weixin},#{photo},#{qrcode})
-	</insert>
-	
-	<!-- 删除名片，应该没有 -->
-	<delete id="deleteById" parameterType="long">
-	delete from u_card
-	where 
-	id = #{id}
-	</delete>
 	
 	<!-- 修改名片 ,user_id和qrcode地址应该是不更新的-->
 	<update id="update" parameterType="card">
 	update u_card 
 	set
-	name = #{name},company = #{company},title = #{title},phone = #{phone},email = #{email},address = #{address},
-	website = #{website},qq = #{qq},weixin = #{weixin},photo = #{photo}
+	updated_time = #{updatedTime},username = #{username},company = #{company},title = #{title},phone = #{phone},email = #{email},address = #{address},
+	website = #{website},qq = #{qq},weixin = #{weixin},avatar = #{avatar},qrcode_url = #{qrcodeUrl}
 	where user_id = #{user_id}
 	</update>
 	
-	<!-- 添加名片到我的名片夹 -->
-	<insert id="addCardToMyBook" useGeneratedKeys="true" keyProperty="id" parameterType="cardBook" >
-	insert into u_user_cards
-	(user_id,card_id)
-	values(#{user_id},#{card_id})
-	</insert>
-	
-	<!-- 从我的名片夹删除名片 -->
-	<delete id="deleteCardFormMyBook">
-	delete from u_user_cards
-	where user_id = #{user_id}
-	and card_id = #{card_id}
-	</delete>
-	
-	<!-- 分页得到我名片夹里的名片 ,paginationParam.map.key={user_id}-->
-	<select id="getCradsFromMyBook" resultMap="CARD_MAP" parameterType ="com.galaxy.dal.base.mapper.PaginationParam">
-	select * from u_card 
-	where id in
-	(select card_id from u_user_cards where user_id = #{param1.user_id})
-	limit #{param2},#{param3}
-	</select>
-	
-	<!-- 得到我名片夹里的所有名片 -->
-	<select id="getAllCradsFromMyBook" resultMap="CARD_MAP" parameterType="long">
-	select * from u_card
-	where id in
-	(select card_id from u_user_cards where user_id = #{user_id})
-	</select>
-	
-	<!-- 查看是否已经添加某人名片,user_id和他人的user_id(target_id) -->
-	<select id="checkisAdded" resultType="int">
-	select count(id)
-	from u_user_cards
-	where user_id = #{user_id} 
-	and card_id in (select card_id from u_card where user_id = #{target_id}) 
-	</select>
-	
-	<!-- 查看是否已经添加某人名片,user_id和他人的card_id -->
-	<select id="checkisAddedByUserIdCardId" resultType="int">
-	select count(id)
-	from u_user_cards
-	where user_id = #{user_id} 
-	and card_id = #{card_id}
-	</select>
 </mapper>

@@ -33,14 +33,18 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.galaxy.dal.domain.activity.Activity;
 import com.galaxy.dal.domain.activity.ActivityDetail;
+import com.galaxy.dal.domain.activity.ActivityTicket;
 import com.galaxy.dal.domain.activity.ActivityType;
+import com.galaxy.dal.domain.ticket.Ticket;
 import com.galaxy.front.web.activity.controller.PostModel.CreateModel;
 import com.galaxy.front.web.activity.controller.PostModel.EvenBaseInfoModel;
 import com.galaxy.front.web.activity.controller.PostModel.OrgModel;
 import com.galaxy.front.web.activity.controller.PostModel.TicketModel;
 import com.galaxy.front.web.rest.model.ResultModel;
+import com.galaxy.front.web.utils.ActivityUtils;
 import com.galaxy.service.activity.ActivityService;
 import com.galaxy.service.activity.form.ActivityForm;
+import com.galaxy.service.ticket.TicketService;
 import com.galaxy.service.user.LoginUserModel;
 import com.galaxy.service.user.UserUtils;
 import com.google.gson.Gson;
@@ -56,6 +60,8 @@ public class ActivityController {
 
 	@Autowired
 	private ActivityService activityService;
+	@Autowired
+	private TicketService ticketService;
 
 	/**
 	 * ajax创建活动表单提交第一版
@@ -166,12 +172,12 @@ public class ActivityController {
 			activityForm.setDescription(evenBaseInfoModel.getDescription());
 			activityForm.setContent(editor_text_zyc);// 详情
 
-			activityForm.setHaibao_urls(evenBaseInfoModel.getHaibao_urls());
+			activityForm.setPictures(evenBaseInfoModel.getHaibao_urls());
 
 			activityForm.setCatId1(Long.valueOf(evenBaseInfoModel.getEvent_category1()));
 
-			activityForm.setType((evenBaseInfoModel.getEvent_yinsi() % 2 == 0) ? ActivityType.ONLINE
-					: ActivityType.OFFLINE);
+			activityForm.setActivityType((evenBaseInfoModel.getEvent_yinsi() % 2 == 0) ? ActivityType.opening
+					: ActivityType.privacy);
 
 			activityService.create(activityForm);
 
@@ -211,6 +217,8 @@ public class ActivityController {
 		
 		LoginUserModel loginUserModel = UserUtils.getLoginUser();
 		long userId = loginUserModel.getUserId();
+		
+		
 		System.out.println("userId============================="+userId);
 		//保存海报
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
@@ -245,7 +253,7 @@ public class ActivityController {
 					"/activity/"+userId+"/"+fold+"/"+filename2+";"+
 					"/activity/"+userId+"/"+fold+"/"+filename3;
 			System.out.println("haibao_urls======="+haibao_urls);
-			activityForm.setHaibao_urls(haibao_urls);
+			activityForm.setPictures(haibao_urls);
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -254,33 +262,46 @@ public class ActivityController {
 			e.printStackTrace();
 		}
 		//保存海报
-		
-		
-		activityForm.setUserId(userId);
-		activityForm.setType((model.getOptionsRadios()==1)?ActivityType.ONLINE:ActivityType.OFFLINE);
-		activityForm.setCatId1(model.getCatId1());
-		activityForm.setCatId2(model.getCatId2());
 		activityForm.setTitle(model.getName());
 		activityForm.setStartTime(String2Date(model.getStart_time()));
 		activityForm.setEndTime(String2Date(model.getEnd_time()));
 		activityForm.setProvinceId(model.getProvince());
 		activityForm.setCityId(model.getCity());
-		activityForm.setDistrictId(model.getDistrict());
+		activityForm.setAreaId(model.getArea());
 		activityForm.setAddress(model.getAddress_detail());
+		activityForm.setTags(model.getTags());
+		activityForm.setJoinedNum(0);
+		activityForm.setCommentNum(0);;
+		activityForm.setTicketsNum(model.getTicket_num());
+		activityForm.setCollectNum(0);
+		
+		activityForm.setActivityStatus(ActivityUtils.getActivityStatus(activityForm.getStartTime(), activityForm.getEndTime()));
+		activityForm.setNeedAudit(false);
+		activityForm.setPhone(model.getPhone());
+		activityForm.setDescription(model.getDescription().trim());
+        //无email
+		activityForm.setCatId1(model.getCatId1());
+		activityForm.setCatId2(model.getCatId2());
 		activityForm.setLongtitude(model.getLongtitude());
 		activityForm.setLatitude(model.getLatitude());
-		activityForm.setPrice(model.getTicket_price());
-		activityForm.setTicketsNum(model.getTicket_num());
-		activityForm.setPhone(model.getPhone());
-		activityForm.setTags(model.getTags());
-		activityForm.setDescription(model.getDescription().trim());
+		activityForm.setActivityType((model.getOptionsRadios()==1)?ActivityType.opening:ActivityType.privacy);
+		activityForm.setOrganizerId(userId);
 		activityForm.setContent(model.getDetail().trim());
-		activityForm.setSponsor(model.getSponsor());
+		activityForm.setFree(model.getTicket_price()>0?false:true);
 		
-		activityForm.setJoinedNum(0);
-		activityForm.setLiked_num(0);
+		Long activityId = activityService.create(activityForm);
 		
-		activityService.create(activityForm);
+		Ticket ticket = new Ticket();
+		ticket.setCreatedTime(new Date());
+		ticket.setUpdatedTime(ticket.getCreatedTime());
+		ticket.setTicketName("默认门票");
+		ticket.setPrice(model.getTicket_price());
+		ticket.setTotal(model.getTicket_num());
+		ticket.setRemain(ticket.getTotal());
+		ticket.setActivityId(activityId);
+		
+		ticketService.createTicket(ticket);
+		
 		request.setAttribute("message", "创建活动成功");
 		return "activity/postsuccess";
 	}

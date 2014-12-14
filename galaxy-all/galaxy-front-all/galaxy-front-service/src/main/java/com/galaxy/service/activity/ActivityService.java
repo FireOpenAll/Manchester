@@ -1,33 +1,84 @@
 package com.galaxy.service.activity;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
- 
-
-
-
-
-
-
-
 
 import org.apache.ibatis.annotations.Param;
 
-import com.galaxy.dal.base.mapper.PaginationParam;
 import com.galaxy.dal.domain.activity.Activity;
+import com.galaxy.dal.domain.activity.ActivityCollectUser;
 import com.galaxy.dal.domain.activity.ActivityComment;
 import com.galaxy.dal.domain.activity.ActivityDetail;
-import com.galaxy.dal.domain.activity.ActivityJoinedUsers;
-import com.galaxy.dal.domain.activity.ActivityLikedUsers;
-import com.galaxy.dal.domain.user.User;
+import com.galaxy.dal.domain.activity.ActivityUser;
 import com.galaxy.service.activity.form.ActivityForm;
 
 public interface ActivityService {
+	public Activity getActivity(Long id);
+	public Long create(ActivityForm form);
+	public ActivityDetail getDetailByActId(Long id);
+	
+	public List<Activity> getActivitySortInJoinNum(Integer offset,Integer pageSize);
+	public List<Activity> getActivitySortInCommentNum(Integer offset,Integer pageSize);
+	public List<Activity> getActivitySortInCreateTime(Integer offset,Integer pageSize);
+	
+	public boolean modify(ActivityForm form);
+	public boolean removeById(Long id);
+	
+	public int getUserpublishedActNumber(Long userId);
+	public List<Activity> getUserPublishActivity(Long userId,Integer offset,Integer pageSize);
+
+	
+	//ActivityUser
+	public boolean joinActivity(ActivityUser activityUser);
+	public boolean unjoinActivity(ActivityUser activityUser);
+	public boolean updateAcitvityUserInfo(ActivityUser activityUser);
+	public ActivityUser getAcitvityUserById(Long id);
+
+	public List<ActivityUser> getJoinedUsersSortInTime(Long activityId,int offset, int pageSize);
+	//计算user_id参加的活动数
+	public int getUserJoinedActNumber(Long userId);
+	
+	public List<ActivityUser> getUserJoinedActs(Long userId,int offset,int pageSize);
+	
+	public ActivityUser getByUserIdActIdTicketId( Long userId,Long activityId,Long ticketId);
+	public ActivityUser getByUserIdActId( Long userId,Long activityId);
+	
+	//ActivityUser
+	
+	
+	
+	////comment
+	//统计user_id评论过的活动数
+	public int getUserComActNum(Long userId);
+	//分页得到某活动的评论
+	public ArrayList<ActivityComment> getActComSortByTime(Long activityId,Integer offset,Integer pageSize);
+	//分页得到用户评论过的活动
+	public List<Activity> getUserComedActSortByTime(Long userId,int offset,int pageSize);
+	public boolean commentActivity(ActivityComment activityComment);
+	public ActivityComment getCommentById(Long commentId);
+	public boolean deleteComment(Long commentId);
+	public boolean modifyComment(ActivityComment activityComment);
+	////comment
+	
+	
+	///collect
+	public boolean collectActivity(ActivityCollectUser activityCollectUser);
+	public boolean cancelCollectActivity(Long collectId);
+	public int getUserCollectActNum(Long userId);
+	public List<ActivityCollectUser> getActCollectSortByTime(Long activityId,Integer offset,Integer pageSize);
+	public ArrayList<Activity>getUserCollectedActSortByTime(Long userId,Integer offset,Integer pageSize);
+	///collect
+	
+	
+	
+	
+	
+	/*
 
 	////detail
-	public ActivityDetail getDetailByActId(Long id);
+	
 	////detail
-	public Long create(ActivityForm form);
+	
 	
 	public boolean modify(ActivityForm form);
 
@@ -41,7 +92,7 @@ public interface ActivityService {
     
     ////update
 
-	public Activity getActivity(Long id);
+	
 
 	public List<Activity> list(Map parameters, int size);
 	////create
@@ -54,12 +105,10 @@ public interface ActivityService {
 	////join
 	public boolean joinActivity(Long activityId, Long userId);
 	public boolean unjoinActivity(Long activityId, Long userId);
-	public List<ActivityJoinedUsers> listAllJoinedUsers(Long activityId);
 	
 	//用户参加的所有活动
 	public List<Activity> listAllJoinedActs(Long userId);
 	
-	public List<ActivityJoinedUsers> listAllJoinedUsersFromId(Long activityId,Long fromId,int size);
 	
 	//列出某活动的前几个参加用户
 	public List<User> listTopActJionUser(Long activityId,int num);
@@ -73,12 +122,7 @@ public interface ActivityService {
 	
 	
 	////like
-	public boolean likeActivity(ActivityLikedUsers activityLikedUsers);
 	
-	//分页列出某个活动点赞的用户
-	public List<ActivityLikedUsers> listAllLikedUsers(Long activity_id);
-	//分页列出某个活动点赞的用户
-	public List<ActivityLikedUsers> listAllLikedUsersByActId(PaginationParam paginationParam);
 	//分页得到用户点赞过的活动
 	public List<Activity> getUserLikedActByUntilId(long userId,long untilId,long pageSize);
 	//计算user_id Liked过的活动数
@@ -105,6 +149,8 @@ public interface ActivityService {
 	
 	//统计某user_id发布的活动数
 	public int getUserCreatedActNum(Long user_id);
+	public ActivityJoinedUser getActivityJoinUserByUserId(Long activityId, Long userId);
+*/
 
-	public ActivityJoinedUsers getActivityJoinUserByUserId(Long activityId, Long userId);
+
 }

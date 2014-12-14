@@ -171,24 +171,24 @@ height: 15px;
 		    		
 		    		<tr style="margin: 20px;">
 			   			<td width="100%" colspan="9" align="center" >本页${itemNum}条记录      
-			   				<a href='${pageContext.request.contextPath}/user/act/published?pageNo=1'>&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			   				<a href='/user/act/published?pageNo=1'>&nbsp;&nbsp;&nbsp;&nbsp;首页&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</a>
 			   				<c:choose>
 			   					<c:when test="${pageNo-1 ge 1}">
-			   						<a href='${pageContext.request.contextPath}/user/act/published?pageNo=${pageNo-1}'>上一页&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			   						<a href='/user/act/published?pageNo=${pageNo-1}'>上一页&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</a>
 			   					</c:when>
 			   					<c:otherwise>
-			   						<a href='${pageContext.request.contextPath}/user/act/published?pageNo=1'>上一页&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			   						<a href='/user/act/published?pageNo=1'>上一页&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</a>
 			   					</c:otherwise>
 			   				</c:choose>
 			   				<c:choose>
 			   					<c:when test="${pageNo+1 le totalPages}">
-			   						<a href='${pageContext.request.contextPath}/user/act/published?pageNo=${pageNo+1}'>下一页&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			   						<a href='/user/act/published?pageNo=${pageNo+1}'>下一页&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</a>
 			   					</c:when>
 			   					<c:otherwise>
-			   						<a href='${pageContext.request.contextPath}/user/act/published?pageNo=${totalPages}'>下一页&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			   						<a href='/user/act/published?pageNo=${totalPages}'>下一页&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</a>
 			   					</c:otherwise>
 			   				</c:choose>			   			
-			   				<a href='${pageContext.request.contextPath}/user/act/published?pageNo=${totalPages}'>末页&nbsp;&nbsp;&nbsp;&nbsp;</a>	
+			   				<a href='/user/act/published?pageNo=${totalPages}'>末页&nbsp;&nbsp;&nbsp;&nbsp;</a>	
 			   			      第${pageNo}页/共${totalPages}页			   			
 			   			</td>
 			   		</tr>  

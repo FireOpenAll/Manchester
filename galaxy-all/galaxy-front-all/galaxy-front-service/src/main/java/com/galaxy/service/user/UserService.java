@@ -1,7 +1,7 @@
 package com.galaxy.service.user;
 
 
-import java.util.Map;
+import java.util.Date;
 
 import com.galaxy.dal.domain.user.User;
 
@@ -9,33 +9,32 @@ public interface UserService {
 	public static final String HASH_ALGORITHM = "SHA-1";
 	public static final int HASH_INTERATIONS = 1024;
 	public static final int SALT_SIZE = 8;
-	User getUser(Long userId);
-
-	boolean createUser(User user);
-	////update
+	
+	public boolean createUser(User user);
 	public boolean update(User user);
-	public boolean updateUserFansNumById(Long userId,int num);
+	public User getUserById(Long userId);
+    public boolean deleteById(Long userId);
+    
+	public boolean updateLoginInfo(Long id,Date LastVisitTime);
 	
-	public boolean updateUserFollowersNumById(Long userId,int num);
+	public User getUserByEmail(String email);
+	public User getUserByLoginName( String loginName);
+	public User getUserByMobile(String mobile);
+    public User getUserByEmailPassword(String email,String password);
+    public User getUserByLoginNamePassword(String loginName,String password);
+    public User getUserByMobilePassword(String mobile,String password);
+	
 	////update
-	/**
-	 * 查找有这email的用户数
-	 * @param email
-	 * @return
-	 */
-	int countUsersByEmail(String email);
-	int countUsersByMobile(String mobile);
-	int countUsersByLoginName(String login_name);
+	public boolean updateUserFriendNumByUserId(Long userId,int num);
+	public boolean updateEmailAuthByEmail(String email,Boolean emailAuth);
+	public boolean updateMobileAuthByMobile(String mobile,Boolean mobileAuth);
+	////update
+
+	public User findUserByLoginName(String loginName);
 	
-	//设置邮箱为认证
-	int setUserEmailAuthByEmail(Map<String, Object> map);
+	public boolean isEmailExisted(String email);
+	public boolean isLoginNameExisted(String loginName);
+	public boolean isMobileExisted(String mobile);
 	
-	User findUserByLoginName(String loginName);
-	User getUserbyEmailPassword(Map<String, String> map);
-	User getUserbyMobilePassword(Map<String, String> map);
-	User getUserbyLoginNamePassword(Map<String, String> map);
-	
-	//邮箱是否认证
-	boolean checkEmailAuth(String email);
 
 }

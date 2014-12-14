@@ -1,5 +1,7 @@
 package com.galaxy.front.web.rest.user.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
@@ -74,6 +76,9 @@ public class LoginController {
 
 			resultModel.setData(authModel);
 			UserUtils.setUserModel(loginedUser.getToken(), subject);
+			//更新登录时间
+			userService.updateLoginInfo(loginedUser.getUserId(), new Date());
+			
 		} catch (AuthenticationException e) {
 			resultModel = ResultModelUtils
 					.getResultModelByCode(Code.LOGIN_FAILED);

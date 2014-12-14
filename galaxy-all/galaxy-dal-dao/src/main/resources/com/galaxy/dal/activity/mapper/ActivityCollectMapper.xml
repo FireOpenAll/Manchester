@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.galaxy.dal.activity.mapper.ActivityCollectMapper"> 
+	<resultMap type="activityCollectUser" id="ACTIVITY_COLLECT_USER_MAP">
+		<id property="id" column="id" />
+		<result property="createdTime" column="created_time" />
+		<result property="updatedTime" column="updated_time" />
+		<result property="activityId" column="activity_id" />
+		<result property="userId" column="user_id" />
+	</resultMap>
+	<select id="getById" resultMap="ACTIVITY_COLLECT_USER_MAP"
+		parameterType="long">
+		SELECT *
+		FROM ac_activity_collect_user
+		WHERE id = #{id}
+	</select>
+
+	<insert id="insert" parameterType="activityCollectUser"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		ac_activity_collect_user(created_time,updated_time,activity_id,user_id)
+		VALUES(#{createdTime},#{updatedTime},#{activityId},#{userId})
+	</insert>
+	
+	<delete id="deleteById" parameterType="long">
+	delete from ac_activity_collect_user
+	where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="activityCollectUser">
+	update ac_activity_collect_user
+	set updated_time = #{updatedTime}
+	where id = #{id}
+	</update>
+
+   <select id="getUserCollectActNum" parameterType="long" resultType="int">
+   select count(*)
+   from ac_activity_collect_user
+   where user_id = #{userId}
+   </select>
+   
+   <select id="getActCollectSortByTime" resultMap="ACTIVITY_COLLECT_USER_MAP">
+   select *
+   from ac_activity_collect_user
+   where activity_id = #{activityId}
+   order by created_time desc
+   limit #{offset},#{pageSize}
+   </select>
+   
+   <select id="getUserCollectedActSortByTime" resultMap="ACTIVITY_COLLECT_USER_MAP">
+   select *
+   from ac_activity_collect_user
+   where user_id = #{userId}
+   order by  created_time desc
+   limit #{offset},#{pageSize}
+   </select>
+	
+   <select id="getByUserIdActId" resultMap="ACTIVITY_COLLECT_USER_MAP">
+   select *
+   from ac_activity_collect_user
+   where activity_id = #{activityId} and user_id = #{userId}
+   limit 1
+   </select>
+</mapper>

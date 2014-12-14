@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.galaxy.dal.activity.mapper.ActivityUserMapper">
+
+	<resultMap type="activityUser" id="ACTIVITY_USER_MAP">
+		<id property="id" column="id" />
+		<result property="createdTime" column="created_time" />
+		<result property="updatedTime" column="updated_time" />
+		<result property="userId" column="user_id"/>
+		<result property="username" column="username"/>
+		<result property="activityId" column="activity_id"/>
+		<result property="ticketId" column="ticket_id"/>
+		<result property="num" column="num"/>
+	</resultMap>
+	
+	<insert id="insert" parameterType="activityUser"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		ac_activity_user(
+		created_time,updated_time,user_id,username,activity_id,ticket_id,num
+		)values (
+		#{createdTime},#{updatedTime},#{userId},#{username},
+		#{activityId},#{ticketId},#{num}
+		)
+	</insert>
+	
+	<update id="update" parameterType="activityUser">
+	update ac_activity_user
+	set username = #{username} and num = #{num}
+	where id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="long">
+	delete from ac_activity_user
+	where
+	id = #{id}
+	</delete>
+	
+	<select id="getById" resultMap="ACTIVITY_USER_MAP"
+		parameterType="long">
+		SELECT *
+		FROM ac_activity_user
+		WHERE id = #{id}
+	</select>
+	
+	<select id="listAllJoinedUsers" parameterType="long" resultMap="ACTIVITY_USER_MAP">
+	select *
+	from ac_activity_user
+	where activity_id = #{activityId}
+	order by created_time
+	</select>
+	
+	<select id="getJoinedUsersSortInTime" resultMap="ACTIVITY_USER_MAP">
+	select *
+	from ac_activity_user
+	where activity_id = #{activityId}
+	order by created_time
+	limit #{offset},#{pageSize}
+	</select>
+	
+	<select id="getUserJoinedActNumber" parameterType="long" resultType="int">
+	select count(*)
+	from ac_activity_user
+	where user_id = #{userId}
+	</select>
+	
+	<select id="getUserJoinedActs" resultMap="ACTIVITY_USER_MAP">
+	select *
+	from ac_activity_user
+	where user_id = #{userId}
+	order by created_time
+	limit #{offset},#{pageSize}
+	</select>
+	
+	<select id="getByUserIdActId" resultMap="ACTIVITY_USER_MAP">
+	select *
+	from ac_activity_user
+	where user_id = #{userId} and activity_id = #{activityId} and ticket_id = #{ticketId}
+	</select>
+</mapper>

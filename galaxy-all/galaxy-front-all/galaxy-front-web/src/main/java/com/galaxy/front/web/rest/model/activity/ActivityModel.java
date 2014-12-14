@@ -2,16 +2,138 @@ package com.galaxy.front.web.rest.model.activity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.junit.Test;
+import org.springframework.beans.BeanUtils;
+
+import com.galaxy.dal.domain.activity.Activity;
 import com.galaxy.front.web.rest.model.Contact;
 import com.galaxy.front.web.rest.model.Photo;
-import com.galaxy.front.web.rest.model.interest.CategoryModel;
-import com.galaxy.front.web.rest.model.location.LocationInfo;
 import com.galaxy.front.web.rest.model.user.UserModel;
+import com.mysql.fabric.xmlrpc.base.Array;
 
 public class ActivityModel implements Serializable {
+	
+	private Long id;
+	private String title;
+	private Date startTime;
+	private Date endTime;
+	private String address;
+	private List<String> tagsList;
+	private String cover;
+	private Integer joinedNum;
+	private Integer commentNum;
+	private Double price;
 
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public Date getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+	public Date getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public List<String> getTagsList() {
+		return tagsList;
+	}
+	public void setTagsList(List<String> tagsList) {
+		this.tagsList = tagsList;
+	}
+	public String getCover() {
+		return cover;
+	}
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+	public Integer getJoinedNum() {
+		return joinedNum;
+	}
+	public void setJoinedNum(Integer joinedNum) {
+		this.joinedNum = joinedNum;
+	}
+	public Integer getCommentNum() {
+		return commentNum;
+	}
+	public void setCommentNum(Integer commentNum) {
+		this.commentNum = commentNum;
+	}
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
+	
+	
+	public static ActivityModel ActToActModel(Activity activity){
+		ActivityModel activityModel = new ActivityModel();
+		BeanUtils.copyProperties(activity, activityModel);
+		activityModel.setCover(activity.getPictures().split(";")[0]);
+		activityModel.setTagsList(Arrays.asList(activity.getTags().split(";")));
+		return activityModel;
+	}
+	
+	public static ArrayList<ActivityModel> ActListToActModelList(List<Activity> list){
+		if(list ==null || list.size() == 0){
+			return null;
+		}
+		ArrayList<ActivityModel> results = new ArrayList<ActivityModel>();
+		for(Activity activity:list){
+			results.add(ActToActModel(activity));
+		}
+		return results;
+	}
+	
+	@Test
+	public void test(){
+		Activity act = new Activity();
+		act.setId(1000000L);
+		act.setTitle("title");
+		act.setStartTime(new Date());
+		act.setEndTime(act.getStartTime());
+		act.setAddress("地址");
+		act.setTags("aa;bb;cc");
+		act.setPictures("aa;bb;cc");
+		act.setJoinedNum(223);
+		act.setCommentNum(33);
+		
+		ActivityModel model = new ActivityModel();
+		BeanUtils.copyProperties(act, model);
+		model.setCover(act.getPictures().split(";")[0]);
+		model.setTagsList(Arrays.asList(act.getTags().split(";")));
+		System.out.println(ToStringBuilder.reflectionToString(model));
+	}
+
+	/*
 	private String feed_type;// feedItem类型
 
 	private Long activity_id;
@@ -214,5 +336,5 @@ public class ActivityModel implements Serializable {
 	public void setInterest_list(ArrayList<CategoryModel> interest_list) {
 		this.interest_list = interest_list;
 	}
-
+*/
 }

@@ -1,81 +1,120 @@
 package com.galaxy.service.card.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.galaxy.dal.base.mapper.PaginationParam;
 import com.galaxy.dal.card.mapper.CardMapper;
+import com.galaxy.dal.card.mapper.UserCardMapper;
 import com.galaxy.dal.domain.card.Card;
-import com.galaxy.dal.domain.card.CardBook;
+import com.galaxy.dal.domain.card.UserCard;
 import com.galaxy.service.card.CardService;
 
 /*author:huangshanqi
- *time  :2014年10月16日 下午12:43:14
+ *time  :2014年12月2日 下午9:49:44
  *email :hsqmobile@gmail.com
  */
 @Service
 public class CardServiceImpl implements CardService {
-
 	@Autowired
 	CardMapper cardMapper;
-	
+	@Autowired
+	private UserCardMapper userCardMapper;
+
 	@Override
 	public boolean createCard(Card card) {
 		// TODO Auto-generated method stub
+		Card temp = cardMapper.getByUserId(card.getUserId());
+		if (temp != null) {
+			return false;
+		}
 		return cardMapper.insert(card);
 	}
 
 	@Override
-	public boolean modefyCard(Card card) {
+	public boolean updateCard(Card card) {
 		// TODO Auto-generated method stub
 		return cardMapper.update(card);
 	}
 
 	@Override
-	public Card getCardByUserId(Long user_id) {
+	public boolean deleteCardById(Long cardId) {
 		// TODO Auto-generated method stub
-		return cardMapper.getByUserId(user_id);
+		return cardMapper.deleteById(cardId);
 	}
 
 	@Override
-	public boolean addCardToMyBook(CardBook cardBook) {
+	public Card getCardById(Long cardId) {
 		// TODO Auto-generated method stub
-		return cardMapper.addCardToMyBook(cardBook);
+		return cardMapper.getById(cardId);
 	}
 
 	@Override
-	public boolean deleteCardFormMyBook(Long user_id, Long card_id) {
+	public Card getCardByUserId(Long userId) {
 		// TODO Auto-generated method stub
-		return cardMapper.deleteCardFormMyBook(user_id, card_id);
+		return cardMapper.getByUserId(userId);
+	}
+
+	
+	
+	@Override
+	@Transactional
+	public boolean createUserCard(UserCard userCard) {
+		// TODO Auto-generated method stub
+		UserCard temp = userCardMapper.getByUserIdTargetUserId(userCard.getUserId(), userCard.getTargetUserId());
+		if(temp == null){
+			return userCardMapper.insert(userCard);
+		}
+		return false;
 	}
 
 	@Override
-	public List<Card> getCradsFromMyBook(PaginationParam paginationParam) {
+	public boolean updateUserCard(UserCard userCard) {
 		// TODO Auto-generated method stub
-		return cardMapper.getCradsFromMyBook(paginationParam);
+		return userCardMapper.update(userCard);
 	}
 
 	@Override
-	public ArrayList<Card> getAllCradsFromMyBook(Long user_id) {
+	public boolean deleteUserCardByUserCardId(Long userCardId) {
 		// TODO Auto-generated method stub
-		return cardMapper.getAllCradsFromMyBook(user_id);
+		return userCardMapper.deleteById(userCardId);
 	}
 
 	@Override
-	public boolean checkisAdded(long user_id, Long target_id) {
+	public UserCard getUserCardByUserCardId(Long userCardId) {
 		// TODO Auto-generated method stub
-		return (cardMapper.checkisAdded(user_id, target_id)>0)?true:false;
+		return userCardMapper.getById(userCardId);
+	}
+	
+	@Override
+	public List<UserCard> getAllFriendCard(Long userId) {
+		// TODO Auto-generated method stub
+		return userCardMapper.getAllFriendCard(userId);
 	}
 
 	@Override
-	public boolean checkisAddedByUserIdCardId(Long user_id, Long card_id) {
+	public List<UserCard> getFriendCardPageByOffset(Long userId, int offset, int pageSize) {
 		// TODO Auto-generated method stub
-		return (cardMapper.checkisAddedByUserIdCardId(user_id, card_id)>0)?true:false;
+		return userCardMapper.getFriendCardPageByOffset(userId, offset, pageSize);
+	}
+
+	@Override
+	public UserCard getByUserIdTargetUserId(Long userId, Long targetUserId) {
+		// TODO Auto-generated method stub
+		return userCardMapper.getByUserIdTargetUserId(userId, targetUserId);
+	}
+
+	@Override
+	public boolean hasAddCard(Long userId, Long targetUserId) {
+		// TODO Auto-generated method stub
+		UserCard temp = userCardMapper.getByUserIdTargetUserId(userId, targetUserId);
+		return temp != null;
 	}
 	
 	
+
+
 
 }

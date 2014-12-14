@@ -45,7 +45,7 @@ public class RegisterController {
 		String email = registerForm.getEmail();
 		String password = registerForm.getPassword();
 		if (RegexUtils.checkAll(username, password, email, null)) {
-			if (userService.countUsersByEmail(email) > 0) {
+			if (userService.isEmailExisted(email)) {
 				// email 已被注册
 				request.setAttribute("message", "该邮箱已被注册,请重新注册!");
 			} else {

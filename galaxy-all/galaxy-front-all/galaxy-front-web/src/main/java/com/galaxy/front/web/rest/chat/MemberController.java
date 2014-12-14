@@ -24,13 +24,13 @@ public class MemberController {
 
 	@RequestMapping(value = "member")
 	public Object memberInfo(@RequestParam("id") Long memberId) {
-		User user = userService.getUser(memberId);
+		User user = userService.getUserById(memberId);
 		if (user == null) {
 			return Collections.EMPTY_MAP;
 		}
 		ChatMemberModel model=new ChatMemberModel();
         model.setAvatar(user.getAvatar());
-        model.setGender(user.getSex());
+        model.setGender(""+user.getGender());
         String name=user.getLoginName();
         if(StringUtils.isBlank(name)){
         	name=user.getNick();

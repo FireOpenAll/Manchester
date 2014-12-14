@@ -1,8 +1,5 @@
 package com.galaxy.front.web.rest.user.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.galaxy.dal.domain.user.User;
 import com.galaxy.front.web.rest.interceptor.IgnoreAuth;
 import com.galaxy.front.web.utils.Constants;
-import com.galaxy.front.web.utils.EmailUtils;
 import com.galaxy.front.web.utils.MD5Utils;
 import com.galaxy.front.web.utils.RegexUtils;
 import com.galaxy.service.user.UserService;
@@ -46,21 +41,7 @@ public class EmailController {
 		
 		if (RegexUtils.checkEmail(email) && MD5Utils.verifyMD2(email, code)) {
 
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("email", email);
-			map.put("email_auth", true);
-			
-			userService.setUserEmailAuthByEmail(map);
-			
-			//验证成功创建名片
-			
-			/*
-			stringBuffer.append("邮箱验证成功,");
-			stringBuffer.append(email).append(" 马上登陆：");
-			stringBuffer.append(Constans.localhost);
-			stringBuffer.append("user/login");
-			request.setAttribute("message", stringBuffer.toString());
-			*/
+			userService.updateEmailAuthByEmail(email, true);
 			return "user/email_verify_success";
 
 		} else {

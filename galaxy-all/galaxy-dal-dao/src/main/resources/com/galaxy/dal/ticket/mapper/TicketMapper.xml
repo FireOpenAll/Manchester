@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.galaxy.dal.ticket.mapper.TicketMapper">
+
+	<resultMap type="ticket" id="TICKET_MAP">
+		<id property="id" column="id" />
+		<result property="createdTime" column="created_time" />
+		<result property="updatedTime" column="updated_time" />
+		<result property="activityId" column="activity_id" />
+		<result property="ticketName" column="ticket_name" />
+		<result property="price" column="price" />
+		<result property="total" column="total" />
+		<result property="remain" column="remain" />
+		
+	</resultMap>
+	
+	<insert id="insert" parameterType="ticket" useGeneratedKeys="true"
+		keyProperty="id">
+		insert into ac_ticket
+		(created_time,updated_time,activity_id,ticket_name,price,total,remain)
+		VALUES(#{createdTime},#{updatedTime},#{activityId},#{ticketName},#{price},#{total},#{remain})
+	</insert>
+		
+	<delete id="deleteById" parameterType="long">
+		delete from ac_ticket
+		WHERE id = #{id}
+    </delete>
+	<select id="getById" resultMap="TICKET_MAP" parameterType="long">
+		SELECT *
+		FROM ac_ticket
+		WHERE id = #{id}
+	</select>
+	
+	<update id="update" parameterType="ticket">
+	update ac_ticket
+	set total = #{total},remain = #{remain},price = #{price},updated_time = #{updatedTime}
+	where id = #{id}
+	</update>
+	
+	<select id="getByActivityIdTicketName" resultMap="TICKET_MAP">
+	select *
+	from ac_ticket
+	where activity_id = #{activityId} and ticket_name = #{ticketName}
+	limit 1
+	</select>
+	
+	
+</mapper>

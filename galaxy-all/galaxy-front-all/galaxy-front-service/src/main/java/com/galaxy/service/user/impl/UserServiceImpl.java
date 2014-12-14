@@ -1,5 +1,6 @@
 package com.galaxy.service.user.impl;
 
+import java.util.Date;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,34 +17,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserMapper userMapper;
 
-	public User getUser(Long userId) { 
-		return userMapper.getById(userId);
-	}
 	
-	////update
-	
-	@Override
-	public boolean update(User user) {
-		// TODO Auto-generated method stub
-		return userMapper.update(user);
-	}
-
-	@Override
-	public boolean updateUserFansNumById(Long userId, int num) {
-		// TODO Auto-generated method stub
-		return (userMapper.updateUserFansNumById(userId, num)>0)?true:false;
-	}
-
-	@Override
-	public boolean updateUserFollowersNumById(Long userId, int num) {
-		// TODO Auto-generated method stub
-		return (userMapper.updateUserFollowersNumById(userId, num)>0)?true:false;
-	}
-	
-    ////update
-
-
-
 	/**
 	 * 设定安全的密码，生成随机的salt并经过1024次 sha-1 hash
 	 */
@@ -56,57 +30,104 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(Encodes.encodeHex(hashPassword));
 		return userMapper.insert(user);
 	}
-
-	 
+	
 	@Override
-	public int countUsersByEmail(String email) { 
-		return userMapper.countUsersByEmail(email);
+	public boolean update(User user) {
+		// TODO Auto-generated method stub
+		return userMapper.update(user);
+	}
+	
+	public User getUserById(Long userId) { 
+		return userMapper.getById(userId);
+	}
+	
+	public boolean deleteById(Long userId){
+		return userMapper.deleteById(userId);
 	}
 
 	@Override
-	public int countUsersByMobile(String mobile) { 
-		return userMapper.countUsersByMobile(mobile);
+	public boolean updateLoginInfo(Long id, Date lastVisitTime) {
+		// TODO Auto-generated method stub
+		return userMapper.updateLoginInfo(id, lastVisitTime);
 	}
 
 	@Override
-	public int countUsersByLoginName(String login_name) { 
-		return userMapper.countUsersByLoginName(login_name);
+	public User getUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserByEmail(email);
 	}
 
 	@Override
-	public int setUserEmailAuthByEmail(Map<String, Object> map) { 
-		return userMapper.setUserEmailAuthByEmail(map);
+	public User getUserByLoginName(String loginName) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserByLoginName(loginName);
 	}
 
 	@Override
-	public User getUserbyEmailPassword(Map<String, String> map) { 
-		return userMapper.getUserbyEmailPassword(map);
+	public User getUserByMobile(String mobile) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserByMobile(mobile);
 	}
 
 	@Override
-	public boolean checkEmailAuth(String email) { 
-		return (userMapper.countEmailAuthed(email)==1)?true:false;
+	public User getUserByEmailPassword(String email, String password) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserByEmailPassword(email, password);
 	}
 
 	@Override
-	public User getUserbyMobilePassword(Map<String, String> map) { 
-		return userMapper.getUserbyMobilePassword(map);
+	public User getUserByLoginNamePassword(String loginName, String password) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserByLoginNamePassword(loginName, password);
 	}
 
 	@Override
-	public User getUserbyLoginNamePassword(Map<String, String> map) { 
-		return userMapper.getUserbyLoginNamePassword(map);
+	public User getUserByMobilePassword(String mobile, String password) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserByMobilePassword(mobile, password);
 	}
 
 	@Override
-	public User findUserByLoginName(String loginName) { 
+	public boolean updateUserFriendNumByUserId(Long userId, int num) {
+		// TODO Auto-generated method stub
+		return userMapper.updateUserFriendNumByUserId(userId, num)>0;
+	}
+
+	@Override
+	public boolean updateEmailAuthByEmail(String email, Boolean emailAuth) {
+		// TODO Auto-generated method stub
+		return userMapper.updateEmailAuthByEmail(email,emailAuth)>0;
+	}
+
+	@Override
+	public boolean updateMobileAuthByMobile(String mobile, Boolean mobileAuth) {
+		// TODO Auto-generated method stub
+		return userMapper.updateMobileAuthByMobile(mobile, mobileAuth)>0;
+	}
+
+	@Override
+	public User findUserByLoginName(String loginName) {
+		// TODO Auto-generated method stub
 		return userMapper.findUserByLoginName(loginName);
 	}
-	
-	
-	
-	
-	
+
+	@Override
+	public boolean isEmailExisted(String email) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserByEmail(email) != null;
+	}
+
+	@Override
+	public boolean isLoginNameExisted(String loginName) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserByLoginName(loginName) != null;
+	}
+
+	@Override
+	public boolean isMobileExisted(String mobile) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserByMobile(mobile) != null;
+	}	
 	
 	
 	

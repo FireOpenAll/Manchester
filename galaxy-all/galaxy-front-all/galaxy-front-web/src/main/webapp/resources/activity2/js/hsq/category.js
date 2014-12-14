@@ -1,6 +1,6 @@
 //加载活动分类
 function loadCategory(){
-	var url = '/activity/category/get';
+	var url = '/category/all';
 	
 	
 	var defaultcat1 = '<option value="0">--分类1--</option>';
@@ -30,7 +30,7 @@ function loadCategory(){
 		      	for(var i = 0; i < len; i++){
 		      		var item = categorylist[i];
 		      		var id = item.id;
-		      		var name = item.name;
+		      		var name = item.nameCh;
 		      	    html += '<option class="text-center" value="'+id+ '">'+name+'</option>';
 		      	}
 		      	$("#category1").html(html);

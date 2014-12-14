@@ -19,13 +19,14 @@
 		<result property="activityId" column="activity_id" />
 		<result property="userId" column="user_id" />
 		<result property="targetId" column="target_id" />
-		<result property="replyTime" column="reply_time" />
+		<result property="commentType" column="comment_type" />
+		<result property="content" column="content" />
 		
 	</resultMap>
 	<select id="getById" resultMap="ACTIVITY_COMMENT_MAP"
 		parameterType="long">
 		SELECT *
-		FROM ac_activity_commented_users
+		FROM ac_activity_commented_user
 		WHERE id = #{id}
 	</select>
 
@@ -33,60 +34,41 @@
 	<insert id="insert" parameterType="activityComment"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
-		ac_activity_commented_users(created_time,activity_id,user_id,target_id,reply_time,content)
-		VALUES(#{createdTime},#{activityId},#{userId},#{targetId},#{replyTime},#{content})
+		ac_activity_commented_user(created_time,updated_time,activity_id,user_id,target_id,comment_type,content)
+		VALUES(#{createdTime},#{updatedTime},#{activityId},#{userId},#{targetId},#{commentType},#{content})
 	</insert>
 	
 	<!-- 取消评论  By 评论id-->
-	<delete id="cancelCommentById" parameterType="long">
-	delete from ac_activity_commented_users
+	<delete id="deleteById" parameterType="long">
+	delete from ac_activity_commented_user
 	where id = #{id}
 	</delete>
 	
-	<!-- 取消评论 -->
-	<delete id="cancelComment">
-	delete from ac_activity_commented_users
-	where user_id = #{user_id}
-	and activity_id = #{activity_id}
-	and reply_time = #{replyTime}
-	</delete>
+	<update id="update" parameterType="activityComment">
+	update ac_activity_commented_user
+	set updated_time = #{updatedTime},content = #{content}
+	where id = #{id}
+	</update>
+
+   <select id="getUserComActNum" parameterType="long" resultType="int">
+   select count(distinct activity_id)
+   from ac_activity_commented_user
+   where user_id = #{userId}
+   </select>
+   
+   <select id="getActComSortByTime" resultMap="ACTIVITY_COMMENT_MAP">
+   select *
+   from ac_activity_commented_user
+   where activity_id = #{activityId}
+   order by created_time desc
+   limit #{offset},#{pageSize}
+   </select>
+   
+   <select id="getUserComedActSortByTime" resultMap="ACTIVITY_COMMENT_MAP">
+   select * from
+   (select * from ac_activity_commented_user where user_id = #{userId} order by created_time,activity_id desc) t
+   group by activity_id
+   limit #{offset},#{pageSize}
+   </select>
 	
-	<!-- 统计user_id评论过的活动数 -->
-	<select id="getUserComActNum" parameterType="long" resultType="int">
-	select count(distinct activity_id)
-	from ac_activity_commented_users
-	where user_id = #{user_id}
-	</select>
-	
-	<!-- 分页获取userId评论过的活动 -->
-	<select id="getUserComedActByUntilId" resultMap="ACTIVITY_COMMENT_MAP">
-	select *
-	from ac_activity_commented_users
-	where user_id = #{user_id} and activity_id &gt;  #{until_id} 
-	group by activity_id 
-	order by activity_id asc
-	limit #{pageSize}
-	</select>
-	
-	<!-- 分页获取评论 -->
-	<select id="list" resultMap="ACTIVITY_COMMENT_MAP" parameterType="com.galaxy.dal.base.mapper.PaginationParam">
-	select * from
-	ac_activity_commented_users
-	where activity_id = #{param1.activity_id} limit param2,param3
-	</select>
-	
-    <!-- 分页获取评论 -->
-	<select id="getActComByUntilId" resultMap="ACTIVITY_COMMENT_MAP">
-	select * from
-	ac_activity_commented_users
-	where activity_id = #{activityId} and  id &gt; #{untilId} limit #{pageSize}
-	</select>
-	
-	
-	<!-- 统计某个活动评论的人数 -->
-	<select id="getActComNum" parameterType="long" resultType="int">
-	select count(*)
-	from ac_activity_commented_users
-	where activity_id = #{activity_id}
-	</select>
 </mapper>

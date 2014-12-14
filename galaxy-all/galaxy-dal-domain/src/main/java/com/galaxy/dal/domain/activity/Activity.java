@@ -6,86 +6,32 @@ import com.galaxy.dal.domain.BaseDomain;
 
 public class Activity extends BaseDomain {
 
-	private ActivityType type;
-	/**
-	 * 分类级
-	 */
-	private Long catId1;
-	private Long catId2;
-	private Long catId3;
-
-	private String status;
 	private String title;
 	private Date startTime;
 	private Date endTime;
 	private Long provinceId;
 	private Long cityId;
-	private Long districtId;
+	private Long areaId;
 	private String address;
-
-	private String refUrl;
-
-	private Float price;
-
+	private String detailUrl;
 	private String tags;
-
-	private Long userId;// 发布人ID
-
-	private Long operatorId;// 操作人ID
-
-	private Integer joinedNum;// 参会人数
-
-	private Integer ticketsNum;// 门票数量
-	
-	private Integer liked_num;//点赞人数
-
-	// hsq
-	private String haibao_urls;// 活动图片url，以";"分割
-	private String phone;// 多个以";"分割
+	private Integer joinedNum;
+	private Integer commentNum;
+	private Integer ticketsNum;
+	private Integer collectNum;
+	private ActivityStatus activityStatus;
+	private Boolean needAudit;
+	private String phone;
+	private String description;
+	private String pictures;
 	private String email;
-
+	private Long catId1;
+	private Long catId2;
 	private Double longtitude;
-
 	private Double latitude;
-	private String description;// 活动简介
-	private String sponsor;//活动主办方
-	
-	public String getSponsor() {
-		return sponsor;
-	}
-	public void setSponsor(String sponsor) {
-		this.sponsor = sponsor;
-	}
-	public ActivityType getType() {
-		return type;
-	}
-	public void setType(ActivityType type) {
-		this.type = type;
-	}
-	public Long getCatId1() {
-		return catId1;
-	}
-	public void setCatId1(Long catId1) {
-		this.catId1 = catId1;
-	}
-	public Long getCatId2() {
-		return catId2;
-	}
-	public void setCatId2(Long catId2) {
-		this.catId2 = catId2;
-	}
-	public Long getCatId3() {
-		return catId3;
-	}
-	public void setCatId3(Long catId3) {
-		this.catId3 = catId3;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
+	private ActivityType activityType;
+	private Long organizerId;
+	private Boolean free;
 	public String getTitle() {
 		return title;
 	}
@@ -116,11 +62,11 @@ public class Activity extends BaseDomain {
 	public void setCityId(Long cityId) {
 		this.cityId = cityId;
 	}
-	public Long getDistrictId() {
-		return districtId;
+	public Long getAreaId() {
+		return areaId;
 	}
-	public void setDistrictId(Long districtId) {
-		this.districtId = districtId;
+	public void setAreaId(Long areaId) {
+		this.areaId = areaId;
 	}
 	public String getAddress() {
 		return address;
@@ -128,17 +74,11 @@ public class Activity extends BaseDomain {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getRefUrl() {
-		return refUrl;
+	public String getDetailUrl() {
+		return detailUrl;
 	}
-	public void setRefUrl(String refUrl) {
-		this.refUrl = refUrl;
-	}
-	public Float getPrice() {
-		return price;
-	}
-	public void setPrice(Float price) {
-		this.price = price;
+	public void setDetailUrl(String detailUrl) {
+		this.detailUrl = detailUrl;
 	}
 	public String getTags() {
 		return tags;
@@ -146,23 +86,17 @@ public class Activity extends BaseDomain {
 	public void setTags(String tags) {
 		this.tags = tags;
 	}
-	public Long getUserId() {
-		return userId;
-	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-	public Long getOperatorId() {
-		return operatorId;
-	}
-	public void setOperatorId(Long operatorId) {
-		this.operatorId = operatorId;
-	}
 	public Integer getJoinedNum() {
 		return joinedNum;
 	}
 	public void setJoinedNum(Integer joinedNum) {
 		this.joinedNum = joinedNum;
+	}
+	public Integer getCommentNum() {
+		return commentNum;
+	}
+	public void setCommentNum(Integer commentNum) {
+		this.commentNum = commentNum;
 	}
 	public Integer getTicketsNum() {
 		return ticketsNum;
@@ -170,18 +104,23 @@ public class Activity extends BaseDomain {
 	public void setTicketsNum(Integer ticketsNum) {
 		this.ticketsNum = ticketsNum;
 	}
-	
-	public Integer getLiked_num() {
-		return liked_num;
+	public Integer getCollectNum() {
+		return collectNum;
 	}
-	public void setLiked_num(Integer liked_num) {
-		this.liked_num = liked_num;
+	public void setCollectNum(Integer collectNum) {
+		this.collectNum = collectNum;
 	}
-	public String getHaibao_urls() {
-		return haibao_urls;
+	public ActivityStatus getActivityStatus() {
+		return activityStatus;
 	}
-	public void setHaibao_urls(String haibao_urls) {
-		this.haibao_urls = haibao_urls;
+	public void setActivityStatus(ActivityStatus activityStatus) {
+		this.activityStatus = activityStatus;
+	}
+	public Boolean getNeedAudit() {
+		return needAudit;
+	}
+	public void setNeedAudit(Boolean needAudit) {
+		this.needAudit = needAudit;
 	}
 	public String getPhone() {
 		return phone;
@@ -189,11 +128,35 @@ public class Activity extends BaseDomain {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getPictures() {
+		return pictures;
+	}
+	public void setPictures(String pictures) {
+		this.pictures = pictures;
+	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public Long getCatId1() {
+		return catId1;
+	}
+	public void setCatId1(Long catId1) {
+		this.catId1 = catId1;
+	}
+	public Long getCatId2() {
+		return catId2;
+	}
+	public void setCatId2(Long catId2) {
+		this.catId2 = catId2;
 	}
 	public Double getLongtitude() {
 		return longtitude;
@@ -207,11 +170,22 @@ public class Activity extends BaseDomain {
 	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
-	public String getDescription() {
-		return description;
+	public ActivityType getActivityType() {
+		return activityType;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setActivityType(ActivityType activityType) {
+		this.activityType = activityType;
 	}
-
+	public Long getOrganizerId() {
+		return organizerId;
+	}
+	public void setOrganizerId(Long organizerId) {
+		this.organizerId = organizerId;
+	}
+	public Boolean getFree() {
+		return free;
+	}
+	public void setFree(Boolean free) {
+		this.free = free;
+	}
 }

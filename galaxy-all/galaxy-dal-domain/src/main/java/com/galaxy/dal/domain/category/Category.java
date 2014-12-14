@@ -1,48 +1,54 @@
+/**
+ * 
+ */
 package com.galaxy.dal.domain.category;
 
 import com.galaxy.dal.domain.BaseDomain;
 
-/*author:huangshanqi
- *time  :2014年10月25日 下午2:12:57
- *email :hsqmobile@gmail.com
- */
 public class Category extends BaseDomain {
+	
+	private String nameEn;
+	private String nameCh;
+	private Long parentId;
+	private String path;
+	private String coverUrl;
+	private String description;
 
-	private String name;
-	private int level;
-	private Long parent_id;
-	private int seq;
-
-	public String getName() {
-		return name;
+	public String getNameEn() {
+		return nameEn;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setNameEn(String nameEn) {
+		this.nameEn = nameEn;
 	}
-
-	public int getLevel() {
-		return level;
+	public String getNameCh() {
+		return nameCh;
 	}
-
-	public void setLevel(int level) {
-		this.level = level;
+	public void setNameCh(String nameCh) {
+		this.nameCh = nameCh;
 	}
-
-	public Long getParent_id() {
-		return parent_id;
+	public Long getParentId() {
+		return parentId;
 	}
-
-	public void setParent_id(Long parent_id) {
-		this.parent_id = parent_id;
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
 	}
-
-	public int getSeq() {
-		return seq;
+	public String getPath() {
+		return path;
 	}
-
-	public void setSeq(int seq) {
-		this.seq = seq;
+	public void setPath(String path) {
+		this.path = path;
 	}
-
+	public String getCoverUrl() {
+		return coverUrl;
+	}
+	public void setCoverUrl(String coverUrl) {
+		this.coverUrl = coverUrl;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 }

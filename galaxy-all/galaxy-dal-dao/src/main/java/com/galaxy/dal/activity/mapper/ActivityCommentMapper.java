@@ -1,9 +1,9 @@
 package com.galaxy.dal.activity.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.junit.runners.Parameterized.Parameters;
 
 import com.galaxy.dal.base.mapper.BaseMapper;
 import com.galaxy.dal.domain.activity.ActivityComment;
@@ -15,11 +15,9 @@ import com.galaxy.dal.domain.activity.ActivityComment;
 public interface ActivityCommentMapper extends BaseMapper<ActivityComment> {
 
 	//统计user_id评论过的活动数
-	public int getUserComActNum(@Param("user_id") Long user_id);
-	//统计某个活动总的评论数
-	public int getActComNum(@Param("activity_id") Long activityId);
-	//分页得到用户评论过的活动
-	public List<ActivityComment> getUserComedActByUntilId(@Param("user_id") long userId,@Param("until_id") long untilId,@Param("pageSize") long pageSize);
-	//分页得到某活动的评论
-	public List<ActivityComment> getActComByUntilId(@Param("activityId") Long activityId, @Param("untilId") Long untilId,@Param("pageSize") int pageSize );
+		public int getUserComActNum(@Param("userId")Long userId);
+		//分页得到某活动的评论
+		public ArrayList<ActivityComment> getActComSortByTime(@Param("activityId")Long activityId,@Param("offset")Integer offset,@Param("pageSize")Integer pageSize);
+		//分页得到用户评论过的活动
+		public List<ActivityComment> getUserComedActSortByTime(@Param("userId")Long userId,@Param("offset")int offset,@Param("pageSize")int pageSize);
 }

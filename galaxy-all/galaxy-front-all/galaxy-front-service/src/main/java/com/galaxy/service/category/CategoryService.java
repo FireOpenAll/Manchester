@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import com.galaxy.dal.domain.category.Category;
 
 /*author:huangshanqi
- *time  :2014年10月25日 下午2:36:41
+ *time  :2014年12月9日 下午10:53:16
  *email :hsqmobile@gmail.com
  */
 public interface CategoryService {
 
-	public ArrayList<Category> getCategories(long parent_id);
-
+	public boolean createCategory(Category category);
+	public boolean updateCategoryInfo(Category category);
+	public boolean deleteCategoryById(Long categoryId);
+	public ArrayList<Category> getAllCategory();
+	public ArrayList<Category> getChildrenCategory(Long parentId);
 }

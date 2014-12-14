@@ -3,20 +3,19 @@ package com.galaxy.dal.domain.card;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.galaxy.dal.domain.BaseDomain;
+
 /*author:huangshanqi
  *time  :2014年10月15日 下午4:50:31
  *email :hsqmobile@gmail.com
  */
-public class Card  implements Serializable{
+public class Card extends BaseDomain {
 
 	/* 名片实体类定义 */
-	private Long card_id;
-	private Date createdTime;
-	private Date updatedTime;
-	
-	private Long user_id;
 
-	private String name;// 名字
+	private Long userId;
+
+	private String username;// 名字
 
 	private String company;// 公司
 
@@ -34,49 +33,24 @@ public class Card  implements Serializable{
 
 	private String weixin;
 
-	private String photo;// 头像URL
+	private String avatar;// 头像URL
 
-	private String qrcode;// 名片二维码地址
-	
+	private String qrcodeUrl;// 名片二维码地址
 
-	public Long getCard_id() {
-		return card_id;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setCard_id(Long card_id) {
-		this.card_id = card_id;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
-	public Date getCreatedTime() {
-		return createdTime;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setCreatedTime(Date createdTime) {
-		this.createdTime = createdTime;
-	}
-
-	public Date getUpdatedTime() {
-		return updatedTime;
-	}
-
-	public void setUpdatedTime(Date updatedTime) {
-		this.updatedTime = updatedTime;
-	}
-
-	public Long getUser_id() {
-		return user_id;
-	}
-
-	public void setUser_id(Long user_id) {
-		this.user_id = user_id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getCompany() {
@@ -143,42 +117,20 @@ public class Card  implements Serializable{
 		this.weixin = weixin;
 	}
 
-	public String getPhoto() {
-		return photo;
+	public String getAvatar() {
+		return avatar;
 	}
 
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
-	public String getQrcode() {
-		return qrcode;
+	public String getQrcodeUrl() {
+		return qrcodeUrl;
 	}
 
-	public void setQrcode(String qrcode) {
-		this.qrcode = qrcode;
+	public void setQrcodeUrl(String qrcodeUrl) {
+		this.qrcodeUrl = qrcodeUrl;
 	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("card_id=").append(this.getCard_id()).append(",");
-		stringBuilder.append("user_id=").append(this.getUser_id()).append(",");
-		stringBuilder.append("name=").append(this.getName()).append(",");
-		stringBuilder.append("company=").append(this.getCompany()).append(",");
-		stringBuilder.append("title=").append(this.getTitle()).append(",");
-		stringBuilder.append("phone=").append(this.getPhone()).append(",");
-		stringBuilder.append("email=").append(this.getEmail()).append(",");
-		stringBuilder.append("address=").append(this.getAddress());
-		stringBuilder.append("website=").append(this.getWebsite()).append(",");
-		stringBuilder.append("qq=").append(this.getQq()).append(",");
-		stringBuilder.append("weixin=").append(this.getWeixin()).append(",");
-		stringBuilder.append("photo=").append(this.getPhoto()).append(",");
-		stringBuilder.append("qrcode=").append(this.getQrcode()).append(",");
-		return stringBuilder.toString();
-	}
-	
-	
 
 }

@@ -17,110 +17,124 @@
 		<id property="id" column="id" />
 		<result property="createdTime" column="created_time" />
 		<result property="updatedTime" column="updated_time" />
-		<result property="realNameAuth" column="real_name_auth" />
-		<result property="emailAuth" column="email_auth" />
-		<result property="mobileAuth" column="mobile_auth" />
-		<result property="mobileAuth" column="mobile_auth" />
-		<result property="hasPic" column="haspic" />
-        <result property="loginName" column="login_name"/>
-		<result property="qqOpenid" column="qq_openid" />
-		<result property="weiboOpenid" column="weibo_openid" />
-		<result property="webchatOpenid" column="webchat_openid" />
-
-		<result property="lastVisitTime" column="last_visit_time" />
+		<result property="LoginName" column="login_name" />
+		<result property="password" column="password" />
+		<result property="gender" column="gender" />
+		<result property="birthday" column="birthday" />
+		<result property="userType" column="user_type" />
+        <result property="nick" column="nick"/>
+		<result property="friendNum" column="friend_num" />
+		<result property="realName" column="real_name" />
+		<result property="email" column="email" />
+        <result property="mobile" column="mobile" />
+        <result property="realNameAuth" column="real_name_auth" />
+        <result property="emailAuth" column="email_auth" />
+        <result property="mobileAuth" column="mobile_auth" />
+        <result property="avatar" column="avatar" />
+        <result property="weiboOpenId" column="weibo_openid" />
+        <result property="webcharOpenId" column="webchat_openid" />
+        <result property="qqOpenId" column="qq_openid" />
+        <result property="lastVisitTime" column="last_visit_time" />
+        <result property="userStatus" column="user_status" />
+		<result property="salt" column="salt" />
 	</resultMap>
+	
+	<insert id="insert" parameterType="user" useGeneratedKeys="true"
+		keyProperty="id">
+		insert into u_user
+		(created_time,updated_time,login_name,password,
+		gender,birthday,user_type,nick,
+		friend_num,real_name,email,mobile,
+		real_name_auth,email_auth,mobile_auth,avatar,
+		weibo_openid,webchat_openid,qq_openid,last_visit_time,user_status,salt)
+		VALUES(#{createdTime},#{updatedTime},#{LoginName},#{password},
+		#{gender},#{birthday},#{userType},#{nick},
+		#{friendNum},#{realName},#{email},#{mobile},
+		#{realNameAuth},#{emailAuth},#{mobileAuth},#{avatar},
+		#{webcharOpenId},#{webcharOpenId},#{qqOpenId},#{lastVisitTime},#{userStatus},#{salt})
+	</insert>
+		
+	<delete id="deleteById" parameterType="long">
+		delete from u_user
+		WHERE id = #{id}
+    </delete>
 	<select id="getById" resultMap="USER_MAP" parameterType="long">
 		SELECT *
 		FROM u_user
 		WHERE id = #{id}
 	</select>
-	<!-- private String loginName,sex,birthday,type,nick,followers,fans,realName,email,mobile,password,realNameAuth,emailAuth,mobileAuth,hasPic,avatar,bindOpenId,bindPlatform,lastVisitTime,status; -->
-	<insert id="insert" parameterType="user" useGeneratedKeys="true"
-		keyProperty="id">
-		INSERT INTO
-		u_user(login_name,created_time,sex,birthday,type,nick,followers,fans,real_name,email,mobile,password,salt,real_name_auth,email_auth,mobile_auth,haspic,avatar,qq_openid,weibo_openid,webchat_openid,last_visit_time,status)
-		VALUES(#{loginName},#{createdTime},#{sex},#{birthday},#{type},#{nick},#{followers},#{fans},#{realName},#{email},#{mobile},#{password},#{salt},#{realNameAuth},#{emailAuth},#{mobileAuth},#{hasPic},#{avatar},#{qqOpenid},#{weiboOpenid},#{webchatOpenid},#{lastVisitTime},#{status})
-	</insert>
 	
-	<select id="countUsersByEmail" parameterType="String" resultType="int">
-	select count(id) 
+	
+	<update id="updateLoginInfo">
+		update u_user
+		set last_visit_time =#{lastVisitTime}
+		where id = #{id}
+	</update>
+	
+	<select id="getUserByEmail" parameterType="String" resultMap="USER_MAP">
+	select * 
 	from u_user
 	where email = #{email}
+	limit 1
 	</select>
 	
-	<select id="countUsersByMobile" parameterType="String" resultType="int">
-	select count(id) 
+	<select id="getUserByLoginName" parameterType="String" resultMap="USER_MAP">
+	select * 
+	from u_user
+	where login_name = #{loginName}
+	limit 1
+	</select>
+	
+	<select id="getUserByMobile" parameterType="String" resultMap="USER_MAP">
+	select *
 	from u_user
 	where mobile = #{mobile}
+	limit 1
 	</select>
 	
-	<select id="countUsersByLoginName" parameterType="String" resultType="int">
-	select count(id) 
+	<select id="getUserByEmailPassword" resultMap="USER_MAP">
+	select *
 	from u_user
-	where login_name = #{login_name}
+	where mobile = #{mobile} and password = #{password}
+	limit 1
 	</select>
 	
-	<select id="getUserbyEmailPassword" parameterType="Map" resultMap="USER_MAP">
-	SELECT * 
-	FROM u_user
-	WHERE
-	email = #{email}
-	AND
-	password = #{password}
+	<select id="getUserByLoginNamePassword" resultMap="USER_MAP">
+	select *
+	from u_user
+	where mobile = #{mobile} and password = #{password}
+	limit 1
 	</select>
 	
-	<select id="getUserbyMobilePassword" parameterType="Map" resultMap="USER_MAP">
-	SELECT * 
-	FROM u_user
-	WHERE
-	mobile = #{mobile}
-	AND
-	password = #{password}
+	<select id="getUserByMobilePassword" resultMap="USER_MAP">
+	select *
+	from u_user
+	where mobile = #{mobile} and password = #{password}
+	limit 1
 	</select>
 	
-	<select id="getUserbyLoginNamePassword" parameterType="Map" resultMap="USER_MAP">
-	SELECT * 
-	FROM u_user
-	WHERE
-	login_name = #{login_name}
-	AND
-	password = #{password}
-	</select>
+	<update id="updateUserFriendNumByUserId">
+		update u_user
+		set friend_num = #{num}
+		where id = #{id}
+	</update>
+	
+	<update id="updateEmailAuthByEmail">
+		update u_user
+		set email_auth = #{emailAuth}
+		where email =#{email}
+	</update>
+	
+	<update id="updateMobileAuthByMobile">
+		update u_user
+		set mobile_auth = #{mobileAuth}
+		where mobile =#{mobile}
+	</update>
+	
 	<select id="findUserByLoginName" parameterType="string" resultMap="USER_MAP">
 	SELECT * 
 	FROM u_user
 	WHERE
 	login_name = #{loginName} or email = #{loginName} or mobile = #{loginName} limit 1
 	</select>
-	
-	<select id="countEmailAuthed" parameterType="String" resultType="int">
-	select count(*)
-	from u_user
-	where
-	email = #{email}
-	and
-	email_auth = 1
-	</select>
-	
-	<!-- email auth  -->
-	<update id="setUserEmailAuthByEmail" parameterType="Map">
-	update u_user
-	set email_auth = #{email_auth}
-	where email = #{email}
-	
-	</update>
-	
-	<!-- update fans -->
-	<update id="updateUserFansNumById" >
-	update u_user
-	set fans = #{num}
-	where id = #{userId}
-	</update>
-	
-	<!-- update fans -->
-	<update id="updateUserFollowersNumById" >
-	update u_user
-	set followers = #{num}
-	where id = #{userId}
-	</update>
 </mapper>
