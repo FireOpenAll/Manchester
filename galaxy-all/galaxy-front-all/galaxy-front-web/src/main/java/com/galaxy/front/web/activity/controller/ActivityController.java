@@ -291,13 +291,6 @@ public class ActivityController {
 		
 		Long activityId = activityService.create(activityForm);
 		
-		ActivityTicket activityTicket = new ActivityTicket();
-		activityTicket.setCreatedTime(new Date());
-		activityTicket.setUpdatedTime(activityTicket.getCreatedTime());
-		activityTicket.setActivityId(activityId);
-		
-		
-		
 		Ticket ticket = new Ticket();
 		ticket.setCreatedTime(new Date());
 		ticket.setUpdatedTime(ticket.getCreatedTime());

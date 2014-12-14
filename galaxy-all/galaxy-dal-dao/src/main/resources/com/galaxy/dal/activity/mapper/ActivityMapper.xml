@@ -85,7 +85,7 @@
 	
 	<update id="updateActUrlById">
 	update ac_activity
-	set detailUrl = #{newUrl}
+	set detail_url = #{newUrl}
 	where id = #{activityId}
 	</update>
 	
@@ -130,4 +130,17 @@
 	where id = #{activityId}
 	</update>
 	
+	<select id="getUserpublishedActNumber" parameterType="long" resultType="int">
+	select count(*)
+	from ac_activity
+	where organizer_id = #{userId}
+	</select>
+	
+	<select id="getUserPublishActivity" resultMap="ACTIVITY_MAP">
+	select *
+	from ac_activity
+	where organizer_id = #{userId}
+	order by created_time desc
+	limit #{offset},#{pageSize}
+	</select>
 </mapper>

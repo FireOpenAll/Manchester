@@ -11,64 +11,65 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.galaxy.dal.activity.mapper.ActivityCommentMapper"> 
-	<resultMap type="activityComment" id="ACTIVITY_COMMENT_MAP">
+<mapper namespace="com.galaxy.dal.activity.mapper.ActivityCollectMapper"> 
+	<resultMap type="activityCollectUser" id="ACTIVITY_COLLECT_USER_MAP">
 		<id property="id" column="id" />
 		<result property="createdTime" column="created_time" />
 		<result property="updatedTime" column="updated_time" />
 		<result property="activityId" column="activity_id" />
 		<result property="userId" column="user_id" />
-		<result property="targetId" column="target_id" />
-		<result property="commentType" column="comment_type" />
-		<result property="content" column="content" />
-		
 	</resultMap>
-	<select id="getById" resultMap="ACTIVITY_COMMENT_MAP"
+	<select id="getById" resultMap="ACTIVITY_COLLECT_USER_MAP"
 		parameterType="long">
 		SELECT *
-		FROM ac_activity_commented_user
+		FROM ac_activity_collect_user
 		WHERE id = #{id}
 	</select>
 
-    <!-- 评论活动 -->
-	<insert id="insert" parameterType="activityComment"
+	<insert id="insert" parameterType="activityCollectUser"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
-		ac_activity_commented_user(created_time,updated_time,activity_id,user_id,target_id,comment_type,content)
-		VALUES(#{createdTime},#{updatedTime},#{activityId},#{userId},#{targetId},#{commentType},#{content})
+		ac_activity_collect_user(created_time,updated_time,activity_id,user_id)
+		VALUES(#{createdTime},#{updatedTime},#{activityId},#{userId})
 	</insert>
 	
-	<!-- 取消评论  By 评论id-->
 	<delete id="deleteById" parameterType="long">
-	delete from ac_activity_commented_user
+	delete from ac_activity_collect_user
 	where id = #{id}
 	</delete>
 	
-	<update id="update" parameterType="activityComment">
-	update ac_activity_commented_user
-	set updated_time = #{updatedTime},content = #{content}
+	<update id="update" parameterType="activityCollectUser">
+	update ac_activity_collect_user
+	set updated_time = #{updatedTime}
 	where id = #{id}
 	</update>
 
-   <select id="getUserComActNum" parameterType="long" resultType="int">
-   select count(distinct activity_id)
-   from ac_activity_commented_user
+   <select id="getUserCollectActNum" parameterType="long" resultType="int">
+   select count(*)
+   from ac_activity_collect_user
    where user_id = #{userId}
    </select>
    
-   <select id="getActComSortByTime" resultMap="ACTIVITY_COMMENT_MAP">
+   <select id="getActCollectSortByTime" resultMap="ACTIVITY_COLLECT_USER_MAP">
    select *
-   from ac_activity_commented_user
+   from ac_activity_collect_user
    where activity_id = #{activityId}
    order by created_time desc
    limit #{offset},#{pageSize}
    </select>
    
-   <select id="getUserComedActSortByTime" resultMap="ACTIVITY_COMMENT_MAP">
-   select * from
-   (select * from ac_activity_commented_user where user_id = #{userId} order by created_time,activity_id desc) t
-   group by activity_id
+   <select id="getUserCollectedActSortByTime" resultMap="ACTIVITY_COLLECT_USER_MAP">
+   select *
+   from ac_activity_collect_user
+   where user_id = #{userId}
+   order by  created_time desc
    limit #{offset},#{pageSize}
    </select>
 	
+   <select id="getByUserIdActId" resultMap="ACTIVITY_COLLECT_USER_MAP">
+   select *
+   from ac_activity_collect_user
+   where activity_id = #{activityId} and user_id = #{userId}
+   limit 1
+   </select>
 </mapper>

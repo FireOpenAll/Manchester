@@ -47,7 +47,6 @@ public class TicketServiceImpl implements TicketService{
 		activityTicket.setUpdatedTime(ticket.getUpdatedTime());
 		activityTicket.setActivityId(ticket.getActivityId());
 		activityTicket.setTicketId(ticket.getId());
-		activityTicketMapper.insert(activityTicket);
 		
 		return activityTicketMapper.insert(activityTicket);
 	}

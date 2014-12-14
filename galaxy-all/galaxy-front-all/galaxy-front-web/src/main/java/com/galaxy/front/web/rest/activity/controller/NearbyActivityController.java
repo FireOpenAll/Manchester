@@ -1,8 +1,6 @@
 package com.galaxy.front.web.rest.activity.controller;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,12 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.galaxy.dal.domain.activity.Activity;
-import com.galaxy.front.web.rest.model.Contact;
-import com.galaxy.front.web.rest.model.Photo;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.activity.ActivityModel;
-import com.galaxy.front.web.rest.model.location.LocationInfo;
-import com.galaxy.front.web.rest.model.user.UserModel;
 import com.galaxy.front.web.utils.Code;
 import com.galaxy.front.web.utils.Constants;
 import com.galaxy.front.web.utils.ResultModelUtils;

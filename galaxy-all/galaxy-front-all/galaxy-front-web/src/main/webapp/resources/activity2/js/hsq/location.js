@@ -127,7 +127,7 @@ function setDistrict(){
 	//设置district的input值
 	var dis = $("#district_select").val();
 	//alert('dis='+dis);
-	$("#district").val(dis);
+	$("#area").val(dis);
 	//var district = $("#district").val();
 	//alert('district='+district);
 }

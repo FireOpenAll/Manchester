@@ -1,9 +1,12 @@
 package com.galaxy.service.activity;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.galaxy.dal.domain.activity.Activity;
+import com.galaxy.dal.domain.activity.ActivityCollectUser;
 import com.galaxy.dal.domain.activity.ActivityComment;
 import com.galaxy.dal.domain.activity.ActivityDetail;
 import com.galaxy.dal.domain.activity.ActivityUser;
@@ -21,17 +24,21 @@ public interface ActivityService {
 	public boolean modify(ActivityForm form);
 	public boolean removeById(Long id);
 	
+	public int getUserpublishedActNumber(Long userId);
+	public List<Activity> getUserPublishActivity(Long userId,Integer offset,Integer pageSize);
+
+	
 	//ActivityUser
 	public boolean joinActivity(ActivityUser activityUser);
 	public boolean unjoinActivity(ActivityUser activityUser);
 	public boolean updateAcitvityUserInfo(ActivityUser activityUser);
 	public ActivityUser getAcitvityUserById(Long id);
 
-	public List<ActivityUser> listJoinedUsersSortInTime(Long activityId,Date jionTime, int pageSize);
+	public List<ActivityUser> getJoinedUsersSortInTime(Long activityId,int offset, int pageSize);
 	//计算user_id参加的活动数
 	public int getUserJoinedActNumber(Long userId);
 	
-	public List<ActivityUser> listUserJoinedActs(Long userId,Date jionTime,int pageSize);
+	public List<ActivityUser> getUserJoinedActs(Long userId,int offset,int pageSize);
 	
 	public ActivityUser getByUserIdActIdTicketId( Long userId,Long activityId,Long ticketId);
 	public ActivityUser getByUserIdActId( Long userId,Long activityId);
@@ -44,14 +51,24 @@ public interface ActivityService {
 	//统计user_id评论过的活动数
 	public int getUserComActNum(Long userId);
 	//分页得到某活动的评论
-	public List<ActivityComment> getActComSortByTime(Long activityId,Date commentTime,Integer pageSize);
+	public ArrayList<ActivityComment> getActComSortByTime(Long activityId,Integer offset,Integer pageSize);
 	//分页得到用户评论过的活动
-	public List<ActivityComment> getUserComedActSortByTime(Long activityId,Long userId,Date commentTime,Long pageSize);
-	public boolean Comment(ActivityComment activityComment);
+	public List<Activity> getUserComedActSortByTime(Long userId,int offset,int pageSize);
+	public boolean commentActivity(ActivityComment activityComment);
 	public ActivityComment getCommentById(Long commentId);
 	public boolean deleteComment(Long commentId);
 	public boolean modifyComment(ActivityComment activityComment);
 	////comment
+	
+	
+	///collect
+	public boolean collectActivity(ActivityCollectUser activityCollectUser);
+	public boolean cancelCollectActivity(Long collectId);
+	public int getUserCollectActNum(Long userId);
+	public List<ActivityCollectUser> getActCollectSortByTime(Long activityId,Integer offset,Integer pageSize);
+	public ArrayList<Activity>getUserCollectedActSortByTime(Long userId,Integer offset,Integer pageSize);
+	///collect
+	
 	
 	
 	

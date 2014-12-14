@@ -134,8 +134,8 @@
                 <input type="text"   class="form-control col-lg-3" id="end_time" name="end_time" placeholder="结束时间"></div>
             </div>
             <div class="form-group">
-              <label for="area" class="col-lg-2 control-label">活动地点:</label>
-              <div class="col-lg-10 form-inline" id ="area">
+              <label for="location" class="col-lg-2 control-label">活动地点:</label>
+              <div class="col-lg-10 form-inline" id ="location">
                  
                            
                 <select class="col-lg-2 text-center" id="province_select" onchange="getCity()">
@@ -153,7 +153,7 @@
 
                 <input type="hidden" id="province" name="province">
                 <input type="hidden" id="city" name="city">
-                <input type="hidden" id="district" name="district">
+                <input type="hidden" id="area" name="area">
               </div>
             </div>
             <div class="form-group">
@@ -283,7 +283,7 @@
                 </select>
 
                 <input type="hidden" id=catId1 name="catId1">
-                <input type="hidden" id="catId2" name="catId2">
+                <input type="hidden" id="catId2" name="catId2" value="0">
               </div>
             </div>
             

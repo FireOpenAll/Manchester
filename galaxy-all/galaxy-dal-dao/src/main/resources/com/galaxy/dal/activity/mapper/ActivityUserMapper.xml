@@ -61,26 +61,26 @@
 	order by created_time
 	</select>
 	
-	<select id="listJoinedUsersSortInTime" resultMap="ACTIVITY_USER_MAP">
+	<select id="getJoinedUsersSortInTime" resultMap="ACTIVITY_USER_MAP">
 	select *
 	from ac_activity_user
-	where activity_id = #{activityId} and created_time &gt; #{jionTime}
+	where activity_id = #{activityId}
 	order by created_time
-	limit #{pageSize}
+	limit #{offset},#{pageSize}
 	</select>
 	
-	<select id="getUserJoinedActNumber" parameterType="int" resultType="int">
+	<select id="getUserJoinedActNumber" parameterType="long" resultType="int">
 	select count(*)
 	from ac_activity_user
 	where user_id = #{userId}
 	</select>
 	
-	<select id="listUserJoinedActs" resultMap="ACTIVITY_USER_MAP">
+	<select id="getUserJoinedActs" resultMap="ACTIVITY_USER_MAP">
 	select *
 	from ac_activity_user
-	where user_id = #{userId} and created_time &gt; #{jionTime}
+	where user_id = #{userId}
 	order by created_time
-	limit #{pageSize}
+	limit #{offset},#{pageSize}
 	</select>
 	
 	<select id="getByUserIdActId" resultMap="ACTIVITY_USER_MAP">

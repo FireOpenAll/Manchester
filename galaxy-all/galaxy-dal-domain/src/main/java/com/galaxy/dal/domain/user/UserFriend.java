@@ -10,7 +10,7 @@ public class UserFriend extends BaseDomain {
 	// 用户关系实体
 	private Long userId;
 	private Long targetId;
-	private UserFriendRequestStatus requestStatus;
+	private String remarkName;
 	public Long getUserId() {
 		return userId;
 	}
@@ -23,11 +23,12 @@ public class UserFriend extends BaseDomain {
 	public void setTargetId(Long targetId) {
 		this.targetId = targetId;
 	}
-	public UserFriendRequestStatus getRequestStatus() {
-		return requestStatus;
+	public String getRemarkName() {
+		return remarkName;
 	}
-	public void setRequestStatus(UserFriendRequestStatus requestStatus) {
-		this.requestStatus = requestStatus;
+	public void setRemarkName(String remarkName) {
+		this.remarkName = remarkName;
 	}
-
+	
+	
 }

@@ -106,6 +106,15 @@ public class CardServiceImpl implements CardService {
 		return userCardMapper.getByUserIdTargetUserId(userId, targetUserId);
 	}
 
+	@Override
+	public boolean hasAddCard(Long userId, Long targetUserId) {
+		// TODO Auto-generated method stub
+		UserCard temp = userCardMapper.getByUserIdTargetUserId(userId, targetUserId);
+		return temp != null;
+	}
+	
+	
+
 
 
 }

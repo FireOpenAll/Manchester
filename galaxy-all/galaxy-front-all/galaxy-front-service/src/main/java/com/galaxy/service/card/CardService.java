@@ -28,6 +28,7 @@ public interface CardService {
 	public UserCard getUserCardByUserCardId(Long userCardId);
     
     public UserCard getByUserIdTargetUserId(Long userId,Long targetUserId);
+    public boolean hasAddCard(Long userId,Long targetUserId);
 	public List<UserCard> getAllFriendCard(Long userId);
 	public List<UserCard> getFriendCardPageByOffset(Long userId,int offset,int pageSize);
 

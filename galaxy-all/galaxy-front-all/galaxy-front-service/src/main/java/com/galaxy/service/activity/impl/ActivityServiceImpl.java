@@ -1,5 +1,6 @@
 package com.galaxy.service.activity.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.galaxy.dal.activity.mapper.ActivityCollectMapper;
 import com.galaxy.dal.activity.mapper.ActivityCommentMapper;
 import com.galaxy.dal.activity.mapper.ActivityDetailMapper;
 import com.galaxy.dal.activity.mapper.ActivityMapper;
 import com.galaxy.dal.activity.mapper.ActivityUserMapper;
 import com.galaxy.dal.domain.activity.Activity;
+import com.galaxy.dal.domain.activity.ActivityCollectUser;
 import com.galaxy.dal.domain.activity.ActivityComment;
 import com.galaxy.dal.domain.activity.ActivityDetail;
 import com.galaxy.dal.domain.activity.ActivityUser;
@@ -37,6 +40,8 @@ public class ActivityServiceImpl implements ActivityService {
 	private ActivityUserMapper activityUserMapper;
 	@Autowired
 	private ActivityCommentMapper activityCommentMapper;
+	@Autowired
+	private ActivityCollectMapper activityCollectMapper;
 	@Autowired
 	private TicketMapper ticketMapper;
 	
@@ -119,10 +124,25 @@ public class ActivityServiceImpl implements ActivityService {
 		// TODO Auto-generated method stub
 		return activityMappper.getActivitySortInCreateTime(offset, pageSize);
 	}
+	
+	
+	@Override
+	public List<Activity> getUserPublishActivity(Long userId, Integer offset, Integer pageSize) {
+		// TODO Auto-generated method stub
+		return activityMappper.getUserPublishActivity(userId, offset, pageSize);
+	}
+	
 
 
 	
 	//activityuser
+
+
+	@Override
+	public int getUserpublishedActNumber(Long userId) {
+		// TODO Auto-generated method stub
+		return activityMappper.getUserpublishedActNumber(userId);
+	}
 
 	@Override
 	@Transactional
@@ -172,9 +192,9 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
-	public List<ActivityUser> listJoinedUsersSortInTime(Long activityId, Date jionTime, int pageSize) {
+	public List<ActivityUser> getJoinedUsersSortInTime(Long activityId, int offset, int pageSize) {
 		// TODO Auto-generated method stub
-		return activityUserMapper.listJoinedUsersSortInTime(activityId, jionTime, pageSize);
+		return activityUserMapper.getJoinedUsersSortInTime(activityId, offset, pageSize);
 	}
 
 	@Override
@@ -184,9 +204,9 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
-	public List<ActivityUser> listUserJoinedActs(Long userId, Date jionTime, int pageSize) {
+	public List<ActivityUser> getUserJoinedActs(Long userId, int offset, int pageSize) {
 		// TODO Auto-generated method stub
-		return activityUserMapper.listUserJoinedActs(userId, jionTime, pageSize);
+		return activityUserMapper.getUserJoinedActs(userId, offset, pageSize);
 	}
 
 	@Override
@@ -207,19 +227,30 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
-	public List<ActivityComment> getActComSortByTime(Long activityId, Date commentTime, Integer pageSize) {
+	public ArrayList<ActivityComment> getActComSortByTime(Long activityId, Integer offset, Integer pageSize) {
 		// TODO Auto-generated method stub
-		return activityCommentMapper.getActComSortByTime(activityId, commentTime, pageSize);
+		return activityCommentMapper.getActComSortByTime(activityId, offset, pageSize);
+	}
+
+	@Transactional
+	@Override
+	public List<Activity> getUserComedActSortByTime(Long userId, int offset, int pageSize) {
+		// TODO Auto-generated method stub
+		List<ActivityComment> comments = activityCommentMapper.getUserComedActSortByTime(userId, offset, pageSize);
+		if(comments != null){
+			ArrayList<Activity> result = new ArrayList<Activity>();
+			for(ActivityComment comment : comments){
+				Activity activity = activityMappper.getById(comment.getActivityId());
+				if(activity != null)
+					result.add(activity);
+			}
+			return result;
+		}
+		return null;
 	}
 
 	@Override
-	public List<ActivityComment> getUserComedActSortByTime(Long activityId, Long userId, Date commentTime, Long pageSize) {
-		// TODO Auto-generated method stub
-		return activityCommentMapper.getUserComedActSortByTime(activityId, userId, commentTime, pageSize);
-	}
-
-	@Override
-	public boolean Comment(ActivityComment activityComment) {
+	public boolean commentActivity(ActivityComment activityComment) {
 		// TODO Auto-generated method stub
 		return activityCommentMapper.insert(activityComment);
 	}
@@ -249,8 +280,55 @@ public class ActivityServiceImpl implements ActivityService {
 		return activityUserMapper.getByUserIdActId(userId, activityId);
 	}
 
+	
+
 	//comment
 	
 
+	///collect
+	@Override
+	public boolean collectActivity(ActivityCollectUser activityCollectUser) {
+		// TODO Auto-generated method stub
+		ActivityCollectUser temp = activityCollectMapper.getByUserIdActId(activityCollectUser.getUserId(), activityCollectUser.getActivityId());
+		if(temp != null)
+			return false;
+		return activityCollectMapper.insert(activityCollectUser);
+	}
+
+	@Override
+	public boolean cancelCollectActivity(Long collectId) {
+		// TODO Auto-generated method stub
+		return activityCollectMapper.deleteById(collectId);
+	}
+
+	@Override
+	public int getUserCollectActNum(Long userId) {
+		// TODO Auto-generated method stub
+		return activityCollectMapper.getUserCollectActNum(userId);
+	}
+
+	@Override
+	public List<ActivityCollectUser> getActCollectSortByTime(Long activityId, Integer offset, Integer pageSize) {
+		// TODO Auto-generated method stub
+		return activityCollectMapper.getActCollectSortByTime(activityId,offset,pageSize);
+	}
+
+	@Override
+	public ArrayList<Activity> getUserCollectedActSortByTime(Long userId, Integer offset, Integer pageSize) {
+		// TODO Auto-generated method stub
+		List<ActivityCollectUser> list = activityCollectMapper.getUserCollectedActSortByTime(userId, offset, pageSize);
+		if(list != null){
+			ArrayList<Activity> result = new ArrayList<Activity>();
+			for(ActivityCollectUser collect:list){
+				Activity activity = activityMappper.getById(collect.getActivityId());
+				if(activity != null){
+					result.add(activity);
+				}
+			}
+			return result;
+		}
+		return null;
+	}
+	///collect
 	
 }

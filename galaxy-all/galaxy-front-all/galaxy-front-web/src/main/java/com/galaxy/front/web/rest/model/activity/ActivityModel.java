@@ -13,7 +13,6 @@ import org.springframework.beans.BeanUtils;
 import com.galaxy.dal.domain.activity.Activity;
 import com.galaxy.front.web.rest.model.Contact;
 import com.galaxy.front.web.rest.model.Photo;
-import com.galaxy.front.web.rest.model.location.LocationInfo;
 import com.galaxy.front.web.rest.model.user.UserModel;
 import com.mysql.fabric.xmlrpc.base.Array;
 

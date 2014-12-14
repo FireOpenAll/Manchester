@@ -19,14 +19,13 @@
 		<result property="updatedTime" column="updated_time" />
 		<result property="userId" column="user_id" />
 		<result property="targetUserId" column="target_user_id" />
-		<result property="tergetCardId" column="target_card_id" />
 		<result property="requestStatus" column="request_status" />
 	</resultMap>
 	
 	<insert id="insert" parameterType="userCard" useGeneratedKeys="true" keyProperty="id">
 		insert into u_user_card
-		(created_time,updated_time,user_id,target_user_id,target_card_id,request_status)
-		values(#{createdTime},#{updatedTime},#{userId},#{targetUserId},#{tergetCardId},#{requestStatus})
+		(created_time,updated_time,user_id,target_user_id,request_status)
+		values(#{createdTime},#{updatedTime},#{userId},#{targetUserId},#{requestStatus})
 	</insert>
 	
 	<update id="update" parameterType="userCard">

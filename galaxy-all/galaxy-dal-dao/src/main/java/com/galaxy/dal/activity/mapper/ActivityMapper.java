@@ -19,6 +19,8 @@ public interface ActivityMapper extends BaseMapper<Activity>{
 	public boolean updateActivityTicketNum(@Param("activityId") Long activityId,@Param("number") int number);
 	public boolean updateActivityCollectNum(@Param("activityId") Long activityId,@Param("number") int number);
 	
+	public int getUserpublishedActNumber(@Param("userId") Long userId);
+	public List<Activity> getUserPublishActivity(@Param("userId") Long userId,@Param("offset") Integer offset,@Param("pageSize") Integer pageSize);
 	
 	
 	

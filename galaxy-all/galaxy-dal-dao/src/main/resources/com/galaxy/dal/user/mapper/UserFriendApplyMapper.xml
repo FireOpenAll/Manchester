@@ -11,56 +11,55 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.galaxy.dal.user.mapper.UserFriendMapper">
+<mapper namespace="com.galaxy.dal.user.mapper.UserFriendApplyMapper">
 
-	<resultMap type="userFriend" id="USER_FRIEND_MAP">
+	<resultMap type="userFriendApply" id="USER_FRIEND_APPLY_MAP">
 		<id property="id" column="id" />
 		<result property="createdTime" column="created_time" />
 		<result property="updatedTime" column="updated_time" />
 		<result property="userId" column="user_id" />
 		<result property="targetId" column="target_id" />
-		<result property="remarkName" column="remark_name"/>
+		<result property="message" column="message" />
+		<result property="applyStatus" column="apply_status" />
 		
 	</resultMap>
-	<select id="getById" resultMap="USER_FRIEND_MAP" parameterType="long">
+	<select id="getById" resultMap="USER_FRIEND_APPLY_MAP" parameterType="long">
 		SELECT *
-		FROM u_user_friend
+		FROM u_user_friend_apply
 		WHERE id = #{id}
 	</select>
-	<!-- 添加用户关系 -->
-	<insert id="insert" parameterType="userFriend" useGeneratedKeys="true"
+	
+	<insert id="insert" parameterType="userFriendApply" useGeneratedKeys="true"
 		keyProperty="id">
 		INSERT INTO
-		u_user_friend(created_time,updated_time,user_id,target_id,remark_name)
-		VALUES(#{createdTime},#{updatedTime},#{userId},#{targetId},#{remarkName})
+		u_user_friend_apply(created_time,updated_time,user_id,target_id,message,apply_status)
+		VALUES(#{createdTime},#{updatedTime},#{userId},#{targetId},#{message},#{applyStatus})
 	</insert>
 
+	<update id="update" parameterType="userFriendApply">
+	update u_user_friend_apply
+	set updated_time = #{updatedTime},apply_status = #{applyStatus}
+	where id = #{id}
+	</update>
 	
-	<!-- 删除两用户关系 -->
 	<delete id="deleteById" parameterType="long">
-	delete from u_user_friend
+	delete from u_user_friend_apply
 	where id = #{id}
 	</delete>
 	
 		
-	<!-- 查找两用户关系 -->
-	<select id="getUserFriend" resultMap="USER_FRIEND_MAP">
+	<select id="getuserFriendApply" resultMap="USER_FRIEND_APPLY_MAP">
 	select * 
-	from u_user_friend
+	from u_user_friend_apply
 	where user_id = #{userId} and target_id = #{targetId} 
 	limit 1
 	</select>
 	
-	<select id="getAllfriend" parameterType="long" resultMap="USER_FRIEND_MAP">
+	<select id="getAllfriendApply" parameterType="long" resultMap="USER_FRIEND_APPLY_MAP">
 	select *
-	from u_user_friend
+	from u_user_friend_apply
 	where user_id = #{userId}
 	</select>
-	
-	<delete id="deleteUserFriendByUseridTargetid">
-	delete from u_user_friend
-	where user_id = #{userId} and target_id = #{targetId}
-	</delete>
 	
 	
 </mapper>

@@ -42,6 +42,10 @@ public enum Code {
 	
 	//评论
 	COMMENT_FIAL("52000","评论失败"),
+	DELETE_COMMENT_FAIL("52001","删除评论失败"),
+	//收藏
+	COLLECT_FAIL("53000","收藏失败"),
+	CANCEL_COLLECT_FAIL("53000","收藏失败"),
 	
 	
 	
