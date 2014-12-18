@@ -18,6 +18,7 @@ public interface ActivityCommentMapper extends BaseMapper<ActivityComment> {
 		public int getUserComActNum(@Param("userId")Long userId);
 		//分页得到某活动的评论
 		public ArrayList<ActivityComment> getActComSortByTime(@Param("activityId")Long activityId,@Param("offset")Integer offset,@Param("pageSize")Integer pageSize);
+		public ArrayList<ActivityComment> getAllActComSortByTime(@Param("activityId")Long activityId);
 		//分页得到用户评论过的活动
 		public List<ActivityComment> getUserComedActSortByTime(@Param("userId")Long userId,@Param("offset")int offset,@Param("pageSize")int pageSize);
 }

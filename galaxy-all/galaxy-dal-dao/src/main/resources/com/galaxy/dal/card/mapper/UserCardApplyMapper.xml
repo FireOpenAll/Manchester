@@ -11,9 +11,9 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.galaxy.dal.user.mapper.UserFriendApplyMapper">
+<mapper namespace="com.galaxy.dal.card.mapper.UserCardApplyMapper">
 
-	<resultMap type="userFriendApply" id="USER_FRIEND_APPLY_MAP">
+	<resultMap type="userCardApply" id="USER_CARD_APPLY_MAP">
 		<id property="id" column="id" />
 		<result property="createdTime" column="created_time" />
 		<result property="updatedTime" column="updated_time" />
@@ -23,41 +23,41 @@
 		<result property="applyStatus" column="apply_status" />
 		
 	</resultMap>
-	<select id="getById" resultMap="USER_FRIEND_APPLY_MAP" parameterType="long">
+	<select id="getById" resultMap="USER_CARD_APPLY_MAP" parameterType="long">
 		SELECT *
-		FROM u_user_friend_apply
+		FROM u_user_card_apply
 		WHERE id = #{id}
 	</select>
 	
-	<insert id="insert" parameterType="userFriendApply" useGeneratedKeys="true"
+	<insert id="insert" parameterType="userCardApply" useGeneratedKeys="true"
 		keyProperty="id">
 		INSERT INTO
-		u_user_friend_apply(created_time,updated_time,user_id,target_id,message,apply_status)
+		u_user_card_apply(created_time,updated_time,user_id,target_id,message,apply_status)
 		VALUES(#{createdTime},#{updatedTime},#{userId},#{targetId},#{message},#{applyStatus})
 	</insert>
 
-	<update id="update" parameterType="userFriendApply">
-	update u_user_friend_apply
+	<update id="update" parameterType="userCardApply">
+	update u_user_card_apply
 	set updated_time = #{updatedTime},apply_status = #{applyStatus},message = #{message}
 	where id = #{id}
 	</update>
 	
 	<delete id="deleteById" parameterType="long">
-	delete from u_user_friend_apply
+	delete from u_user_card_apply
 	where id = #{id}
 	</delete>
 	
 		
-	<select id="getuserFriendApply" resultMap="USER_FRIEND_APPLY_MAP">
+	<select id="getUserCardApply" resultMap="USER_CARD_APPLY_MAP">
 	select * 
-	from u_user_friend_apply
+	from u_user_card_apply
 	where user_id = #{userId} and target_id = #{targetId} 
 	limit 1
 	</select>
 	
-	<select id="getAllfriendApply" parameterType="long" resultMap="USER_FRIEND_APPLY_MAP">
+	<select id="getAllCardApply" parameterType="long" resultMap="USER_CARD_APPLY_MAP">
 	select *
-	from u_user_friend_apply
+	from u_user_card_apply
 	where target_id = #{userId}
 	</select>
 	

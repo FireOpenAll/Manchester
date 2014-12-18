@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.galaxy.dal.domain.activity.Activity;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.activity.ActivityModel;
+import com.galaxy.front.web.utils.Code;
 import com.galaxy.front.web.utils.Constants;
+import com.galaxy.front.web.utils.ResultModelUtils;
 import com.galaxy.service.activity.ActivityService;
 import com.galaxy.service.user.LoginUserModel;
 import com.galaxy.service.user.UserUtils;
@@ -31,6 +33,7 @@ public class UserPublishActivityController {
 	@RequestMapping(value="getPublishedAct",method = RequestMethod.GET,params = {"pageNum","pageSize"})
 	public Object getUserPublishActivity(@RequestParam("pageNum") int pageNum,@RequestParam("pageSize") int pageSize){
 		ResultModel resultModel = new ResultModel();
+		resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 		if(pageNum <= 0){
 			pageNum = 1;
 		}

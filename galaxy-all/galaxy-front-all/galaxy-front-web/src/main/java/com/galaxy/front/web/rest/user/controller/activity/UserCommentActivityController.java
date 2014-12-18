@@ -2,7 +2,6 @@ package com.galaxy.front.web.rest.user.controller.activity;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,15 +12,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.galaxy.dal.domain.activity.ActivityComment;
+import com.galaxy.dal.domain.user.User;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.StatusModel;
 import com.galaxy.front.web.rest.model.activity.ActivityModel;
+import com.galaxy.front.web.rest.model.comment.CommentModel;
 import com.galaxy.front.web.utils.Code;
 import com.galaxy.front.web.utils.Constants;
 import com.galaxy.front.web.utils.ParamUtils;
 import com.galaxy.front.web.utils.ResultModelUtils;
 import com.galaxy.service.activity.ActivityService;
 import com.galaxy.service.user.LoginUserModel;
+import com.galaxy.service.user.UserService;
 import com.galaxy.service.user.UserUtils;
 
 /*author:huangshanqi
@@ -34,6 +36,8 @@ public class UserCommentActivityController {
 
 	@Autowired
 	private ActivityService activityService;
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping(value="getCommentedAct",method=RequestMethod.GET,params={"pageNum","pageSize"})
 	public Object getUserCommentActivity(@RequestParam("pageNum") Integer pageNum,@RequestParam("pageSize") Integer pageSize){
@@ -85,27 +89,7 @@ public class UserCommentActivityController {
 		return resultModel;
 	}
 	
-	@RequestMapping(value="getComment",method=RequestMethod.GET,params={"activityId","pageNum","pageSize"})
-	public Object getComment(@RequestParam("activityId") Long activityId,@RequestParam("pageNum") Integer pageNum,@RequestParam("pageSize") Integer pageSize){
-		ResultModel resultModel = new ResultModel();
-		
-		if(ParamUtils.isNotEmpty(activityId,pageNum,pageSize)){
-			resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
-			if(pageNum <= 0){
-				pageNum = 1;
-			}
-			if(pageSize <= 0 || pageSize > Constants.MAX_PAGESIZE){
-				pageSize = Constants.PAGESIZE;
-			}
-			ArrayList<ActivityComment> list = activityService.getActComSortByTime(activityId, (pageNum-1)*pageSize, pageSize);
-			resultModel.setData(list);
-		}else{
-			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
-		}
-		
-		
-		return resultModel;
-	}
+	
 	
 	@RequestMapping(value="deleteComment",method=RequestMethod.GET,params={"commontId"})
 	public Object deleteComment(@RequestParam("commontId") Long commontId){

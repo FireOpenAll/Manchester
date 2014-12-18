@@ -24,6 +24,7 @@
 		<result property="cityId" column="city_id"/>
 		<result property="areaId" column="area_id"/>
 		<result property="address" column="address"/>
+		<result property="price" column="price"/>
 		<result property="detailUrl" column="detail_url"/>
 		<result property="tags" column="tags"/>
 		<result property="joinedNum" column="joined_num"/>
@@ -52,7 +53,7 @@
 		ac_activity(
 		created_time,updated_time,title,start_time,
 		end_time,province_id,city_id,area_id,
-		address,detail_url,tags,joined_num,
+		address,price,detail_url,tags,joined_num,
 		comment_num,tickets_num,collect_num,activity_status,
 		need_audit,phone,description,pictures,
 		email,catId1,catId2,longtitude,
@@ -60,7 +61,7 @@
 		)values (
 		#{createdTime},#{updatedTime},#{title},#{startTime},
 		#{endTime},#{provinceId},#{cityId},#{areaId},
-		#{address},#{detailUrl},#{tags},#{joinedNum},
+		#{address},#{price},#{detailUrl},#{tags},#{joinedNum},
 		#{commentNum},#{ticketsNum},#{collectNum},#{activityStatus},
 		#{needAudit},#{phone},#{description},#{pictures},
 		#{email},#{catId1},#{catId2},#{longtitude},

@@ -1,5 +1,6 @@
 package com.galaxy.service.card.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.galaxy.dal.card.mapper.CardMapper;
+import com.galaxy.dal.card.mapper.UserCardApplyMapper;
 import com.galaxy.dal.card.mapper.UserCardMapper;
 import com.galaxy.dal.domain.card.Card;
 import com.galaxy.dal.domain.card.UserCard;
+import com.galaxy.dal.domain.card.UserCardApply;
 import com.galaxy.service.card.CardService;
 
 /*author:huangshanqi
@@ -19,10 +22,13 @@ import com.galaxy.service.card.CardService;
 @Service
 public class CardServiceImpl implements CardService {
 	@Autowired
-	CardMapper cardMapper;
+	private CardMapper cardMapper;
 	@Autowired
 	private UserCardMapper userCardMapper;
+	@Autowired
+	private UserCardApplyMapper userCardApplyMapper;
 
+	@Transactional
 	@Override
 	public boolean createCard(Card card) {
 		// TODO Auto-generated method stub
@@ -89,9 +95,17 @@ public class CardServiceImpl implements CardService {
 	}
 	
 	@Override
-	public List<UserCard> getAllFriendCard(Long userId) {
+	public List<Card> getAllFriendCard(Long userId) {
 		// TODO Auto-generated method stub
-		return userCardMapper.getAllFriendCard(userId);
+		List<UserCard> list = userCardMapper.getAllFriendCard(userId);
+		if(list == null)
+			return null;
+		List<Card> cards = new ArrayList<Card>();
+		for(UserCard userCard:list){
+			Card card = cardMapper.getByUserId(userCard.getUserId());
+			cards.add(card);
+		}
+		return cards;
 	}
 
 	@Override
@@ -100,11 +114,6 @@ public class CardServiceImpl implements CardService {
 		return userCardMapper.getFriendCardPageByOffset(userId, offset, pageSize);
 	}
 
-	@Override
-	public UserCard getByUserIdTargetUserId(Long userId, Long targetUserId) {
-		// TODO Auto-generated method stub
-		return userCardMapper.getByUserIdTargetUserId(userId, targetUserId);
-	}
 
 	@Override
 	public boolean hasAddCard(Long userId, Long targetUserId) {
@@ -112,6 +121,43 @@ public class CardServiceImpl implements CardService {
 		UserCard temp = userCardMapper.getByUserIdTargetUserId(userId, targetUserId);
 		return temp != null;
 	}
+
+	@Override
+	@Transactional
+	public boolean createUserCardApply(UserCardApply userCardApply) {
+		// TODO Auto-generated method stub
+		if(hasUserCardApplyExist(userCardApply.getUserId(), userCardApply.getTargetId()))
+		   return updateUserCardApply(userCardApply);
+		return userCardApplyMapper.insert(userCardApply);
+	}
+
+	@Override
+	public boolean updateUserCardApply(UserCardApply userCardApply) {
+		// TODO Auto-generated method stub
+		
+		return userCardApplyMapper.update(userCardApply);
+	}
+
+	@Override
+	public boolean deleteUserCardById(Long userCardApplyId) {
+		// TODO Auto-generated method stub
+		return userCardApplyMapper.deleteById(userCardApplyId);
+	}
+
+	@Override
+	public boolean hasUserCardApplyExist(Long userId, Long targetUserId) {
+		// TODO Auto-generated method stub
+		UserCardApply temp = userCardApplyMapper.getUserCardApply(userId, targetUserId);
+		return temp != null;
+	}
+
+	@Override
+	public List<UserCardApply> getAllUserCardApply(Long userId) {
+		// TODO Auto-generated method stub
+		return ;
+	}
+	
+	
 	
 	
 

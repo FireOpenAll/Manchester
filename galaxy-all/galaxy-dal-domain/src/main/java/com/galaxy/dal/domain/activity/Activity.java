@@ -13,6 +13,7 @@ public class Activity extends BaseDomain {
 	private Long cityId;
 	private Long areaId;
 	private String address;
+	private Float price;
 	private String detailUrl;
 	private String tags;
 	private Integer joinedNum;
@@ -73,6 +74,12 @@ public class Activity extends BaseDomain {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public Float getPrice() {
+		return price;
+	}
+	public void setPrice(Float price) {
+		this.price = price;
 	}
 	public String getDetailUrl() {
 		return detailUrl;
@@ -188,4 +195,6 @@ public class Activity extends BaseDomain {
 	public void setFree(Boolean free) {
 		this.free = free;
 	}
+	
+	
 }

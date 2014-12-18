@@ -20,7 +20,9 @@ import com.galaxy.dal.domain.activity.ActivityComment;
 import com.galaxy.dal.domain.activity.ActivityDetail;
 import com.galaxy.dal.domain.activity.ActivityUser;
 import com.galaxy.dal.domain.ticket.Ticket;
+import com.galaxy.dal.domain.user.User;
 import com.galaxy.dal.ticket.mapper.TicketMapper;
+import com.galaxy.dal.user.mapper.UserMapper;
 import com.galaxy.service.activity.ActivityService;
 import com.galaxy.service.activity.form.ActivityForm;
 import com.galaxy.service.chat.ChatService;
@@ -44,6 +46,8 @@ public class ActivityServiceImpl implements ActivityService {
 	private ActivityCollectMapper activityCollectMapper;
 	@Autowired
 	private TicketMapper ticketMapper;
+	@Autowired
+	private UserMapper userMapper;
 	
 	@Autowired 
 	private ChatService chatService; 
@@ -152,23 +156,15 @@ public class ActivityServiceImpl implements ActivityService {
 			//todo error handle
 			return false;
 		}
-		
-		ActivityUser temp = activityUserMapper.getByUserIdActIdTicketId(activityUser.getUserId(), activityUser.getActivityId(),activityUser.getTicketId());
-		if (temp != null) {
+		if(activity.getTicketsNum() < activityUser.getNum())
 			return false;
-		}else {
-			Ticket ticket = ticketMapper.getById(activityUser.getTicketId()) ;
-			if(ticket == null){
-				return false;
-			}
-			//
-			ticket.setUpdatedTime(new Date());
-			ticket.setRemain((ticket.getTotal()-activityUser.getNum()>0)?(ticket.getTotal()-activityUser.getNum()):0);
-			ticketMapper.update(ticket);
-			//
-			activityMappper.updateActivityJoinNum(activityUser.getActivityId(), activity.getJoinedNum() + activityUser.getNum());
-			return activityUserMapper.insert(activityUser);
-		}
+		ActivityUser temp = activityUserMapper.getByUserIdActId(activityUser.getUserId(), activityUser.getActivityId());
+		if(temp != null)
+			return false;
+		activityMappper.updateActivityJoinNum(activity.getId(), activity.getJoinedNum()+activityUser.getNum());
+		activityMappper.updateActivityTicketNum(activity.getId(), activity.getTicketsNum() - activityUser.getNum());
+		
+		return activityUserMapper.insert(activityUser);
 	}
 
 	@Override
@@ -190,11 +186,38 @@ public class ActivityServiceImpl implements ActivityService {
 		// TODO Auto-generated method stub
 		return activityUserMapper.getById(id);
 	}
+	
+
+	
+	
+	@Override
+	public List<User> getAllJoinedUsersSortInTime(Long activityId) {
+		// TODO Auto-generated method stub
+		List<ActivityUser> tempList = activityUserMapper.getAllJoinedUsersSortInTime(activityId);
+		if(tempList == null)
+			return null;
+		List<User> result = new ArrayList<User>();
+		for(ActivityUser temp :tempList){
+			User user = userMapper.getById(temp.getUserId());
+			if(user != null)
+				result.add(user);
+		}
+		return result;
+	}
 
 	@Override
-	public List<ActivityUser> getJoinedUsersSortInTime(Long activityId, int offset, int pageSize) {
+	public List<User> getJoinedUsersSortInTime(Long activityId, int offset, int pageSize) {
 		// TODO Auto-generated method stub
-		return activityUserMapper.getJoinedUsersSortInTime(activityId, offset, pageSize);
+		List<ActivityUser> tempList = activityUserMapper.getJoinedUsersSortInTime(activityId, offset, pageSize);
+		if(tempList == null)
+			return null;
+		List<User> result = new ArrayList<User>();
+		for(ActivityUser temp :tempList){
+			User user = userMapper.getById(temp.getUserId());
+			if(user != null)
+				result.add(user);
+		}
+		return result;
 	}
 
 	@Override
@@ -209,11 +232,6 @@ public class ActivityServiceImpl implements ActivityService {
 		return activityUserMapper.getUserJoinedActs(userId, offset, pageSize);
 	}
 
-	@Override
-	public ActivityUser getByUserIdActIdTicketId(Long userId, Long activityId,Long ticketId) {
-		// TODO Auto-generated method stub
-		return activityUserMapper.getByUserIdActIdTicketId(userId, activityId, ticketId);
-	}
 
 	//activityuser
 
@@ -224,6 +242,15 @@ public class ActivityServiceImpl implements ActivityService {
 	public int getUserComActNum(Long userId) {
 		// TODO Auto-generated method stub
 		return activityCommentMapper.getUserComActNum(userId);
+	}
+
+	
+	
+	
+	@Override
+	public ArrayList<ActivityComment> getAllActComSortByTime(Long activityId) {
+		// TODO Auto-generated method stub
+		return activityCommentMapper.getAllActComSortByTime(activityId);
 	}
 
 	@Override
@@ -250,14 +277,29 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
+	@Transactional 
 	public boolean commentActivity(ActivityComment activityComment) {
 		// TODO Auto-generated method stub
+		Activity activity = activityMappper.getById(activityComment.getActivityId());
+		if(activity == null){
+			return false;
+		}
+		activityMappper.updateActivityCommentNum(activity.getId(), activity.getCommentNum()+1);
 		return activityCommentMapper.insert(activityComment);
 	}
 
 	@Override
 	public boolean deleteComment(Long commentId) {
 		// TODO Auto-generated method stub
+		ActivityComment comment = activityCommentMapper.getById(commentId);
+		if(comment == null){
+			return false;
+		}
+		Activity activity = activityMappper.getById(comment.getActivityId());
+		if(activity == null){
+			return false;
+		}
+		activityMappper.updateActivityCommentNum(activity.getId(), (activity.getCommentNum()-1)>0?(activity.getCommentNum()+1):0);
 		return activityCommentMapper.deleteById(commentId);
 	}
 
@@ -292,6 +334,11 @@ public class ActivityServiceImpl implements ActivityService {
 		ActivityCollectUser temp = activityCollectMapper.getByUserIdActId(activityCollectUser.getUserId(), activityCollectUser.getActivityId());
 		if(temp != null)
 			return false;
+		Activity activity = activityMappper.getById(activityCollectUser.getActivityId());
+		if(activity == null){
+			return false;
+		}
+		activityMappper.updateActivityCollectNum(activity.getId(), activity.getCollectNum()+1);
 		return activityCollectMapper.insert(activityCollectUser);
 	}
 

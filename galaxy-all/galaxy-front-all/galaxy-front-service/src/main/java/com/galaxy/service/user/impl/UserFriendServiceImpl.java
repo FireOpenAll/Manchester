@@ -1,14 +1,19 @@
 package com.galaxy.service.user.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.galaxy.dal.domain.user.User;
 import com.galaxy.dal.domain.user.UserFriend;
 import com.galaxy.dal.domain.user.UserFriendApply;
 import com.galaxy.dal.user.mapper.UserFriendApplyMapper;
 import com.galaxy.dal.user.mapper.UserFriendMapper;
+import com.galaxy.dal.user.mapper.UserMapper;
 import com.galaxy.service.user.UserFriendService;
 
 /*author:huangshanqi
@@ -22,6 +27,11 @@ public class UserFriendServiceImpl implements UserFriendService {
 	private UserFriendMapper userFriendMapper;
 	@Autowired
 	private UserFriendApplyMapper userFriendApplyMapper;
+	@Autowired
+	private UserMapper userMapper;
+	
+	
+	@Transactional
 	@Override
 	public boolean createUserFriend(UserFriend userFriend) {
 		// TODO Auto-generated method stub
@@ -55,29 +65,77 @@ public class UserFriendServiceImpl implements UserFriendService {
 	public UserFriend getUserFriendByUidTid(Long userId, Long targetId) {
 		// TODO Auto-generated method stub
 		return userFriendMapper.getUserFriend(userId,targetId);
+	}public UserFriendServiceImpl() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Transactional
+	@Override
+	public List<User> getAllUserFriend(Long userId) {
+		// TODO Auto-generated method stub
+		List<UserFriend> list = userFriendMapper.getAllfriend(userId);
+		if(list == null){
+			return null;
+		}
+		List<User> result = new ArrayList<User>();
+		for(UserFriend userFriend:list){
+			User user = userMapper.getById(userFriend.getTargetId());
+			if(user != null){
+				result.add(user);
+			}
+		}
+		return result;
+	}
+	
+	
+	
+	
+	@Transactional
+	@Override
+	public boolean acceptFriendApply(UserFriend userFriend) {
+		// TODO Auto-generated method stub
+		UserFriendApply  apply = userFriendApplyMapper.getuserFriendApply(userFriend.getTargetId(), userFriend.getUserId());
+		if(apply == null){
+			return false;
+		}
+		if(!hasAddFriend(userFriend.getUserId(),userFriend.getTargetId())){
+		    userFriendMapper.insert(userFriend);
+		}
+		if(!hasAddFriend(userFriend.getTargetId(),userFriend.getUserId())){
+			Long tempId = userFriend.getUserId();
+			userFriend.setUserId(userFriend.getTargetId());
+			userFriend.setTargetId(tempId);
+		    userFriendMapper.insert(userFriend);
+		}
+		apply.setUpdatedTime(new Date());
+		apply.setApplyStatus(1);
+		return userFriendApplyMapper.update(apply);
 	}
 	@Override
-	public List<UserFriend> getAllUserFriend(Long userId) {
+	public UserFriendApply getUserFriendApplyByid(Long applyId) {
 		// TODO Auto-generated method stub
-		return userFriendMapper.getAllfriend(userId);
+		return userFriendApplyMapper.getById(applyId);
 	}
+	@Transactional
 	@Override
 	public boolean createUserFriendApply(UserFriendApply userFriendApply) {
 		// TODO Auto-generated method stub
 		UserFriendApply temp = userFriendApplyMapper.getuserFriendApply(userFriendApply.getUserId(), userFriendApply.getTargetId());
-        if(temp != null)
-        	return false;
-		return userFriendApplyMapper.insert(userFriendApply);
+        if(temp == null)
+        	return userFriendApplyMapper.insert(userFriendApply);
+		if(temp.getApplyStatus() == 1){
+			return false;
+		}else{
+			temp.setUpdatedTime(userFriendApply.getCreatedTime());
+			temp.setMessage(userFriendApply.getMessage());
+			temp.setApplyStatus(userFriendApply.getApplyStatus());
+			return userFriendApplyMapper.update(temp);
+		}
 	}
 	@Override
 	public boolean deleteUserFriendApply(Long userFriendApplyId) {
 		// TODO Auto-generated method stub
 		return userFriendApplyMapper.deleteById(userFriendApplyId);
-	}
-	@Override
-	public boolean modifyUserFriendApply(UserFriendApply userFriendApply) {
-		// TODO Auto-generated method stub
-		return userFriendApplyMapper.update(userFriendApply);
 	}
 	@Override
 	public UserFriendApply getUserFriendApplyByUidTid(Long userId, Long targetId) {

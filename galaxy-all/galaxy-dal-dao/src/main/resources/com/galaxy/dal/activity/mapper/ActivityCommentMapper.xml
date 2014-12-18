@@ -64,6 +64,13 @@
    limit #{offset},#{pageSize}
    </select>
    
+   <select id="getAllActComSortByTime" resultMap="ACTIVITY_COMMENT_MAP" parameterType="long">
+   select *
+   from ac_activity_commented_user
+   where activity_id = #{activityId}
+   order by created_time desc
+   </select>
+   
    <select id="getUserComedActSortByTime" resultMap="ACTIVITY_COMMENT_MAP">
    select * from
    (select * from ac_activity_commented_user where user_id = #{userId} order by created_time,activity_id desc) t

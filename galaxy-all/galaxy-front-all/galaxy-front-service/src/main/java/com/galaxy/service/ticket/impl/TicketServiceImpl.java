@@ -88,17 +88,17 @@ public class TicketServiceImpl implements TicketService{
 	public List<Ticket> getAllAcitivityTicket(Long activityId) {
 		// TODO Auto-generated method stub
 		List<ActivityTicket> temp = activityTicketMapper.getAllAcitivityTicket(activityId);
-		if(temp != null || temp.size() == 0){
-			return null;
-		}
-		List<Ticket> tickets = new ArrayList<Ticket>();
-		for(ActivityTicket activityTicket:temp){
-			Ticket ticket = ticketMapper.getById(activityTicket.getTicketId());
-			if(ticket != null){
-				tickets.add(ticket);
+		if(temp != null){
+			List<Ticket> tickets = new ArrayList<Ticket>();
+			for(ActivityTicket activityTicket:temp){
+				Ticket ticket = ticketMapper.getById(activityTicket.getTicketId());
+				if(ticket != null){
+					tickets.add(ticket);
+				}
 			}
+			return tickets;
 		}
-		return tickets;
+		return null;
 	}
 
 	@Override

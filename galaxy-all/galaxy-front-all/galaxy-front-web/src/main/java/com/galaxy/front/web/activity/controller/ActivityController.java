@@ -273,6 +273,7 @@ public class ActivityController {
 		activityForm.setJoinedNum(0);
 		activityForm.setCommentNum(0);;
 		activityForm.setTicketsNum(model.getTicket_num());
+		activityForm.setPrice(model.getTicket_price());
 		activityForm.setCollectNum(0);
 		
 		activityForm.setActivityStatus(ActivityUtils.getActivityStatus(activityForm.getStartTime(), activityForm.getEndTime()));
@@ -291,6 +292,7 @@ public class ActivityController {
 		
 		Long activityId = activityService.create(activityForm);
 		
+		/*
 		Ticket ticket = new Ticket();
 		ticket.setCreatedTime(new Date());
 		ticket.setUpdatedTime(ticket.getCreatedTime());
@@ -301,7 +303,7 @@ public class ActivityController {
 		ticket.setActivityId(activityId);
 		
 		ticketService.createTicket(ticket);
-		
+		*/
 		request.setAttribute("message", "创建活动成功");
 		return "activity/postsuccess";
 	}

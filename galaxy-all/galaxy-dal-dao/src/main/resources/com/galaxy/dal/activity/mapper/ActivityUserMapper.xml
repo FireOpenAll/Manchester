@@ -20,7 +20,6 @@
 		<result property="userId" column="user_id"/>
 		<result property="username" column="username"/>
 		<result property="activityId" column="activity_id"/>
-		<result property="ticketId" column="ticket_id"/>
 		<result property="num" column="num"/>
 	</resultMap>
 	
@@ -28,10 +27,10 @@
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
 		ac_activity_user(
-		created_time,updated_time,user_id,username,activity_id,ticket_id,num
+		created_time,updated_time,user_id,username,activity_id,num
 		)values (
 		#{createdTime},#{updatedTime},#{userId},#{username},
-		#{activityId},#{ticketId},#{num}
+		#{activityId},#{num}
 		)
 	</insert>
 	
@@ -54,7 +53,7 @@
 		WHERE id = #{id}
 	</select>
 	
-	<select id="listAllJoinedUsers" parameterType="long" resultMap="ACTIVITY_USER_MAP">
+	<select id="getAllJoinedUsersSortInTime" parameterType="long" resultMap="ACTIVITY_USER_MAP">
 	select *
 	from ac_activity_user
 	where activity_id = #{activityId}
@@ -86,6 +85,7 @@
 	<select id="getByUserIdActId" resultMap="ACTIVITY_USER_MAP">
 	select *
 	from ac_activity_user
-	where user_id = #{userId} and activity_id = #{activityId} and ticket_id = #{ticketId}
+	where user_id = #{userId} and activity_id = #{activityId}
 	</select>
+	
 </mapper>

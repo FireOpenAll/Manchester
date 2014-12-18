@@ -1,6 +1,10 @@
 package com.galaxy.front.web.rest.model.user;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.galaxy.dal.domain.user.User;
 
 /*author:huangshanqi
  *time  :2014年9月21日 下午5:09:38
@@ -58,4 +62,27 @@ public class UserModel implements Serializable {
 		this.gender = gender;
 	}
 
+	public static UserModel userToUserModel( User user){
+		if(user == null)
+			return null;
+		UserModel model = new UserModel();
+		model.setUserid(user.getId());
+		model.setName(user.getNick());
+		model.setAvatar(user.getAvatar());
+		model.setGender(user.getGender().toString());
+		return model;
+	}
+	
+	public static ArrayList<UserModel> userListToUserModelList(List<User> users){
+		if(users == null)
+			return null;
+		ArrayList<UserModel> result = new ArrayList<UserModel>();
+		for(User user:users){
+			UserModel model = userToUserModel(user);
+			if(model != null)
+				result.add(model);
+		}
+		return result;
+	}
+	
 }

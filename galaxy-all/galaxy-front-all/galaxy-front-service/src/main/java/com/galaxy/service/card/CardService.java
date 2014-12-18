@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.galaxy.dal.domain.card.Card;
 import com.galaxy.dal.domain.card.UserCard;
+import com.galaxy.dal.domain.card.UserCardApply;
 
 /*author:huangshanqi
  *time  :2014年12月2日 下午9:48:43
@@ -27,10 +28,15 @@ public interface CardService {
 	public boolean deleteUserCardByUserCardId(Long userCardId);
 	public UserCard getUserCardByUserCardId(Long userCardId);
     
-    public UserCard getByUserIdTargetUserId(Long userId,Long targetUserId);
     public boolean hasAddCard(Long userId,Long targetUserId);
-	public List<UserCard> getAllFriendCard(Long userId);
+	public List<Card> getAllFriendCard(Long userId);
 	public List<UserCard> getFriendCardPageByOffset(Long userId,int offset,int pageSize);
 
-    
+	
+	//userCardApply
+	public boolean createUserCardApply(UserCardApply userCardApply);
+	public boolean updateUserCardApply(UserCardApply userCardApply);
+	public boolean deleteUserCardById(Long userCardApplyId);
+	public boolean hasUserCardApplyExist(Long userId,Long targetUserId);
+	public List<UserCardApply> getAllUserCardApply(Long userId);
 }
