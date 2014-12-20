@@ -12,6 +12,7 @@ import com.galaxy.front.web.rest.model.user.UserModel;
  */
 public class ActivityDetailModel implements Serializable {
 
+	private Long id;
 	private String title;
 	private Date startTime;
 	private Date endTime;
@@ -40,209 +41,153 @@ public class ActivityDetailModel implements Serializable {
 	//
 	private String organizerNickName;
 	
-	//
 	//private List<Ticket> tickets;
-	
 	
 	//
 	private List<UserModel> joinedUser;
-
-
+	
+	private Boolean hasJoined;
+	private Boolean hasCollected;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getTitle() {
 		return title;
 	}
-
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
-
 	public Date getStartTime() {
 		return startTime;
 	}
-
-
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
-
-
 	public Date getEndTime() {
 		return endTime;
 	}
-
-
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
-
-
 	public String getAddress() {
 		return address;
 	}
-
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-
 	public String getDetailUrl() {
 		return detailUrl;
 	}
-
-
 	public void setDetailUrl(String detailUrl) {
 		this.detailUrl = detailUrl;
 	}
-
-
+	public Float getPrice() {
+		return price;
+	}
+	public void setPrice(Float price) {
+		this.price = price;
+	}
 	public List<String> getActivityTags() {
 		return activityTags;
 	}
-
-
 	public void setActivityTags(List<String> activityTags) {
 		this.activityTags = activityTags;
 	}
-
-
 	public Integer getJoinedNum() {
 		return joinedNum;
 	}
-
-
 	public void setJoinedNum(Integer joinedNum) {
 		this.joinedNum = joinedNum;
 	}
-
-
 	public Integer getCommentNum() {
 		return commentNum;
 	}
-
-
 	public void setCommentNum(Integer commentNum) {
 		this.commentNum = commentNum;
 	}
-
-
 	public Integer getCollectNum() {
 		return collectNum;
 	}
-
-
 	public void setCollectNum(Integer collectNum) {
 		this.collectNum = collectNum;
 	}
 	public Integer getTicketsNum() {
 		return ticketsNum;
 	}
-
-
 	public void setTicketsNum(Integer ticketsNum) {
 		this.ticketsNum = ticketsNum;
 	}
-
-
 	public String getPhone() {
 		return phone;
 	}
-
-
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-
 	public String getDescription() {
 		return description;
 	}
-
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-
 	public List<String> getActivityPics() {
 		return activityPics;
 	}
-
-
 	public void setActivityPics(List<String> activityPics) {
 		this.activityPics = activityPics;
 	}
-
-
 	public String getEmail() {
 		return email;
 	}
-
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
 	public Double getLongtitude() {
 		return longtitude;
 	}
-
-
 	public void setLongtitude(Double longtitude) {
 		this.longtitude = longtitude;
 	}
-
-
 	public Double getLatitude() {
 		return latitude;
 	}
-
-
 	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
-
-
 	public Long getOrganizerId() {
 		return organizerId;
 	}
-
-
 	public void setOrganizerId(Long organizerId) {
 		this.organizerId = organizerId;
 	}
-
-
 	public String getOrganizerNickName() {
 		return organizerNickName;
 	}
-
-
 	public void setOrganizerNickName(String organizerNickName) {
 		this.organizerNickName = organizerNickName;
 	}
-
 	public List<UserModel> getJoinedUser() {
 		return joinedUser;
 	}
-
-
 	public void setJoinedUser(List<UserModel> joinedUser) {
 		this.joinedUser = joinedUser;
 	}
-
-
-	public Float getPrice() {
-		return price;
+	public Boolean getHasJoined() {
+		return hasJoined;
+	}
+	public void setHasJoined(Boolean hasJoined) {
+		this.hasJoined = hasJoined;
+	}
+	public Boolean getHasCollected() {
+		return hasCollected;
+	}
+	public void setHasCollected(Boolean hasCollected) {
+		this.hasCollected = hasCollected;
 	}
 
 
-	public void setPrice(Float price) {
-		this.price = price;
-	}
 	
 	
 	

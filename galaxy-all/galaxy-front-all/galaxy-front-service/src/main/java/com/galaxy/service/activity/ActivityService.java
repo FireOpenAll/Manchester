@@ -28,6 +28,8 @@ public interface ActivityService {
 	public int getUserpublishedActNumber(Long userId);
 	public List<Activity> getUserPublishActivity(Long userId,Integer offset,Integer pageSize);
 
+	public boolean hasUserJoinedActivity(Long userId,Long activityId);
+	public boolean hasUserCollectedActivity(Long userId,Long activityId);
 	
 	//ActivityUser
 	public boolean joinActivity(ActivityUser activityUser);

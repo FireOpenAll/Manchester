@@ -43,5 +43,15 @@ public abstract class UserUtils {
 		cachedClient.set(token,subject.getPrincipal()); ;
 	}
  
+	
+	public static boolean isWebLogin(){
+		
+		return false;
+	}
+	
+	public static boolean isAppLogin(){
+		
+		return SecurityUtils.getSubject().getPrincipal()!=null;
+	}
 
 }

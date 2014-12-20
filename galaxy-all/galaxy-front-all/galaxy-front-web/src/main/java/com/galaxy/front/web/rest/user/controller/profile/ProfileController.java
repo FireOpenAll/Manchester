@@ -48,7 +48,7 @@ public class ProfileController {
 		ResultModel resultModel = new ResultModel();
 
 		LoginUserModel loginUser = UserUtils.getLoginUser();
-		
+
 		if (loginUser != null) {
 			// 自己的
 			User user = userService.getUserById(loginUser.getUserId());
@@ -124,15 +124,16 @@ public class ProfileController {
 		//
 		profile.setAddress(new SimpleAddress("北京", "北京市"));
 
-		LoginUserModel loginUser = UserUtils.getLoginUser();
-		if (loginUser == null) {
+		if (UserUtils.isAppLogin()) {
+			// 登录
+			LoginUserModel loginUser = UserUtils.getLoginUser();
+			profile.setAddCard(cardService.hasAddCard(loginUser.getUserId(), targetId));
+			profile.setAddFriend(userFriendService.hasAddFriend(loginUser.getUserId(), targetId));
+		} else {
 			// 未登录
 			profile.setAddCard(false);
 			profile.setAddFriend(false);
-		} else {
-			// 登录
-			profile.setAddCard(cardService.hasAddCard(loginUser.getUserId(), targetId));
-			profile.setAddFriend(userFriendService.hasAddFriend(loginUser.getUserId(), targetId));
+
 		}
 		resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 		resultModel.setData(profile);

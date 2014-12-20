@@ -13,6 +13,7 @@ import com.galaxy.dal.domain.card.UserCard;
  */
 public interface UserCardMapper extends BaseMapper<UserCard> {
 	
+	public boolean deleteByUserIdTargetId(@Param("userId") Long userId,@Param("targetUserId") Long targetUserId);
 	public UserCard getByUserIdTargetUserId(@Param("userId") Long userId,@Param("targetUserId") Long targetUserId);
 	public List<UserCard> getAllFriendCard(@Param("userId") Long userId);
 	public List<UserCard> getFriendCardPageByOffset(@Param("userId") Long userId,@Param("offset")int offset,@Param("pageSize") int pageSize);

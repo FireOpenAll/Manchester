@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,9 @@ import com.galaxy.front.web.utils.Code;
 import com.galaxy.front.web.utils.ResultModelUtils;
 import com.galaxy.service.activity.ActivityService;
 import com.galaxy.service.ticket.TicketService;
+import com.galaxy.service.user.LoginUserModel;
 import com.galaxy.service.user.UserService;
+import com.galaxy.service.user.UserUtils;
 
 /*author:huangshanqi
  *time  :2014年12月14日 下午3:18:48
@@ -58,6 +61,16 @@ public class ActivityDetailController {
 			if(users!=null){
 				detail.setJoinedUser(UserModel.userListToUserModelList(users));
 			}
+			
+			if(UserUtils.isAppLogin()){
+			   LoginUserModel loginUser = UserUtils.getLoginUser();
+			   detail.setHasJoined(activityService.hasUserJoinedActivity(loginUser.getUserId(), activityId));
+			   detail.setHasCollected(activityService.hasUserCollectedActivity(loginUser.getUserId(), activityId));
+			}else{
+				detail.setHasCollected(false);
+				detail.setHasJoined(false);
+			}
+			
 			resultModel.setData(detail);
 		}
 		

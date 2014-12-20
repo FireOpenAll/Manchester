@@ -1,8 +1,10 @@
 package com.galaxy.service.card.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,7 @@ import com.galaxy.dal.domain.card.Card;
 import com.galaxy.dal.domain.card.UserCard;
 import com.galaxy.dal.domain.card.UserCardApply;
 import com.galaxy.service.card.CardService;
+import com.galaxy.service.card.form.CardApplyItemForm;
 
 /*author:huangshanqi
  *time  :2014年12月2日 下午9:49:44
@@ -82,6 +85,21 @@ public class CardServiceImpl implements CardService {
 		return userCardMapper.update(userCard);
 	}
 
+	
+	
+	
+	
+	@Override
+	public boolean deleteCardFromBook(Long userId, Long targetUserId) {
+		// TODO Auto-generated method stub
+		
+		UserCardApply temp = userCardApplyMapper.getUserCardApply(userId, targetUserId);
+		if(temp != null)
+			userCardApplyMapper.deleteById(temp.getId());
+		
+		return userCardMapper.deleteByUserIdTargetId(userId, targetUserId);
+	}
+
 	@Override
 	public boolean deleteUserCardByUserCardId(Long userCardId) {
 		// TODO Auto-generated method stub
@@ -94,6 +112,7 @@ public class CardServiceImpl implements CardService {
 		return userCardMapper.getById(userCardId);
 	}
 	
+	@Transactional
 	@Override
 	public List<Card> getAllFriendCard(Long userId) {
 		// TODO Auto-generated method stub
@@ -102,7 +121,7 @@ public class CardServiceImpl implements CardService {
 			return null;
 		List<Card> cards = new ArrayList<Card>();
 		for(UserCard userCard:list){
-			Card card = cardMapper.getByUserId(userCard.getUserId());
+			Card card = cardMapper.getByUserId(userCard.getTargetUserId());
 			cards.add(card);
 		}
 		return cards;
@@ -126,8 +145,15 @@ public class CardServiceImpl implements CardService {
 	@Transactional
 	public boolean createUserCardApply(UserCardApply userCardApply) {
 		// TODO Auto-generated method stub
-		if(hasUserCardApplyExist(userCardApply.getUserId(), userCardApply.getTargetId()))
-		   return updateUserCardApply(userCardApply);
+		UserCardApply temp = userCardApplyMapper.getUserCardApply(userCardApply.getUserId(), userCardApply.getTargetId());
+		
+		if(temp != null){
+			if(temp.getApplyStatus() == 1)
+				return false;
+			temp.setUpdatedTime(userCardApply.getCreatedTime());
+			temp.setMessage(userCardApply.getMessage());
+			return updateUserCardApply(temp);
+		}
 		return userCardApplyMapper.insert(userCardApply);
 	}
 
@@ -139,7 +165,7 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public boolean deleteUserCardById(Long userCardApplyId) {
+	public boolean deleteUserCardApplyById(Long userCardApplyId) {
 		// TODO Auto-generated method stub
 		return userCardApplyMapper.deleteById(userCardApplyId);
 	}
@@ -151,10 +177,42 @@ public class CardServiceImpl implements CardService {
 		return temp != null;
 	}
 
+	@Transactional
 	@Override
-	public List<UserCardApply> getAllUserCardApply(Long userId) {
+	public ArrayList<CardApplyItemForm> getAllUserCardApply(Long userId) {
 		// TODO Auto-generated method stub
-		return ;
+		List<UserCardApply> list = userCardApplyMapper.getAllCardApply(userId);
+		if(list == null)
+			return null;
+		ArrayList<CardApplyItemForm> applys = new ArrayList<CardApplyItemForm>();
+		for(UserCardApply apply : list){
+			Card card = cardMapper.getByUserId(apply.getUserId());
+			if(card != null){
+				CardApplyItemForm item = new CardApplyItemForm();
+				BeanUtils.copyProperties(card, item);
+				item.setAddCard(apply.getApplyStatus()==1);
+				applys.add(item);
+		    }
+		}
+		return applys;
+		
+	}
+
+	@Override
+	public boolean acceptUserCardApply(UserCard userCard) {
+		// TODO Auto-generated method stub
+		UserCardApply apply = userCardApplyMapper.getUserCardApply(userCard.getUserId(),userCard.getTargetUserId());
+		if(apply == null)
+			return false;
+		UserCard temp = userCardMapper.getByUserIdTargetUserId(userCard.getUserId(), userCard.getTargetUserId());
+		if(temp != null)
+			return false;
+
+		userCardMapper.insert(userCard);
+		
+		apply.setUpdatedTime(new Date());
+		apply.setApplyStatus(1);
+		return userCardApplyMapper.update(apply);
 	}
 	
 	

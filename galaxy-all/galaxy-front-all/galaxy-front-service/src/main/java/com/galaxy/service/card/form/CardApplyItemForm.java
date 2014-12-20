@@ -1,12 +1,9 @@
-package com.galaxy.front.web.rest.model.card;
-
-import java.io.Serializable;
-
+package com.galaxy.service.card.form;
 /*author:huangshanqi
- *time  :2014年12月17日 上午11:35:13
+ *time  :2014年12月18日 上午10:51:23
  *email :hsqmobile@gmail.com
  */
-public class CardApplyItemModel implements Serializable {
+public class CardApplyItemForm {
 
 	private Long userId;
 	private String avatar;// 头像URL

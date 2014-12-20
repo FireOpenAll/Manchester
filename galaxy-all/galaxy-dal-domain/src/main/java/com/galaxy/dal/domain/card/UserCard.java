@@ -15,7 +15,6 @@ public class UserCard extends BaseDomain{
 	
 	private Long userId;
 	private Long targetUserId;
-	private int requestStatus;//名片请求状态，0=等待同意，1=同意
 	public Long getUserId() {
 		return userId;
 	}
@@ -28,12 +27,7 @@ public class UserCard extends BaseDomain{
 	public void setTargetUserId(Long targetUserId) {
 		this.targetUserId = targetUserId;
 	}
-	public int getRequestStatus() {
-		return requestStatus;
-	}
-	public void setRequestStatus(int requestStatus) {
-		this.requestStatus = requestStatus;
-	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

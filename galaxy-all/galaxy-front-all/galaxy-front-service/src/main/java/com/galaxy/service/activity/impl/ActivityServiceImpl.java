@@ -137,9 +137,26 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 	
 
+	@Override
+	public boolean hasUserJoinedActivity(Long userId, Long activityId) {
+		// TODO Auto-generated method stub
+		ActivityUser temp = activityUserMapper.getByUserIdActId(userId, activityId);
+		return temp != null;
+	}
+
+	@Override
+	public boolean hasUserCollectedActivity(Long userId, Long activityId) {
+		// TODO Auto-generated method stub
+		ActivityCollectUser temp = activityCollectMapper.getByUserIdActId(userId, activityId);
+		return temp != null;
+	}
 
 	
+	
+	
+	
 	//activityuser
+
 
 
 	@Override
