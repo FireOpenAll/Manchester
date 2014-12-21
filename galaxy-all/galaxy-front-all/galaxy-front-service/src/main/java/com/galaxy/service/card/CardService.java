@@ -16,7 +16,7 @@ public interface CardService {
 	
 	//card
 	public boolean createCard(Card card);
-	public boolean updateCard(Card card);
+	public Card updateCard(Card card);
 	public boolean deleteCardById(Long cardId);
 	public Card getCardById(Long cardId);
     public Card getCardByUserId(Long userId);
@@ -31,7 +31,7 @@ public interface CardService {
 	public UserCard getUserCardByUserCardId(Long userCardId);
     public boolean deleteCardFromBook(Long userId,Long targetUserId);
     public boolean hasAddCard(Long userId,Long targetUserId);
-	public List<Card> getAllFriendCard(Long userId);
+	public ArrayList<Card> getAllFriendCard(Long userId);
 	public List<UserCard> getFriendCardPageByOffset(Long userId,int offset,int pageSize);
 
 	

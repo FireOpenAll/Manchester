@@ -4,5 +4,5 @@ package com.galaxy.dal.domain.user;
  *email :hsqmobile@gmail.com
  */
 public enum Gender {
-male,femail
+male,female
 }

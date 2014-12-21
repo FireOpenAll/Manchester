@@ -30,6 +30,8 @@ public class User extends BaseDomain {
 	private Date lastVisitTime;
 	private UserStatus userStatus;// 状态
 	private String salt;
+	private String tags;
+	private String region;
 
 	public String getLoginName() {
 		return LoginName;
@@ -191,4 +193,22 @@ public class User extends BaseDomain {
 		this.salt = salt;
 	}
 
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+	
+	
 }

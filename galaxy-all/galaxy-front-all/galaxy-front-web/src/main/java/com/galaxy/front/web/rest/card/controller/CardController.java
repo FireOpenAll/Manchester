@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -117,33 +119,49 @@ public class CardController {
 		ResultModel resultModel = new ResultModel();
 
 		LoginUserModel loginUser = UserUtils.getLoginUser();
-		List<Card> list = cardService.getAllFriendCard(loginUser.getUserId());
+		ArrayList<Card> list = cardService.getAllFriendCard(loginUser.getUserId());
 		resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
-		if(list != null){
-			ArrayList<CardBookItemModel> results = new ArrayList<CardBookItemModel>();
-			for(Card card:list){
-				CardBookItemModel item = new CardBookItemModel();
-				BeanUtils.copyProperties(card, item);
-				results.add(item);
-			}
-			resultModel.setData(results);
-		}
-
+	    resultModel.setData(list);
 		return resultModel;
 	}
 
-	@RequestMapping(value = "getCardDetail", method = RequestMethod.GET, params = { "targetId" })
-	public Object getCardDetail(@RequestParam("targetId") Long targetId) {
+	@RequestMapping(value = "getCardDetail")
+	public Object getCardDetail(HttpServletRequest request) {
 		ResultModel resultModel = new ResultModel();
-		if (ParamUtils.isNotEmpty(targetId)) {
+		if (request.getParameter("targetId")==null) {
+			//获取自己的
 			resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
-            resultModel.setData(cardService.getCardByUserId(targetId));
+            resultModel.setData(cardService.getCardByUserId(UserUtils.getLoginUser().getUserId()));
 		} else {
+			//获取他人的
+			Long targetId = Long.valueOf(request.getParameter("targetId"));
+			Card card = cardService.getCardByUserId(targetId);
+			System.out.println(card);
+			resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+			resultModel.setData(card);
+		}
+		return resultModel;
+	}
+
+	@RequestMapping(value="modify",method=RequestMethod.POST)
+	public Object modifyCard(Card card){
+		ResultModel resultModel = new ResultModel();
+		if(ParamUtils.isNotEmpty(card.getId())){
+			Card temp = cardService.updateCard(card);
+			if(null != temp){
+				resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+				resultModel.setData(temp);
+			}else{
+				resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
+				resultModel.setData(new StatusModel("修改名片失败"));
+			}
+		}else{
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 		}
 		return resultModel;
 	}
-
+	
+	
 	// @RequestMapping(value="delete",method=RequestMethod.GET,params={"cardId"})
 	// public Object deleteByCardId(){
 	// ResultModel resultModel = new ResultModel();

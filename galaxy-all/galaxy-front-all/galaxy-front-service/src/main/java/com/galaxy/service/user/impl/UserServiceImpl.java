@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.galaxy.commons.utils.Digests;
 import com.galaxy.commons.utils.Encodes;
 import com.galaxy.dal.domain.user.User;
+import com.galaxy.dal.domain.user.form.UserProfileForm;
 import com.galaxy.dal.user.mapper.UserMapper;
 import com.galaxy.service.user.UserService;
 
@@ -85,6 +86,17 @@ public class UserServiceImpl implements UserService {
 	public User getUserByMobilePassword(String mobile, String password) {
 		// TODO Auto-generated method stub
 		return userMapper.getUserByMobilePassword(mobile, password);
+	}
+
+	
+	
+	
+	
+	
+	@Override
+	public boolean updateProfileForm(UserProfileForm form) {
+		// TODO Auto-generated method stub
+		return userMapper.updateProfileForm(form);
 	}
 
 	@Override
