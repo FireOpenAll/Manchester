@@ -2,7 +2,6 @@ eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/java/com/galaxy/front/web/activity/controller/ActivityController.java=UTF-8
 encoding//src/main/java/com/galaxy/front/web/activity/controller/ActivityDetailController.java=UTF-8
-encoding//src/main/java/com/galaxy/front/web/rest/activity/controller/HotsController.java=UTF-8
 encoding//src/main/resources=UTF-8
 encoding//src/main/webapp/WEB-INF/views/activity/detail.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/activity/postactivity.jsp=UTF-8
