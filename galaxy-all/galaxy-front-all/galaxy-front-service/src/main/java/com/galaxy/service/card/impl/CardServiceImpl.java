@@ -15,6 +15,7 @@ import com.galaxy.dal.card.mapper.UserCardMapper;
 import com.galaxy.dal.domain.card.Card;
 import com.galaxy.dal.domain.card.UserCard;
 import com.galaxy.dal.domain.card.UserCardApply;
+import com.galaxy.dal.user.mapper.UserMapper;
 import com.galaxy.service.card.CardService;
 import com.galaxy.service.card.form.CardApplyItemForm;
 
@@ -85,18 +86,16 @@ public class CardServiceImpl implements CardService {
 		return userCardMapper.update(userCard);
 	}
 
-	
-	
-	
-	
 	@Override
 	public boolean deleteCardFromBook(Long userId, Long targetUserId) {
 		// TODO Auto-generated method stub
 		
-		UserCardApply temp = userCardApplyMapper.getUserCardApply(userId, targetUserId);
-		if(temp != null)
-			userCardApplyMapper.deleteById(temp.getId());
-		
+		UserCardApply temp = userCardApplyMapper.getUserCardApply(targetUserId,userId);
+		if(temp != null){
+			temp.setUpdatedTime(new Date());
+		    temp.setApplyStatus(0);
+		    userCardApplyMapper.update(temp);
+		}
 		return userCardMapper.deleteByUserIdTargetId(userId, targetUserId);
 	}
 
@@ -148,11 +147,7 @@ public class CardServiceImpl implements CardService {
 		UserCardApply temp = userCardApplyMapper.getUserCardApply(userCardApply.getUserId(), userCardApply.getTargetId());
 		
 		if(temp != null){
-			if(temp.getApplyStatus() == 1)
-				return false;
-			temp.setUpdatedTime(userCardApply.getCreatedTime());
-			temp.setMessage(userCardApply.getMessage());
-			return updateUserCardApply(temp);
+			return  true;
 		}
 		return userCardApplyMapper.insert(userCardApply);
 	}
@@ -201,15 +196,23 @@ public class CardServiceImpl implements CardService {
 	@Override
 	public boolean acceptUserCardApply(UserCard userCard) {
 		// TODO Auto-generated method stub
-		UserCardApply apply = userCardApplyMapper.getUserCardApply(userCard.getUserId(),userCard.getTargetUserId());
+		UserCardApply apply = userCardApplyMapper.getUserCardApply(userCard.getTargetUserId(),userCard.getUserId());
 		if(apply == null)
 			return false;
-		UserCard temp = userCardMapper.getByUserIdTargetUserId(userCard.getUserId(), userCard.getTargetUserId());
-		if(temp != null)
+		if(apply.getApplyStatus() == 1)
 			return false;
-
-		userCardMapper.insert(userCard);
+		if(!hasAddCard(userCard.getUserId(), userCard.getTargetUserId())){
+			userCardMapper.insert(userCard);
+		}
 		
+		if(!hasAddCard( userCard.getTargetUserId(),userCard.getUserId())){
+			UserCard to = new UserCard();
+			to.setCreatedTime(userCard.getCreatedTime());
+			to.setUpdatedTime(userCard.getUpdatedTime());
+			to.setUserId(userCard.getTargetUserId());
+			to.setTargetUserId(userCard.getUserId());
+		    userCardMapper.insert(to);
+		}	
 		apply.setUpdatedTime(new Date());
 		apply.setApplyStatus(1);
 		return userCardApplyMapper.update(apply);

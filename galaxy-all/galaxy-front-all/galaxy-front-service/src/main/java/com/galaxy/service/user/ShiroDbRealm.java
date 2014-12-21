@@ -49,6 +49,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 			loginUser.setMobile(user.getMobile());
 			loginUser.setNickName(user.getNick());
 			loginUser.setUserId(user.getId());
+			loginUser.setAvatar(user.getAvatar());
 			loginUser.setToken(tokenService.generateToken());
 			loginUser.setExpiredToken(tokenService.generateToken());
 			loginUser.setExpireshIn(DateUtils.addDays(new Date(), 30).getTime());

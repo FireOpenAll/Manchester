@@ -34,7 +34,7 @@ public class ActivityDetailModel implements Serializable {
 	private List<String> activityPics;
 	
 	private String email;
-	private Double longtitude;
+	private Double longitude;
 	private Double latitude;
 	
 	private Long organizerId;
@@ -145,10 +145,10 @@ public class ActivityDetailModel implements Serializable {
 		this.email = email;
 	}
 	public Double getLongtitude() {
-		return longtitude;
+		return longitude;
 	}
 	public void setLongtitude(Double longtitude) {
-		this.longtitude = longtitude;
+		this.longitude = longtitude;
 	}
 	public Double getLatitude() {
 		return latitude;

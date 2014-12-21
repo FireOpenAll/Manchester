@@ -50,9 +50,15 @@ public class UserFriendServiceImpl implements UserFriendService {
 	
 	
 	
+	@Transactional
 	@Override
 	public boolean deleteUserFriendByUseridTargetid(Long userId, Long targetId) {
 		// TODO Auto-generated method stub
+	  UserFriendApply apply = userFriendApplyMapper.getuserFriendApply(targetId, userId);
+	  if(apply != null){
+		  apply.setApplyStatus(0);
+		  userFriendApplyMapper.update(apply);
+	  }
 		return userFriendMapper.deleteUserFriendByUseridTargetid(userId, targetId);
 	}
 	@Override

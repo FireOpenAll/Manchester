@@ -35,7 +35,7 @@ public class UserCollectActivityController {
 	@Autowired
 	private ActivityService activityService;
 	
-	@RequestMapping(value="getcollectedAct",method=RequestMethod.GET,params={"pageNum","pageSize"})
+	@RequestMapping(value="getCollectedAct",method=RequestMethod.GET,params={"pageNum","pageSize"})
 	public Object getUsercollectActivity(@RequestParam("pageNum") Integer pageNum,@RequestParam("pageSize") Integer pageSize){
 		ResultModel resultModel = new ResultModel();
 		if(ParamUtils.isNotEmpty(pageNum,pageSize)){
@@ -86,11 +86,12 @@ public class UserCollectActivityController {
 		return resultModel;
 	}
 	
-	@RequestMapping(value="cancelCollect",method=RequestMethod.GET,params={"collectId"})
-	public Object cancelCollect(@RequestParam("collectId") Long collectId){
+	@RequestMapping(value="cancelCollect",method=RequestMethod.POST,params={"activityId"})
+	public Object cancelCollect(@RequestParam("activityId") Long activityId){
 		ResultModel resultModel = new ResultModel();
-		if(ParamUtils.isNotEmpty(collectId)){
-			if(activityService.cancelCollectActivity(collectId)){
+		if(ParamUtils.isNotEmpty(activityId)){
+			LoginUserModel loginUser = UserUtils.getLoginUser();
+			if(activityService.cancelCollectActivity(loginUser.getUserId(),activityId)){
 				resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 				resultModel.setData(new StatusModel("ok"));
 			}else{

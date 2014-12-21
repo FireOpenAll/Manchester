@@ -20,11 +20,11 @@
 	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
-	<beans:bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean>
+<!-- 	<beans:bean -->
+<!-- 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
+<!-- 		<beans:property name="prefix" value="/WEB-INF/views/" /> -->
+<!-- 		<beans:property name="suffix" value=".jsp" /> -->
+<!-- 	</beans:bean> -->
 
 	 
 
@@ -37,5 +37,24 @@
 	<beans:import resource="controllers.xml" />
 
 	<task:annotation-driven />
+<resources mapping="/resources/**" location="/resources/" />  
 
+<beans:bean class="org.springframework.mobile.device.view.LiteDeviceDelegatingViewResolver">
+		<beans:constructor-arg>
+			<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+				<beans:property name="prefix" value="/WEB-INF/views/" />
+				<beans:property name="suffix" value=".jsp" />
+			</beans:bean>
+		</beans:constructor-arg>
+		<beans:property name="enableFallback" value="true" />
+		<beans:property name="mobilePrefix" value="mobile/" />
+		<beans:property name="tabletPrefix" value="tablet/" />
+	</beans:bean>
+	<interceptors>
+		<!-- On pre-handle, resolve the device that originated the web request -->
+		<beans:bean class="org.springframework.mobile.device.DeviceResolverHandlerInterceptor" />
+		<!-- On pre-handle, manage the user's site preference (declare after DeviceResolverHandlerInterceptor) -->
+		<beans:bean class="org.springframework.mobile.device.site.SitePreferenceHandlerInterceptor" />
+	</interceptors>
+	
 </beans:beans>

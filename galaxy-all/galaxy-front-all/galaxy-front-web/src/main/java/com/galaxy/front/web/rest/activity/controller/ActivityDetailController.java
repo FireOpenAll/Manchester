@@ -64,6 +64,7 @@ public class ActivityDetailController {
 			
 			if(UserUtils.isAppLogin()){
 			   LoginUserModel loginUser = UserUtils.getLoginUser();
+			   System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!hasLogined");
 			   detail.setHasJoined(activityService.hasUserJoinedActivity(loginUser.getUserId(), activityId));
 			   detail.setHasCollected(activityService.hasUserCollectedActivity(loginUser.getUserId(), activityId));
 			}else{

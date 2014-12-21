@@ -86,8 +86,8 @@ public class CardController {
 		UserCard userCard = new UserCard();
 		userCard.setCreatedTime(new Date());
 		userCard.setUpdatedTime(userCard.getCreatedTime());
-		userCard.setUserId(targetId);
-		userCard.setTargetUserId(loginUser.getUserId());
+		userCard.setUserId(loginUser.getUserId());
+		userCard.setTargetUserId(targetId);
 		
 		if (cardService.acceptUserCardApply(userCard)) {
 			resultModel = ResultModelUtils.getResultModelByCode(Code.OK);

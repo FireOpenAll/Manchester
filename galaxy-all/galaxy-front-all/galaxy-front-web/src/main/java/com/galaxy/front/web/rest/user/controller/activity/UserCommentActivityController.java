@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -80,9 +81,13 @@ public class UserCommentActivityController {
 			comment.setUserId(loginUserModel.getUserId());
 			
 			activityService.commentActivity(comment);
+			CommentModel result = CommentModel.activityCommentToCommentModel(comment);
+			result.setNickName(loginUserModel.getLoginName());
+			result.setAvatar(loginUserModel.getAvatar());
+			result.setTime(comment.getUpdatedTime());
 			
 			resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
-			resultModel.setData(comment);
+			resultModel.setData(result);
 		}else{
 			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
 		}

@@ -9,124 +9,141 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.flatui.css" />
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery.mobile-1.3.1.min.js"></script>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0,  user-scalable=no" >
+	<!-- Bootstrap CSS -->
+<link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap-theme.min.css">
+
+ <link href="/resources/bootstrap/css/jumbotron-narrow.css" rel="stylesheet">
+
+<!-- <script src="http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script> -->
+<script src="/resources/bootstrap/js/jquery.min.js"></script>
+<script src="/resources/bootstrap/js/bootstrap.min.js"></script>
+
+
+<script src="/resources/bootstrap/js/unslider.min.js"></script>
+
+<script src="/resources/bootstrap/js/jquery.event.move.js"></script>
+<!--支持触摸屏-->
+<script src="/resources/bootstrap/js/jquery.event.swipe.js"></script>
+
+<script src="/resources/bootstrap/js/unslider.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/style.css">
 </head>
 <body>
-  <div data-role="page">
+  <div class="banner">
+		    <ul>
+		        <li style="background-image: url('http://www.ququan8.com/UpLoadFile/2010-8-18/279495682816648.jpg');">
+		        	<div class="inner">
+						<h1>Fluid, flexible, fantastically minimal.</h1>
+						<p>Use any HTML in your slides, extend with CSS. You have full control.</p>
 
-    <div data-role="panel" id="panel" data-position="right" data-theme="a" data-display="push"></div>
+						<a class="btn" href="#download">下载</a>
+					</div>
+		        </li>
+		        <li style="background-image: url('http://e.hiphotos.baidu.com/image/pic/item/79f0f736afc3793186edd82ce9c4b74543a91129.jpg');">
+		        		<div class="inner">
+						<h1>Fluid, flexible, fantastically minimal.</h1>
+						<p>Use any HTML in your slides, extend with CSS. You have full control.</p>
 
-    <div data-role="header">
-      <a data-iconpos="notext" data-role="button" data-icon="home" title="Home">Home</a>
-      <h1>A</h1>
-      <a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu"></a>
-    </div>
+						<a class="btn" href="#download">下载</a>
+					</div>
 
-    <div data-role="content" role="main">
-      <p>Sample text and <a href="#">links</a>.</p>
-      <fieldset class="ui-grid-a">
-        <div class="ui-block-a"><button data-icon="flat-settings" data-theme="a">Button A</button></div>
-        <div class="ui-block-b"><button data-icon="flat-new" data-theme="b">Button B</button></div>
-      </fieldset>
-      <fieldset class="ui-grid-a">
-        <div class="ui-block-a"><button data-icon="flat-man" data-theme="c">Button C</button></div>
-        <div class="ui-block-b"><button data-icon="flat-mail" data-theme="d">Button D</button></div>
-      </fieldset>
-      <fieldset class="ui-grid-a">
-        <div class="ui-block-a"><button data-icon="flat-lock" data-theme="e">Button E</button></div>
-        <div class="ui-block-b"><button data-icon="flat-menu" data-theme="f">Button F</button></div>
-      </fieldset>
-      <fieldset class="ui-grid-a">
-        <div class="ui-block-a"><button data-icon="flat-heart" data-theme="g">Button G</button></div>
-      </fieldset>
+		        </li>
+		        <li style="background-image: url('http://h.hiphotos.baidu.com/image/pic/item/c9fcc3cec3fdfc03cdf2bdbdd63f8794a4c22628.jpg');">
+		        	<div class="inner">
+						<h1>Fluid, flexible, fantastically minimal.</h1>
+						<p>Use any HTML in your slides, extend with CSS. You have full control.</p>
 
-      <ul data-role="listview" data-inset="true">
-        <li data-role="list-divider" data-theme="a">List Header</li>
-        <li>Read-only list item</li>
-        <li><a href="#">Linked list item</a></li>
-      </ul>
+						<a class="btn" href="#download">下载</a>
+					</div>
+		        </li>
+		    </ul>
+		</div>
+			<br>
 
-      <div data-role="collapsible-set" data-theme="b" data-content-theme="b">
-        <div data-role="collapsible" data-collapsed-icon="flat-time" data-expanded-icon="flat-cross" data-collapsed="false">
-          <h3>Section 1</h3>
-          <p>I'm the collapsible content for section 1</p>
-        </div>
-        <div data-role="collapsible" data-collapsed-icon="flat-calendar" data-expanded-icon="flat-cross">
-          <h3>Section 2</h3>
-          <p>I'm the collapsible content for section 2</p>
-        </div>
-        <div data-role="collapsible" data-collapsed-icon="flat-settings" data-expanded-icon="flat-cross">
-          <h3>Section 3</h3>
-          <p>I'm the collapsible content for section 3</p>
-        </div>
-      </div>
 
-      <div data-role="fieldcontain">
-        <fieldset data-role="controlgroup">
-          <input type="radio" name="radio-choice-a" data-theme="c" id="radio-choice-1-a" value="choice-1" checked="checked" />
-          <label for="radio-choice-1-a">Radio</label>
 
-          <input type="checkbox" name="checkbox-a" data-theme="c" id="checkbox-a" checked="checked" />
-          <label for="checkbox-a">Checkbox</label>
-        </fieldset>
-      </div>
+			<nav class="navbar navbar-default navbar-fixed-top panel-danger" role="navigation">
+			    	<div class="navbar-header ">
+				      <a class="navbar-brand" href="#">
+				        <span class="glyphicon glyphicon-home"></span>
+				      </a>
+				       <a class="navbar-brand pull-right" href="#">
+				        <span class="glyphicon glyphicon-share"></span>
+				      </a>
+				    </div>
 
-      <div data-role="fieldcontain">
-        <a href="#" data-role="button" data-icon="home" data-iconpos="notext" data-theme="b" data-inline="true">Home</a>
-        <a href="#" data-role="button" data-icon="flat-video" data-iconpos="notext" data-theme="b" data-inline="true">Video</a>
-        <a href="#" data-role="button" data-icon="flat-time" data-iconpos="notext" data-theme="b" data-inline="true">Time</a>
-        <a href="#" data-role="button" data-icon="flat-settings" data-iconpos="notext" data-theme="b" data-inline="true">Settings</a>
-        <a href="#" data-role="button" data-icon="flat-plus" data-iconpos="notext" data-theme="b" data-inline="true">Plus</a>
-        <a href="#" data-role="button" data-icon="flat-new" data-iconpos="notext" data-theme="b" data-inline="true">New</a>
-        <a href="#" data-role="button" data-icon="flat-menu" data-iconpos="notext" data-theme="b" data-inline="true">Menu</a>
-        <a href="#" data-role="button" data-icon="flat-man" data-iconpos="notext" data-theme="b" data-inline="true">Man</a>
-        <a href="#" data-role="button" data-icon="flat-mail" data-iconpos="notext" data-theme="b" data-inline="true">Mail</a>
-        <a href="#" data-role="button" data-icon="flat-lock" data-iconpos="notext" data-theme="b" data-inline="true">Lock</a>
-        <a href="#" data-role="button" data-icon="flat-location" data-iconpos="notext" data-theme="b" data-inline="true">Location</a>
-        <a href="#" data-role="button" data-icon="flat-heart" data-iconpos="notext" data-theme="b" data-inline="true">Heart</a>
-        <a href="#" data-role="button" data-icon="flat-eye" data-iconpos="notext" data-theme="b" data-inline="true">Eye</a>
-        <a href="#" data-role="button" data-icon="flat-cross" data-iconpos="notext" data-theme="b" data-inline="true">Cross</a>
-        <a href="#" data-role="button" data-icon="flat-cmd" data-iconpos="notext" data-theme="b" data-inline="true">Cmd</a>
-        <a href="#" data-role="button" data-icon="flat-checkround" data-iconpos="notext" data-theme="b" data-inline="true">Checkround</a>
-        <a href="#" data-role="button" data-icon="flat-calendar" data-iconpos="notext" data-theme="b" data-inline="true">Calendar</a>
-        <a href="#" data-role="button" data-icon="flat-bubble" data-iconpos="notext" data-theme="b" data-inline="true">Bubble</a>
-        <a href="#" data-role="button" data-icon="flat-volume" data-iconpos="notext" data-theme="b" data-inline="true">Volume</a>
-        <a href="#" data-role="button" data-icon="flat-camera" data-iconpos="notext" data-theme="b" data-inline="true">Camera</a>
-      </div>
+			</nav>
 
-      <select name="flip-1" id="flip-1"  data-theme="b" data-role="slider">
-        <option value="off">Off</option>
-        <option value="on" selected>On</option>
-      </select>
 
-      <div data-role="fieldcontain">
-        <div data-role="controlgroup" data-type="horizontal">
-          <a href="#" data-icon="flat-mail" data-theme="a" data-iconpos="notext" data-role="button">Yes</a>
-          <a href="#" data-icon="flat-camera" data-theme="a" data-iconpos="notext" data-role="button">Yes</a>
-          <a href="#" data-icon="flat-heart" data-theme="a" data-iconpos="notext" data-role="button">Yes</a>
-          <a href="#" data-icon="flat-eye" data-theme="a" data-iconpos="notext" data-role="button">Yes</a>
-        </div>
-      </div>
+		<div class="row">
+			<ul class="list-group">
+			  <li class="list-group-item list-group-item-default">
+			  	<i class="glyphicon glyphicon-share"></i>北京朝阳区报名后告知地点
+			  </li>
+			  <li class="list-group-item list-group-item-default">
+			  	<i class="glyphicon glyphicon-time"></i>2014-12-5 10:30 － 2014-12-10 10:30
+			  </li>
+			  <li class="list-group-item list-group-item-default">
+			  	<i class="glyphicon glyphicon-phone"></i>	13521782226
+			  	<a href="tel:13521782226"><button type="button" class="btn btn-xs btn-info">拨打</button></a>
+			  </li>
+			</ul>
+		</div>
+		<div class="row">
+			<div class="panel panel-info">
+			 <div ></div>
+			  <div class="panel-heading">
+			    <h3 class="panel-title">活动简介</h3>
+			  </div>
+			  <div class="panel-body">
+			    活动简介活动简介活动简介活动简介活动简介活动简介活动简介活动简介活动简介活动简介活动简介
+			    活动简介活动简介活动简介活动简介活动简介活动简介活动简介活动简介活动简介活动简介活动简介活动简介
+			  </div>
+			</div>
+			<div class="panel panel-info">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">活动主办方</h3>
+			  </div>
+			  <div class="panel-body">
+			   北京市文化传媒有限公司
+			  </div>
+			</div>
+			<div class="panel panel-info">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">如何参加</h3>
+			  </div>
+			  <div class="panel-body">
+			    如何参加如何参加如何参加如何参加如何参加如何参加如何参加如何参加如何参加如何参加如何参加如何参加如何参加
+			    如何参加如何参加如何参加如何参加如何参加如何参加如何参加如何参加如何参加如何参加如何参加如何参加如何参加
+			  </div>
+			</div>
+		</div>
+		
+		<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+		  <button type="button" class="btn btn-large btn-block btn-danger">报名</button>
+		</nav>
 
-      <div data-role="fieldcontain">
-        <select name="select-choice" id="select-choice-a" data-native-menu="false" data-theme="a">
-          <option value="standard">Option 1</option>
-          <option value="rush">Option 2</option>
-          <option value="express">Option 3</option>
-          <option value="overnight">Option 4</option>
-        </select>
-      </div>
 
-      <input type="text" placeholder="Text Input" />
-      <div data-role="fieldcontain">
-        <input type="range" name="slider" value="50" min="0" max="100" data-highlight="true" />
-      </div>
-    </div>
-  </div>
 
-  <div id="highlight"> </div>
+
+		<script type="text/javascript">
+
+		if(window.chrome) {
+				$('.banner li').css('background-size', '100% 100%');
+			}
+
+			$(function() {
+			    $('.banner').unslider({
+
+			    	arrows: true,
+					fluid: true,
+					dots: true
+			    });
+			});
+		</script>
 </body>
 </html>

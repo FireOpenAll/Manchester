@@ -50,8 +50,8 @@ public abstract class UserUtils {
 	}
 	
 	public static boolean isAppLogin(){
-		
-		return SecurityUtils.getSubject().getPrincipal()!=null;
+		boolean result = getLoginUser() !=null;
+		return result;
 	}
 
 }

@@ -1,6 +1,10 @@
 package com.galaxy.front.web.rest.user.controller.profile;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,15 +12,20 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.galaxy.dal.domain.user.User;
 import com.galaxy.front.web.rest.model.ResultModel;
+import com.galaxy.front.web.rest.model.StatusModel;
 import com.galaxy.front.web.rest.model.location.SimpleAddress;
 import com.galaxy.front.web.rest.model.profile.CreditInfo;
 import com.galaxy.front.web.rest.model.profile.OthersProfileModel;
 import com.galaxy.front.web.rest.model.profile.OwnProfileModel;
 import com.galaxy.front.web.utils.Code;
+import com.galaxy.front.web.utils.Constants;
+import com.galaxy.front.web.utils.PathUtils;
 import com.galaxy.front.web.utils.ResultModelUtils;
 import com.galaxy.service.activity.ActivityService;
 import com.galaxy.service.card.CardService;
@@ -140,4 +149,35 @@ public class ProfileController {
 
 		return resultModel;
 	}
+	
+	
+	@RequestMapping(value = "/user/profile/changeAvatar",method = RequestMethod.POST)
+	public Object changeAvatar(@RequestParam("avatar")MultipartFile avatar){
+		ResultModel resultModel = new ResultModel();
+		
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		LoginUserModel loginUser = UserUtils.getLoginUser();
+		String avatarFilePath = PathUtils.AVATAR_PATH + loginUser.getUserId() + "/";
+		String avatarFileName = simpleDateFormat.format(new Date())+avatar.getOriginalFilename().substring(avatar.getOriginalFilename().indexOf("."));
+		File targetFile1 = new File(avatarFilePath, avatarFileName);
+		if (!targetFile1.exists()) {
+			targetFile1.mkdirs();
+		}
+		try {
+			avatar.transferTo(targetFile1);
+			
+			resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+			resultModel.setData(new StatusModel("ok"));
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return resultModel;
+	}
+	
 }

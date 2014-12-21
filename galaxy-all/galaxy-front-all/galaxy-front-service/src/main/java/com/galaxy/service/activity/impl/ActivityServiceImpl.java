@@ -184,10 +184,22 @@ public class ActivityServiceImpl implements ActivityService {
 		return activityUserMapper.insert(activityUser);
 	}
 
+	@Transactional
 	@Override
-	public boolean unjoinActivity(ActivityUser activityUser) {
+	public boolean unjoinActivity(Long userId,Long activityId) {
 		// TODO Auto-generated method stub
-		return false;
+		Activity activity  = activityMappper.getById(activityId);
+		if(activity == null){
+			return false;
+		}
+		ActivityUser temp = activityUserMapper.getByUserIdActId(userId, activityId);
+		if(temp == null)
+			return false;
+		activity.setJoinedNum((activity.getJoinedNum()-temp.getNum())>0?(activity.getJoinedNum()-temp.getNum()):0);
+		activity.setTicketsNum(activity.getTicketsNum()-temp.getNum());
+		activityMappper.update(activity);
+		activityUserMapper.deleteById(temp.getId());
+		return true;
 	}
 
 
@@ -244,9 +256,19 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
-	public List<ActivityUser> getUserJoinedActs(Long userId, int offset, int pageSize) {
+	public List<Activity> getUserJoinedActs(Long userId, int offset, int pageSize) {
 		// TODO Auto-generated method stub
-		return activityUserMapper.getUserJoinedActs(userId, offset, pageSize);
+		List<ActivityUser> list = activityUserMapper.getUserJoinedActs(userId, offset, pageSize);
+		if(list == null){
+			return null;
+		}
+		List<Activity> results = new ArrayList<Activity>();
+		for(ActivityUser activityUser : list){
+			Activity activity = activityMappper.getById(activityUser.getActivityId());
+			if(activity!=null)
+				results.add(activity);
+		}
+		return results;
 	}
 
 
@@ -360,9 +382,9 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
-	public boolean cancelCollectActivity(Long collectId) {
+	public boolean cancelCollectActivity(Long userId,Long activityId) {
 		// TODO Auto-generated method stub
-		return activityCollectMapper.deleteById(collectId);
+	    return activityCollectMapper.deleteByUserIdActivityId(userId, activityId);
 	}
 
 	@Override

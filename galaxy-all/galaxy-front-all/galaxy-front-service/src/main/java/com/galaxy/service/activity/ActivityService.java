@@ -33,7 +33,7 @@ public interface ActivityService {
 	
 	//ActivityUser
 	public boolean joinActivity(ActivityUser activityUser);
-	public boolean unjoinActivity(ActivityUser activityUser);
+	public boolean unjoinActivity(Long userId,Long activityId);
 	public boolean updateAcitvityUserInfo(ActivityUser activityUser);
 	public ActivityUser getAcitvityUserById(Long id);
 	public List<User> getAllJoinedUsersSortInTime(Long activityId);
@@ -41,7 +41,7 @@ public interface ActivityService {
 	//计算user_id参加的活动数
 	public int getUserJoinedActNumber(Long userId);
 	
-	public List<ActivityUser> getUserJoinedActs(Long userId,int offset,int pageSize);
+	public List<Activity> getUserJoinedActs(Long userId,int offset,int pageSize);
 	
 	public ActivityUser getByUserIdActId( Long userId,Long activityId);
 	
@@ -66,7 +66,7 @@ public interface ActivityService {
 	
 	///collect
 	public boolean collectActivity(ActivityCollectUser activityCollectUser);
-	public boolean cancelCollectActivity(Long collectId);
+	public boolean cancelCollectActivity(Long userId,Long activityId);
 	public int getUserCollectActNum(Long userId);
 	public List<ActivityCollectUser> getActCollectSortByTime(Long activityId,Integer offset,Integer pageSize);
 	public ArrayList<Activity>getUserCollectedActSortByTime(Long userId,Integer offset,Integer pageSize);

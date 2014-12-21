@@ -166,7 +166,7 @@ public class ActivityController {
 			activityForm.setEndTime(String2Date(evenBaseInfoModel.getEvent_end_time()));
 
 			activityForm.setAddress(evenBaseInfoModel.getEvent_address_info());
-			activityForm.setLongtitude(evenBaseInfoModel.getEvent_longitude());
+			activityForm.setLongitude(evenBaseInfoModel.getEvent_longitude());
 			activityForm.setLatitude(evenBaseInfoModel.getEvent_latitude());
 			activityForm.setPhone(evenBaseInfoModel.getRefer_telephone());
 			activityForm.setDescription(evenBaseInfoModel.getDescription());
@@ -283,7 +283,7 @@ public class ActivityController {
         //无email
 		activityForm.setCatId1(model.getCatId1());
 		activityForm.setCatId2(model.getCatId2());
-		activityForm.setLongtitude(model.getLongtitude());
+		activityForm.setLongitude(model.getLongitude());
 		activityForm.setLatitude(model.getLatitude());
 		activityForm.setActivityType((model.getOptionsRadios()==1)?ActivityType.opening:ActivityType.privacy);
 		activityForm.setOrganizerId(userId);

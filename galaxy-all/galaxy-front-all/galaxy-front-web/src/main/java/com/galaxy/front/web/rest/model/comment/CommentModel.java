@@ -3,6 +3,8 @@ package com.galaxy.front.web.rest.model.comment;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.beans.BeanUtils;
+
 import com.galaxy.dal.domain.activity.ActivityComment;
 
 /*author:huangshanqi
@@ -62,5 +64,10 @@ public class CommentModel implements Serializable {
 		this.time = time;
 	}
 	
-	
+	public static CommentModel activityCommentToCommentModel(ActivityComment comment){
+		CommentModel result = new CommentModel();
+		BeanUtils.copyProperties(comment, result);
+		
+		return result;
+	}
 }

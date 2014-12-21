@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class FriendApplyItemModel implements Serializable {
 
 	private Long targetId;
-	private String avatar;
+	private String avatar;//ac_activity_collect_user
 	private String nickName;
 	private String applyMessage;
 	private boolean addFriend;

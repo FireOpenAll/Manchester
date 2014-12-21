@@ -1,5 +1,6 @@
 package com.galaxy.front.web.rest.user.controller.activity;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.galaxy.dal.domain.activity.ActivityUser;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.StatusModel;
+import com.galaxy.front.web.rest.model.activity.ActivityModel;
 import com.galaxy.front.web.utils.Code;
+import com.galaxy.front.web.utils.Constants;
 import com.galaxy.front.web.utils.ResultModelUtils;
 import com.galaxy.service.activity.ActivityService;
 import com.galaxy.service.user.LoginUserModel;
@@ -34,6 +37,16 @@ public class UserJoinActivityController {
 	public Object getUserPublishActivity(@RequestParam("pageNum") int pageNum,@RequestParam("pageSize") int pageSize){
 		ResultModel resultModel = new ResultModel();
 		resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+		if(pageNum <= 0){
+			pageNum = 1;
+		}
+		if(pageSize <= 0 || pageSize > Constants.MAX_PAGESIZE){
+			pageSize = Constants.PAGESIZE;
+		}
+		LoginUserModel loginUserModel = UserUtils.getLoginUser();
+		ArrayList<ActivityModel>  list= ActivityModel.ActListToActModelList(activityService.getUserJoinedActs(loginUserModel.getUserId(),(pageNum-1)*pageSize, pageSize)) ;
+		
+		resultModel.setData(list);
 		return resultModel;
 	}
 	
@@ -56,5 +69,20 @@ public class UserJoinActivityController {
 		}
 		return resultModel;
 	}
+	
+	@RequestMapping(value="unjoin",method=RequestMethod.POST,params={"activityId"})
+	public Object unjoinActivity(@RequestParam("activityId") Long activityId){
+		ResultModel resultModel = new ResultModel();
+		
+		if(activityService.unjoinActivity(UserUtils.getLoginUser().getUserId(),activityId)){
+			resultModel=ResultModelUtils.getResultModelByCode(Code.OK);
+			resultModel.setData(new StatusModel("unjoin activity ok"));
+		}else{
+			resultModel=ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
+		}
+		return resultModel;
+	}
+	
+	
 
 }
