@@ -15,12 +15,13 @@ import com.galaxy.dal.domain.activity.ActivityUser;
 public interface ActivityUserMapper extends BaseMapper<ActivityUser> {
 
 	public List<ActivityUser> getJoinedUsersSortInTime(@Param("activityId")Long activityId,@Param("offset")int offset, @Param("pageSize")int pageSize);
+	public List<ActivityUser> getAllJoinedUsersSortInTime(@Param("activityId")Long activityId);
 	//计算user_id参加的活动数
 	public int getUserJoinedActNumber(@Param("userId")Long userId);
 	
 	public List<ActivityUser> getUserJoinedActs(@Param("userId")Long userId,@Param("offset")int offset, @Param("pageSize")int pageSize);
 	
-	public ActivityUser getByUserIdActIdTicketId(@Param("userId") Long userId,@Param("activityId") Long activityId,@Param("ticketId") Long ticketId);
+	//public ActivityUser getByUserIdActIdTicketId(@Param("userId") Long userId,@Param("activityId") Long activityId,@Param("ticketId") Long ticketId);
 	public ActivityUser getByUserIdActId(@Param("userId") Long userId,@Param("activityId") Long activityId);
 
 }

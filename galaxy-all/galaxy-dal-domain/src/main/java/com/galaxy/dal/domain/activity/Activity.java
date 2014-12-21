@@ -13,6 +13,7 @@ public class Activity extends BaseDomain {
 	private Long cityId;
 	private Long areaId;
 	private String address;
+	private Float price;
 	private String detailUrl;
 	private String tags;
 	private Integer joinedNum;
@@ -27,7 +28,7 @@ public class Activity extends BaseDomain {
 	private String email;
 	private Long catId1;
 	private Long catId2;
-	private Double longtitude;
+	private Double longitude;
 	private Double latitude;
 	private ActivityType activityType;
 	private Long organizerId;
@@ -73,6 +74,12 @@ public class Activity extends BaseDomain {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public Float getPrice() {
+		return price;
+	}
+	public void setPrice(Float price) {
+		this.price = price;
 	}
 	public String getDetailUrl() {
 		return detailUrl;
@@ -158,11 +165,11 @@ public class Activity extends BaseDomain {
 	public void setCatId2(Long catId2) {
 		this.catId2 = catId2;
 	}
-	public Double getLongtitude() {
-		return longtitude;
+	public Double getLongitude() {
+		return longitude;
 	}
-	public void setLongtitude(Double longtitude) {
-		this.longtitude = longtitude;
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
 	}
 	public Double getLatitude() {
 		return latitude;
@@ -188,4 +195,6 @@ public class Activity extends BaseDomain {
 	public void setFree(Boolean free) {
 		this.free = free;
 	}
+	
+	
 }

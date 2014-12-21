@@ -19,19 +19,17 @@
 		<result property="updatedTime" column="updated_time" />
 		<result property="userId" column="user_id" />
 		<result property="targetUserId" column="target_user_id" />
-		<result property="requestStatus" column="request_status" />
 	</resultMap>
 	
 	<insert id="insert" parameterType="userCard" useGeneratedKeys="true" keyProperty="id">
 		insert into u_user_card
-		(created_time,updated_time,user_id,target_user_id,request_status)
-		values(#{createdTime},#{updatedTime},#{userId},#{targetUserId},#{requestStatus})
+		(created_time,updated_time,user_id,target_user_id)
+		values(#{createdTime},#{updatedTime},#{userId},#{targetUserId})
 	</insert>
 	
 	<update id="update" parameterType="userCard">
 		update u_user_card
 		set updated_time = #{updatedTime},
-		request_status = #{requestStatus}
 		where id = #{id}
 	</update>
 	<delete id="deleteById" parameterType="long">
@@ -65,5 +63,10 @@
 		where user_id = #{userId} and target_user_id = #{targetUserId}
 		limit 1
 	</select>
+	
+	<delete id="deleteByUserIdTargetId">
+	delete from u_user_card
+	where user_id = #{userId} and target_id = #{targetUserId}
+	</delete>
 	
 </mapper>

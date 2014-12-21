@@ -24,6 +24,7 @@
 		<result property="cityId" column="city_id"/>
 		<result property="areaId" column="area_id"/>
 		<result property="address" column="address"/>
+		<result property="price" column="price"/>
 		<result property="detailUrl" column="detail_url"/>
 		<result property="tags" column="tags"/>
 		<result property="joinedNum" column="joined_num"/>
@@ -38,7 +39,7 @@
 		<result property="email" column="email"/>
 		<result property="catId1" column="catId1"/>
 		<result property="catId2" column="catId2"/>
-		<result property="longtitude" column="longtitude"/>
+		<result property="longitude" column="longitude"/>
 		<result property="latitude" column="latitude"/>
 		<result property="activityType" column="activity_type"/>
 		<result property="organizerId" column="organizer_id"/>
@@ -52,18 +53,18 @@
 		ac_activity(
 		created_time,updated_time,title,start_time,
 		end_time,province_id,city_id,area_id,
-		address,detail_url,tags,joined_num,
+		address,price,detail_url,tags,joined_num,
 		comment_num,tickets_num,collect_num,activity_status,
 		need_audit,phone,description,pictures,
-		email,catId1,catId2,longtitude,
+		email,catId1,catId2,longitude,
 		latitude,activity_type,organizer_id,free
 		)values (
 		#{createdTime},#{updatedTime},#{title},#{startTime},
 		#{endTime},#{provinceId},#{cityId},#{areaId},
-		#{address},#{detailUrl},#{tags},#{joinedNum},
+		#{address},#{price},#{detailUrl},#{tags},#{joinedNum},
 		#{commentNum},#{ticketsNum},#{collectNum},#{activityStatus},
 		#{needAudit},#{phone},#{description},#{pictures},
-		#{email},#{catId1},#{catId2},#{longtitude},
+		#{email},#{catId1},#{catId2},#{longitude},
 		#{latitude},#{activityType},#{organizerId},#{free}
 		)
 	</insert>
@@ -82,6 +83,17 @@
 		FROM ac_activity
 		WHERE id = #{id}
 	</select>
+	
+	<update id="update" parameterType="activity">
+	update ac_activity
+	set updated_time = #{updatedTime},title = #{title},start_time = #{startTime},
+		end_time = #{endTime},province_id = #{provinceId},city_id = #{cityId},area_id = #{areaId},
+		address = #{address},price = #{price},detail_url = #{detailUrl},tags = #{tags},joined_num = #{joinedNum},
+		comment_num = #{commentNum},tickets_num = #{ticketsNum},collect_num = #{collectNum},activity_status = #{activityStatus},
+		need_audit = #{needAudit},phone = #{phone},description = #{description},pictures = #{pictures},
+		email = #{email},catId1 = #{catId1},catId2 = #{catId2},longitude = #{longitude},
+		latitude = #{latitude},activity_type = #{activityType},free = #{free}
+	</update>
 	
 	<update id="updateActUrlById">
 	update ac_activity

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.galaxy.dal.card.mapper.UserCardApplyMapper">
+
+	<resultMap type="userCardApply" id="USER_CARD_APPLY_MAP">
+		<id property="id" column="id" />
+		<result property="createdTime" column="created_time" />
+		<result property="updatedTime" column="updated_time" />
+		<result property="userId" column="user_id" />
+		<result property="targetId" column="target_id" />
+		<result property="message" column="message" />
+		<result property="applyStatus" column="apply_status" />
+		
+	</resultMap>
+	<select id="getById" resultMap="USER_CARD_APPLY_MAP" parameterType="long">
+		SELECT *
+		FROM u_user_card_apply
+		WHERE id = #{id}
+	</select>
+	
+	<insert id="insert" parameterType="userCardApply" useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO
+		u_user_card_apply(created_time,updated_time,user_id,target_id,message,apply_status)
+		VALUES(#{createdTime},#{updatedTime},#{userId},#{targetId},#{message},#{applyStatus})
+	</insert>
+
+	<update id="update" parameterType="userCardApply">
+	update u_user_card_apply
+	set updated_time = #{updatedTime},apply_status = #{applyStatus},message = #{message}
+	where id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="long">
+	delete from u_user_card_apply
+	where id = #{id}
+	</delete>
+	
+		
+	<select id="getUserCardApply" resultMap="USER_CARD_APPLY_MAP">
+	select * 
+	from u_user_card_apply
+	where user_id = #{userId} and target_id = #{targetId} 
+	limit 1
+	</select>
+	
+	<select id="getAllCardApply" parameterType="long" resultMap="USER_CARD_APPLY_MAP">
+	select *
+	from u_user_card_apply
+	where target_id = #{userId}
+	</select>
+	
+	
+</mapper>

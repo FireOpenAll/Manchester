@@ -38,7 +38,7 @@
 
 	<update id="update" parameterType="userFriendApply">
 	update u_user_friend_apply
-	set updated_time = #{updatedTime},apply_status = #{applyStatus}
+	set updated_time = #{updatedTime},apply_status = #{applyStatus},message = #{message}
 	where id = #{id}
 	</update>
 	
@@ -58,7 +58,7 @@
 	<select id="getAllfriendApply" parameterType="long" resultMap="USER_FRIEND_APPLY_MAP">
 	select *
 	from u_user_friend_apply
-	where user_id = #{userId}
+	where target_id = #{userId}
 	</select>
 	
 	

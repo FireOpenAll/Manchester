@@ -13,6 +13,7 @@ import com.galaxy.dal.domain.activity.ActivityCollectUser;
  */
 public interface ActivityCollectMapper extends BaseMapper<ActivityCollectUser> {
 
+	public boolean deleteByUserIdActivityId(@Param("userId") Long userId,@Param("activityId") Long activityId);
 	public int getUserCollectActNum(@Param("userId") Long userId);
 	public List<ActivityCollectUser> getActCollectSortByTime(@Param("activityId") Long activityId,@Param("offset") Integer offset,@Param("pageSize") Integer pageSize);
 	public List<ActivityCollectUser> getUserCollectedActSortByTime(@Param("userId") Long userId,@Param("offset") Integer offset,@Param("pageSize") Integer pageSize);

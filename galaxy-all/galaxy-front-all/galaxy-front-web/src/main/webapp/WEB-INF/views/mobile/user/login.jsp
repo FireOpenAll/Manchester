@@ -1,57 +1,137 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- saved from url=(0047)http://www.o2olive.net/demo/index.php?act=login -->
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <title>登陆乐朋</title> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  
+ <!-- Bootstrap CSS -->
+		<link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-<title>注册活动平台</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="/resources/themes/jquery.mobile.icons.red.min.css" />
-<link rel="stylesheet"
-	href="/resources/themes/jquery.mobile.icons.min.css" />
-<link rel="stylesheet"
-	href="http://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script
-	src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+		<script src="/resources/bootstrap/js/jquery.min.js"></script>
+		<script src="/resources/bootstrap/js/bootstrap.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/lepeng.css">
+		
+	<script type="text/javascript"
+		src="/resources/js/jquery.js" charset="utf-8"></script>
+	<script type="text/javascript"
+		src="/resources/js/common_register.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/resources/js/jquery.validation.min.js" charset="utf-8"></script>
+
+</head> 
+<body> 
+<div class="row">
+			<br>
+			<center>
+					<img src="/resources/bootstrap/images/logo.png" class="img-responsive" alt="Image">
+			</center>
+		</div>	
+
+		<div class="panel col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1">
+	      <div class="panel-heading text-center">
+	        <h3 class="panel-title">欢迎登陆乐朋</h3>
+	      </div>
+	      <div class="panel-body panel-danger">
+			<form id="login_form" method="post" novalidate="novalidate" action="/user/login">
+				<div class="form-group">
+						<input type="text" class="field-control" name="username" id="username" placeholder="输入用户名／验证邮箱／验证手机号">
+					<label for="username" generated="true" class="error error_reg" style="display:none;"></label>
+				</div>
+				<div class="form-group">
+						<input type="password" id="password" autocomplete="off" name="password" class="field-control" id="" placeholder="密码">
+					 <label for="password" generated="true" class="error error_reg" style="display:none;"></label>
+				</div>
+				<div class="row">
+					  <div class="col-xs-5 col-md-8">
+					    <input type="text" class="field-control" placeholder="验证码" name="captcha" id="captcha">
+					    <label for="captcha" generated="true" class="error error_reg" style="display:none;"></label>
+					  </div>
+
+					<div class="col-xs-5 col-md-4">
+				  	
+				  		<label for="input-id" class="col-sm-2">
+				  			
+	            	<a href="javascript:void(0);" onclick="javascript:document.getElementById('codeimage').src='/api/v1/code/image_code?t=' + Math.random();">
+	            		<img border="0" class="fl" id="codeimage" name="codeimage" style="width:100px" title="" src="/api/v1/code/image_code">
+	            	</a>
+				  		</label>
+				  	</div>
+				</div>
+				<div class="form-group"></div>
+				<div class="form-group">
+					<div>
+						 <button type="button" id="loginSubmit"  name="Submit" class="btn btn-large btn-block btn-danger">登陆</button>
+					</div>
+				</div>
+				<div class="form-group">
+					<div>
+						 <a href="/user/register" class="btn btn-large btn-block btn-info">注册</a>
+					</div>
+				</div>
+				 
+			</form>
+		</div>
+	</div>
 <script>
-	// Turn off jQuery Mobile transitions for faster use
-	$(document).bind("mobileinit", function() {
-		$.mobile.defaultPageTransition = 'none';
+$(document).ready(function(){
+	$("#loginSubmit").click(function(){
+		
+        if($("#login_form").valid()){
+        	/*
+        	var username = $("#username").val();
+        	alert('username:' + username)
+        	if(/^([a-z0-9A-Z_]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$/i.test(username)){
+        		$("#type").val("email");
+        	}else if(/^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$/i.test(username)){
+        		$("#type").val("mobile");
+        	}else{
+        		$("#type").val("username");
+        	}
+        	alert($("#type").val())
+        	*/
+        	
+        	
+        	$("#login_form").submit();
+        } else{
+        	document.getElementById('codeimage').src='/api/v1/code/image_code?t=' + Math.random();
+        }
+    });
+	$("#login_form").validate({
+        errorPlacement: function(error, element){
+			error.appendTo('.error_login');
+        },
+		rules: {
+			username: "required",
+			password: "required",
+            captcha : {
+                required : true,
+                remote   : {
+                    url : '/api/v1/code/check_image',
+                    type: 'get',
+                    data:{
+                        captcha : function(){
+                            return $('#captcha').val();
+                        }
+                    }
+                }
+            }
+		},
+		messages: {
+			username: "登录用户名不能为空!",
+			password: "登录密码不能为空!",
+		    captcha : {
+                required : '请输入验证码',
+		   		remote	 : '验证码不正确'
+            }
+		}
 	});
-	// Allow swiping to open menu panels
-	$(document).on("pageinit", ".ui-page", function() {
-		var $page = $(this);
-		$page.on("swipeleft swiperight", function(e) {
-			if ($page.jqmData("panel") !== "open") {
-				if (e.type === "swipeleft") {
-					$page.find(".right-panel").panel("open");
-				} else if (e.type === "swiperight") {
-					$page.find(".left-panel").panel("open");
-				}
-			}
-		});
-	});
+});
 </script>
-<script src="/resources/js/jquery.mobile-1.4.4.min.js"></script>
-</head>
-<body>
-	<form action="/user/login" method="post">
-		<div class="ui-field-contain">
-			<label for="textinput-fc">用户名:</label> <input type="text"
-				name="textinput-fc" id="textinput-fc" placeholder="请输入登录用户名"
-				value=""／>
-		</div>
-		<div class="ui-field-contain">
-			<label for="textinput-fc">密码:</label> <input type="password"
-				name="textinput-fc" id="textinput-fc" placeholder="请输入登录密码" value=""／>
-		</div>
-		<input type="submit" value="登&nbsp;&nbsp;&nbsp;录" stype="width:80%"/>
-		
-		
-	</form>
+</body>
 </html>
+

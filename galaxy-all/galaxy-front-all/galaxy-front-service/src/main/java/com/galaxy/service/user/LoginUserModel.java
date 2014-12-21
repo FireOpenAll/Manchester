@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class LoginUserModel implements Serializable{
 	Long userId;
+	String avatar;
 	String loginName;
 	String nickName;
 	String email;
@@ -20,6 +21,12 @@ public class LoginUserModel implements Serializable{
 		this.userId = userId;
 	}
 	 
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
 	public String getNickName() {
 		return nickName;
 	}

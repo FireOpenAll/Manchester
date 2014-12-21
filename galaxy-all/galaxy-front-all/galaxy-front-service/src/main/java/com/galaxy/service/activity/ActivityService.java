@@ -10,6 +10,7 @@ import com.galaxy.dal.domain.activity.ActivityCollectUser;
 import com.galaxy.dal.domain.activity.ActivityComment;
 import com.galaxy.dal.domain.activity.ActivityDetail;
 import com.galaxy.dal.domain.activity.ActivityUser;
+import com.galaxy.dal.domain.user.User;
 import com.galaxy.service.activity.form.ActivityForm;
 
 public interface ActivityService {
@@ -27,20 +28,21 @@ public interface ActivityService {
 	public int getUserpublishedActNumber(Long userId);
 	public List<Activity> getUserPublishActivity(Long userId,Integer offset,Integer pageSize);
 
+	public boolean hasUserJoinedActivity(Long userId,Long activityId);
+	public boolean hasUserCollectedActivity(Long userId,Long activityId);
 	
 	//ActivityUser
 	public boolean joinActivity(ActivityUser activityUser);
-	public boolean unjoinActivity(ActivityUser activityUser);
+	public boolean unjoinActivity(Long userId,Long activityId);
 	public boolean updateAcitvityUserInfo(ActivityUser activityUser);
 	public ActivityUser getAcitvityUserById(Long id);
-
-	public List<ActivityUser> getJoinedUsersSortInTime(Long activityId,int offset, int pageSize);
+	public List<User> getAllJoinedUsersSortInTime(Long activityId);
+	public List<User> getJoinedUsersSortInTime(Long activityId,int offset, int pageSize);
 	//计算user_id参加的活动数
 	public int getUserJoinedActNumber(Long userId);
 	
-	public List<ActivityUser> getUserJoinedActs(Long userId,int offset,int pageSize);
+	public List<Activity> getUserJoinedActs(Long userId,int offset,int pageSize);
 	
-	public ActivityUser getByUserIdActIdTicketId( Long userId,Long activityId,Long ticketId);
 	public ActivityUser getByUserIdActId( Long userId,Long activityId);
 	
 	//ActivityUser
@@ -52,6 +54,7 @@ public interface ActivityService {
 	public int getUserComActNum(Long userId);
 	//分页得到某活动的评论
 	public ArrayList<ActivityComment> getActComSortByTime(Long activityId,Integer offset,Integer pageSize);
+	public ArrayList<ActivityComment> getAllActComSortByTime(Long activityId);
 	//分页得到用户评论过的活动
 	public List<Activity> getUserComedActSortByTime(Long userId,int offset,int pageSize);
 	public boolean commentActivity(ActivityComment activityComment);
@@ -63,7 +66,7 @@ public interface ActivityService {
 	
 	///collect
 	public boolean collectActivity(ActivityCollectUser activityCollectUser);
-	public boolean cancelCollectActivity(Long collectId);
+	public boolean cancelCollectActivity(Long userId,Long activityId);
 	public int getUserCollectActNum(Long userId);
 	public List<ActivityCollectUser> getActCollectSortByTime(Long activityId,Integer offset,Integer pageSize);
 	public ArrayList<Activity>getUserCollectedActSortByTime(Long userId,Integer offset,Integer pageSize);

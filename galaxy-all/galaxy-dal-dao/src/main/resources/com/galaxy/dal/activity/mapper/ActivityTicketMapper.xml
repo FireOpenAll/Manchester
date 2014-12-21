@@ -50,7 +50,7 @@
 	where activity_id = #{activityId} and ticket_id = #{ticketId}
 	</select>
 	
-	<select id="getAllAcitivityTicket" parameterType="long">
+	<select id="getAllAcitivityTicket" parameterType="long" resultMap="ACTIVITY_TICKET_MAP">
 	select *
 	from ac_activity_ticket
 	where activity_id = #{activityId}

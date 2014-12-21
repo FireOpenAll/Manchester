@@ -72,4 +72,9 @@
    where activity_id = #{activityId} and user_id = #{userId}
    limit 1
    </select>
+   
+   <delete id="deleteByUserIdActivityId">
+   delete from ac_activity_collect_user
+   where user_id = #{userId} and activity_id = #{activityId}
+   </delete>
 </mapper>

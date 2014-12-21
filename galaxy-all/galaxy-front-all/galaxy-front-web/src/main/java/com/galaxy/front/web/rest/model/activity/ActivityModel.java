@@ -27,7 +27,7 @@ public class ActivityModel implements Serializable {
 	private String cover;
 	private Integer joinedNum;
 	private Integer commentNum;
-	private Double price;
+	private Integer ticketsNum;
 
 	
 	public Long getId() {
@@ -85,15 +85,12 @@ public class ActivityModel implements Serializable {
 	public void setCommentNum(Integer commentNum) {
 		this.commentNum = commentNum;
 	}
-	public Double getPrice() {
-		return price;
+	public Integer getTicketsNum() {
+		return ticketsNum;
 	}
-	public void setPrice(Double price) {
-		this.price = price;
+	public void setTicketsNum(Integer ticketsNum) {
+		this.ticketsNum = ticketsNum;
 	}
-	
-	
-	
 	public static ActivityModel ActToActModel(Activity activity){
 		ActivityModel activityModel = new ActivityModel();
 		BeanUtils.copyProperties(activity, activityModel);

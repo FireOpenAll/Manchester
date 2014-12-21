@@ -35,7 +35,8 @@ public class AuthApiHandlerInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		String token = getToken(request);
+		UserContext context=UserContext.getContext();
+		String token = context.getToken();
 		if (handler instanceof HandlerMethod) {
 			HandlerMethod handlerMethod = (HandlerMethod) handler;
 			IgnoreAuth ignoreAuth = AnnotationUtils.findAnnotation(
@@ -47,9 +48,7 @@ public class AuthApiHandlerInterceptor implements HandlerInterceptor {
 				return true;
 			}
 		}
-		UserContext context=new UserContext();
-		UserContext.setContext(context);
-		context.setToken(token);
+		 
 		LoginUserModel userModel =UserUtils.getLoginUser();
 		if (StringUtils.isBlank(token)&&userModel==null) {
 			ResultModel resultModel = new ResultModel();
@@ -89,24 +88,7 @@ public class AuthApiHandlerInterceptor implements HandlerInterceptor {
 
 		return true;
 	}
-
-	private String getToken(HttpServletRequest request) {
-		String authToken = StringUtils.trimToEmpty(request
-				.getHeader(AUTH_HEADER_NAME));
-		if(StringUtils.isBlank(authToken)){
-			authToken = StringUtils.trimToEmpty(request
-					.getHeader(AUTH_HEADER_NAME2));
-		}
-		if(StringUtils.isBlank(authToken)){
-			authToken = StringUtils.trimToEmpty(request.getParameter(TOKEN_PARAM_NAME));
-		}
-		if (authToken.startsWith("Bearer")) {
-			authToken = StringUtils
-					.trim(authToken.substring("Bearer".length()));
-		}
-
-		return authToken;
-	}
+ 
 
 	@Override
 	public void postHandle(HttpServletRequest request,
@@ -119,8 +101,7 @@ public class AuthApiHandlerInterceptor implements HandlerInterceptor {
 	@Override
 	public void afterCompletion(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
-		UserContext.setContext(null);
+			throws Exception { 
 
 	}
 
