@@ -1,22 +1,24 @@
 package com.galaxy.front.web.rest.user.controller.profile;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.Arrays;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.galaxy.dal.domain.user.User;
+import com.galaxy.dal.domain.user.form.UserProfileForm;
 import com.galaxy.front.web.rest.model.ResultModel;
 import com.galaxy.front.web.rest.model.StatusModel;
 import com.galaxy.front.web.rest.model.location.SimpleAddress;
@@ -24,7 +26,6 @@ import com.galaxy.front.web.rest.model.profile.CreditInfo;
 import com.galaxy.front.web.rest.model.profile.OthersProfileModel;
 import com.galaxy.front.web.rest.model.profile.OwnProfileModel;
 import com.galaxy.front.web.utils.Code;
-import com.galaxy.front.web.utils.Constants;
 import com.galaxy.front.web.utils.PathUtils;
 import com.galaxy.front.web.utils.ResultModelUtils;
 import com.galaxy.service.activity.ActivityService;
@@ -149,35 +150,77 @@ public class ProfileController {
 
 		return resultModel;
 	}
-	
-	
-	@RequestMapping(value = "/user/profile/changeAvatar",method = RequestMethod.POST)
-	public Object changeAvatar(@RequestParam("avatar")MultipartFile avatar){
+
+	@RequestMapping(value = "/user/profile/changeAvatar", method = RequestMethod.POST, params = { "avatar" })
+	public Object changeAvatar(@RequestParam("avatar") String avatar) {
 		ResultModel resultModel = new ResultModel();
-		
-		
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-		LoginUserModel loginUser = UserUtils.getLoginUser();
-		String avatarFilePath = PathUtils.AVATAR_PATH + loginUser.getUserId() + "/";
-		String avatarFileName = simpleDateFormat.format(new Date())+avatar.getOriginalFilename().substring(avatar.getOriginalFilename().indexOf("."));
-		File targetFile1 = new File(avatarFilePath, avatarFileName);
-		if (!targetFile1.exists()) {
-			targetFile1.mkdirs();
-		}
+
+		// Base64.decodeBase64(base64String)
 		try {
-			avatar.transferTo(targetFile1);
-			
+			// Base64解码
+			byte[] bytes = Base64.decodeBase64(avatar);
+			for (int i = 0; i < bytes.length; ++i) {
+				if (bytes[i] < 0) {// 调整异常数据
+					bytes[i] += 256;
+				}
+			}
+			String avatarFilePath = PathUtils.AVATAR_PATH + UserUtils.getLoginUser().getUserId() + "/";
+			File imgFilePath = FileUtils.getFile(avatarFilePath, "testtest.jpg");
+			// 生成图片
+			OutputStream out = new FileOutputStream(imgFilePath);
+			out.write(bytes);
+			out.flush();
+			out.close();
 			resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
 			resultModel.setData(new StatusModel("ok"));
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return resultModel;
+		} catch (Exception e) {
+			resultModel = ResultModelUtils.getResultModelByCode(Code.PARAMS_ERROR);
+			return resultModel;
 		}
-		
+
+		/*
+		 * if(avatar != null){
+		 * System.out.println("1111111111111111111111!!!!!!"+
+		 * avatar.getOriginalFilename()); }else{
+		 * System.out.println("file ====================================null");
+		 * }
+		 * 
+		 * SimpleDateFormat simpleDateFormat = new
+		 * SimpleDateFormat("yyyyMMddHHmmss"); LoginUserModel loginUser =
+		 * UserUtils.getLoginUser(); String avatarFilePath =
+		 * PathUtils.AVATAR_PATH + loginUser.getUserId() + "/"; String
+		 * avatarFileName = simpleDateFormat.format(new
+		 * Date())+avatar.getOriginalFilename
+		 * ().substring(avatar.getOriginalFilename().indexOf(".")); File
+		 * targetFile1 = new File(avatarFilePath, avatarFileName); if
+		 * (!targetFile1.exists()) { targetFile1.mkdirs(); } try {
+		 * avatar.transferTo(targetFile1);
+		 * 
+		 * resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+		 * resultModel.setData(new StatusModel("ok")); } catch
+		 * (IllegalStateException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } catch (IOException e) { // TODO Auto-generated
+		 * catch block e.printStackTrace(); }
+		 */
+
+	}
+
+	@RequestMapping(value = "/user/profile/updateForm", method = RequestMethod.POST)
+	public Object updateProfileForm(@ModelAttribute UserProfileForm form) {
+		ResultModel resultModel = new ResultModel();
+
+		// System.out.println("11111111111111111111111111111111111"+ToStringBuilder.reflectionToString(form));
+
+		form.setUserId(UserUtils.getLoginUser().getUserId());
+		if (userService.updateProfileForm(form)) {
+			resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+			resultModel.setData(form);
+		} else {
+			resultModel = ResultModelUtils.getResultModelByCode(Code.OK);
+			resultModel.setData(new StatusModel("update profile form fail"));
+		}
+
 		return resultModel;
 	}
-	
 }

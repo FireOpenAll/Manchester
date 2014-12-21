@@ -37,6 +37,8 @@
         <result property="lastVisitTime" column="last_visit_time" />
         <result property="userStatus" column="user_status" />
 		<result property="salt" column="salt" />
+		<result property="tags" column="tags" />
+		<result property="region" column="region" />
 	</resultMap>
 	
 	<insert id="insert" parameterType="user" useGeneratedKeys="true"
@@ -46,14 +48,23 @@
 		gender,birthday,user_type,nick,
 		friend_num,real_name,email,mobile,
 		real_name_auth,email_auth,mobile_auth,avatar,
-		weibo_openid,webchat_openid,qq_openid,last_visit_time,user_status,salt)
+		weibo_openid,webchat_openid,qq_openid,last_visit_time,user_status,salt,
+		tags,region)
 		VALUES(#{createdTime},#{updatedTime},#{LoginName},#{password},
 		#{gender},#{birthday},#{userType},#{nick},
 		#{friendNum},#{realName},#{email},#{mobile},
 		#{realNameAuth},#{emailAuth},#{mobileAuth},#{avatar},
-		#{webcharOpenId},#{webcharOpenId},#{qqOpenId},#{lastVisitTime},#{userStatus},#{salt})
+		#{webcharOpenId},#{webcharOpenId},#{qqOpenId},#{lastVisitTime},#{userStatus},#{salt},
+		#{tags},#{region})
 	</insert>
 		
+    <update id="updateProfileForm" parameterType="userProfileForm">
+        update u_user
+        set gender = #{gender},nick = #{nickName},birthday = #{birthday},tags = #{tags},region = #{region}
+        where id = #{userId}
+    </update>
+    
+    
 	<delete id="deleteById" parameterType="long">
 		delete from u_user
 		WHERE id = #{id}

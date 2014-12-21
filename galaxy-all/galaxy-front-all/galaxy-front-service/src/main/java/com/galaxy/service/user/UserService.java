@@ -4,6 +4,7 @@ package com.galaxy.service.user;
 import java.util.Date;
 
 import com.galaxy.dal.domain.user.User;
+import com.galaxy.dal.domain.user.form.UserProfileForm;
 
 public interface UserService {
 	public static final String HASH_ALGORITHM = "SHA-1";
@@ -25,6 +26,7 @@ public interface UserService {
     public User getUserByMobilePassword(String mobile,String password);
 	
 	////update
+    public boolean updateProfileForm(UserProfileForm form);
 	public boolean updateUserFriendNumByUserId(Long userId,int num);
 	public boolean updateEmailAuthByEmail(String email,Boolean emailAuth);
 	public boolean updateMobileAuthByMobile(String mobile,Boolean mobileAuth);

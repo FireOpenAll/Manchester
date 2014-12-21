@@ -62,7 +62,7 @@
 	set
 	updated_time = #{updatedTime},username = #{username},company = #{company},title = #{title},phone = #{phone},email = #{email},address = #{address},
 	website = #{website},qq = #{qq},weixin = #{weixin},avatar = #{avatar},qrcode_url = #{qrcodeUrl}
-	where user_id = #{user_id}
+	where user_id = #{userId}
 	</update>
 	
 </mapper>

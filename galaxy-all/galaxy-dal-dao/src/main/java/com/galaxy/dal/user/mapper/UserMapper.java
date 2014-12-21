@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.galaxy.dal.base.mapper.BaseMapper;
 import com.galaxy.dal.domain.user.User;
+import com.galaxy.dal.domain.user.form.UserProfileForm;
 
 public interface UserMapper extends BaseMapper<User> {
 
@@ -20,6 +21,7 @@ public interface UserMapper extends BaseMapper<User> {
     public User getUserByMobilePassword(@Param("mobile") String mobile,@Param("password") String password);
 	
 	////update
+    public boolean updateProfileForm(UserProfileForm form);
 	int updateUserFriendNumByUserId(@Param("userId")Long userId,@Param("num")int num);
 	int updateEmailAuthByEmail(@Param("email") String email,@Param("emailAuth") Boolean emailAuth);
 	int updateMobileAuthByMobile(@Param("mobile") String mobile,@Param("mobileAuth") Boolean mobileAuth);

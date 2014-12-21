@@ -44,9 +44,17 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public boolean updateCard(Card card) {
+	public Card updateCard(Card card) {
 		// TODO Auto-generated method stub
-		return cardMapper.update(card);
+		Card temp = cardMapper.getById(card.getId());
+		if(temp == null)
+			return null;
+		card.setCreatedTime(temp.getCreatedTime());
+		card.setId(temp.getId());
+		BeanUtils.copyProperties(card, temp);
+		temp.setUpdatedTime(new Date());
+		cardMapper.update(temp);
+		return temp;
 	}
 
 	@Override
@@ -113,12 +121,12 @@ public class CardServiceImpl implements CardService {
 	
 	@Transactional
 	@Override
-	public List<Card> getAllFriendCard(Long userId) {
+	public ArrayList<Card> getAllFriendCard(Long userId) {
 		// TODO Auto-generated method stub
 		List<UserCard> list = userCardMapper.getAllFriendCard(userId);
 		if(list == null)
 			return null;
-		List<Card> cards = new ArrayList<Card>();
+		ArrayList<Card> cards = new ArrayList<Card>();
 		for(UserCard userCard:list){
 			Card card = cardMapper.getByUserId(userCard.getTargetUserId());
 			cards.add(card);
